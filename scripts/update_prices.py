@@ -179,9 +179,9 @@ ROBOTS = {
     },
     "boschxs": {
         "name": "Bosch Indego XS 300",
-        "sources": [{"url": "https://www.amazon.fr/dp/B085FCXY97", "method": "amazon"}],
+        "sources": [{"url": "https://www.amazon.fr/dp/B08VJJQJ1G", "method": "amazon"}],
         "buy_links": [
-            "https://www.amazon.fr/dp/B085FCXY97",
+            "https://www.amazon.fr/dp/B08VJJQJ1G",
             "https://www.leroymerlin.fr/recherche?q=bosch+indego+xs+300",
             "https://www.boulanger.com/recherche/bosch+indego+xs+300",
             "https://www.darty.com/nav/extra/recherche/bosch+indego+xs+300.html",
