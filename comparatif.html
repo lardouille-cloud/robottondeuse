@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Comparatif robots tondeuses 2026 — Vue d'ensemble | RoboTondeuse.guide</title>
+<link href="fonts/inter.css" rel="stylesheet"/>
+<style>
+/* ═══════════════════════════════════════════════
+   VARIABLES & RESET
+═══════════════════════════════════════════════ */
+:root{
+  --dark:#080f1a;--dark2:#0d1829;--dark3:#111e33;
+  --green:#16a34a;--green-l:#22c55e;--green-xl:#4ade80;
+  --blue:#0ea5e9;--purple:#8b5cf6;--amber:#f59e0b;
+  --text:#f8fafc;--text2:#cbd5e1;--muted:#64748b;
+  --card:rgba(255,255,255,0.04);--card-h:rgba(255,255,255,0.07);
+  --border:rgba(255,255,255,0.07);--border-h:rgba(34,197,94,0.35);
+  --r:18px;--shadow:0 20px 60px rgba(0,0,0,0.4);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--dark);color:var(--text);overflow-x:hidden}
+img{max-width:100%;display:block}
+a{text-decoration:none;color:inherit}
+
+/* ═══════════════════════════════════════════════
+   NAV
+═══════════════════════════════════════════════ */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  padding:0 5%;height:68px;display:flex;align-items:center;justify-content:space-between;
+  background:rgba(8,15,26,0.85);backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border);transition:background .3s;
+}
+.nav-logo{display:flex;align-items:center;gap:9px;text-decoration:none;color:inherit;}
+.logo-icon{width:26px;height:26px;color:var(--green-l);flex-shrink:0;}
+.logo-name{font-weight:800;font-size:1.05rem;letter-spacing:-.4px;}
+.logo-name em{font-style:normal;color:var(--green-l);}
+.logo-name s{text-decoration:none;color:var(--muted);font-weight:500;font-size:.85em;}
+.nav-links{display:flex;align-items:center;gap:2px;}
+.nav-links a{
+  position:relative;padding:8px 13px;border-radius:8px;font-size:.84rem;font-weight:500;
+  color:var(--text2);transition:color .2s;
+}
+.nav-links a::after{
+  content:'';position:absolute;bottom:3px;left:13px;right:13px;
+  height:2px;background:var(--green-l);border-radius:1px;
+  transform:scaleX(0);transform-origin:center;transition:transform .25s ease;
+}
+.nav-links a:hover{color:var(--text);}
+.nav-links a.nav-active{color:var(--text);}
+.nav-links a.nav-active::after{transform:scaleX(1);}
+.nav-premium-btn{
+  display:inline-flex;align-items:center;gap:7px;
+  padding:8px 16px;border-radius:10px;font-size:.8rem;font-weight:700;
+  background:rgba(22,163,74,.1);border:1px solid rgba(34,197,94,.35);
+  color:var(--green-xl);cursor:pointer;transition:all .2s;
+  white-space:nowrap;text-decoration:none;letter-spacing:.1px;
+}
+.nav-premium-btn svg{flex-shrink:0;}
+.nav-premium-btn:hover{background:rgba(22,163,74,.18);border-color:rgba(34,197,94,.55);transform:translateY(-1px);}
+.nav-premium-btn.active-paid{color:var(--green-l);border-color:rgba(34,197,94,.25);background:rgba(22,163,74,.06);}
+.nav-premium-btn.active-paid svg{display:none;}
+
+/* ═══════════════════════════════════════════════
+   SECTIONS COMMUNES
+═══════════════════════════════════════════════ */
+section{padding:90px 5%;}
+.section-label{
+  display:inline-flex;align-items:center;gap:10px;
+  font-size:.65rem;font-weight:700;letter-spacing:1.6px;
+  color:var(--muted);text-transform:uppercase;margin-bottom:16px;
+}
+.section-label::before{
+  content:'';display:block;width:22px;height:1.5px;
+  background:currentColor;border-radius:1px;flex-shrink:0;opacity:.7;
+}
+.section-title{font-size:clamp(1.8rem,4vw,2.8rem);font-weight:900;letter-spacing:-1.5px;margin-bottom:16px;}
+.section-sub{font-size:1rem;color:var(--text2);line-height:1.7;max-width:600px;margin-bottom:56px;}
+
+/* ═══════════════════════════════════════════════
+   COMPARAISON RAPIDE
+═══════════════════════════════════════════════ */
+.compare-table{width:100%;border-collapse:collapse;border-radius:var(--r);overflow:hidden;}
+.compare-table thead tr{background:rgba(22,163,74,.12);border-bottom:1px solid rgba(22,163,74,.2);}
+.compare-table th{
+  padding:16px 18px;text-align:left;font-size:.78rem;font-weight:700;
+  text-transform:uppercase;letter-spacing:.8px;color:var(--green-xl);
+}
+.compare-table td{
+  padding:14px 18px;font-size:.88rem;border-bottom:1px solid var(--border);
+  color:var(--text2);
+}
+.compare-table tr:last-child td{border-bottom:none;}
+.compare-table tr:nth-child(even) td{background:rgba(255,255,255,.02);}
+.compare-table tr:hover td{background:rgba(22,163,74,.05);}
+.compare-table td:first-child{color:var(--text);font-weight:600;}
+/* Blurred score column */
+.compare-table.score-blurred td:last-child{
+  filter:blur(5px);user-select:none;cursor:pointer;transition:filter .2s;
+}
+.compare-table.score-blurred th:last-child{cursor:pointer;}
+.compare-table.score-blurred th:last-child::after{content:' 🔒';font-size:.85em;}
+.ctag{
+  display:inline-block;padding:3px 9px;border-radius:6px;
+  font-size:.72rem;font-weight:700;
+}
+.ctag-g{background:rgba(34,197,94,.12);color:#86efac;}
+.ctag-b{background:rgba(14,165,233,.12);color:#7dd3fc;}
+.ctag-o{background:rgba(245,158,11,.12);color:#fcd34d;}
+
+/* ═══════════════════════════════════════════════
+   PAYWALL
+═══════════════════════════════════════════════ */
+.pw-overlay{
+  position:fixed;inset:0;z-index:9999;
+  background:rgba(0,0,0,.8);backdrop-filter:blur(10px);
+  display:flex;align-items:center;justify-content:center;padding:20px;
+  opacity:0;pointer-events:none;transition:opacity .3s;
+}
+.pw-overlay.active{opacity:1;pointer-events:all;}
+.pw-modal{
+  background:linear-gradient(145deg,#0f1f38,#091525);
+  border:1px solid rgba(34,197,94,.3);border-radius:24px;
+  padding:40px 36px;max-width:460px;width:100%;text-align:center;
+  box-shadow:0 40px 100px rgba(0,0,0,.7),0 0 0 1px rgba(255,255,255,.04);
+  animation:pwSlide .3s ease;
+}
+@keyframes pwSlide{from{transform:translateY(22px) scale(.96);opacity:0}to{transform:none;opacity:1}}
+.pw-badge{
+  display:inline-flex;align-items:center;gap:6px;
+  background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.3);
+  color:var(--green-l);font-size:.72rem;font-weight:700;letter-spacing:.8px;
+  padding:5px 14px;border-radius:20px;margin-bottom:18px;text-transform:uppercase;
+}
+.pw-title{font-size:1.65rem;font-weight:900;margin-bottom:8px;line-height:1.2;}
+.pw-sub{font-size:.88rem;color:var(--text2);margin-bottom:22px;}
+.pw-features{list-style:none;text-align:left;margin-bottom:24px;display:flex;flex-direction:column;gap:9px;}
+.pw-features li{display:flex;align-items:flex-start;gap:10px;font-size:.85rem;color:var(--text2);line-height:1.4;}
+.pw-features li::before{content:'✓';color:var(--green-l);font-weight:900;flex-shrink:0;margin-top:1px;}
+.pw-price-row{
+  display:flex;align-items:center;justify-content:center;gap:12px;
+  margin-bottom:20px;background:rgba(255,255,255,.03);
+  border:1px solid rgba(255,255,255,.06);border-radius:14px;padding:14px;
+}
+.pw-old{font-size:.95rem;color:var(--muted);text-decoration:line-through;}
+.pw-new{font-size:2.1rem;font-weight:900;color:var(--green-l);}
+.pw-once{font-size:.75rem;color:var(--muted);background:rgba(255,255,255,.06);padding:3px 9px;border-radius:6px;}
+.pw-btn{
+  display:block;width:100%;padding:16px;border-radius:14px;
+  background:linear-gradient(135deg,#16a34a,#22c55e);
+  color:#fff;font-weight:800;font-size:1rem;
+  border:none;cursor:pointer;text-decoration:none;
+  transition:all .2s;margin-bottom:12px;
+  box-shadow:0 6px 30px rgba(34,197,94,.4);font-family:'Inter',sans-serif;
+}
+.pw-btn:hover{transform:translateY(-2px);box-shadow:0 12px 40px rgba(34,197,94,.55);}
+.pw-guarantee{font-size:.74rem;color:var(--muted);margin-bottom:14px;line-height:1.5;}
+.pw-close{
+  background:none;border:none;color:var(--muted);font-size:.78rem;
+  cursor:pointer;text-decoration:underline;font-family:'Inter',sans-serif;transition:color .2s;
+}
+.pw-close:hover{color:var(--text2);}
+
+/* ═══════════════════════════════════════════════
+   PAGE HEADER
+═══════════════════════════════════════════════ */
+.page-header{
+  padding:120px 5% 60px;
+  background:linear-gradient(135deg,rgba(4,10,18,0.99) 0%,rgba(6,26,15,0.97) 100%);
+  border-bottom:1px solid var(--border);
+}
+
+/* ═══════════════════════════════════════════════
+   SCROLL ANIMATION
+═══════════════════════════════════════════════ */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease;}
+.reveal.visible{opacity:1;transform:none;}
+
+/* ═══════════════════════════════════════════════
+   FOOTER
+═══════════════════════════════════════════════ */
+footer{
+  background:var(--dark);border-top:1px solid var(--border);
+  padding:56px 5% 40px;
+  display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;
+  gap:40px;align-items:start;
+}
+.footer-brand{}
+.footer-logo-link{display:inline-flex;align-items:center;gap:8px;text-decoration:none;color:inherit;}
+.footer-logo{font-size:1.05rem;font-weight:800;letter-spacing:-.4px;}
+.footer-logo span{color:var(--green-l);}
+.footer-links-col{display:flex;flex-direction:column;gap:10px;}
+.footer-col-title{font-size:.65rem;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:var(--muted);margin-bottom:4px;}
+.footer-links-col a,.footer-note a{font-size:.82rem;color:rgba(255,255,255,.45);transition:color .2s;text-decoration:none;display:block;}
+.footer-links-col a:hover,.footer-note a:hover{color:var(--text2);}
+.footer-note{display:flex;flex-direction:column;gap:10px;}
+@media(max-width:900px){footer{grid-template-columns:1fr 1fr;}}
+@media(max-width:580px){footer{grid-template-columns:1fr;}}
+
+/* ═══════════════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════════════ */
+@media(max-width:680px){
+  nav{padding:0 4%;}
+  .nav-links{display:none;}
+  section{padding:60px 4%;}
+}
+</style>
+</head>
+<body>
+
+<!-- PAYWALL MODAL -->
+<div id="paywall-modal" class="pw-overlay" onclick="if(event.target===this)closePaywall()">
+  <div class="pw-modal">
+    <div class="pw-badge">🔒 Accès Complet</div>
+    <h2 class="pw-title">Fiches complètes<br>de tous les robots</h2>
+    <p class="pw-sub">Accès illimité · Paiement unique · Sur cet appareil</p>
+    <ul class="pw-features">
+      <li>Vrais avis d'acheteurs vérifiés (4+ par robot)</li>
+      <li>Points forts &amp; points faibles détaillés</li>
+      <li>Pannes &amp; bugs connus par modèle</li>
+      <li>7 pièges à éviter que les vendeurs cachent</li>
+      <li>10 questions à poser avant d'acheter</li>
+      <li>Simulateur coût réel 3 ans + Comparateur</li>
+      <li>Checklist jardin + Guide 7 erreurs à éviter</li>
+    </ul>
+    <div class="pw-price-row">
+      <span class="pw-old">9,99 €</span>
+      <span class="pw-new">4,99 €</span>
+      <span class="pw-once">une seule fois</span>
+    </div>
+    <a class="pw-btn" href="STRIPE_LINK_PLACEHOLDER" target="_blank">Débloquer maintenant →</a>
+    <p class="pw-guarantee">🛡️ Paiement sécurisé Stripe · Sans abonnement · Accès immédiat</p>
+    <button class="pw-close" onclick="closePaywall()">Continuer sans accès complet</button>
+  </div>
+</div>
+
+<!-- ══ NAV ══ -->
+<nav id="nav">
+  <a href="index.html" class="nav-logo">
+    <svg class="logo-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="12" cy="12" r="9.5" stroke="currentColor" stroke-width="1.2" opacity="0.35"/>
+      <path d="M4 15 Q12 3.5 20 15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      <path d="M15.5 4 Q4 12 15.5 20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      <circle cx="12" cy="12" r="2.2" fill="currentColor"/>
+    </svg>
+    <span class="logo-name">Robot<em>Tondeuse</em><s>.guide</s></span>
+  </a>
+  <div class="nav-links">
+    <a href="index.html">Accueil</a>
+    <a href="robots.html">Robots 2026</a>
+    <a href="comparatif.html" class="nav-active">Comparatif</a>
+    <a href="classement.html" onclick="if(!isPaid()){event.preventDefault();showPaywall();}">Classement 🔒</a>
+    <a href="quiz.html">Quiz</a>
+  </div>
+  <a id="nav-premium" class="nav-premium-btn" href="#" onclick="handleNavPremium(event)">
+    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+    Accès Complet — 4,99 €
+  </a>
+</nav>
+
+<!-- ══ PAGE HEADER ══ -->
+<div class="page-header">
+  <div class="section-label">Comparatif détaillé</div>
+  <h1 class="section-title">Vue d'ensemble</h1>
+  <p class="section-sub">Tous les modèles côte à côte pour comparer d'un coup d'œil. La colonne Note est réservée à l'Accès Complet.</p>
+</div>
+
+<!-- ══ COMPARAISON ══ -->
+<section id="comparaison" style="background:var(--dark2);">
+  <div class="reveal" style="overflow-x:auto;border-radius:var(--r);border:1px solid var(--border)">
+    <table class="compare-table" id="compareTable">
+      <thead>
+        <tr>
+          <th>Modèle</th><th>Surface max</th><th>Navigation</th><th>Pentes</th><th>Bruit</th><th>Prix</th><th>Note</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Segway Navimow i105E</td><td>600 m²</td><td><span class="ctag ctag-g">GPS RTK</span></td><td>45%</td><td>65 dB</td><td><strong>649 €</strong></td><td>⭐ 4.3/5</td></tr>
+        <tr><td>Ecovacs Goat O800 RTK</td><td>800 m²</td><td><span class="ctag ctag-g">RTK + LiDAR</span></td><td>45%</td><td><strong>55 dB</strong></td><td><strong>699 €</strong></td><td>⭐ 4.2/5</td></tr>
+        <tr><td>Worx Landroid Vision WR208E</td><td>800 m²</td><td><span class="ctag ctag-b">Vision IA</span></td><td>30%</td><td>66 dB</td><td><strong>949 €</strong></td><td>⭐ 4.1/5</td></tr>
+        <tr><td>Dreame A1 Pro</td><td>2 000 m²</td><td><span class="ctag ctag-o">LiDAR+RTK+Vision</span></td><td>45%</td><td>~65 dB</td><td><strong>899 €</strong></td><td>⭐ 4.4/5</td></tr>
+        <tr><td>Mammotion Yuka Mini Vision</td><td>700 m²</td><td><span class="ctag ctag-b">Vision IA triple</span></td><td>45%</td><td>~64 dB</td><td><strong>1 199 €</strong></td><td>⭐ 4.5/5</td></tr>
+        <tr><td>Mammotion LUBA 2 AWD 3000X</td><td>3 000 m²</td><td><span class="ctag ctag-o">RTK+IMU+Vision</span></td><td><strong>80%</strong></td><td>&lt;60 dB</td><td><strong>2 599 €</strong></td><td>⭐ 4.4/5</td></tr>
+        <tr><td>Husqvarna Automower 320 NERA</td><td>2 200 m²</td><td><span class="ctag ctag-g">EPOS satellites</span></td><td>50%</td><td>60 dB</td><td><strong>2 463 €</strong></td><td>⭐ 4.6/5</td></tr>
+        <tr><td>MOVA LiDAX Ultra 1200</td><td>1 200 m²</td><td><span class="ctag ctag-o">LiDAR 3D 360°</span></td><td>45%</td><td>~62 dB</td><td><strong>1 099 €</strong></td><td>⭐ 4.4/5</td></tr>
+        <tr><td>Dreame A3 AWD Pro 3500</td><td>3 500 m²</td><td><span class="ctag ctag-o">LiDAR 3D + Vision 4WD</span></td><td>80%</td><td>~63 dB</td><td><strong>2 299 €</strong></td><td>⭐ 4.5/5</td></tr>
+        <tr><td>Mammotion LUBA 3 AWD 3000</td><td>3 000 m²</td><td><span class="ctag ctag-o">Tri-Fusion LiDAR+RTK+Vision</span></td><td>80%</td><td>&lt;60 dB</td><td><strong>2 699 €</strong></td><td>⭐ 4.5/5</td></tr>
+        <tr><td>Bosch Indego XS 300</td><td>300 m²</td><td><span class="ctag ctag-g">GPS LogiCut</span></td><td>25%</td><td>~63 dB</td><td><strong>299 €</strong></td><td>⭐ 3.9/5</td></tr>
+        <tr><td>Bosch Indego M+ 700</td><td>700 m²</td><td><span class="ctag ctag-g">GPS LogiCut</span></td><td>27%</td><td>~68 dB</td><td><strong>599 €</strong></td><td>⭐ 3.8/5</td></tr>
+        <tr><td>Gardena Sileno Minimo 250</td><td>250 m²</td><td><span class="ctag ctag-b">Fil périmètre</span></td><td>25%</td><td><strong>57 dB</strong></td><td><strong>329 €</strong></td><td>⭐ 4.0/5</td></tr>
+        <tr><td>Gardena Sileno Life 750</td><td>750 m²</td><td><span class="ctag ctag-b">Fil périmètre</span></td><td>25%</td><td>58 dB</td><td><strong>549 €</strong></td><td>⭐ 4.0/5</td></tr>
+        <tr><td>Husqvarna Automower 115H</td><td>1 500 m²</td><td><span class="ctag ctag-b">Fil + GPS</span></td><td>25%</td><td>~65 dB</td><td><strong>599 €</strong></td><td>⭐ 4.1/5</td></tr>
+        <tr><td>Segway Navimow i108E</td><td>1 000 m²</td><td><span class="ctag ctag-g">GPS RTK</span></td><td>45%</td><td>~65 dB</td><td><strong>849 €</strong></td><td>⭐ 4.3/5</td></tr>
+        <tr><td>Stiga A 1000</td><td>1 000 m²</td><td><span class="ctag ctag-g">GPS RTK</span></td><td>45%</td><td>~62 dB</td><td><strong>749 €</strong></td><td>⭐ 4.2/5</td></tr>
+        <tr><td>Kress Mission 5 RTK</td><td>1 500 m²</td><td><span class="ctag ctag-g">GPS RTK</span></td><td>45%</td><td>~63 dB</td><td><strong>899 €</strong></td><td>⭐ 4.1/5</td></tr>
+        <tr><td>Honda Miimo 520</td><td>2 000 m²</td><td><span class="ctag ctag-b">Fil + gyroscope</span></td><td>35%</td><td><strong>58 dB</strong></td><td><strong>899 €</strong></td><td>⭐ 4.0/5</td></tr>
+        <tr><td>Stihl iMow RMI 422 PC</td><td>2 200 m²</td><td><span class="ctag ctag-b">Fil + GPS</span></td><td>35%</td><td>~64 dB</td><td><strong>999 €</strong></td><td>⭐ 4.1/5</td></tr>
+        <tr><td>Ecovacs GOAT G1</td><td>1 000 m²</td><td><span class="ctag ctag-b">Vision IA 2 caméras</span></td><td>45%</td><td>~60 dB</td><td><strong>799 €</strong></td><td>⭐ 4.0/5</td></tr>
+        <tr><td>Robomow RS635 Pro</td><td>3 500 m²</td><td><span class="ctag ctag-b">Fil + GPS</span></td><td>30%</td><td>~65 dB</td><td><strong>1 199 €</strong></td><td>⭐ 4.0/5</td></tr>
+        <tr><td>Stiga A 3000</td><td>3 000 m²</td><td><span class="ctag ctag-g">GPS RTK</span></td><td>45%</td><td>~63 dB</td><td><strong>1 499 €</strong></td><td>⭐ 4.2/5</td></tr>
+        <tr><td>Viking iMow MI 632 PC</td><td>3 200 m²</td><td><span class="ctag ctag-b">Fil + GPS</span></td><td>35%</td><td>~63 dB</td><td><strong>1 199 €</strong></td><td>⭐ 4.0/5</td></tr>
+        <tr><td>EcoFlow Blade</td><td>3 200 m²</td><td><span class="ctag ctag-b">Vision + GPS</span></td><td>30%</td><td>~64 dB</td><td><strong>2 199 €</strong></td><td>⭐ 4.2/5</td></tr>
+        <tr><td>Husqvarna Automower 430X</td><td>3 200 m²</td><td><span class="ctag ctag-g">EPOS satellites</span></td><td>45%</td><td>63 dB</td><td><strong>1 799 €</strong></td><td>⭐ 4.4/5</td></tr>
+        <tr><td>Ambrogio L15 Elite</td><td>1 500 m²</td><td><span class="ctag ctag-b">Fil périmètre</span></td><td>35%</td><td>~65 dB</td><td><strong>1 299 €</strong></td><td>⭐ 4.1/5</td></tr>
+        <tr><td>Mammotion LUBA 2 AWD 1000</td><td>1 000 m²</td><td><span class="ctag ctag-o">RTK+IMU+Vision 4WD</span></td><td><strong>80%</strong></td><td>~58 dB</td><td><strong>1 799 €</strong></td><td>⭐ 4.3/5</td></tr>
+        <tr><td>Husqvarna Automower 450X NERA</td><td>5 000 m²</td><td><span class="ctag ctag-g">EPOS sans câble</span></td><td>50%</td><td><strong>58 dB</strong></td><td><strong>3 499 €</strong></td><td>⭐ 4.7/5</td></tr>
+        <tr><td>Husqvarna Automower 435X AWD</td><td>3 500 m²</td><td><span class="ctag ctag-g">EPOS + 4WD</span></td><td>70%</td><td>60 dB</td><td><strong>3 199 €</strong></td><td>⭐ 4.5/5</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ══ FOOTER ══ -->
+<footer>
+  <div class="footer-brand">
+    <a href="index.html" class="footer-logo-link">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" style="color:var(--green-l)">
+        <circle cx="12" cy="12" r="9.5" stroke="currentColor" stroke-width="1.2" opacity="0.35"/>
+        <path d="M4 15 Q12 3.5 20 15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        <path d="M15.5 4 Q4 12 15.5 20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        <circle cx="12" cy="12" r="2.2" fill="currentColor"/>
+      </svg>
+      <span class="footer-logo">Robot<span>Tondeuse</span>.guide</span>
+    </a>
+    <p style="color:var(--muted);font-size:.78rem;margin-top:8px;line-height:1.6;">Guide indépendant · Non affilié aux marques citées<br/>Mis à jour mars 2026</p>
+  </div>
+  <div class="footer-links-col">
+    <div class="footer-col-title">Navigation</div>
+    <a href="robots.html">Robots 2026</a>
+    <a href="comparatif.html">Tableau comparatif</a>
+    <a href="quiz.html">Questionnaire</a>
+    <a href="index.html#conseils">Conseils d'achat</a>
+  </div>
+  <div class="footer-links-col">
+    <div class="footer-col-title">Outils</div>
+    <a href="simulateur.html">Simulateur coût 3 ans</a>
+    <a href="comparateur.html">Comparateur côte à côte</a>
+    <a href="checklist.html">Checklist jardin</a>
+    <a href="guide-pdf.html">Guide 7 erreurs</a>
+  </div>
+  <div class="footer-note">
+    <div class="footer-col-title">Sources</div>
+    <a href="https://www.clubic.com/guide-achat/article-829280-1-selection-tondeuse-robot.html" target="_blank" rel="noopener">Clubic</a>
+    <a href="https://www.futura-sciences.com/conso/comparatifs/meilleur-robot-tondeuse-comparatif/" target="_blank" rel="noopener">Futura-Sciences</a>
+    <a href="https://jardinsplus.com/robot-tondeuse/" target="_blank" rel="noopener">JardinsPlus</a>
+    <a href="https://www.jardinage-media.com/blog/top-robot-tondeuse-autonome" target="_blank" rel="noopener">Jardinage-Media</a>
+    <span style="color:var(--muted);font-size:.72rem;margin-top:8px;display:block;">Avis : Trustpilot · Amazon.fr · Forums Kelrobot</span>
+  </div>
+</footer>
+
+<script>
+/* ════════════════════════════
+   PAYWALL
+════════════════════════════ */
+const STRIPE_URL = 'STRIPE_LINK_PLACEHOLDER';
+const ACCESS_KEY = 'rt_premium_v1';
+
+function isPaid(){
+  return localStorage.getItem(ACCESS_KEY) === 'true';
+}
+function showPaywall(){
+  document.getElementById('paywall-modal').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+function closePaywall(){
+  document.getElementById('paywall-modal').classList.remove('active');
+  document.body.style.overflow = '';
+}
+function handleNavPremium(e){
+  e.preventDefault();
+  if(isPaid()){ alert('✅ Accès Complet actif — toutes les fiches sont débloquées !'); return; }
+  showPaywall();
+}
+function handleStripeReturn(){
+  const params = new URLSearchParams(window.location.search);
+  if(params.get('access') === 'granted'){
+    localStorage.setItem(ACCESS_KEY, 'true');
+    params.delete('access');
+    const clean = window.location.pathname + (params.toString() ? '?'+params.toString() : '') + (window.location.hash||'');
+    window.history.replaceState({}, '', clean);
+  }
+}
+function updatePremiumUI(){
+  const navBtn = document.getElementById('nav-premium');
+  const table = document.getElementById('compareTable');
+  if(isPaid()){
+    if(navBtn){ navBtn.textContent = '✅ Accès Complet actif'; navBtn.classList.add('active-paid'); }
+    if(table) table.classList.remove('score-blurred');
+  } else {
+    if(table){
+      table.classList.add('score-blurred');
+      table.addEventListener('click', function(e){
+        if(e.target.closest('td:last-child, th:last-child')) showPaywall();
+      }, {once:false});
+    }
+  }
+}
+
+handleStripeReturn();
+updatePremiumUI();
+
+/* Nav scroll tint */
+window.addEventListener('scroll', () => {
+  document.getElementById('nav').style.background =
+    window.scrollY > 60 ? 'rgba(8,15,26,0.97)' : 'rgba(8,15,26,0.85)';
+});
+
+/* Scroll animations */
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); }});
+}, {threshold:.1, rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>

@@ -897,7 +897,7 @@ footer{
 
 <!-- ══ NAV ══ -->
 <nav id="nav">
-  <a href="#accueil" class="nav-logo">
+  <a href="index.html" class="nav-logo">
     <svg class="logo-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
       <circle cx="12" cy="12" r="9.5" stroke="currentColor" stroke-width="1.2" opacity="0.35"/>
       <path d="M4 15 Q12 3.5 20 15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
@@ -907,12 +907,11 @@ footer{
     <span class="logo-name">Robot<em>Tondeuse</em><s>.guide</s></span>
   </a>
   <div class="nav-links">
-    <a href="#technos" data-section="technos">Technologies</a>
-    <a href="#produits" data-section="produits">Robots 2026</a>
-    <a href="#comparaison" data-section="comparaison">Comparatif</a>
-    <a href="#classement" data-section="classement" onclick="if(!isPaid()){event.preventDefault();showPaywall();}">Classement 🔒</a>
-    <a href="#conseils" data-section="conseils">Conseils</a>
-    <a href="#outils" data-section="outils">Outils</a>
+    <a href="index.html" class="nav-active">Accueil</a>
+    <a href="robots.html">Robots 2026</a>
+    <a href="comparatif.html">Comparatif</a>
+    <a href="classement.html" onclick="if(!isPaid()){event.preventDefault();showPaywall();}">Classement 🔒</a>
+    <a href="quiz.html">Quiz</a>
   </div>
   <a id="nav-premium" class="nav-premium-btn" href="#" onclick="handleNavPremium(event)">
     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
@@ -931,12 +930,12 @@ footer{
     <h1>Quel robot tondeuse<br/><em>pour votre terrain ?</em></h1>
     <p>30 robots comparés sur 20 critères — surface réelle, pentes, obstacles, SAV, coût sur 3 ans. Votre sélection personnalisée en 3 minutes.</p>
     <div class="hero-btns">
-      <button class="btn-primary" onclick="document.getElementById('quiz').scrollIntoView({behavior:'smooth'})">
+      <a class="btn-primary" href="quiz.html">
         Faire le test personnalisé
-      </button>
-      <button class="btn-secondary" onclick="document.getElementById('produits').scrollIntoView({behavior:'smooth'})">
+      </a>
+      <a class="btn-secondary" href="robots.html">
         Voir tous les robots
-      </button>
+      </a>
     </div>
   </div>
   <div class="hero-visual">
@@ -1003,24 +1002,6 @@ footer{
     </div>
   </div>
 </div>
-
-<!-- ══ CLASSEMENT ══ -->
-<section id="classement">
-  <div class="reveal">
-    <div class="section-label">Accès Complet</div>
-    <h2 class="section-title">Classement par note</h2>
-    <p class="section-sub">Les 30 robots classés du meilleur au moins bon selon leur note globale — avis utilisateurs, fiabilité et rapport qualité/prix.</p>
-  </div>
-  <div class="premium-gate reveal" id="classement-gate">
-    <div class="pg-content" id="classement-content"><!-- rempli par JS --></div>
-    <div class="pg-overlay" onclick="showPaywall()">
-      <div class="pg-lock-icon">🏆</div>
-      <div class="pg-lock-title">Classement complet — 30 robots notés</div>
-      <div class="pg-lock-desc">Découvrez quel robot mérite vraiment votre argent. Classement complet avec notes, prix et verdict pour chaque modèle.</div>
-      <button class="pg-lock-btn" onclick="showPaywall()">Débloquer le classement — 4,99 €</button>
-    </div>
-  </div>
-</section>
 
 <!-- ══ TECHNOS ══ -->
 <section id="technos">
@@ -1118,217 +1099,38 @@ footer{
   </div>
 </section>
 
-<!-- ══ PRODUITS ══ -->
-<section id="produits">
-  <div class="reveal">
-    <div class="section-label">Sélection 2026</div>
-    <h2 class="section-title">Les meilleurs robots 2026</h2>
-    <p class="section-sub">9 robots visibles gratuitement · 21 robots supplémentaires réservés à l'Accès Complet · Sélectionnés sur tests croisés &amp; 15 000+ avis réels.</p>
-  </div>
-  <div class="products-grid" id="productGrid"></div>
-
-  <!-- PREMIUM BANNER -->
-  <div class="premium-banner reveal" id="premium-banner">
-    <div class="pb-eyebrow">🔒 Accès Complet — 4,99 €</div>
-    <h3 class="pb-title">21 robots de plus à découvrir</h3>
-    <p class="pb-desc">Vous voyez 9 robots sur 30. Débloquez les 21 suivants + fiches complètes, avis vérifiés, pannes connues et 4 outils pour faire le bon choix.</p>
-    <div class="pb-features-row">
-      <span class="pb-feat">✅ 30 robots comparés</span>
-      <span class="pb-feat">✅ Fiches complètes</span>
-      <span class="pb-feat">✅ Pannes &amp; bugs connus</span>
-      <span class="pb-feat">✅ 4 outils inclus</span>
-    </div>
-    <div class="pb-price-row">
-      <span class="pb-old">9,99 €</span>
-      <span class="pb-new">4,99 €</span>
-      <span class="pb-once">une seule fois</span>
-    </div>
-    <button class="pb-btn" onclick="showPaywall()">Débloquer l'accès complet →</button>
-    <p class="pb-note">🛡️ Paiement sécurisé Stripe · Sans abonnement · Accès immédiat</p>
-  </div>
-</section>
-
-<!-- ══ COMPARAISON ══ -->
-<section id="comparaison">
-  <div class="reveal">
-    <div class="section-label">Comparatif détaillé</div>
-    <h2 class="section-title">Vue d'ensemble</h2>
-    <p class="section-sub">Tous les modèles côte à côte pour comparer d'un coup d'œil.</p>
-  </div>
-  <div class="reveal" style="overflow-x:auto;border-radius:var(--r);border:1px solid var(--border)">
-    <table class="compare-table" id="compareTable">
-      <thead>
-        <tr>
-          <th>Modèle</th><th>Surface max</th><th>Navigation</th><th>Pentes</th><th>Bruit</th><th>Prix</th><th>Note</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr><td>Segway Navimow i105E</td><td>600 m²</td><td><span class="ctag ctag-g">GPS RTK</span></td><td>45%</td><td>65 dB</td><td><strong>649 €</strong></td><td>⭐ 4.3/5</td></tr>
-        <tr><td>Ecovacs Goat O800 RTK</td><td>800 m²</td><td><span class="ctag ctag-g">RTK + LiDAR</span></td><td>45%</td><td><strong>55 dB</strong></td><td><strong>699 €</strong></td><td>⭐ 4.2/5</td></tr>
-        <tr><td>Worx Landroid Vision WR208E</td><td>800 m²</td><td><span class="ctag ctag-b">Vision IA</span></td><td>30%</td><td>66 dB</td><td><strong>949 €</strong></td><td>⭐ 4.1/5</td></tr>
-        <tr><td>Dreame A1 Pro</td><td>2 000 m²</td><td><span class="ctag ctag-o">LiDAR+RTK+Vision</span></td><td>45%</td><td>~65 dB</td><td><strong>899 €</strong></td><td>⭐ 4.4/5</td></tr>
-        <tr><td>Mammotion Yuka Mini Vision</td><td>700 m²</td><td><span class="ctag ctag-b">Vision IA triple</span></td><td>45%</td><td>~64 dB</td><td><strong>1 199 €</strong></td><td>⭐ 4.5/5</td></tr>
-        <tr><td>Mammotion LUBA 2 AWD 3000X</td><td>3 000 m²</td><td><span class="ctag ctag-o">RTK+IMU+Vision</span></td><td><strong>80%</strong></td><td>&lt;60 dB</td><td><strong>2 599 €</strong></td><td>⭐ 4.4/5</td></tr>
-        <tr><td>Husqvarna Automower 320 NERA</td><td>2 200 m²</td><td><span class="ctag ctag-g">EPOS satellites</span></td><td>50%</td><td>60 dB</td><td><strong>2 463 €</strong></td><td>⭐ 4.6/5</td></tr>
-        <tr><td>MOVA LiDAX Ultra 1200</td><td>1 200 m²</td><td><span class="ctag ctag-o">LiDAR 3D 360°</span></td><td>45%</td><td>~62 dB</td><td><strong>1 099 €</strong></td><td>⭐ 4.4/5</td></tr>
-        <tr><td>Dreame A3 AWD Pro 3500</td><td>3 500 m²</td><td><span class="ctag ctag-o">LiDAR 3D + Vision 4WD</span></td><td>80%</td><td>~63 dB</td><td><strong>2 299 €</strong></td><td>⭐ 4.5/5</td></tr>
-        <tr><td>Mammotion LUBA 3 AWD 3000</td><td>3 000 m²</td><td><span class="ctag ctag-o">Tri-Fusion LiDAR+RTK+Vision</span></td><td>80%</td><td>&lt;60 dB</td><td><strong>2 699 €</strong></td><td>⭐ 4.5/5</td></tr>
-        <tr><td>Bosch Indego XS 300</td><td>300 m²</td><td><span class="ctag ctag-g">GPS LogiCut</span></td><td>25%</td><td>~63 dB</td><td><strong>299 €</strong></td><td>⭐ 3.9/5</td></tr>
-        <tr><td>Bosch Indego M+ 700</td><td>700 m²</td><td><span class="ctag ctag-g">GPS LogiCut</span></td><td>27%</td><td>~68 dB</td><td><strong>599 €</strong></td><td>⭐ 3.8/5</td></tr>
-        <tr><td>Gardena Sileno Minimo 250</td><td>250 m²</td><td><span class="ctag ctag-b">Fil périmètre</span></td><td>25%</td><td><strong>57 dB</strong></td><td><strong>329 €</strong></td><td>⭐ 4.0/5</td></tr>
-        <tr><td>Gardena Sileno Life 750</td><td>750 m²</td><td><span class="ctag ctag-b">Fil périmètre</span></td><td>25%</td><td>58 dB</td><td><strong>549 €</strong></td><td>⭐ 4.0/5</td></tr>
-        <tr><td>Husqvarna Automower 115H</td><td>1 500 m²</td><td><span class="ctag ctag-b">Fil + GPS</span></td><td>25%</td><td>~65 dB</td><td><strong>599 €</strong></td><td>⭐ 4.1/5</td></tr>
-        <tr><td>Segway Navimow i108E</td><td>1 000 m²</td><td><span class="ctag ctag-g">GPS RTK</span></td><td>45%</td><td>~65 dB</td><td><strong>849 €</strong></td><td>⭐ 4.3/5</td></tr>
-        <tr><td>Stiga A 1000</td><td>1 000 m²</td><td><span class="ctag ctag-g">GPS RTK</span></td><td>45%</td><td>~62 dB</td><td><strong>749 €</strong></td><td>⭐ 4.2/5</td></tr>
-        <tr><td>Kress Mission 5 RTK</td><td>1 500 m²</td><td><span class="ctag ctag-g">GPS RTK</span></td><td>45%</td><td>~63 dB</td><td><strong>899 €</strong></td><td>⭐ 4.1/5</td></tr>
-        <tr><td>Honda Miimo 520</td><td>2 000 m²</td><td><span class="ctag ctag-b">Fil + gyroscope</span></td><td>35%</td><td><strong>58 dB</strong></td><td><strong>899 €</strong></td><td>⭐ 4.0/5</td></tr>
-        <tr><td>Stihl iMow RMI 422 PC</td><td>2 200 m²</td><td><span class="ctag ctag-b">Fil + GPS</span></td><td>35%</td><td>~64 dB</td><td><strong>999 €</strong></td><td>⭐ 4.1/5</td></tr>
-        <tr><td>Ecovacs GOAT G1</td><td>1 000 m²</td><td><span class="ctag ctag-b">Vision IA 2 caméras</span></td><td>45%</td><td>~60 dB</td><td><strong>799 €</strong></td><td>⭐ 4.0/5</td></tr>
-        <tr><td>Robomow RS635 Pro</td><td>3 500 m²</td><td><span class="ctag ctag-b">Fil + GPS</span></td><td>30%</td><td>~65 dB</td><td><strong>1 199 €</strong></td><td>⭐ 4.0/5</td></tr>
-        <tr><td>Stiga A 3000</td><td>3 000 m²</td><td><span class="ctag ctag-g">GPS RTK</span></td><td>45%</td><td>~63 dB</td><td><strong>1 499 €</strong></td><td>⭐ 4.2/5</td></tr>
-        <tr><td>Viking iMow MI 632 PC</td><td>3 200 m²</td><td><span class="ctag ctag-b">Fil + GPS</span></td><td>35%</td><td>~63 dB</td><td><strong>1 199 €</strong></td><td>⭐ 4.0/5</td></tr>
-        <tr><td>EcoFlow Blade</td><td>3 200 m²</td><td><span class="ctag ctag-b">Vision + GPS</span></td><td>30%</td><td>~64 dB</td><td><strong>2 199 €</strong></td><td>⭐ 4.2/5</td></tr>
-        <tr><td>Husqvarna Automower 430X</td><td>3 200 m²</td><td><span class="ctag ctag-g">EPOS satellites</span></td><td>45%</td><td>63 dB</td><td><strong>1 799 €</strong></td><td>⭐ 4.4/5</td></tr>
-        <tr><td>Ambrogio L15 Elite</td><td>1 500 m²</td><td><span class="ctag ctag-b">Fil périmètre</span></td><td>35%</td><td>~65 dB</td><td><strong>1 299 €</strong></td><td>⭐ 4.1/5</td></tr>
-        <tr><td>Mammotion LUBA 2 AWD 1000</td><td>1 000 m²</td><td><span class="ctag ctag-o">RTK+IMU+Vision 4WD</span></td><td><strong>80%</strong></td><td>~58 dB</td><td><strong>1 799 €</strong></td><td>⭐ 4.3/5</td></tr>
-        <tr><td>Husqvarna Automower 450X NERA</td><td>5 000 m²</td><td><span class="ctag ctag-g">EPOS sans câble</span></td><td>50%</td><td><strong>58 dB</strong></td><td><strong>3 499 €</strong></td><td>⭐ 4.7/5</td></tr>
-        <tr><td>Husqvarna Automower 435X AWD</td><td>3 500 m²</td><td><span class="ctag ctag-g">EPOS + 4WD</span></td><td>70%</td><td>60 dB</td><td><strong>3 199 €</strong></td><td>⭐ 4.5/5</td></tr>
-      </tbody>
-    </table>
-  </div>
-</section>
-
-<!-- ══ QUIZ ══ -->
-<section id="quiz">
+<!-- ══ CTA CARDS ══ -->
+<section style="background:var(--dark3);padding:80px 5%;">
   <div class="reveal" style="text-align:center;margin-bottom:48px;">
-    <div class="section-label">Questionnaire personnalisé</div>
-    <h2 class="section-title">Quel robot vous correspond ?</h2>
-    <p class="section-sub" style="margin:0 auto">5 questions pour trouver votre robot idéal parmi les 30 robots de notre sélection 2026.</p>
+    <div class="section-label">Explorer le site</div>
+    <h2 class="section-title">Tout ce qu'il vous faut</h2>
+    <p class="section-sub" style="margin:0 auto">30 robots comparés, un quiz personnalisé, un tableau comparatif et le classement par note.</p>
   </div>
-  <div class="quiz-wrapper reveal">
-    <div class="quiz-header">
-      <div class="qpills" id="qpills"></div>
-      <h2>Trouvez votre robot idéal</h2>
-      <p>Sélection croisée experts + 15 000+ avis utilisateurs · Mise à jour Mars 2026</p>
-    </div>
-    <div class="quiz-body">
-      <div class="qprogbar"><div class="qprogfill" id="qpf" style="width:0%"></div></div>
-
-      <!-- Q1 -->
-      <div class="qstep on" id="qs1">
-        <div class="qstep-label">Question 1 / 5</div>
-        <h3>Surface de pelouse à tondre</h3>
-        <p class="hint">Comptez uniquement la pelouse, sans allées ni massifs.</p>
-        <div class="qopts g2">
-          <div class="qopt" data-q="surface" data-v="small" onclick="qpick(this)"><span class="qopt-icon">🏡</span><h4>Petit jardin</h4><p>Moins de 400 m²</p></div>
-          <div class="qopt" data-q="surface" data-v="medium" onclick="qpick(this)"><span class="qopt-icon">🌳</span><h4>Jardin moyen</h4><p>400 à 800 m²</p></div>
-          <div class="qopt" data-q="surface" data-v="large" onclick="qpick(this)"><span class="qopt-icon">🏞️</span><h4>Grand jardin</h4><p>800 à 2 000 m²</p></div>
-          <div class="qopt" data-q="surface" data-v="xlarge" onclick="qpick(this)"><span class="qopt-icon">🌾</span><h4>Très grand terrain</h4><p>Plus de 2 000 m²</p></div>
-        </div>
-        <div class="qnav"><button class="qbtn-next" onclick="qgo(2)" id="qn1" disabled>Continuer</button></div>
-      </div>
-
-      <!-- Q2 -->
-      <div class="qstep" id="qs2">
-        <div class="qstep-label">Question 2 / 5</div>
-        <h3>Type de terrain</h3>
-        <p class="hint">La complexité détermine la technologie de navigation nécessaire.</p>
-        <div class="qopts">
-          <div class="qopt" data-q="terrain" data-v="flat" onclick="qpick(this)"><span class="qopt-icon">🟩</span><h4>Plat et simple</h4><p>Rectangulaire, peu d'obstacles, terrain dégagé</p></div>
-          <div class="qopt" data-q="terrain" data-v="medium" onclick="qpick(this)"><span class="qopt-icon">🌿</span><h4>Forme irrégulière</h4><p>Arbres, massifs, allées, contours non rectilignes</p></div>
-          <div class="qopt" data-q="terrain" data-v="slopes" onclick="qpick(this)"><span class="qopt-icon">⛰️</span><h4>Terrain en pente</h4><p>Dénivelé important, plus de 30%</p></div>
-          <div class="qopt" data-q="terrain" data-v="complex" onclick="qpick(this)"><span class="qopt-icon">🗺️</span><h4>Très complexe / multi-zones</h4><p>Zones séparées, nombreux obstacles, piscine, allées multiples</p></div>
-        </div>
-        <div class="qnav">
-          <button class="qbtn-back" onclick="qgo(1)">Retour</button>
-          <button class="qbtn-next" onclick="qgo(3)" id="qn2" disabled>Continuer</button>
-        </div>
-      </div>
-
-      <!-- Q3 -->
-      <div class="qstep" id="qs3">
-        <div class="qstep-label">Question 3 / 5</div>
-        <h3>Budget maximum</h3>
-        <p class="hint">D'excellents modèles sans fil existent dès 649 €.</p>
-        <div class="budget-big" id="qbn">1 000 €</div>
-        <div class="budget-sub">budget maximum</div>
-        <input type="range" id="qbr" min="600" max="3000" step="50" value="1000" oninput="qBudget(this.value)"/>
-        <div class="range-labs"><span>600 €</span><span>1 500 €</span><span>3 000 €</span></div>
-        <div class="qopts g3">
-          <div class="qopt" data-q="budget" data-v="low" onclick="qSetBudget(800,this)"><span class="qopt-icon">💚</span><h4>Économique</h4><p>≤ 800 €</p></div>
-          <div class="qopt" data-q="budget" data-v="mid" onclick="qSetBudget(1500,this)"><span class="qopt-icon">💛</span><h4>Milieu de gamme</h4><p>800 – 1 700 €</p></div>
-          <div class="qopt" data-q="budget" data-v="high" onclick="qSetBudget(3000,this)"><span class="qopt-icon">🏅</span><h4>Haut de gamme</h4><p>+ 1 700 €</p></div>
-        </div>
-        <div class="qnav">
-          <button class="qbtn-back" onclick="qgo(2)">Retour</button>
-          <button class="qbtn-next" onclick="qgo(4)">Continuer</button>
-        </div>
-      </div>
-
-      <!-- Q4 -->
-      <div class="qstep" id="qs4">
-        <div class="qstep-label">Question 4 / 5</div>
-        <h3>Vos priorités</h3>
-        <p class="hint">Choisissez jusqu'à 3 critères qui comptent le plus.</p>
-        <div class="qprios">
-          <div class="qprio" data-key="install" onclick="qTogPrio(this)"><span class="qprio-icon">⚡</span><span>Installation rapide</span></div>
-          <div class="qprio" data-key="precision" onclick="qTogPrio(this)"><span class="qprio-icon">🎯</span><span>Précision de tonte</span></div>
-          <div class="qprio" data-key="obstacles" onclick="qTogPrio(this)"><span class="qprio-icon">🚧</span><span>Évitement d'obstacles</span></div>
-          <div class="qprio" data-key="silent" onclick="qTogPrio(this)"><span class="qprio-icon">🔇</span><span>Silencieux</span></div>
-          <div class="qprio" data-key="app" onclick="qTogPrio(this)"><span class="qprio-icon">📱</span><span>Application mobile</span></div>
-          <div class="qprio" data-key="sav" onclick="qTogPrio(this)"><span class="qprio-icon">🔧</span><span>SAV & fiabilité</span></div>
-          <div class="qprio" data-key="voice" onclick="qTogPrio(this)"><span class="qprio-icon">🗣️</span><span>Contrôle vocal</span></div>
-          <div class="qprio" data-key="noWire" onclick="qTogPrio(this)"><span class="qprio-icon">📡</span><span>Sans câble</span></div>
-        </div>
-        <div class="qnav">
-          <button class="qbtn-back" onclick="qgo(3)">Retour</button>
-          <button class="qbtn-next" onclick="qgo(5)">Continuer</button>
-        </div>
-      </div>
-
-      <!-- Q5 -->
-      <div class="qstep" id="qs5">
-        <div class="qstep-label">Question 5 / 5</div>
-        <h3>Votre niveau avec la technologie</h3>
-        <p class="hint">Certains robots sont prêts en 30 min, d'autres demandent plus de configuration.</p>
-        <div class="qopts">
-          <div class="qopt" data-q="tech" data-v="beginner" onclick="qpick(this)"><span class="qopt-icon">😊</span><h4>Je veux simple</h4><p>Plug & play, sans configuration complexe</p></div>
-          <div class="qopt" data-q="tech" data-v="intermediate" onclick="qpick(this)"><span class="qopt-icon">🙂</span><h4>À l'aise avec une app</h4><p>Paramétrage mobile, zones, planning</p></div>
-          <div class="qopt" data-q="tech" data-v="advanced" onclick="qpick(this)"><span class="qopt-icon">🤓</span><h4>Profil avancé</h4><p>GPS, RTK, multi-zones — j'assume tout</p></div>
-        </div>
-        <div class="qnav">
-          <button class="qbtn-back" onclick="qgo(4)">Retour</button>
-          <button class="qbtn-next" onclick="qShowResult()" id="qn5" disabled>Voir ma recommandation</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- RESULTS -->
-    <div class="qres" id="qres">
-      <div class="qres-header">
-        <div style="font-size:2.5rem;margin-bottom:12px">🏆</div>
-        <h2>Votre sélection personnalisée</h2>
-        <p>Basée sur votre profil · Croisée avec 15 000+ avis utilisateurs · Mars 2026</p>
-      </div>
-      <div class="qres-body">
-        <div class="premium-gate" id="qres-gate">
-          <div class="pg-content" id="qrcards"></div>
-          <div class="pg-overlay" onclick="showPaywall()">
-            <div class="pg-lock-icon">🔒</div>
-            <div class="pg-lock-title">Débloquez vos résultats personnalisés</div>
-            <div class="pg-lock-desc">Votre sélection est prête ! Accédez aux 3 robots qui correspondent à votre profil, leurs fiches complètes et avis vérifiés.</div>
-            <button class="pg-lock-btn" onclick="showPaywall()">Voir mes résultats — 4,99 €</button>
-          </div>
-        </div>
-        <button class="qbtn-restart" onclick="qRestart()">Refaire le questionnaire</button>
-        <div style="text-align:center;font-size:.7rem;color:var(--muted);margin-top:20px;line-height:1.8;">
-          Sources : <a href="https://www.clubic.com/guide-achat/article-829280-1-selection-tondeuse-robot.html" target="_blank" style="color:rgba(34,197,94,.6)">Clubic</a> ·
-          <a href="https://www.jardinage-media.com/blog/top-robot-tondeuse-autonome" target="_blank" style="color:rgba(34,197,94,.6)">Jardinage-Media</a> ·
-          Trustpilot Mammotion 4.5/5 · Forums Kelrobot<br/>
-          ⚠️ Remplacez les liens par vos liens d'affiliation
-        </div>
-      </div>
-    </div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:20px;">
+    <a href="robots.html" style="background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:32px 28px;display:flex;flex-direction:column;gap:12px;transition:all .25s;text-decoration:none;color:inherit;" onmouseover="this.style.borderColor='rgba(34,197,94,.35)';this.style.background='rgba(255,255,255,.07)'" onmouseout="this.style.borderColor='rgba(255,255,255,.07)';this.style.background='rgba(255,255,255,.04)'">
+      <div style="font-size:2rem;">🤖</div>
+      <div style="font-size:1rem;font-weight:800;letter-spacing:-.3px;">Robots 2026</div>
+      <div style="font-size:.82rem;color:var(--text2);line-height:1.55;">Les 30 meilleurs robots tondeuses sélectionnés sur 15 000+ avis. 9 gratuits, 21 avec Accès Complet.</div>
+      <div style="font-size:.78rem;font-weight:700;color:var(--green-l);margin-top:auto;">Voir les robots →</div>
+    </a>
+    <a href="comparatif.html" style="background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:32px 28px;display:flex;flex-direction:column;gap:12px;transition:all .25s;text-decoration:none;color:inherit;" onmouseover="this.style.borderColor='rgba(34,197,94,.35)';this.style.background='rgba(255,255,255,.07)'" onmouseout="this.style.borderColor='rgba(255,255,255,.07)';this.style.background='rgba(255,255,255,.04)'">
+      <div style="font-size:2rem;">📊</div>
+      <div style="font-size:1rem;font-weight:800;letter-spacing:-.3px;">Tableau comparatif</div>
+      <div style="font-size:.82rem;color:var(--text2);line-height:1.55;">Tous les modèles côte à côte : surface, navigation, pentes, bruit, prix. Vue d'ensemble en un coup d'œil.</div>
+      <div style="font-size:.78rem;font-weight:700;color:var(--green-l);margin-top:auto;">Comparer →</div>
+    </a>
+    <a href="classement.html" onclick="if(!isPaid()){event.preventDefault();showPaywall();}" style="background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:32px 28px;display:flex;flex-direction:column;gap:12px;transition:all .25s;text-decoration:none;color:inherit;" onmouseover="this.style.borderColor='rgba(34,197,94,.35)';this.style.background='rgba(255,255,255,.07)'" onmouseout="this.style.borderColor='rgba(255,255,255,.07)';this.style.background='rgba(255,255,255,.04)'">
+      <div style="font-size:2rem;">🏆</div>
+      <div style="font-size:1rem;font-weight:800;letter-spacing:-.3px;">Classement 🔒</div>
+      <div style="font-size:.82rem;color:var(--text2);line-height:1.55;">Les 30 robots classés du meilleur au moins bon selon leur note globale. Accès Complet requis.</div>
+      <div style="font-size:.78rem;font-weight:700;color:var(--green-l);margin-top:auto;">Voir le classement →</div>
+    </a>
+    <a href="quiz.html" style="background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:32px 28px;display:flex;flex-direction:column;gap:12px;transition:all .25s;text-decoration:none;color:inherit;" onmouseover="this.style.borderColor='rgba(34,197,94,.35)';this.style.background='rgba(255,255,255,.07)'" onmouseout="this.style.borderColor='rgba(255,255,255,.07)';this.style.background='rgba(255,255,255,.04)'">
+      <div style="font-size:2rem;">🎯</div>
+      <div style="font-size:1rem;font-weight:800;letter-spacing:-.3px;">Quiz personnalisé</div>
+      <div style="font-size:.82rem;color:var(--text2);line-height:1.55;">5 questions pour trouver votre robot idéal parmi les 30 modèles. Résultat en 3 minutes.</div>
+      <div style="font-size:.78rem;font-weight:700;color:var(--green-l);margin-top:auto;">Faire le quiz →</div>
+    </a>
   </div>
 </section>
 
@@ -1656,7 +1458,7 @@ footer{
 <!-- ══ FOOTER ══ -->
 <footer>
   <div class="footer-brand">
-    <a href="#accueil" class="footer-logo-link">
+    <a href="index.html" class="footer-logo-link">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" style="color:var(--green-l)">
         <circle cx="12" cy="12" r="9.5" stroke="currentColor" stroke-width="1.2" opacity="0.35"/>
         <path d="M4 15 Q12 3.5 20 15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
@@ -1669,9 +1471,9 @@ footer{
   </div>
   <div class="footer-links-col">
     <div class="footer-col-title">Navigation</div>
-    <a href="#produits">Robots 2026</a>
-    <a href="#comparaison">Tableau comparatif</a>
-    <a href="#quiz">Questionnaire</a>
+    <a href="robots.html">Robots 2026</a>
+    <a href="comparatif.html">Tableau comparatif</a>
+    <a href="quiz.html">Questionnaire</a>
     <a href="#conseils">Conseils d'achat</a>
   </div>
   <div class="footer-links-col">
@@ -1723,94 +1525,21 @@ function handleStripeReturn(){
     window.history.replaceState({}, '', clean);
   }
 }
-function updatePremiumUI(rerender){
+function updatePremiumUI(){
   const navBtn = document.getElementById('nav-premium');
-  const banner = document.getElementById('premium-banner');
-  const gates = ['pieges-gate','outils-gate','questions-gate','qres-gate'].map(id=>document.getElementById(id));
-  const table = document.getElementById('compareTable');
+  const gates = ['pieges-gate','outils-gate','questions-gate'].map(id=>document.getElementById(id));
   if(isPaid()){
     if(navBtn){ navBtn.textContent = '✅ Accès Complet actif'; navBtn.classList.add('active-paid'); }
-    if(banner){ banner.style.display = 'none'; }
     gates.forEach(g=>{ if(g) g.classList.remove('locked'); });
-    if(table) table.classList.remove('score-blurred');
-    const gridEl = document.getElementById('productGrid');
-    if(gridEl) gridEl.classList.remove('scores-blurred');
-    buildRanking();
   } else {
     gates.forEach(g=>{ if(g) g.classList.add('locked'); });
-    const gridEl = document.getElementById('productGrid');
-    if(gridEl){
-      gridEl.classList.add('scores-blurred');
-      gridEl.addEventListener('click', function(e){
-        if(e.target.closest('.pc-score')) showPaywall();
-      }, {once:false});
-    }
-    if(table){
-      table.classList.add('score-blurred');
-      table.addEventListener('click', function handler(e){
-        if(e.target.closest('td:last-child, th:last-child')) showPaywall();
-      }, {once:false});
-    }
   }
-  if(rerender) renderGrid();
-}
-
-function buildRanking(){
-  const gate = document.getElementById('classement-gate');
-  const content = document.getElementById('classement-content');
-  if(!gate||!content) return;
-  const sorted = [...PRODUCTS].sort((a,b)=>parseFloat(b.score)-parseFloat(a.score));
-  const medals = ['🥇','🥈','🥉'];
-  content.innerHTML = `<div class="rank-list">${sorted.map((p,i)=>{
-    const pos = i<3 ? `<span class="rank-pos rank-medal-${i+1}">${medals[i]}</span>`
-                    : `<span class="rank-pos rank-medal-n">#${i+1}</span>`;
-    return `<div class="rank-row" onclick="window.location.href='fiche.html?id=${p.id}'" style="cursor:pointer">
-      ${pos}
-      <img class="rank-img" src="${p.img}" alt="${p.name}" onerror="this.style.opacity='.2'"/>
-      <div class="rank-info">
-        <div class="rank-name">${p.name}</div>
-        <div class="rank-tag">${p.tag}</div>
-      </div>
-      <div>
-        <div class="rank-score">⭐ ${p.score}/5</div>
-        <div class="rank-price">${p.price}</div>
-      </div>
-    </div>`;
-  }).join('')}</div>`;
-  gate.classList.remove('locked');
 }
 handleStripeReturn();
 updatePremiumUI();
 
 /* ════════════════════════════
-   ACTIVE NAV DETECTION
-════════════════════════════ */
-(function(){
-  const sectionIds = ['technos','produits','comparaison','classement','quiz','conseils','outils','questions'];
-  const navLinks = document.querySelectorAll('.nav-links a[data-section]');
-  const nav = document.getElementById('nav');
-  if(!navLinks.length) return;
-
-  function updateActive(){
-    const scrollY = window.scrollY;
-    const offset = 80; // nav height + margin
-    let current = sectionIds[0];
-    for(const id of sectionIds){
-      const el = document.getElementById(id);
-      if(el && el.getBoundingClientRect().top + scrollY - offset <= scrollY){
-        current = id;
-      }
-    }
-    navLinks.forEach(a => a.classList.toggle('nav-active', a.dataset.section === current));
-    nav.style.background = scrollY > 40 ? 'rgba(8,15,26,0.97)' : 'rgba(8,15,26,0.85)';
-  }
-
-  window.addEventListener('scroll', updateActive, { passive: true });
-  updateActive();
-})();
-
-/* ════════════════════════════
-   PRODUCTS DATA
+   PRODUCTS DATA (kept for hero cards only)
 ════════════════════════════ */
 const PRODUCTS=[
   {id:'navimow',rank:1,rankCls:'rank-gold',tag:'Meilleur rapport qualité/prix',tagColor:'#86efac',name:'Segway Navimow i105E',desc:'Le bestseller 2026 : installation sans câble en 30 min, lignes parallèles parfaites grâce au GPS RTK.',price:'649 €',priceN:649,surface:'600 m²',nav:'GPS RTK',slope:'45%',noise:'65 dB',score:'4.3',stars:'★★★★☆',count:'1 200+',img:'images/robots/navimow.png',imgBg:'linear-gradient(135deg,#0a2a1e,#061a10)',
@@ -1993,193 +1722,6 @@ const PRODUCTS=[
    tags:['xlarge','large','slopes','complex','high'],prios:['sav','precision','silent'],
    links:[{l:'Amazon',c:'bb-amazon',ico:'🛒',url:'https://www.amazon.fr/dp/B0CF5QSDYB'},{l:'Husqvarna Direct',c:'bb-husqvarna',ico:'🌐',url:'https://www.husqvarna.com/fr/robots-tondeuses/automower-435x-awd/'}]}
 ];
-
-/* Render products */
-const pg=document.getElementById('productGrid');
-function renderGrid(){
-  pg.innerHTML='';
-  PRODUCTS.forEach(p=>{
-    const locked=p.rank>9&&!isPaid();
-    const div=document.createElement('div');
-    div.className='product-card reveal'+(locked?' card-locked':'');
-    div.innerHTML=`
-      <div class="pc-img" style="background:${p.imgBg}">
-        <img src="${p.img}" alt="${p.name}" onerror="this.style.opacity='.2'"/>
-        <span class="pc-score">⭐ ${p.score}</span>
-      </div>
-      <div class="pc-body">
-        <div class="pc-tag" style="color:${p.tagColor}">${p.tag}</div>
-        <div class="pc-name">${p.name}</div>
-        <div class="pc-desc">${p.desc}</div>
-        <div class="pc-specs">
-          <div class="pc-spec"><div class="psl">Surface</div><div class="psv">${p.surface}</div></div>
-          <div class="pc-spec"><div class="psl">Pentes</div><div class="psv">${p.slope}</div></div>
-          <div class="pc-spec"><div class="psl">Bruit</div><div class="psv">${p.noise}</div></div>
-        </div>
-        <div class="pc-footer">
-          <div class="pc-price">${p.price}</div>
-          <span class="pc-fiche">Voir la fiche →</span>
-        </div>
-      </div>
-      ${locked?`<div class="card-lock-overlay" onclick="showPaywall()">
-        <div class="cl-icon">🔒</div>
-        <div class="cl-name">${p.name}</div>
-        <div class="cl-sub">+ 21 robots disponibles<br>avec l'Accès Complet</div>
-        <button class="cl-btn">Tout voir — 4,99 € →</button>
-      </div>`:''}`;
-    if(!locked){
-      div.style.cursor='pointer';
-      div.addEventListener('click',e=>{
-        if(!e.target.closest('a')) window.location.href='fiche.html?id='+p.id;
-      });
-    }
-    pg.appendChild(div);
-  });
-}
-renderGrid();
-
-/* ════════════════════════════
-   QUIZ LOGIC
-════════════════════════════ */
-const QA={surface:null,terrain:null,budget:1000,tech:null,prios:[]};
-let qCur=1;
-
-// Init pills
-const qpp=document.getElementById('qpills');
-const pillLabels=['Surface','Terrain','Budget','Priorités','Profil'];
-pillLabels.forEach((l,i)=>{
-  const d=document.createElement('div');
-  d.id='qp'+(i+1);d.className='qpill'+(i===0?' active':'');d.textContent=l;
-  qpp.appendChild(d);
-});
-
-function qUpdUI(){
-  for(let i=1;i<=5;i++){
-    const p=document.getElementById('qp'+i);
-    if(p)p.className='qpill'+(i===qCur?' active':i<qCur?' done':'');
-  }
-  document.getElementById('qpf').style.width=(((qCur-1)/5)*100)+'%';
-}
-
-function qpick(el){
-  const q=el.dataset.q;
-  document.querySelectorAll('[data-q="'+q+'"]').forEach(o=>o.classList.remove('sel'));
-  el.classList.add('sel');QA[q]=el.dataset.v;
-  const nb=document.getElementById('qn'+qCur);
-  if(nb)nb.disabled=false;
-}
-function qSetBudget(v,el){
-  document.getElementById('qbr').value=v;qBudget(v);
-  document.querySelectorAll('[data-q="budget"]').forEach(o=>o.classList.remove('sel'));
-  el.classList.add('sel');
-}
-function qBudget(v){
-  v=parseInt(v);QA.budget=v;
-  document.getElementById('qbn').textContent=v.toLocaleString('fr-FR')+' €';
-  const pct=((v-600)/2400)*100;
-  document.getElementById('qbr').style.background=`linear-gradient(to right,var(--green) 0%,var(--green) ${pct}%,rgba(255,255,255,.08) ${pct}%)`;
-  const t=document.querySelectorAll('[data-q="budget"]');
-  t.forEach(o=>o.classList.remove('sel'));
-  if(v<=800)t[0].classList.add('sel');else if(v<=1700)t[1].classList.add('sel');else t[2].classList.add('sel');
-}
-function qTogPrio(el){
-  const k=el.dataset.key;
-  if(el.classList.contains('sel')){el.classList.remove('sel');QA.prios=QA.prios.filter(p=>p!==k);}
-  else{
-    if(QA.prios.length>=3){const o=QA.prios.shift();document.querySelector('.qprio[data-key="'+o+'"]').classList.remove('sel');}
-    el.classList.add('sel');QA.prios.push(k);
-  }
-}
-function qgo(n){
-  document.getElementById('qs'+qCur).classList.remove('on');
-  qCur=n;document.getElementById('qs'+n).classList.add('on');
-  qUpdUI();document.getElementById('quiz').scrollIntoView({behavior:'smooth',block:'start'});
-}
-
-function qScore(p){
-  let s=0;
-  if(QA.surface==='small'&&p.tags.includes('small'))s+=30;
-  if(QA.surface==='medium'&&p.tags.includes('medium'))s+=30;
-  if(QA.surface==='large'&&p.tags.includes('large'))s+=30;
-  if(QA.surface==='xlarge'&&p.tags.includes('xlarge'))s+=30;
-  if(QA.surface==='large'&&!p.tags.includes('large')&&!p.tags.includes('xlarge'))s-=40;
-  if(QA.surface==='xlarge'&&!p.tags.includes('xlarge'))s-=50;
-  if(QA.terrain==='slopes'&&p.tags.includes('slopes'))s+=25;
-  if(QA.terrain==='complex'&&p.tags.includes('complex'))s+=20;
-  if(QA.terrain==='slopes'&&!p.tags.includes('slopes'))s-=20;
-  if(p.priceN<=QA.budget)s+=20;else s-=40;
-  QA.prios.forEach(pr=>{if(p.prios.includes(pr))s+=15;});
-  return s;
-}
-
-function qShowResult(){
-  document.getElementById('qs5').classList.remove('on');
-  document.getElementById('quiz').querySelector('.quiz-body').style.display='none';
-  document.getElementById('qres').classList.add('on');
-
-  const ranked=[...PRODUCTS].map(p=>({p,s:qScore(p)})).sort((a,b)=>b.s-a.s);
-  const top3=ranked.slice(0,3);
-  const c=document.getElementById('qrcards');c.innerHTML='';
-  const badgeCls=['rb1','rb2','rb3'];
-  const badgeLabels=['🥇 Recommandation #1','🥈 Alternative #2','🥉 Option #3'];
-  const rcls=['r1','r2','r3'];
-
-  top3.forEach(({p},i)=>{
-    const div=document.createElement('div');
-    div.className='rcard '+rcls[i];
-    div.innerHTML=`
-      <div class="rcard-top">
-        <div class="rcard-img" style="background:${p.imgBg}">
-          <img src="${p.img}" alt="${p.name}" onerror="this.textContent='🤖';this.style.fontSize='3rem'"/>
-        </div>
-        <div class="rcard-info">
-          <span class="rcard-badge ${badgeCls[i]}">${badgeLabels[i]}</span>
-          <div class="rcard-name">${p.name}</div>
-          <div class="rcard-tag">${p.tag}</div>
-          <div class="rcard-specs">
-            <span class="rcard-spec"><strong>${p.surface}</strong> surface</span>
-            <span class="rcard-spec"><strong>${p.nav}</strong></span>
-            <span class="rcard-spec"><strong>${p.slope}</strong> pentes</span>
-            <span class="rcard-spec"><strong>${p.noise}</strong></span>
-          </div>
-          <div class="rcard-why">${p.why}</div>
-        </div>
-      </div>
-      <div class="rcard-bottom">
-        <div>
-          <div class="rcard-price">${p.price}</div>
-          <div class="rcard-rating"><span class="rcard-stars">${p.stars}</span><span>${p.score}/5 · ${p.count} avis</span></div>
-        </div>
-        <div class="buy-btns-row">
-          ${p.rank>9&&!isPaid()
-            ?`<button class="buy-btn-pro bb-fiche" onclick="showPaywall()">🔒 Fiche complète — Accès Complet</button>`
-            :`<a class="buy-btn-pro bb-fiche" href="fiche.html?id=${p.id}">📋 Fiche complète</a>`}
-          ${p.links.map(l=>`<a class="buy-btn-pro ${l.c}" href="${l.url}" target="_blank" rel="noopener">${l.ico} ${l.l}</a>`).join('')}
-        </div>
-        <div class="buy-note">* Remplacez par vos liens d'affiliation</div>
-      </div>`;
-    c.appendChild(div);
-  });
-  // Lock results for free users
-  const gate = document.getElementById('qres-gate');
-  if(gate) gate.classList.toggle('locked', !isPaid());
-
-  document.getElementById('quiz').scrollIntoView({behavior:'smooth'});
-}
-
-function qRestart(){
-  Object.assign(QA,{surface:null,terrain:null,budget:1000,tech:null,prios:[]});
-  document.querySelectorAll('.qopt,.qprio').forEach(e=>e.classList.remove('sel'));
-  document.getElementById('qbr').value=1000;qBudget(1000);
-  document.getElementById('qres').classList.remove('on');
-  document.getElementById('quiz').querySelector('.quiz-body').style.display='block';
-  ['qn1','qn2','qn5'].forEach(id=>{const e=document.getElementById(id);if(e)e.disabled=true;});
-  qCur=1;document.getElementById('qs1').classList.add('on');
-  for(let i=2;i<=5;i++)document.getElementById('qs'+i).classList.remove('on');
-  qUpdUI();document.getElementById('quiz').scrollIntoView({behavior:'smooth'});
-}
-
-qUpdUI();qBudget(1000);
 
 /* ════════════════════════════
    SCROLL ANIMATIONS

@@ -1,0 +1,986 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Quiz — Trouvez votre robot tondeuse idéal 2026 | RoboTondeuse.guide</title>
+<link href="fonts/inter.css" rel="stylesheet"/>
+<style>
+/* ═══════════════════════════════════════════════
+   VARIABLES & RESET
+═══════════════════════════════════════════════ */
+:root{
+  --dark:#080f1a;--dark2:#0d1829;--dark3:#111e33;
+  --green:#16a34a;--green-l:#22c55e;--green-xl:#4ade80;
+  --blue:#0ea5e9;--purple:#8b5cf6;--amber:#f59e0b;
+  --text:#f8fafc;--text2:#cbd5e1;--muted:#64748b;
+  --card:rgba(255,255,255,0.04);--card-h:rgba(255,255,255,0.07);
+  --border:rgba(255,255,255,0.07);--border-h:rgba(34,197,94,0.35);
+  --r:18px;--shadow:0 20px 60px rgba(0,0,0,0.4);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--dark);color:var(--text);overflow-x:hidden}
+img{max-width:100%;display:block}
+a{text-decoration:none;color:inherit}
+
+/* ═══════════════════════════════════════════════
+   NAV
+═══════════════════════════════════════════════ */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  padding:0 5%;height:68px;display:flex;align-items:center;justify-content:space-between;
+  background:rgba(8,15,26,0.85);backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border);transition:background .3s;
+}
+.nav-logo{display:flex;align-items:center;gap:9px;text-decoration:none;color:inherit;}
+.logo-icon{width:26px;height:26px;color:var(--green-l);flex-shrink:0;}
+.logo-name{font-weight:800;font-size:1.05rem;letter-spacing:-.4px;}
+.logo-name em{font-style:normal;color:var(--green-l);}
+.logo-name s{text-decoration:none;color:var(--muted);font-weight:500;font-size:.85em;}
+.nav-links{display:flex;align-items:center;gap:2px;}
+.nav-links a{
+  position:relative;padding:8px 13px;border-radius:8px;font-size:.84rem;font-weight:500;
+  color:var(--text2);transition:color .2s;
+}
+.nav-links a::after{
+  content:'';position:absolute;bottom:3px;left:13px;right:13px;
+  height:2px;background:var(--green-l);border-radius:1px;
+  transform:scaleX(0);transform-origin:center;transition:transform .25s ease;
+}
+.nav-links a:hover{color:var(--text);}
+.nav-links a.nav-active{color:var(--text);}
+.nav-links a.nav-active::after{transform:scaleX(1);}
+.nav-premium-btn{
+  display:inline-flex;align-items:center;gap:7px;
+  padding:8px 16px;border-radius:10px;font-size:.8rem;font-weight:700;
+  background:rgba(22,163,74,.1);border:1px solid rgba(34,197,94,.35);
+  color:var(--green-xl);cursor:pointer;transition:all .2s;
+  white-space:nowrap;text-decoration:none;letter-spacing:.1px;
+}
+.nav-premium-btn svg{flex-shrink:0;}
+.nav-premium-btn:hover{background:rgba(22,163,74,.18);border-color:rgba(34,197,94,.55);transform:translateY(-1px);}
+.nav-premium-btn.active-paid{color:var(--green-l);border-color:rgba(34,197,94,.25);background:rgba(22,163,74,.06);}
+.nav-premium-btn.active-paid svg{display:none;}
+
+/* ═══════════════════════════════════════════════
+   SECTIONS COMMUNES
+═══════════════════════════════════════════════ */
+section{padding:90px 5%;}
+.section-label{
+  display:inline-flex;align-items:center;gap:10px;
+  font-size:.65rem;font-weight:700;letter-spacing:1.6px;
+  color:var(--muted);text-transform:uppercase;margin-bottom:16px;
+}
+.section-label::before{
+  content:'';display:block;width:22px;height:1.5px;
+  background:currentColor;border-radius:1px;flex-shrink:0;opacity:.7;
+}
+.section-title{font-size:clamp(1.8rem,4vw,2.8rem);font-weight:900;letter-spacing:-1.5px;margin-bottom:16px;}
+.section-sub{font-size:1rem;color:var(--text2);line-height:1.7;max-width:600px;margin-bottom:56px;}
+
+/* ═══════════════════════════════════════════════
+   QUIZ / FORM SECTION
+═══════════════════════════════════════════════ */
+.quiz-wrapper{
+  max-width:820px;margin:0 auto;
+  background:rgba(255,255,255,.02);border:1px solid var(--border);
+  border-radius:24px;overflow:hidden;
+}
+.quiz-header{
+  background:linear-gradient(135deg,rgba(22,163,74,.15),rgba(14,165,233,.08));
+  padding:36px 40px;border-bottom:1px solid var(--border);
+}
+.quiz-header h2{font-size:1.5rem;font-weight:800;letter-spacing:-.5px;margin-bottom:8px;}
+.quiz-header p{color:var(--text2);font-size:.9rem;}
+.quiz-body{padding:36px 40px;}
+
+/* Step pills */
+.qpills{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px;}
+.qpill{
+  padding:5px 14px;border-radius:999px;font-size:.75rem;font-weight:600;
+  border:1px solid var(--border);color:var(--muted);transition:all .25s;
+}
+.qpill.active{background:var(--green);border-color:var(--green);color:#fff;}
+.qpill.done{border-color:rgba(34,197,94,.3);color:var(--green-xl);}
+.qprogbar{height:3px;background:rgba(255,255,255,.06);border-radius:2px;margin-bottom:36px;overflow:hidden;}
+.qprogfill{height:100%;background:linear-gradient(90deg,var(--green),var(--blue));border-radius:2px;transition:width .5s ease;}
+
+/* Steps */
+.qstep{display:none;animation:fadeUp .35s ease;}
+.qstep.on{display:block;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+.qstep-label{
+  font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;
+  color:var(--green-l);margin-bottom:8px;display:flex;align-items:center;gap:8px;
+}
+.qstep-label::after{content:'';flex:1;height:1px;background:linear-gradient(to right,rgba(34,197,94,.2),transparent);}
+.qstep h3{font-size:1.25rem;font-weight:800;letter-spacing:-.4px;margin-bottom:6px;}
+.qstep .hint{font-size:.85rem;color:var(--muted);margin-bottom:24px;line-height:1.6;}
+
+/* Options */
+.qopts{display:grid;gap:10px;}
+.qopts.g2{grid-template-columns:1fr 1fr;}
+.qopts.g3{grid-template-columns:repeat(3,1fr);}
+.qopt{
+  border:1px solid var(--border);border-radius:12px;padding:16px 18px;
+  cursor:pointer;transition:all .2s;background:rgba(255,255,255,.02);
+  position:relative;
+}
+.qopt:hover{border-color:rgba(34,197,94,.3);background:rgba(34,197,94,.04);}
+.qopt.sel{border-color:var(--green);background:rgba(22,163,74,.08);}
+.qopt.sel::after{
+  content:'✓';position:absolute;top:12px;right:14px;
+  width:20px;height:20px;border-radius:50%;background:var(--green);
+  color:#fff;font-size:.72rem;font-weight:800;
+  display:flex;align-items:center;justify-content:center;line-height:20px;text-align:center;
+}
+.qopt-icon{font-size:1.5rem;margin-bottom:7px;display:block;}
+.qopt h4{font-size:.9rem;font-weight:700;margin-bottom:2px;}
+.qopt p{font-size:.78rem;color:var(--muted);line-height:1.4;}
+
+/* Budget */
+.budget-big{
+  font-size:3rem;font-weight:900;letter-spacing:-2px;text-align:center;
+  background:linear-gradient(135deg,var(--green-l),var(--blue));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  margin:12px 0 6px;
+}
+.budget-sub{text-align:center;color:var(--muted);font-size:.82rem;margin-bottom:18px;}
+input[type=range]{
+  width:100%;-webkit-appearance:none;height:5px;
+  background:rgba(255,255,255,.08);border-radius:3px;outline:none;cursor:pointer;
+}
+input[type=range]::-webkit-slider-thumb{
+  -webkit-appearance:none;width:20px;height:20px;border-radius:50%;
+  background:linear-gradient(135deg,var(--green),var(--blue));
+  box-shadow:0 0 10px rgba(34,197,94,.4);cursor:pointer;
+}
+.range-labs{display:flex;justify-content:space-between;font-size:.75rem;color:var(--muted);margin-top:8px;margin-bottom:18px;}
+
+/* Priorities */
+.qprios{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.qprio{
+  display:flex;align-items:center;gap:12px;padding:13px 15px;
+  border:1px solid var(--border);border-radius:10px;cursor:pointer;
+  transition:all .2s;background:rgba(255,255,255,.02);
+}
+.qprio:hover{border-color:rgba(139,92,246,.35);background:rgba(139,92,246,.05);}
+.qprio.sel{border-color:var(--purple);background:rgba(139,92,246,.1);}
+.qprio-icon{font-size:1.2rem;flex-shrink:0;}
+.qprio span{font-size:.85rem;font-weight:600;}
+
+/* Nav buttons */
+.qnav{display:flex;gap:12px;margin-top:28px;justify-content:flex-end;}
+.qbtn-back{
+  padding:12px 24px;border-radius:10px;font-size:.88rem;font-weight:600;
+  background:transparent;color:var(--text2);border:1px solid var(--border);
+  cursor:pointer;transition:all .2s;font-family:'Inter',sans-serif;
+}
+.qbtn-back:hover{background:rgba(255,255,255,.06);color:var(--text);border-color:rgba(255,255,255,.2);}
+.qbtn-next{
+  padding:12px 32px;border-radius:10px;font-size:.88rem;font-weight:700;
+  background:var(--green);color:#fff;border:none;cursor:pointer;
+  transition:all .25s;font-family:'Inter',sans-serif;
+}
+.qbtn-next:hover{background:var(--green-l);transform:translateY(-2px);box-shadow:0 6px 20px rgba(34,197,94,.3);}
+.qbtn-next:disabled{background:rgba(255,255,255,.08);color:var(--muted);cursor:not-allowed;transform:none;box-shadow:none;}
+
+/* ─── RESULTS ─── */
+.qres{display:none;}
+.qres.on{display:block;animation:fadeUp .5s ease;}
+.qres-header{
+  background:linear-gradient(135deg,rgba(22,163,74,.1),rgba(14,165,233,.06));
+  border-bottom:1px solid var(--border);padding:32px 40px;text-align:center;
+}
+.qres-header h2{font-size:1.4rem;font-weight:800;letter-spacing:-.5px;margin-bottom:6px;}
+.qres-header p{color:var(--muted);font-size:.85rem;}
+.qres-body{padding:32px 40px;}
+
+.rcard{
+  background:rgba(255,255,255,.03);border:1px solid var(--border);
+  border-radius:var(--r);margin-bottom:18px;overflow:hidden;
+  transition:border-color .2s;
+}
+.rcard.r1{border-color:rgba(34,197,94,.3);}
+.rcard.r2{border-color:rgba(14,165,233,.2);}
+.rcard.r3{border-color:rgba(139,92,246,.2);}
+.rcard-top{display:flex;gap:0;align-items:stretch;}
+.rcard-img{
+  width:180px;flex-shrink:0;display:flex;align-items:center;justify-content:center;
+  padding:20px;
+}
+.rcard-img img{max-height:130px;max-width:140px;object-fit:contain;filter:drop-shadow(0 6px 20px rgba(0,0,0,.5));}
+.rcard-info{flex:1;padding:22px 24px 22px 0;border-left:1px solid var(--border);}
+.rcard-badge{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:4px 12px;border-radius:999px;font-size:.7rem;font-weight:800;
+  letter-spacing:.5px;text-transform:uppercase;margin-bottom:10px;
+}
+.rb1{background:rgba(245,158,11,.15);color:#fcd34d;border:1px solid rgba(245,158,11,.25);}
+.rb2{background:rgba(14,165,233,.1);color:#7dd3fc;border:1px solid rgba(14,165,233,.2);}
+.rb3{background:rgba(139,92,246,.1);color:#c4b5fd;border:1px solid rgba(139,92,246,.2);}
+.rcard-name{font-size:1.05rem;font-weight:800;letter-spacing:-.3px;margin-bottom:4px;}
+.rcard-tag{font-size:.8rem;color:var(--muted);margin-bottom:14px;}
+.rcard-specs{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:12px;}
+.rcard-spec{
+  background:rgba(255,255,255,.04);border-radius:7px;padding:6px 12px;
+  font-size:.75rem;color:var(--text2);
+}
+.rcard-spec strong{color:var(--text);font-weight:700;}
+.rcard-why{
+  font-size:.82rem;color:var(--text2);line-height:1.65;
+  border-left:2px solid var(--green);padding-left:12px;
+  background:rgba(22,163,74,.04);padding:10px 14px;border-radius:0 8px 8px 0;
+}
+.rcard-why strong{color:var(--green-xl);}
+.rcard-bottom{
+  padding:16px 24px;border-top:1px solid var(--border);
+  background:rgba(0,0,0,.15);
+  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;
+}
+.rcard-price{font-size:1.4rem;font-weight:900;color:var(--green-l);}
+.rcard-stars{color:#fbbf24;font-size:.95rem;letter-spacing:1px;}
+.rcard-rating{display:flex;align-items:center;gap:8px;font-size:.8rem;color:var(--muted);}
+.buy-btns-row{display:flex;gap:8px;flex-wrap:wrap;}
+.buy-btn-pro{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:9px 18px;border-radius:8px;font-size:.82rem;font-weight:700;
+  text-decoration:none;transition:all .2s;border:none;cursor:pointer;
+  font-family:'Inter',sans-serif;letter-spacing:-.1px;
+}
+.buy-btn-pro:hover{transform:translateY(-2px);filter:brightness(1.1);}
+.bb-amazon{background:#FF9900;color:#000;}
+.bb-leroy{background:#78be20;color:#000;}
+.bb-boulanger{background:#0070c0;color:#fff;}
+.bb-dreame{background:#5c5fdb;color:#fff;}
+.bb-mammotion{background:#1a7340;color:#fff;}
+.bb-husqvarna{background:#1e3a8a;color:#fff;}
+.bb-fiche{background:rgba(255,255,255,.1)!important;color:#fff!important;border:1px solid rgba(255,255,255,.2);}
+.buy-note{font-size:.68rem;color:var(--muted);font-style:italic;width:100%;}
+
+.qbtn-restart{
+  width:100%;padding:15px;border-radius:12px;font-size:.9rem;font-weight:700;
+  background:rgba(255,255,255,.04);border:1px solid var(--border);
+  color:var(--text2);cursor:pointer;margin-top:8px;
+  transition:all .2s;font-family:'Inter',sans-serif;
+}
+.qbtn-restart:hover{background:rgba(255,255,255,.08);border-color:var(--green);color:var(--text);}
+
+/* Premium gate */
+.premium-gate{position:relative;border-radius:var(--r);overflow:hidden;}
+.premium-gate.locked .pg-content{
+  filter:blur(5px);pointer-events:none;user-select:none;
+  max-height:260px;overflow:hidden;
+}
+.premium-gate.locked::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(to bottom,transparent 0%,rgba(13,24,41,.98) 62%);
+  z-index:1;pointer-events:none;
+}
+.pg-overlay{
+  display:none;position:absolute;bottom:0;left:0;right:0;z-index:2;
+  flex-direction:column;align-items:center;text-align:center;padding:28px 20px;
+}
+.premium-gate.locked .pg-overlay{display:flex;}
+.pg-lock-icon{font-size:2rem;margin-bottom:8px;}
+.pg-lock-title{font-size:1rem;font-weight:800;margin-bottom:6px;}
+.pg-lock-desc{font-size:.8rem;color:var(--text2);margin-bottom:16px;max-width:340px;}
+.pg-lock-btn{
+  padding:12px 28px;border-radius:11px;
+  background:linear-gradient(135deg,var(--green),var(--green-l));
+  color:#fff;font-weight:800;font-size:.88rem;border:none;cursor:pointer;
+  transition:all .2s;box-shadow:0 4px 20px rgba(34,197,94,.3);font-family:'Inter',sans-serif;
+}
+.pg-lock-btn:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(34,197,94,.45);}
+
+/* ═══════════════════════════════════════════════
+   PAYWALL
+═══════════════════════════════════════════════ */
+.pw-overlay{
+  position:fixed;inset:0;z-index:9999;
+  background:rgba(0,0,0,.8);backdrop-filter:blur(10px);
+  display:flex;align-items:center;justify-content:center;padding:20px;
+  opacity:0;pointer-events:none;transition:opacity .3s;
+}
+.pw-overlay.active{opacity:1;pointer-events:all;}
+.pw-modal{
+  background:linear-gradient(145deg,#0f1f38,#091525);
+  border:1px solid rgba(34,197,94,.3);border-radius:24px;
+  padding:40px 36px;max-width:460px;width:100%;text-align:center;
+  box-shadow:0 40px 100px rgba(0,0,0,.7),0 0 0 1px rgba(255,255,255,.04);
+  animation:pwSlide .3s ease;
+}
+@keyframes pwSlide{from{transform:translateY(22px) scale(.96);opacity:0}to{transform:none;opacity:1}}
+.pw-badge{
+  display:inline-flex;align-items:center;gap:6px;
+  background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.3);
+  color:var(--green-l);font-size:.72rem;font-weight:700;letter-spacing:.8px;
+  padding:5px 14px;border-radius:20px;margin-bottom:18px;text-transform:uppercase;
+}
+.pw-title{font-size:1.65rem;font-weight:900;margin-bottom:8px;line-height:1.2;}
+.pw-sub{font-size:.88rem;color:var(--text2);margin-bottom:22px;}
+.pw-features{list-style:none;text-align:left;margin-bottom:24px;display:flex;flex-direction:column;gap:9px;}
+.pw-features li{display:flex;align-items:flex-start;gap:10px;font-size:.85rem;color:var(--text2);line-height:1.4;}
+.pw-features li::before{content:'✓';color:var(--green-l);font-weight:900;flex-shrink:0;margin-top:1px;}
+.pw-price-row{
+  display:flex;align-items:center;justify-content:center;gap:12px;
+  margin-bottom:20px;background:rgba(255,255,255,.03);
+  border:1px solid rgba(255,255,255,.06);border-radius:14px;padding:14px;
+}
+.pw-old{font-size:.95rem;color:var(--muted);text-decoration:line-through;}
+.pw-new{font-size:2.1rem;font-weight:900;color:var(--green-l);}
+.pw-once{font-size:.75rem;color:var(--muted);background:rgba(255,255,255,.06);padding:3px 9px;border-radius:6px;}
+.pw-btn{
+  display:block;width:100%;padding:16px;border-radius:14px;
+  background:linear-gradient(135deg,#16a34a,#22c55e);
+  color:#fff;font-weight:800;font-size:1rem;
+  border:none;cursor:pointer;text-decoration:none;
+  transition:all .2s;margin-bottom:12px;
+  box-shadow:0 6px 30px rgba(34,197,94,.4);font-family:'Inter',sans-serif;
+}
+.pw-btn:hover{transform:translateY(-2px);box-shadow:0 12px 40px rgba(34,197,94,.55);}
+.pw-guarantee{font-size:.74rem;color:var(--muted);margin-bottom:14px;line-height:1.5;}
+.pw-close{
+  background:none;border:none;color:var(--muted);font-size:.78rem;
+  cursor:pointer;text-decoration:underline;font-family:'Inter',sans-serif;transition:color .2s;
+}
+.pw-close:hover{color:var(--text2);}
+
+/* ═══════════════════════════════════════════════
+   PAGE HEADER
+═══════════════════════════════════════════════ */
+.page-header{
+  padding:120px 5% 60px;
+  background:linear-gradient(135deg,rgba(4,10,18,0.99) 0%,rgba(6,26,15,0.97) 100%);
+  border-bottom:1px solid var(--border);
+  text-align:center;
+}
+
+/* ═══════════════════════════════════════════════
+   SCROLL ANIMATION
+═══════════════════════════════════════════════ */
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease;}
+.reveal.visible{opacity:1;transform:none;}
+
+/* ═══════════════════════════════════════════════
+   FOOTER
+═══════════════════════════════════════════════ */
+footer{
+  background:var(--dark);border-top:1px solid var(--border);
+  padding:56px 5% 40px;
+  display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;
+  gap:40px;align-items:start;
+}
+.footer-brand{}
+.footer-logo-link{display:inline-flex;align-items:center;gap:8px;text-decoration:none;color:inherit;}
+.footer-logo{font-size:1.05rem;font-weight:800;letter-spacing:-.4px;}
+.footer-logo span{color:var(--green-l);}
+.footer-links-col{display:flex;flex-direction:column;gap:10px;}
+.footer-col-title{font-size:.65rem;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:var(--muted);margin-bottom:4px;}
+.footer-links-col a,.footer-note a{font-size:.82rem;color:rgba(255,255,255,.45);transition:color .2s;text-decoration:none;display:block;}
+.footer-links-col a:hover,.footer-note a:hover{color:var(--text2);}
+.footer-note{display:flex;flex-direction:column;gap:10px;}
+@media(max-width:900px){footer{grid-template-columns:1fr 1fr;}}
+@media(max-width:580px){footer{grid-template-columns:1fr;}}
+
+/* ═══════════════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════════════ */
+@media(max-width:680px){
+  nav{padding:0 4%;}
+  .nav-links{display:none;}
+  section{padding:60px 4%;}
+  .qopts.g2,.qopts.g3{grid-template-columns:1fr;}
+  .qprios{grid-template-columns:1fr;}
+  .rcard-top{flex-direction:column;}
+  .rcard-img{width:100%;padding:20px;border-left:none;border-bottom:1px solid var(--border);}
+  .rcard-info{padding:18px;}
+  .quiz-body,.quiz-header,.qres-header,.qres-body{padding:24px 20px;}
+}
+</style>
+</head>
+<body>
+
+<!-- PAYWALL MODAL -->
+<div id="paywall-modal" class="pw-overlay" onclick="if(event.target===this)closePaywall()">
+  <div class="pw-modal">
+    <div class="pw-badge">🔒 Accès Complet</div>
+    <h2 class="pw-title">Fiches complètes<br>de tous les robots</h2>
+    <p class="pw-sub">Accès illimité · Paiement unique · Sur cet appareil</p>
+    <ul class="pw-features">
+      <li>Vrais avis d'acheteurs vérifiés (4+ par robot)</li>
+      <li>Points forts &amp; points faibles détaillés</li>
+      <li>Pannes &amp; bugs connus par modèle</li>
+      <li>7 pièges à éviter que les vendeurs cachent</li>
+      <li>10 questions à poser avant d'acheter</li>
+      <li>Simulateur coût réel 3 ans + Comparateur</li>
+      <li>Checklist jardin + Guide 7 erreurs à éviter</li>
+    </ul>
+    <div class="pw-price-row">
+      <span class="pw-old">9,99 €</span>
+      <span class="pw-new">4,99 €</span>
+      <span class="pw-once">une seule fois</span>
+    </div>
+    <a class="pw-btn" href="STRIPE_LINK_PLACEHOLDER" target="_blank">Débloquer maintenant →</a>
+    <p class="pw-guarantee">🛡️ Paiement sécurisé Stripe · Sans abonnement · Accès immédiat</p>
+    <button class="pw-close" onclick="closePaywall()">Continuer sans accès complet</button>
+  </div>
+</div>
+
+<!-- ══ NAV ══ -->
+<nav id="nav">
+  <a href="index.html" class="nav-logo">
+    <svg class="logo-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="12" cy="12" r="9.5" stroke="currentColor" stroke-width="1.2" opacity="0.35"/>
+      <path d="M4 15 Q12 3.5 20 15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      <path d="M15.5 4 Q4 12 15.5 20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      <circle cx="12" cy="12" r="2.2" fill="currentColor"/>
+    </svg>
+    <span class="logo-name">Robot<em>Tondeuse</em><s>.guide</s></span>
+  </a>
+  <div class="nav-links">
+    <a href="index.html">Accueil</a>
+    <a href="robots.html">Robots 2026</a>
+    <a href="comparatif.html">Comparatif</a>
+    <a href="classement.html" onclick="if(!isPaid()){event.preventDefault();showPaywall();}">Classement 🔒</a>
+    <a href="quiz.html" class="nav-active">Quiz</a>
+  </div>
+  <a id="nav-premium" class="nav-premium-btn" href="#" onclick="handleNavPremium(event)">
+    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+    Accès Complet — 4,99 €
+  </a>
+</nav>
+
+<!-- ══ PAGE HEADER ══ -->
+<div class="page-header">
+  <div class="section-label">Questionnaire personnalisé</div>
+  <h1 class="section-title">Quel robot vous correspond ?</h1>
+  <p class="section-sub" style="margin:0 auto">5 questions pour trouver votre robot idéal parmi les 30 robots de notre sélection 2026.</p>
+</div>
+
+<!-- ══ QUIZ ══ -->
+<section id="quiz" style="background:var(--dark);">
+  <div class="quiz-wrapper reveal">
+    <div class="quiz-header">
+      <div class="qpills" id="qpills"></div>
+      <h2>Trouvez votre robot idéal</h2>
+      <p>Sélection croisée experts + 15 000+ avis utilisateurs · Mise à jour Mars 2026</p>
+    </div>
+    <div class="quiz-body">
+      <div class="qprogbar"><div class="qprogfill" id="qpf" style="width:0%"></div></div>
+
+      <!-- Q1 -->
+      <div class="qstep on" id="qs1">
+        <div class="qstep-label">Question 1 / 5</div>
+        <h3>Surface de pelouse à tondre</h3>
+        <p class="hint">Comptez uniquement la pelouse, sans allées ni massifs.</p>
+        <div class="qopts g2">
+          <div class="qopt" data-q="surface" data-v="small" onclick="qpick(this)"><span class="qopt-icon">🏡</span><h4>Petit jardin</h4><p>Moins de 400 m²</p></div>
+          <div class="qopt" data-q="surface" data-v="medium" onclick="qpick(this)"><span class="qopt-icon">🌳</span><h4>Jardin moyen</h4><p>400 à 800 m²</p></div>
+          <div class="qopt" data-q="surface" data-v="large" onclick="qpick(this)"><span class="qopt-icon">🏞️</span><h4>Grand jardin</h4><p>800 à 2 000 m²</p></div>
+          <div class="qopt" data-q="surface" data-v="xlarge" onclick="qpick(this)"><span class="qopt-icon">🌾</span><h4>Très grand terrain</h4><p>Plus de 2 000 m²</p></div>
+        </div>
+        <div class="qnav"><button class="qbtn-next" onclick="qgo(2)" id="qn1" disabled>Continuer</button></div>
+      </div>
+
+      <!-- Q2 -->
+      <div class="qstep" id="qs2">
+        <div class="qstep-label">Question 2 / 5</div>
+        <h3>Type de terrain</h3>
+        <p class="hint">La complexité détermine la technologie de navigation nécessaire.</p>
+        <div class="qopts">
+          <div class="qopt" data-q="terrain" data-v="flat" onclick="qpick(this)"><span class="qopt-icon">🟩</span><h4>Plat et simple</h4><p>Rectangulaire, peu d'obstacles, terrain dégagé</p></div>
+          <div class="qopt" data-q="terrain" data-v="medium" onclick="qpick(this)"><span class="qopt-icon">🌿</span><h4>Forme irrégulière</h4><p>Arbres, massifs, allées, contours non rectilignes</p></div>
+          <div class="qopt" data-q="terrain" data-v="slopes" onclick="qpick(this)"><span class="qopt-icon">⛰️</span><h4>Terrain en pente</h4><p>Dénivelé important, plus de 30%</p></div>
+          <div class="qopt" data-q="terrain" data-v="complex" onclick="qpick(this)"><span class="qopt-icon">🗺️</span><h4>Très complexe / multi-zones</h4><p>Zones séparées, nombreux obstacles, piscine, allées multiples</p></div>
+        </div>
+        <div class="qnav">
+          <button class="qbtn-back" onclick="qgo(1)">Retour</button>
+          <button class="qbtn-next" onclick="qgo(3)" id="qn2" disabled>Continuer</button>
+        </div>
+      </div>
+
+      <!-- Q3 -->
+      <div class="qstep" id="qs3">
+        <div class="qstep-label">Question 3 / 5</div>
+        <h3>Budget maximum</h3>
+        <p class="hint">D'excellents modèles sans fil existent dès 649 €.</p>
+        <div class="budget-big" id="qbn">1 000 €</div>
+        <div class="budget-sub">budget maximum</div>
+        <input type="range" id="qbr" min="600" max="3000" step="50" value="1000" oninput="qBudget(this.value)"/>
+        <div class="range-labs"><span>600 €</span><span>1 500 €</span><span>3 000 €</span></div>
+        <div class="qopts g3">
+          <div class="qopt" data-q="budget" data-v="low" onclick="qSetBudget(800,this)"><span class="qopt-icon">💚</span><h4>Économique</h4><p>≤ 800 €</p></div>
+          <div class="qopt" data-q="budget" data-v="mid" onclick="qSetBudget(1500,this)"><span class="qopt-icon">💛</span><h4>Milieu de gamme</h4><p>800 – 1 700 €</p></div>
+          <div class="qopt" data-q="budget" data-v="high" onclick="qSetBudget(3000,this)"><span class="qopt-icon">🏅</span><h4>Haut de gamme</h4><p>+ 1 700 €</p></div>
+        </div>
+        <div class="qnav">
+          <button class="qbtn-back" onclick="qgo(2)">Retour</button>
+          <button class="qbtn-next" onclick="qgo(4)">Continuer</button>
+        </div>
+      </div>
+
+      <!-- Q4 -->
+      <div class="qstep" id="qs4">
+        <div class="qstep-label">Question 4 / 5</div>
+        <h3>Vos priorités</h3>
+        <p class="hint">Choisissez jusqu'à 3 critères qui comptent le plus.</p>
+        <div class="qprios">
+          <div class="qprio" data-key="install" onclick="qTogPrio(this)"><span class="qprio-icon">⚡</span><span>Installation rapide</span></div>
+          <div class="qprio" data-key="precision" onclick="qTogPrio(this)"><span class="qprio-icon">🎯</span><span>Précision de tonte</span></div>
+          <div class="qprio" data-key="obstacles" onclick="qTogPrio(this)"><span class="qprio-icon">🚧</span><span>Évitement d'obstacles</span></div>
+          <div class="qprio" data-key="silent" onclick="qTogPrio(this)"><span class="qprio-icon">🔇</span><span>Silencieux</span></div>
+          <div class="qprio" data-key="app" onclick="qTogPrio(this)"><span class="qprio-icon">📱</span><span>Application mobile</span></div>
+          <div class="qprio" data-key="sav" onclick="qTogPrio(this)"><span class="qprio-icon">🔧</span><span>SAV & fiabilité</span></div>
+          <div class="qprio" data-key="voice" onclick="qTogPrio(this)"><span class="qprio-icon">🗣️</span><span>Contrôle vocal</span></div>
+          <div class="qprio" data-key="noWire" onclick="qTogPrio(this)"><span class="qprio-icon">📡</span><span>Sans câble</span></div>
+        </div>
+        <div class="qnav">
+          <button class="qbtn-back" onclick="qgo(3)">Retour</button>
+          <button class="qbtn-next" onclick="qgo(5)">Continuer</button>
+        </div>
+      </div>
+
+      <!-- Q5 -->
+      <div class="qstep" id="qs5">
+        <div class="qstep-label">Question 5 / 5</div>
+        <h3>Votre niveau avec la technologie</h3>
+        <p class="hint">Certains robots sont prêts en 30 min, d'autres demandent plus de configuration.</p>
+        <div class="qopts">
+          <div class="qopt" data-q="tech" data-v="beginner" onclick="qpick(this)"><span class="qopt-icon">😊</span><h4>Je veux simple</h4><p>Plug & play, sans configuration complexe</p></div>
+          <div class="qopt" data-q="tech" data-v="intermediate" onclick="qpick(this)"><span class="qopt-icon">🙂</span><h4>À l'aise avec une app</h4><p>Paramétrage mobile, zones, planning</p></div>
+          <div class="qopt" data-q="tech" data-v="advanced" onclick="qpick(this)"><span class="qopt-icon">🤓</span><h4>Profil avancé</h4><p>GPS, RTK, multi-zones — j'assume tout</p></div>
+        </div>
+        <div class="qnav">
+          <button class="qbtn-back" onclick="qgo(4)">Retour</button>
+          <button class="qbtn-next" onclick="qShowResult()" id="qn5" disabled>Voir ma recommandation</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- RESULTS -->
+    <div class="qres" id="qres">
+      <div class="qres-header">
+        <div style="font-size:2.5rem;margin-bottom:12px">🏆</div>
+        <h2>Votre sélection personnalisée</h2>
+        <p>Basée sur votre profil · Croisée avec 15 000+ avis utilisateurs · Mars 2026</p>
+      </div>
+      <div class="qres-body">
+        <div class="premium-gate" id="qres-gate">
+          <div class="pg-content" id="qrcards"></div>
+          <div class="pg-overlay" onclick="showPaywall()">
+            <div class="pg-lock-icon">🔒</div>
+            <div class="pg-lock-title">Débloquez vos résultats personnalisés</div>
+            <div class="pg-lock-desc">Votre sélection est prête ! Accédez aux 3 robots qui correspondent à votre profil, leurs fiches complètes et avis vérifiés.</div>
+            <button class="pg-lock-btn" onclick="showPaywall()">Voir mes résultats — 4,99 €</button>
+          </div>
+        </div>
+        <button class="qbtn-restart" onclick="qRestart()">Refaire le questionnaire</button>
+        <div style="text-align:center;font-size:.7rem;color:var(--muted);margin-top:20px;line-height:1.8;">
+          Sources : <a href="https://www.clubic.com/guide-achat/article-829280-1-selection-tondeuse-robot.html" target="_blank" style="color:rgba(34,197,94,.6)">Clubic</a> ·
+          <a href="https://www.jardinage-media.com/blog/top-robot-tondeuse-autonome" target="_blank" style="color:rgba(34,197,94,.6)">Jardinage-Media</a> ·
+          Trustpilot Mammotion 4.5/5 · Forums Kelrobot<br/>
+          ⚠️ Remplacez les liens par vos liens d'affiliation
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FOOTER ══ -->
+<footer>
+  <div class="footer-brand">
+    <a href="index.html" class="footer-logo-link">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" style="color:var(--green-l)">
+        <circle cx="12" cy="12" r="9.5" stroke="currentColor" stroke-width="1.2" opacity="0.35"/>
+        <path d="M4 15 Q12 3.5 20 15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        <path d="M15.5 4 Q4 12 15.5 20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        <circle cx="12" cy="12" r="2.2" fill="currentColor"/>
+      </svg>
+      <span class="footer-logo">Robot<span>Tondeuse</span>.guide</span>
+    </a>
+    <p style="color:var(--muted);font-size:.78rem;margin-top:8px;line-height:1.6;">Guide indépendant · Non affilié aux marques citées<br/>Mis à jour mars 2026</p>
+  </div>
+  <div class="footer-links-col">
+    <div class="footer-col-title">Navigation</div>
+    <a href="robots.html">Robots 2026</a>
+    <a href="comparatif.html">Tableau comparatif</a>
+    <a href="quiz.html">Questionnaire</a>
+    <a href="index.html#conseils">Conseils d'achat</a>
+  </div>
+  <div class="footer-links-col">
+    <div class="footer-col-title">Outils</div>
+    <a href="simulateur.html">Simulateur coût 3 ans</a>
+    <a href="comparateur.html">Comparateur côte à côte</a>
+    <a href="checklist.html">Checklist jardin</a>
+    <a href="guide-pdf.html">Guide 7 erreurs</a>
+  </div>
+  <div class="footer-note">
+    <div class="footer-col-title">Sources</div>
+    <a href="https://www.clubic.com/guide-achat/article-829280-1-selection-tondeuse-robot.html" target="_blank" rel="noopener">Clubic</a>
+    <a href="https://www.futura-sciences.com/conso/comparatifs/meilleur-robot-tondeuse-comparatif/" target="_blank" rel="noopener">Futura-Sciences</a>
+    <a href="https://jardinsplus.com/robot-tondeuse/" target="_blank" rel="noopener">JardinsPlus</a>
+    <a href="https://www.jardinage-media.com/blog/top-robot-tondeuse-autonome" target="_blank" rel="noopener">Jardinage-Media</a>
+    <span style="color:var(--muted);font-size:.72rem;margin-top:8px;display:block;">Avis : Trustpilot · Amazon.fr · Forums Kelrobot</span>
+  </div>
+</footer>
+
+<script>
+/* ════════════════════════════
+   PAYWALL
+════════════════════════════ */
+const STRIPE_URL = 'STRIPE_LINK_PLACEHOLDER';
+const ACCESS_KEY = 'rt_premium_v1';
+
+function isPaid(){
+  return localStorage.getItem(ACCESS_KEY) === 'true';
+}
+function showPaywall(){
+  document.getElementById('paywall-modal').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+function closePaywall(){
+  document.getElementById('paywall-modal').classList.remove('active');
+  document.body.style.overflow = '';
+}
+function handleNavPremium(e){
+  e.preventDefault();
+  if(isPaid()){ alert('✅ Accès Complet actif — toutes les fiches sont débloquées !'); return; }
+  showPaywall();
+}
+function handleStripeReturn(){
+  const params = new URLSearchParams(window.location.search);
+  if(params.get('access') === 'granted'){
+    localStorage.setItem(ACCESS_KEY, 'true');
+    params.delete('access');
+    const clean = window.location.pathname + (params.toString() ? '?'+params.toString() : '') + (window.location.hash||'');
+    window.history.replaceState({}, '', clean);
+  }
+}
+function updatePremiumUI(){
+  const navBtn = document.getElementById('nav-premium');
+  const gate = document.getElementById('qres-gate');
+  if(isPaid()){
+    if(navBtn){ navBtn.textContent = '✅ Accès Complet actif'; navBtn.classList.add('active-paid'); }
+    if(gate) gate.classList.remove('locked');
+  }
+}
+
+/* ════════════════════════════
+   PRODUCTS DATA
+════════════════════════════ */
+const PRODUCTS=[
+  {id:'navimow',rank:1,tag:'Meilleur rapport qualité/prix',tagColor:'#86efac',name:'Segway Navimow i105E',price:'649 €',priceN:649,surface:'600 m²',nav:'GPS RTK',slope:'45%',noise:'65 dB',score:'4.3',stars:'★★★★☆',count:'1 200+',img:'images/robots/navimow.png',imgBg:'linear-gradient(135deg,#0a2a1e,#061a10)',
+   why:'Plébiscité par les experts ET les utilisateurs pour son installation sans câble en moins de 30 min, ses lignes de tonte parallèles au centimètre. <strong>-35% en ce moment sur Amazon.</strong>',
+   tags:['small','medium','flat','low','mid'],prios:['install','precision','noWire','silent'],
+   links:[{l:'Amazon',c:'bb-amazon',ico:'🛒',url:'https://www.amazon.fr/i105E-p%C3%A9riph%C3%A9rique-Recommand%C3%A9-cartographie-Automatique/dp/B0CXDNFZLL'},{l:'Leroy Merlin',c:'bb-leroy',ico:'🌿',url:'https://www.leroymerlin.fr/produits/robot-tondeuse-segway-i105e-navimow-91166726.html'}]},
+
+  {id:'ecovacs',rank:2,tag:'Le plus silencieux — 55 dB',tagColor:'#7dd3fc',name:'Ecovacs Goat O800 RTK',price:'699 €',priceN:699,surface:'800 m²',nav:'RTK + LiDAR',slope:'45%',noise:'55 dB',score:'4.2',stars:'★★★★☆',count:'800+',img:'images/robots/ecovacs.png',imgBg:'linear-gradient(135deg,#091c2b,#060f1a)',
+   why:'Champion du silence à <strong>55 dB</strong>, avec navigation RTK + LiDAR ultra précise. Passages étroits de 70 cm gérés. App très bien notée utilisateurs.',
+   tags:['small','medium','flat','low','mid'],prios:['silent','precision','noWire','app'],
+   links:[{l:'Amazon',c:'bb-amazon',ico:'🛒',url:'https://www.amazon.fr/ECOVACS-O800-RTK-p%C3%A9riph%C3%A9rique-Cartographie/dp/B0DQ8KYLYR'},{l:'Leroy Merlin',c:'bb-leroy',ico:'🌿',url:'https://www.leroymerlin.fr/produits/robot-tondeuse-connecte-goat-ecovacs-o800rtk-94048028.html'}]},
+
+  {id:'dreame',rank:3,tag:'Polyvalent triple-capteur 2026',tagColor:'#fcd34d',name:'Dreame A1 Pro',price:'899 €',priceN:899,surface:'2 000 m²',nav:'LiDAR+RTK+Vision',slope:'45%',noise:'~65 dB',score:'4.4',stars:'★★★★½',count:'950+',img:'images/robots/dreame.jpg',imgBg:'linear-gradient(135deg,#12122b,#0a0a1f)',
+   why:'Noté <strong>8.5/10 experts</strong> — 2 000 m² pour 899 €, le meilleur ratio surface/prix. Triple navigation (LiDAR 360° + RTK + Vision 3D) idéal jardins complexes.',
+   tags:['large','medium','complex','slopes','mid','low'],prios:['precision','obstacles','noWire','install'],
+   links:[{l:'Amazon',c:'bb-amazon',ico:'🛒',url:'https://www.amazon.fr/robotis%C3%A9e-Intelligente-p%C3%A9rim%C3%A9trique-OmniSense-Intelligent/dp/B0DR35G7P3'},{l:'Boulanger',c:'bb-boulanger',ico:'📦',url:'https://www.boulanger.com/ref/1220215'},{l:'Dreame Direct',c:'bb-dreame',ico:'🌐',url:'https://fr.dreametech.com/products/robot-tondeuse-dreame-a1-pro'}]},
+
+  {id:'worx',rank:4,tag:'Zero câble, tond dès l\'unboxing',tagColor:'#fde68a',name:'Worx Landroid Vision WR208E',price:'949 €',priceN:949,surface:'800 m²',nav:'Caméra 4K + IA',slope:'30%',noise:'~66 dB',score:'4.1',stars:'★★★★☆',count:'8 378',img:'images/robots/worx.jpg',imgBg:'linear-gradient(135deg,#1f1800,#140f00)',
+   why:'<strong>8 378 avis</strong> — le plus populaire. Caméra 4K + IA détecte bordures et obstacles sans rien installer. Compatible <strong>Alexa & Google Home</strong>.',
+   tags:['small','medium','flat','low','mid'],prios:['install','voice','noWire','obstacles'],
+   links:[{l:'Amazon',c:'bb-amazon',ico:'🛒',url:'https://www.amazon.fr/WORX-p%C3%A9riph%C3%A9rique-Evitement-dobstacles-Contr%C3%B4lable/dp/B0CTTWLLZZ'}]},
+
+  {id:'yuka',rank:5,tag:'Note #1 toutes catégories — 8.7/10',tagColor:'#86efac',name:'Mammotion Yuka Mini Vision',price:'1 199 €',priceN:1199,surface:'700 m²',nav:'Triple caméra IA',slope:'45%',noise:'~64 dB',score:'4.5',stars:'★★★★½',count:'2 392',img:'images/robots/yuka.jpg',imgBg:'linear-gradient(135deg,#081f10,#040e08)',
+   why:'<strong>8.7/10 meilleure note 2026</strong> (Jardinage-Media). 4.5/5 Trustpilot sur 2 392 avis. Triple caméra IA sans RTK ni câble, 4G intégré, batterie remplaçable.',
+   tags:['small','medium','complex','mid','high'],prios:['precision','obstacles','app','noWire'],
+   links:[{l:'Amazon',c:'bb-amazon',ico:'🛒',url:'https://www.amazon.fr/Mammotion-Intelligent-Cartographie-Automatique-P%C3%A9riph%C3%A9rique/dp/B0FKTBKDQ1'},{l:'Mammotion Direct',c:'bb-mammotion',ico:'🌿',url:'https://us.mammotion.com/'}]},
+
+  {id:'luba2',rank:6,tag:'Champion pentes — jusqu\'à 80%',tagColor:'#fdba74',name:'Mammotion LUBA 2 AWD 3000X',price:'2 599 €',priceN:2599,surface:'3 000 m²',nav:'RTK+IMU+Vision',slope:'80%',noise:'<60 dB',score:'4.4',stars:'★★★★½',count:'2 392',img:'images/robots/luba2.jpg',imgBg:'linear-gradient(135deg,#1a0d00,#0d0600)',
+   why:'Pour les grands terrains accidentés : <strong>4WD, pentes 80%, 3 000 m²</strong>.',
+   tags:['xlarge','large','slopes','complex','high'],prios:['precision','noWire','obstacles'],
+   links:[{l:'Amazon',c:'bb-amazon',ico:'🛒',url:'https://www.amazon.fr/MAMMOTION-LUBA-AWD-P%C3%A9riph%C3%A9rique-Recommand%C3%A9/dp/B0DT46VJPG'},{l:'Mammotion Direct',c:'bb-mammotion',ico:'🌿',url:'https://us.mammotion.com/'}]},
+
+  {id:'husqvarna',rank:7,tag:'Référence fiabilité & SAV France',tagColor:'#93c5fd',name:'Husqvarna Automower 320 NERA',price:'2 463 €',priceN:2463,surface:'2 200 m²',nav:'EPOS satellites',slope:'50%',noise:'60 dB',score:'4.6',stars:'★★★★★',count:'SAV FR',img:'images/robots/husqvarna.webp',imgBg:'linear-gradient(135deg,#091429,#040a1a)',
+   why:'<strong>4.6/5 — meilleure note utilisateurs</strong>. 20 ans de perfectionnement, réseau SAV France réactif.',
+   tags:['large','xlarge','slopes','complex','high'],prios:['sav','silent','precision'],
+   links:[{l:'Amazon',c:'bb-amazon',ico:'🛒',url:'https://www.amazon.fr/Husqvarna-Automower-320-Nera/dp/B0CF5Q64QS'},{l:'Husqvarna Direct',c:'bb-husqvarna',ico:'🌐',url:'https://www.husqvarna.com/fr/robots-tondeuses/automower-320nera/'}]},
+
+  {id:'mova',rank:8,tag:'Nouveau — LiDAR 3D 360° sans RTK',tagColor:'#c4b5fd',name:'MOVA LiDAX Ultra 1200',price:'1 099 €',priceN:1099,surface:'1 200 m²',nav:'LiDAR 3D 360°',slope:'45%',noise:'~62 dB',score:'4.4',stars:'★★★★½',count:'Nouveau 2026',img:'images/robots/mova.png',imgBg:'linear-gradient(135deg,#1a0d2e,#0d0618)',
+   why:'<strong>LiDAR 3D 360° sans station RTK externe</strong> — le seul à 1 099 €.',
+   tags:['small','medium','large','flat','complex','mid'],prios:['precision','obstacles','noWire','install'],
+   links:[{l:'Amazon',c:'bb-amazon',ico:'🛒',url:'https://www.amazon.fr/dp/B0GD23KKHC'},{l:'MOVA Direct',c:'bb-mammotion',ico:'🌐',url:'https://fr.mova.tech/products/robot-tondeuse-lidax-ultra'}]},
+
+  {id:'a3pro',rank:9,tag:'Nouveau — 4WD · LiDAR 3D',tagColor:'#fda4af',name:'Dreame A3 AWD Pro 3500',price:'2 299 €',priceN:2299,surface:'3 500 m²',nav:'LiDAR 3D+Vision IA 4WD',slope:'80%',noise:'~63 dB',score:'4.5',stars:'★★★★½',count:'Nouveau 2026',img:'images/robots/a3pro.jpg',imgBg:'linear-gradient(135deg,#1f0a14,#120609)',
+   why:'<strong>Lancé le 10 mars 2026.</strong> OmniSense 3.0 : LiDAR 3D + vision IA binoculaire. 80% de pente, EdgeMaster 2.0.',
+   tags:['xlarge','large','slopes','complex','high'],prios:['precision','obstacles','noWire'],
+   links:[{l:'Dreame Direct',c:'bb-dreame',ico:'🌐',url:'https://fr.dreametech.com/pages/lancement-des-nouveaux-robot-tondeuse-serie-a3-awd-pro-2026'}]},
+
+  {id:'luba3',rank:10,tag:'Nouveau — Tri-Fusion LiDAR+RTK+Vision',tagColor:'#86d3fc',name:'Mammotion LUBA 3 AWD 3000',price:'2 699 €',priceN:2699,surface:'3 000 m²',nav:'Tri-Fusion LiDAR+RTK+Vision',slope:'80%',noise:'<60 dB',score:'4.5',stars:'★★★★½',count:'CES 2026',img:'images/robots/luba3.png',imgBg:'linear-gradient(135deg,#0a1f2e,#050f18)',
+   why:'<strong>Tri-Fusion : LiDAR 360° + NetRTK + Vision IA simultanés.</strong> 650 m²/h de débit. Lauréat Prix Durable 2026.',
+   tags:['xlarge','large','slopes','complex','high'],prios:['precision','obstacles','noWire','sav'],
+   links:[{l:'Amazon',c:'bb-amazon',ico:'🛒',url:'https://www.amazon.fr/Mammotion-LUBA-AWD-3000-Positionnement/dp/B0GCZSSZRZ'},{l:'Mammotion Direct',c:'bb-mammotion',ico:'🌿',url:'https://eu.mammotion.com/products/luba-3-awd-robot-lawn-mower'}]},
+
+  {id:'boschxs',rank:11,tag:'Entrée de gamme — le moins cher',tagColor:'#a3e635',name:'Bosch Indego XS 300',price:'299 €',priceN:299,surface:'300 m²',nav:'GPS LogiCut',slope:'25%',noise:'~63 dB',score:'3.9',stars:'★★★★☆',count:'2 400+',img:'images/robots/boschxs.jpg',imgBg:'linear-gradient(135deg,#0f1a00,#0a1200)',
+   why:'Pour moins de 300 €, GPS LogiCut en lignes parallèles.',
+   tags:['small','flat','low'],prios:['install','silent'],
+   links:[{l:'Amazon',c:'bb-amazon',ico:'🛒',url:'https://www.amazon.fr/dp/B085FCXY97'}]},
+
+  {id:'boschm700',rank:12,tag:'GPS sans câble — 700 m²',tagColor:'#a3e635',name:'Bosch Indego M+ 700',price:'599 €',priceN:599,surface:'700 m²',nav:'GPS LogiCut',slope:'27%',noise:'~68 dB',score:'3.8',stars:'★★★★☆',count:'3 500+',img:'images/robots/boschm700.jpg',imgBg:'linear-gradient(135deg,#0f1a00,#0a1200)',
+   why:'GPS LogiCut sans câble pour 599 €. Tonte en lignes droites élégantes.',
+   tags:['small','medium','flat','low','mid'],prios:['install','noWire','sav'],
+   links:[{l:'Amazon',c:'bb-amazon',ico:'🛒',url:'https://www.amazon.fr/dp/B09FDMXHRL'}]},
+
+  {id:'gardenaminimo',rank:13,tag:'Le plus silencieux entrée de gamme',tagColor:'#86efac',name:'Gardena Sileno Minimo 250',price:'329 €',priceN:329,surface:'250 m²',nav:'Fil périmètre',slope:'25%',noise:'57 dB',score:'4.0',stars:'★★★★☆',count:'4 100+',img:'images/robots/gardenaminimo.png',imgBg:'linear-gradient(135deg,#071a07,#030d03)',
+   why:'57 dB quasi inaudible, compact, marque Gardena fiable.',
+   tags:['small','flat','low'],prios:['silent','install'],
+   links:[{l:'Amazon',c:'bb-amazon',ico:'🛒',url:'https://www.amazon.fr/dp/B07GBRZFV2'}]},
+
+  {id:'gardena750',rank:14,tag:'Silencieux & fiable — 58 dB',tagColor:'#86efac',name:'Gardena Sileno Life 750',price:'549 €',priceN:549,surface:'750 m²',nav:'Fil périmètre',slope:'25%',noise:'58 dB',score:'4.0',stars:'★★★★☆',count:'5 800+',img:'images/robots/gardena750.png',imgBg:'linear-gradient(135deg,#071a07,#030d03)',
+   why:'58 dB, marque Gardena solide, choix rassurant pour jardin classique 750 m².',
+   tags:['small','medium','flat','low','mid'],prios:['silent','sav','install'],
+   links:[{l:'Amazon',c:'bb-amazon',ico:'🛒',url:'https://www.amazon.fr/dp/B07GBQWPSD'}]},
+
+  {id:'husqvarna115h',rank:15,tag:'La valeur sûre Husqvarna',tagColor:'#93c5fd',name:'Husqvarna Automower 115H',price:'599 €',priceN:599,surface:'1 500 m²',nav:'Fil + GPS',slope:'25%',noise:'~65 dB',score:'4.1',stars:'★★★★☆',count:'6 200+',img:'images/robots/husqvarna115h.webp',imgBg:'linear-gradient(135deg,#091429,#040a1a)',
+   why:'SAV réseau France, robustesse éprouvée, 1 500 m² à 599 €.',
+   tags:['small','medium','large','flat','low','mid'],prios:['sav','install','silent'],
+   links:[{l:'Amazon',c:'bb-amazon',ico:'🛒',url:'https://www.amazon.fr/dp/B09FDMXHRL'},{l:'Husqvarna Direct',c:'bb-husqvarna',ico:'🌐',url:'https://www.husqvarna.com/fr/robots-tondeuses/automower-115h/'}]},
+
+  {id:'navimow108',rank:16,tag:'RTK sans câble — 1 000 m²',tagColor:'#86efac',name:'Segway Navimow i108E',price:'849 €',priceN:849,surface:'1 000 m²',nav:'GPS RTK',slope:'45%',noise:'~65 dB',score:'4.3',stars:'★★★★☆',count:'800+',img:'images/robots/navimow108.png',imgBg:'linear-gradient(135deg,#0a2a1e,#061a10)',
+   why:'RTK précision 1 cm, 0 câble, installation 30 min pour 1 000 m².',
+   tags:['small','medium','flat','low','mid'],prios:['precision','install','noWire','silent'],
+   links:[{l:'Amazon',c:'bb-amazon',ico:'🛒',url:'https://www.amazon.fr/dp/B0D3KWNDBY'}]},
+
+  {id:'stiga1000',rank:17,tag:'RTK suédois à 749 €',tagColor:'#fcd34d',name:'Stiga A 1000',price:'749 €',priceN:749,surface:'1 000 m²',nav:'GPS RTK',slope:'45%',noise:'~62 dB',score:'4.2',stars:'★★★★☆',count:'1 100+',img:'images/robots/stiga1000.jpg',imgBg:'linear-gradient(135deg,#1a1200,#0d0900)',
+   why:'RTK sans câble à 749 €. Marque Stiga fiable depuis 1943.',
+   tags:['small','medium','flat','low','mid'],prios:['precision','noWire','install','sav'],
+   links:[{l:'Amazon',c:'bb-amazon',ico:'🛒',url:'https://www.amazon.fr/dp/B0BT5W5NNS'}]},
+
+  {id:'kress',rank:18,tag:'RTK pro-grade — 1 500 m²',tagColor:'#fcd34d',name:'Kress Mission 5 RTK',price:'899 €',priceN:899,surface:'1 500 m²',nav:'GPS RTK',slope:'45%',noise:'~63 dB',score:'4.1',stars:'★★★★☆',count:'600+',img:'images/robots/kress.png',imgBg:'linear-gradient(135deg,#1a0d00,#100800)',
+   why:'Robustesse pro-grade, RTK sans câble, 1 500 m².',
+   tags:['small','medium','large','flat','mid'],prios:['precision','noWire','install'],
+   links:[{l:'Amazon',c:'bb-amazon',ico:'🛒',url:'https://www.amazon.fr/dp/B0C1MKBJ5Y'}]},
+
+  {id:'honda520',rank:19,tag:'Silence Honda — 58 dB',tagColor:'#93c5fd',name:'Honda Miimo 520',price:'899 €',priceN:899,surface:'2 000 m²',nav:'Fil + gyroscope',slope:'35%',noise:'58 dB',score:'4.0',stars:'★★★★☆',count:'2 800+',img:'images/robots/honda520.jpg',imgBg:'linear-gradient(135deg,#0a0d1a,#040609)',
+   why:'Fiabilité Honda légendaire. 58 dB, SAV Honda France.',
+   tags:['medium','large','flat','mid'],prios:['silent','sav'],
+   links:[{l:'Amazon',c:'bb-amazon',ico:'🛒',url:'https://www.amazon.fr/dp/B07G1CC2SM'}]},
+
+  {id:'stihl422',rank:20,tag:'Qualité Stihl — 2 200 m²',tagColor:'#fdba74',name:'Stihl iMow RMI 422 PC',price:'999 €',priceN:999,surface:'2 200 m²',nav:'Fil + GPS',slope:'35%',noise:'~64 dB',score:'4.1',stars:'★★★★☆',count:'3 200+',img:'images/robots/stihl422.jpg',imgBg:'linear-gradient(135deg,#1a0800,#0d0400)',
+   why:'Qualité allemande, réseau revendeurs Stihl France.',
+   tags:['medium','large','flat','mid'],prios:['sav','install','silent'],
+   links:[{l:'Amazon',c:'bb-amazon',ico:'🛒',url:'https://www.amazon.fr/dp/B0B3VLJHQ4'}]},
+
+  {id:'ecovacsG1',rank:21,tag:'Vision sans câble — 60 dB',tagColor:'#7dd3fc',name:'Ecovacs GOAT G1',price:'799 €',priceN:799,surface:'1 000 m²',nav:'Vision IA 2 caméras',slope:'45%',noise:'~60 dB',score:'4.0',stars:'★★★★☆',count:'1 500+',img:'images/robots/ecovacsG1.png',imgBg:'linear-gradient(135deg,#091c2b,#060f1a)',
+   why:'Vision IA sans câble ni RTK, 60 dB, 1 000 m².',
+   tags:['small','medium','flat','mid'],prios:['noWire','install','obstacles','app'],
+   links:[{l:'Amazon',c:'bb-amazon',ico:'🛒',url:'https://www.amazon.fr/dp/B0CL7NX96J'}]},
+
+  {id:'robomow635',rank:22,tag:'3 500 m² à 1 199 €',tagColor:'#fcd34d',name:'Robomow RS635 Pro',price:'1 199 €',priceN:1199,surface:'3 500 m²',nav:'Fil + GPS',slope:'30%',noise:'~65 dB',score:'4.0',stars:'★★★★☆',count:'1 800+',img:'images/robots/robomow635.jpg',imgBg:'linear-gradient(135deg,#122200,#0a1500)',
+   why:'3 500 m², double lame, spécialiste grandes surfaces.',
+   tags:['large','xlarge','flat','mid'],prios:['install','sav'],
+   links:[{l:'Amazon',c:'bb-amazon',ico:'🛒',url:'https://www.amazon.fr/dp/B09MHQKYRR'}]},
+
+  {id:'stiga3000',rank:23,tag:'RTK sans câble — 3 000 m²',tagColor:'#fcd34d',name:'Stiga A 3000',price:'1 499 €',priceN:1499,surface:'3 000 m²',nav:'GPS RTK',slope:'45%',noise:'~63 dB',score:'4.2',stars:'★★★★☆',count:'700+',img:'images/robots/stiga3000.png',imgBg:'linear-gradient(135deg,#1a1200,#0d0900)',
+   why:'RTK sans câble sur 3 000 m² à 1 499 €.',
+   tags:['large','xlarge','slopes','mid','high'],prios:['precision','noWire','install'],
+   links:[{l:'Amazon',c:'bb-amazon',ico:'🛒',url:'https://www.amazon.fr/dp/B0BT5KGXNJ'}]},
+
+  {id:'vikingmi632',rank:24,tag:'SAV Stihl/Viking — 3 200 m²',tagColor:'#93c5fd',name:'Viking iMow MI 632 PC',price:'1 199 €',priceN:1199,surface:'3 200 m²',nav:'Fil + GPS',slope:'35%',noise:'~63 dB',score:'4.0',stars:'★★★★☆',count:'2 100+',img:'images/robots/vikingmi632.jpg',imgBg:'linear-gradient(135deg,#0f1520,#080d15)',
+   why:'Groupe Stihl, réseau SAV France, 3 200 m².',
+   tags:['large','xlarge','flat','mid','high'],prios:['sav','install'],
+   links:[{l:'Amazon',c:'bb-amazon',ico:'🛒',url:'https://www.amazon.fr/dp/B09BNYTCC9'}]},
+
+  {id:'ecoflowblade',rank:25,tag:'Tondeuse + souffleur intégré',tagColor:'#c4b5fd',name:'EcoFlow Blade',price:'2 199 €',priceN:2199,surface:'3 200 m²',nav:'Vision + GPS',slope:'30%',noise:'~64 dB',score:'4.2',stars:'★★★★☆',count:'900+',img:'images/robots/ecoflowblade.png',imgBg:'linear-gradient(135deg,#1a0d2e,#0d0618)',
+   why:'Unique : tondeuse + souffleur de feuilles intégré.',
+   tags:['large','xlarge','flat','high'],prios:['noWire','obstacles','install'],
+   links:[{l:'Amazon',c:'bb-amazon',ico:'🛒',url:'https://www.amazon.fr/dp/B0B1C5J36N'}]},
+
+  {id:'husqvarna430x',rank:26,tag:'SAV France — 3 200 m²',tagColor:'#93c5fd',name:'Husqvarna Automower 430X',price:'1 799 €',priceN:1799,surface:'3 200 m²',nav:'EPOS + fil',slope:'45%',noise:'63 dB',score:'4.4',stars:'★★★★½',count:'SAV FR',img:'images/robots/husqvarna430x.webp',imgBg:'linear-gradient(135deg,#091429,#040a1a)',
+   why:'3 200 m², EPOS satellite, SAV France. Remboursement -849 € en cours.',
+   tags:['large','xlarge','slopes','complex','high'],prios:['sav','precision','silent'],
+   links:[{l:'Amazon',c:'bb-amazon',ico:'🛒',url:'https://www.amazon.fr/dp/B0CF5NP8SR'}]},
+
+  {id:'ambrogio',rank:27,tag:'30 ans d\'expertise italienne',tagColor:'#fdba74',name:'Ambrogio L15 Elite',price:'1 299 €',priceN:1299,surface:'1 500 m²',nav:'Fil périmètre',slope:'35%',noise:'~65 dB',score:'4.1',stars:'★★★★☆',count:'1 400+',img:'images/robots/ambrogio.webp',imgBg:'linear-gradient(135deg,#1a0d00,#0d0600)',
+   why:'30 ans de spécialisation, robustesse industrielle, pas d\'abonnement cloud.',
+   tags:['small','medium','large','flat','mid','high'],prios:['sav','install','silent'],
+   links:[{l:'Amazon',c:'bb-amazon',ico:'🛒',url:'https://www.amazon.fr/dp/B07YZ1KQP6'}]},
+
+  {id:'luba2_1000',rank:28,tag:'4WD compact — pentes 80%',tagColor:'#fdba74',name:'Mammotion LUBA 2 AWD 1000',price:'1 799 €',priceN:1799,surface:'1 000 m²',nav:'RTK+IMU+Vision 4WD',slope:'80%',noise:'~58 dB',score:'4.3',stars:'★★★★☆',count:'1 200+',img:'images/robots/luba2_1000.webp',imgBg:'linear-gradient(135deg,#1a0d00,#0d0600)',
+   why:'4WD + pentes 80% en compact pour jardins <1 000 m².',
+   tags:['small','medium','slopes','complex','high'],prios:['precision','obstacles','noWire'],
+   links:[{l:'Amazon',c:'bb-amazon',ico:'🛒',url:'https://www.amazon.fr/dp/B0DT46TJDP'}]},
+
+  {id:'husqvarna450',rank:29,tag:'5 000 m², zéro câble, SAV France',tagColor:'#93c5fd',name:'Husqvarna Automower 450X NERA',price:'3 499 €',priceN:3499,surface:'5 000 m²',nav:'EPOS sans câble',slope:'50%',noise:'58 dB',score:'4.7',stars:'★★★★★',count:'SAV FR',img:'images/robots/husqvarna450.webp',imgBg:'linear-gradient(135deg,#091429,#040a1a)',
+   why:'0 câble, 0 antenne, EPOS satellite, 58 dB, 5 000 m², SAV France.',
+   tags:['xlarge','large','slopes','complex','high'],prios:['sav','precision','noWire','silent'],
+   links:[{l:'Amazon',c:'bb-amazon',ico:'🛒',url:'https://www.amazon.fr/dp/B0CF5Q64QS'}]},
+
+  {id:'husqvarna435',rank:30,tag:'4WD + EPOS — pentes 70%',tagColor:'#93c5fd',name:'Husqvarna Automower 435X AWD',price:'3 199 €',priceN:3199,surface:'3 500 m²',nav:'EPOS + 4WD',slope:'70%',noise:'60 dB',score:'4.5',stars:'★★★★½',count:'SAV FR',img:'images/robots/husqvarna435.webp',imgBg:'linear-gradient(135deg,#091429,#040a1a)',
+   why:'4WD + EPOS Husqvarna + SAV France, 70% de pente.',
+   tags:['xlarge','large','slopes','complex','high'],prios:['sav','precision','silent'],
+   links:[{l:'Amazon',c:'bb-amazon',ico:'🛒',url:'https://www.amazon.fr/dp/B0CF5QSDYB'}]}
+];
+
+/* ════════════════════════════
+   QUIZ LOGIC
+════════════════════════════ */
+const QA = {surface:null, terrain:null, budget:1000, tech:null, prios:[]};
+let qCur = 1;
+
+// Init pills
+const qpp = document.getElementById('qpills');
+const pillLabels = ['Surface','Terrain','Budget','Priorités','Profil'];
+pillLabels.forEach((l,i) => {
+  const d = document.createElement('div');
+  d.id = 'qp'+(i+1); d.className = 'qpill'+(i===0?' active':''); d.textContent = l;
+  qpp.appendChild(d);
+});
+
+function qUpdUI(){
+  for(let i=1;i<=5;i++){
+    const p = document.getElementById('qp'+i);
+    if(p) p.className = 'qpill'+(i===qCur?' active':i<qCur?' done':'');
+  }
+  document.getElementById('qpf').style.width = (((qCur-1)/5)*100)+'%';
+}
+
+function qpick(el){
+  const q = el.dataset.q;
+  document.querySelectorAll('[data-q="'+q+'"]').forEach(o => o.classList.remove('sel'));
+  el.classList.add('sel'); QA[q] = el.dataset.v;
+  const nb = document.getElementById('qn'+qCur);
+  if(nb) nb.disabled = false;
+}
+function qSetBudget(v, el){
+  document.getElementById('qbr').value = v; qBudget(v);
+  document.querySelectorAll('[data-q="budget"]').forEach(o => o.classList.remove('sel'));
+  el.classList.add('sel');
+}
+function qBudget(v){
+  v = parseInt(v); QA.budget = v;
+  document.getElementById('qbn').textContent = v.toLocaleString('fr-FR')+' €';
+  const pct = ((v-600)/2400)*100;
+  document.getElementById('qbr').style.background = `linear-gradient(to right,var(--green) 0%,var(--green) ${pct}%,rgba(255,255,255,.08) ${pct}%)`;
+  const t = document.querySelectorAll('[data-q="budget"]');
+  t.forEach(o => o.classList.remove('sel'));
+  if(v<=800) t[0].classList.add('sel'); else if(v<=1700) t[1].classList.add('sel'); else t[2].classList.add('sel');
+}
+function qTogPrio(el){
+  const k = el.dataset.key;
+  if(el.classList.contains('sel')){
+    el.classList.remove('sel'); QA.prios = QA.prios.filter(p => p!==k);
+  } else {
+    if(QA.prios.length>=3){ const o=QA.prios.shift(); document.querySelector('.qprio[data-key="'+o+'"]').classList.remove('sel'); }
+    el.classList.add('sel'); QA.prios.push(k);
+  }
+}
+function qgo(n){
+  document.getElementById('qs'+qCur).classList.remove('on');
+  qCur = n; document.getElementById('qs'+n).classList.add('on');
+  qUpdUI(); document.getElementById('quiz').scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+function qScore(p){
+  let s = 0;
+  if(QA.surface==='small' && p.tags.includes('small')) s+=30;
+  if(QA.surface==='medium' && p.tags.includes('medium')) s+=30;
+  if(QA.surface==='large' && p.tags.includes('large')) s+=30;
+  if(QA.surface==='xlarge' && p.tags.includes('xlarge')) s+=30;
+  if(QA.surface==='large' && !p.tags.includes('large') && !p.tags.includes('xlarge')) s-=40;
+  if(QA.surface==='xlarge' && !p.tags.includes('xlarge')) s-=50;
+  if(QA.terrain==='slopes' && p.tags.includes('slopes')) s+=25;
+  if(QA.terrain==='complex' && p.tags.includes('complex')) s+=20;
+  if(QA.terrain==='slopes' && !p.tags.includes('slopes')) s-=20;
+  if(p.priceN <= QA.budget) s+=20; else s-=40;
+  QA.prios.forEach(pr => { if(p.prios.includes(pr)) s+=15; });
+  return s;
+}
+
+function qShowResult(){
+  document.getElementById('qs5').classList.remove('on');
+  document.getElementById('quiz').querySelector('.quiz-body').style.display = 'none';
+  document.getElementById('qres').classList.add('on');
+
+  const ranked = [...PRODUCTS].map(p => ({p, s:qScore(p)})).sort((a,b) => b.s-a.s);
+  const top3 = ranked.slice(0, 3);
+  const c = document.getElementById('qrcards'); c.innerHTML = '';
+  const badgeCls = ['rb1','rb2','rb3'];
+  const badgeLabels = ['🥇 Recommandation #1','🥈 Alternative #2','🥉 Option #3'];
+  const rcls = ['r1','r2','r3'];
+
+  top3.forEach(({p}, i) => {
+    const div = document.createElement('div');
+    div.className = 'rcard '+rcls[i];
+    div.innerHTML = `
+      <div class="rcard-top">
+        <div class="rcard-img" style="background:${p.imgBg}">
+          <img src="${p.img}" alt="${p.name}" onerror="this.textContent='🤖';this.style.fontSize='3rem'"/>
+        </div>
+        <div class="rcard-info">
+          <span class="rcard-badge ${badgeCls[i]}">${badgeLabels[i]}</span>
+          <div class="rcard-name">${p.name}</div>
+          <div class="rcard-tag">${p.tag}</div>
+          <div class="rcard-specs">
+            <span class="rcard-spec"><strong>${p.surface}</strong> surface</span>
+            <span class="rcard-spec"><strong>${p.nav}</strong></span>
+            <span class="rcard-spec"><strong>${p.slope}</strong> pentes</span>
+            <span class="rcard-spec"><strong>${p.noise}</strong></span>
+          </div>
+          <div class="rcard-why">${p.why}</div>
+        </div>
+      </div>
+      <div class="rcard-bottom">
+        <div>
+          <div class="rcard-price">${p.price}</div>
+          <div class="rcard-rating"><span class="rcard-stars">${p.stars}</span><span>${p.score}/5 · ${p.count} avis</span></div>
+        </div>
+        <div class="buy-btns-row">
+          ${p.rank>9 && !isPaid()
+            ? `<button class="buy-btn-pro bb-fiche" onclick="showPaywall()">🔒 Fiche complète — Accès Complet</button>`
+            : `<a class="buy-btn-pro bb-fiche" href="fiche.html?id=${p.id}">📋 Fiche complète</a>`}
+          ${p.links.map(l => `<a class="buy-btn-pro ${l.c}" href="${l.url}" target="_blank" rel="noopener">${l.ico} ${l.l}</a>`).join('')}
+        </div>
+        <div class="buy-note">* Remplacez par vos liens d'affiliation</div>
+      </div>`;
+    c.appendChild(div);
+  });
+
+  // Lock results for free users
+  const gate = document.getElementById('qres-gate');
+  if(gate) gate.classList.toggle('locked', !isPaid());
+
+  document.getElementById('quiz').scrollIntoView({behavior:'smooth'});
+}
+
+function qRestart(){
+  Object.assign(QA, {surface:null, terrain:null, budget:1000, tech:null, prios:[]});
+  document.querySelectorAll('.qopt,.qprio').forEach(e => e.classList.remove('sel'));
+  document.getElementById('qbr').value = 1000; qBudget(1000);
+  document.getElementById('qres').classList.remove('on');
+  document.getElementById('quiz').querySelector('.quiz-body').style.display = 'block';
+  ['qn1','qn2','qn5'].forEach(id => { const e=document.getElementById(id); if(e) e.disabled=true; });
+  qCur = 1; document.getElementById('qs1').classList.add('on');
+  for(let i=2;i<=5;i++) document.getElementById('qs'+i).classList.remove('on');
+  qUpdUI(); document.getElementById('quiz').scrollIntoView({behavior:'smooth'});
+}
+
+handleStripeReturn();
+updatePremiumUI();
+qUpdUI();
+qBudget(1000);
+
+/* Nav scroll tint */
+window.addEventListener('scroll', () => {
+  document.getElementById('nav').style.background =
+    window.scrollY > 60 ? 'rgba(8,15,26,0.97)' : 'rgba(8,15,26,0.85)';
+});
+
+/* Scroll animations */
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); }});
+}, {threshold:.1, rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
