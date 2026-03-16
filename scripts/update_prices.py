@@ -114,6 +114,107 @@ ROBOTS = {
             {"url": "https://eu.mammotion.com/fr/products/luba-3-awd-3000", "method": "shopify"},
         ],
     },
+    "boschxs": {
+        "name": "Bosch Indego XS 300",
+        "sources": [{"url": "https://www.amazon.fr/dp/B085FCXY97", "method": "amazon"}],
+    },
+    "boschm700": {
+        "name": "Bosch Indego M+ 700",
+        "sources": [{"url": "https://www.amazon.fr/dp/B09FDMXHRL", "method": "amazon"}],
+    },
+    "gardenaminimo": {
+        "name": "Gardena Sileno Minimo 250",
+        "sources": [{"url": "https://www.amazon.fr/dp/B07GBRZFV2", "method": "amazon"}],
+    },
+    "gardena750": {
+        "name": "Gardena Sileno Life 750",
+        "sources": [{"url": "https://www.amazon.fr/dp/B07GBQWPSD", "method": "amazon"}],
+    },
+    "husqvarna115h": {
+        "name": "Husqvarna Automower 115H",
+        "sources": [
+            {"url": "https://www.husqvarna.com/fr/robots-tondeuses/automower-115h/", "method": "json_ld"},
+            {"url": "https://www.amazon.fr/dp/B09FDMXHRL", "method": "amazon"},
+        ],
+    },
+    "navimow108": {
+        "name": "Segway Navimow i108E",
+        "sources": [{"url": "https://www.amazon.fr/dp/B0D3KWNDBY", "method": "amazon"}],
+    },
+    "stiga1000": {
+        "name": "Stiga A 1000",
+        "sources": [{"url": "https://www.amazon.fr/dp/B0BT5W5NNS", "method": "amazon"}],
+    },
+    "kress": {
+        "name": "Kress Mission 5 RTK",
+        "sources": [{"url": "https://www.amazon.fr/dp/B0C1MKBJ5Y", "method": "amazon"}],
+    },
+    "honda520": {
+        "name": "Honda Miimo 520",
+        "sources": [
+            {"url": "https://www.amazon.fr/dp/B07G1CC2SM", "method": "amazon"},
+            {"url": "https://www.honda.fr/lawn-and-garden/products/miimo.html", "method": "json_ld"},
+        ],
+    },
+    "stihl422": {
+        "name": "Stihl iMow RMI 422 PC",
+        "sources": [{"url": "https://www.amazon.fr/dp/B0B3VLJHQ4", "method": "amazon"}],
+    },
+    "ecovacsG1": {
+        "name": "Ecovacs GOAT G1",
+        "sources": [{"url": "https://www.amazon.fr/dp/B0CL7NX96J", "method": "amazon"}],
+    },
+    "robomow635": {
+        "name": "Robomow RS635 Pro",
+        "sources": [{"url": "https://www.amazon.fr/dp/B09MHQKYRR", "method": "amazon"}],
+    },
+    "stiga3000": {
+        "name": "Stiga A 3000",
+        "sources": [{"url": "https://www.amazon.fr/dp/B0BT5KGXNJ", "method": "amazon"}],
+    },
+    "vikingmi632": {
+        "name": "Viking iMow MI 632 PC",
+        "sources": [{"url": "https://www.amazon.fr/dp/B09BNYTCC9", "method": "amazon"}],
+    },
+    "ecoflowblade": {
+        "name": "EcoFlow Blade",
+        "sources": [
+            {"url": "https://www.amazon.fr/dp/B0B1C5J36N", "method": "amazon"},
+            {"url": "https://www.ecoflow.com/fr/blade", "method": "json_ld"},
+        ],
+    },
+    "husqvarna430x": {
+        "name": "Husqvarna Automower 430X",
+        "sources": [
+            {"url": "https://www.husqvarna.com/fr/robots-tondeuses/automower-430x/", "method": "json_ld"},
+            {"url": "https://www.amazon.fr/dp/B0CF5NP8SR", "method": "amazon"},
+        ],
+    },
+    "ambrogio": {
+        "name": "Ambrogio L15 Elite",
+        "sources": [{"url": "https://www.amazon.fr/dp/B07YZ1KQP6", "method": "amazon"}],
+    },
+    "luba2_1000": {
+        "name": "Mammotion LUBA 2 AWD 1000",
+        "sources": [
+            {"url": "https://www.amazon.fr/dp/B0DT46TJDP", "method": "amazon"},
+            {"url": "https://eu.mammotion.com/fr/products/luba-2-awd-1000", "method": "shopify"},
+        ],
+    },
+    "husqvarna450": {
+        "name": "Husqvarna Automower 450X NERA",
+        "sources": [
+            {"url": "https://www.husqvarna.com/fr/robots-tondeuses/automower-450x-nera/", "method": "json_ld"},
+            {"url": "https://www.amazon.fr/dp/B0CF5Q64QS", "method": "amazon"},
+        ],
+    },
+    "husqvarna435": {
+        "name": "Husqvarna Automower 435X AWD",
+        "sources": [
+            {"url": "https://www.husqvarna.com/fr/robots-tondeuses/automower-435x-awd/", "method": "json_ld"},
+            {"url": "https://www.amazon.fr/dp/B0CF5QSDYB", "method": "amazon"},
+        ],
+    },
 }
 
 # ─── Parsing des prix ─────────────────────────────────────────────────────────
@@ -339,7 +440,7 @@ def update_price_in_file(content: str, robot_id: str, old_price: int, new_price:
 
 # ─── Main ─────────────────────────────────────────────────────────────────────
 
-FILES = ["index.html", "fiche.html"]
+FILES = ["index.html", "fiche.html", "robots.html", "comparatif.html", "classement.html", "quiz.html"]
 
 
 def main():

@@ -31,7 +31,7 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           if ! git diff --quiet; then
-            git add index.html fiche.html PRICE_HISTORY.md
+            git add index.html fiche.html robots.html comparatif.html classement.html quiz.html PRICE_HISTORY.md
             git commit -m "chore: mise à jour prix robots $(date +%Y-%m-%d)"
             git push
           else
