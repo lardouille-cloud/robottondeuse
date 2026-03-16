@@ -1072,21 +1072,21 @@ footer{
 <section id="produits">
   <div class="reveal">
     <div class="section-label">Sélection 2026</div>
-    <h2 class="section-title">Les 7 meilleurs robots</h2>
-    <p class="section-sub">Sélectionnés après croisement des tests experts et des avis utilisateurs réels. Les modèles avec SAV défaillant ou fiabilité insuffisante ont été écartés.</p>
+    <h2 class="section-title">Les meilleurs robots 2026</h2>
+    <p class="section-sub">9 robots visibles gratuitement · 21 robots supplémentaires réservés à l'Accès Complet · Sélectionnés sur tests croisés &amp; 15 000+ avis réels.</p>
   </div>
   <div class="products-grid" id="productGrid"></div>
 
   <!-- PREMIUM BANNER -->
   <div class="premium-banner reveal" id="premium-banner">
-    <div class="pb-eyebrow">🔒 Accès Complet</div>
-    <h3 class="pb-title">Débloquez les fiches complètes</h3>
-    <p class="pb-desc">Avis d'acheteurs réels, pannes connues, pièges vendeurs, 10 questions à poser, simulateur de coût et 4 outils experts — accès complet sur cet appareil.</p>
+    <div class="pb-eyebrow">🔒 Accès Complet — 4,99 €</div>
+    <h3 class="pb-title">21 robots de plus à découvrir</h3>
+    <p class="pb-desc">Vous voyez 9 robots sur 30. Débloquez les 21 suivants + fiches complètes, avis vérifiés, pannes connues et 4 outils pour faire le bon choix.</p>
     <div class="pb-features-row">
-      <span class="pb-feat">4+ avis vérifiés par robot</span>
-      <span class="pb-feat">Pannes &amp; bugs connus</span>
-      <span class="pb-feat">7 pièges à éviter</span>
-      <span class="pb-feat">4 outils experts</span>
+      <span class="pb-feat">✅ 30 robots comparés</span>
+      <span class="pb-feat">✅ Fiches complètes</span>
+      <span class="pb-feat">✅ Pannes &amp; bugs connus</span>
+      <span class="pb-feat">✅ 4 outils inclus</span>
     </div>
     <div class="pb-price-row">
       <span class="pb-old">9,99 €</span>
@@ -1904,7 +1904,7 @@ const pg=document.getElementById('productGrid');
 function renderGrid(){
   pg.innerHTML='';
   PRODUCTS.forEach(p=>{
-    const locked=p.rank>10&&!isPaid();
+    const locked=p.rank>9&&!isPaid();
     const div=document.createElement('div');
     div.className='product-card reveal'+(locked?' card-locked':'');
     div.innerHTML=`
@@ -1930,8 +1930,8 @@ function renderGrid(){
       ${locked?`<div class="card-lock-overlay" onclick="showPaywall()">
         <div class="cl-icon">🔒</div>
         <div class="cl-name">${p.name}</div>
-        <div class="cl-sub">Accès Complet requis<br>pour voir ce robot</div>
-        <button class="cl-btn">Débloquer — 4,99 €</button>
+        <div class="cl-sub">+ 21 robots disponibles<br>avec l'Accès Complet</div>
+        <button class="cl-btn">Tout voir — 4,99 € →</button>
       </div>`:''}`;
     if(!locked){
       div.style.cursor='pointer';
@@ -2057,7 +2057,7 @@ function qShowResult(){
           <div class="rcard-rating"><span class="rcard-stars">${p.stars}</span><span>${p.score}/5 · ${p.count} avis</span></div>
         </div>
         <div class="buy-btns-row">
-          ${p.rank>10&&!isPaid()
+          ${p.rank>9&&!isPaid()
             ?`<button class="buy-btn-pro bb-fiche" onclick="showPaywall()">🔒 Fiche complète — Accès Complet</button>`
             :`<a class="buy-btn-pro bb-fiche" href="fiche.html?id=${p.id}">📋 Fiche complète</a>`}
           ${p.links.map(l=>`<a class="buy-btn-pro ${l.c}" href="${l.url}" target="_blank" rel="noopener">${l.ico} ${l.l}</a>`).join('')}

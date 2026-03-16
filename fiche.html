@@ -2620,7 +2620,7 @@ function renderNotFound(id) {
   }
 
   // Robots 11-30 require paid access
-  const FREE_ROBOTS = ['navimow','ecovacs','dreame','worx','yuka','luba2','husqvarna','mova','a3pro','luba3'];
+  const FREE_ROBOTS = ['navimow','ecovacs','dreame','worx','yuka','luba2','husqvarna','mova','a3pro'];
   if(!FREE_ROBOTS.includes(id) && !isPaid()){
     app.innerHTML = `
       <div style="min-height:60vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px 20px;">
