@@ -1176,9 +1176,9 @@ footer{
       <div style="font-size:.82rem;color:var(--text2);line-height:1.55;">Tous les modèles côte à côte : surface, navigation, pentes, bruit, prix. Vue d'ensemble en un coup d'œil.</div>
       <div style="font-size:.78rem;font-weight:700;color:var(--green-l);margin-top:auto;">Comparer →</div>
     </a>
-    <a href="classement.html" id="nav-classement" onclick="if(!isPaid()){event.preventDefault();showPaywall();}" style="background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:32px 28px;display:flex;flex-direction:column;gap:12px;transition:all .25s;text-decoration:none;color:inherit;" onmouseover="this.style.borderColor='rgba(34,197,94,.35)';this.style.background='rgba(255,255,255,.07)'" onmouseout="this.style.borderColor='rgba(255,255,255,.07)';this.style.background='rgba(255,255,255,.04)'">
+    <a href="classement.html" onclick="if(!isPaid()){event.preventDefault();showPaywall();}" style="background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:32px 28px;display:flex;flex-direction:column;gap:12px;transition:all .25s;text-decoration:none;color:inherit;" onmouseover="this.style.borderColor='rgba(34,197,94,.35)';this.style.background='rgba(255,255,255,.07)'" onmouseout="this.style.borderColor='rgba(255,255,255,.07)';this.style.background='rgba(255,255,255,.04)'">
       <div style="font-size:2rem;">🏆</div>
-      <div style="font-size:1rem;font-weight:800;letter-spacing:-.3px;">Classement 🔒</div>
+      <div id="card-classement-title" style="font-size:1rem;font-weight:800;letter-spacing:-.3px;">Classement 🔒</div>
       <div style="font-size:.82rem;color:var(--text2);line-height:1.55;">Les 30 robots classés du meilleur au moins bon selon leur note globale. Accès Complet requis.</div>
       <div style="font-size:.78rem;font-weight:700;color:var(--green-l);margin-top:auto;">Voir le classement →</div>
     </a>
@@ -1584,6 +1584,7 @@ function updatePremiumUI(){
   if(isPaid()){
     if(navBtn){ navBtn.textContent = '✅ Accès Complet actif'; navBtn.classList.add('active-paid'); }
     const navCls = document.getElementById('nav-classement'); if(navCls) navCls.textContent = 'Classement';
+    const cardCls = document.getElementById('card-classement-title'); if(cardCls) cardCls.textContent = 'Classement';
     gates.forEach(g=>{ if(g) g.classList.remove('locked'); });
   } else {
     gates.forEach(g=>{ if(g) g.classList.add('locked'); });
