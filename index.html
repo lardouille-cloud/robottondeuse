@@ -541,6 +541,11 @@ input[type=range]::-webkit-slider-thumb{
 }
 .pg-lock-btn:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(34,197,94,.45);}
 
+/* Blurred score on free cards */
+#productGrid.scores-blurred .pc-score{
+  filter:blur(5px);user-select:none;cursor:pointer;
+}
+
 /* Locked product card */
 .product-card.card-locked{position:relative;cursor:pointer;}
 .product-card.card-locked .pc-img{filter:blur(4px);transition:filter .3s;}
@@ -1720,9 +1725,16 @@ function updatePremiumUI(rerender){
     if(banner){ banner.style.display = 'none'; }
     gates.forEach(g=>{ if(g) g.classList.remove('locked'); });
     if(table) table.classList.remove('score-blurred');
+    if(pg) pg.classList.remove('scores-blurred');
     buildRanking();
   } else {
     gates.forEach(g=>{ if(g) g.classList.add('locked'); });
+    if(pg){
+      pg.classList.add('scores-blurred');
+      pg.addEventListener('click', function(e){
+        if(e.target.closest('.pc-score')) showPaywall();
+      }, {once:false});
+    }
     if(table){
       table.classList.add('score-blurred');
       table.addEventListener('click', function handler(e){
