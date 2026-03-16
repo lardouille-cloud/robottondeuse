@@ -1311,7 +1311,15 @@ footer{
         <p>Basée sur votre profil · Croisée avec 15 000+ avis utilisateurs · Mars 2026</p>
       </div>
       <div class="qres-body">
-        <div id="qrcards"></div>
+        <div class="premium-gate" id="qres-gate">
+          <div class="pg-content" id="qrcards"></div>
+          <div class="pg-overlay" onclick="showPaywall()">
+            <div class="pg-lock-icon">🔒</div>
+            <div class="pg-lock-title">Débloquez vos résultats personnalisés</div>
+            <div class="pg-lock-desc">Votre sélection est prête ! Accédez aux 3 robots qui correspondent à votre profil, leurs fiches complètes et avis vérifiés.</div>
+            <button class="pg-lock-btn" onclick="showPaywall()">Voir mes résultats — 4,99 €</button>
+          </div>
+        </div>
         <button class="qbtn-restart" onclick="qRestart()">Refaire le questionnaire</button>
         <div style="text-align:center;font-size:.7rem;color:var(--muted);margin-top:20px;line-height:1.8;">
           Sources : <a href="https://www.clubic.com/guide-achat/article-829280-1-selection-tondeuse-robot.html" target="_blank" style="color:rgba(34,197,94,.6)">Clubic</a> ·
@@ -1718,7 +1726,7 @@ function handleStripeReturn(){
 function updatePremiumUI(rerender){
   const navBtn = document.getElementById('nav-premium');
   const banner = document.getElementById('premium-banner');
-  const gates = ['pieges-gate','outils-gate','questions-gate'].map(id=>document.getElementById(id));
+  const gates = ['pieges-gate','outils-gate','questions-gate','qres-gate'].map(id=>document.getElementById(id));
   const table = document.getElementById('compareTable');
   if(isPaid()){
     if(navBtn){ navBtn.textContent = '✅ Accès Complet actif'; navBtn.classList.add('active-paid'); }
@@ -2152,6 +2160,10 @@ function qShowResult(){
       </div>`;
     c.appendChild(div);
   });
+  // Lock results for free users
+  const gate = document.getElementById('qres-gate');
+  if(gate) gate.classList.toggle('locked', !isPaid());
+
   document.getElementById('quiz').scrollIntoView({behavior:'smooth'});
 }
 
