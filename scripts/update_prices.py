@@ -189,9 +189,9 @@ ROBOTS = {
     },
     "boschm700": {
         "name": "Bosch Indego M+ 700",
-        "sources": [{"url": "https://www.amazon.fr/dp/B09FDMXHRL", "method": "amazon"}],
+        "sources": [{"url": "https://www.amazon.fr/dp/B082P7BNVW", "method": "amazon"}],
         "buy_links": [
-            "https://www.amazon.fr/dp/B09FDMXHRL",
+            "https://www.amazon.fr/dp/B082P7BNVW",
             "https://www.leroymerlin.fr/recherche?q=bosch+indego+m+700",
             "https://www.boulanger.com/recherche/bosch+indego+m700",
             "https://www.darty.com/nav/extra/recherche/bosch+indego+m700.html",
@@ -209,9 +209,9 @@ ROBOTS = {
     },
     "gardena750": {
         "name": "Gardena Sileno Life 750",
-        "sources": [{"url": "https://www.amazon.fr/dp/B07GBQWPSD", "method": "amazon"}],
+        "sources": [{"url": "https://www.amazon.fr/dp/B09M779MT2", "method": "amazon"}],
         "buy_links": [
-            "https://www.amazon.fr/dp/B07GBQWPSD",
+            "https://www.amazon.fr/dp/B09M779MT2",
             "https://www.leroymerlin.fr/recherche?q=gardena+sileno+life+750",
             "https://www.boulanger.com/recherche/gardena+sileno+life+750",
             "https://www.darty.com/nav/extra/recherche/gardena+sileno+life.html",
@@ -220,11 +220,10 @@ ROBOTS = {
     "husqvarna115h": {
         "name": "Husqvarna Automower 115H",
         "sources": [
-            {"url": "https://www.husqvarna.com/fr/robots-tondeuses/automower-115h/", "method": "json_ld"},
-            {"url": "https://www.amazon.fr/dp/B09FDMXHRL", "method": "amazon"},
+            {"url": "https://www.amazon.fr/dp/B087YZCNDJ", "method": "amazon"},
         ],
         "buy_links": [
-            "https://www.amazon.fr/dp/B09FDMXHRL",
+            "https://www.amazon.fr/dp/B087YZCNDJ",
             "https://www.husqvarna.com/fr/robots-tondeuses/automower-115h/",
             "https://www.leroymerlin.fr/recherche?q=husqvarna+automower+115h",
             "https://www.boulanger.com/recherche/husqvarna+automower+115h",
@@ -242,9 +241,9 @@ ROBOTS = {
     },
     "stiga1000": {
         "name": "Stiga A 1000",
-        "sources": [{"url": "https://www.amazon.fr/dp/B0BT5W5NNS", "method": "amazon"}],
+        "sources": [{"url": "https://www.amazon.fr/dp/B0CT3PYDKK", "method": "amazon"}],
         "buy_links": [
-            "https://www.amazon.fr/dp/B0BT5W5NNS",
+            "https://www.amazon.fr/dp/B0CT3PYDKK",
             "https://www.leroymerlin.fr/recherche?q=stiga+a+1000+tondeuse",
             "https://www.boulanger.com/recherche/stiga+a+1000",
             "https://www.darty.com/nav/extra/recherche/stiga+a+1000.html",
@@ -263,12 +262,10 @@ ROBOTS = {
     "honda520": {
         "name": "Honda Miimo 520",
         "sources": [
-            {"url": "https://www.amazon.fr/dp/B07G1CC2SM", "method": "amazon"},
-            {"url": "https://www.honda.fr/lawn-and-garden/products/miimo.html", "method": "json_ld"},
+            {"url": "https://www.amazon.fr/dp/B06XD17QP4", "method": "amazon"},
         ],
         "buy_links": [
-            "https://www.amazon.fr/dp/B07G1CC2SM",
-            "https://www.honda.fr/lawn-and-garden/products/miimo.html",
+            "https://www.amazon.fr/dp/B06XD17QP4",
             "https://www.leroymerlin.fr/recherche?q=honda+miimo+520",
             "https://www.boulanger.com/recherche/honda+miimo+520",
             "https://www.darty.com/nav/extra/recherche/honda+miimo+520.html",
@@ -276,9 +273,9 @@ ROBOTS = {
     },
     "stihl422": {
         "name": "Stihl iMow RMI 422 PC",
-        "sources": [{"url": "https://www.amazon.fr/dp/B0B3VLJHQ4", "method": "amazon"}],
+        "sources": [{"url": "https://www.amazon.fr/dp/B07VPBKF73", "method": "amazon"}],
         "buy_links": [
-            "https://www.amazon.fr/dp/B0B3VLJHQ4",
+            "https://www.amazon.fr/dp/B07VPBKF73",
             "https://www.stihl.fr/tondeuses-et-robots-tondeuses/robots-tondeuses/robot-tondeuse-imow-rmi-422-pc.html",
             "https://www.leroymerlin.fr/recherche?q=stihl+imow+422",
             "https://www.boulanger.com/recherche/stihl+imow+422",
@@ -286,19 +283,17 @@ ROBOTS = {
     },
     "ecovacsG1": {
         "name": "Ecovacs GOAT G1",
-        "sources": [{"url": "https://www.amazon.fr/dp/B0CL7NX96J", "method": "amazon"}],
+        "sources": [{"url": "https://www.amazon.fr/dp/B0BQ35NDW1", "method": "amazon"}],
         "buy_links": [
-            "https://www.amazon.fr/dp/B0CL7NX96J",
-            "https://www.ecovacs.com/fr/goat-robotic-lawn-mower/goat-g1",
+            "https://www.amazon.fr/dp/B0BQ35NDW1",
             "https://www.boulanger.com/recherche/ecovacs+goat+g1",
             "https://www.darty.com/nav/extra/recherche/ecovacs+goat+g1.html",
         ],
     },
     "robomow635": {
         "name": "Robomow RS635 Pro",
-        "sources": [{"url": "https://www.amazon.fr/dp/B09MHQKYRR", "method": "amazon"}],
+        "sources": [],
         "buy_links": [
-            "https://www.amazon.fr/dp/B09MHQKYRR",
             "https://www.leroymerlin.fr/recherche?q=robomow+rs635",
             "https://www.boulanger.com/recherche/robomow+rs635",
             "https://www.darty.com/nav/extra/recherche/robomow+rs635.html",
@@ -306,9 +301,8 @@ ROBOTS = {
     },
     "stiga3000": {
         "name": "Stiga A 3000",
-        "sources": [{"url": "https://www.amazon.fr/dp/B0BT5KGXNJ", "method": "amazon"}],
+        "sources": [],
         "buy_links": [
-            "https://www.amazon.fr/dp/B0BT5KGXNJ",
             "https://www.leroymerlin.fr/recherche?q=stiga+a+3000+tondeuse",
             "https://www.boulanger.com/recherche/stiga+a+3000",
             "https://www.darty.com/nav/extra/recherche/stiga+a+3000.html",
@@ -327,12 +321,10 @@ ROBOTS = {
     "ecoflowblade": {
         "name": "EcoFlow Blade",
         "sources": [
-            {"url": "https://www.amazon.fr/dp/B0B1C5J36N", "method": "amazon"},
-            {"url": "https://www.ecoflow.com/fr/blade", "method": "json_ld"},
+            {"url": "https://www.amazon.fr/dp/B0C2BSZ45V", "method": "amazon"},
         ],
         "buy_links": [
-            "https://www.amazon.fr/dp/B0B1C5J36N",
-            "https://www.ecoflow.com/fr/blade",
+            "https://www.amazon.fr/dp/B0C2BSZ45V",
             "https://www.boulanger.com/recherche/ecoflow+blade",
             "https://www.darty.com/nav/extra/recherche/ecoflow+blade.html",
         ],
@@ -340,12 +332,10 @@ ROBOTS = {
     "husqvarna430x": {
         "name": "Husqvarna Automower 430X",
         "sources": [
-            {"url": "https://www.husqvarna.com/fr/robots-tondeuses/automower-430x/", "method": "json_ld"},
-            {"url": "https://www.amazon.fr/dp/B0CF5NP8SR", "method": "amazon"},
+            {"url": "https://www.amazon.fr/dp/B09WNF4V5G", "method": "amazon"},
         ],
         "buy_links": [
-            "https://www.amazon.fr/dp/B0CF5NP8SR",
-            "https://www.husqvarna.com/fr/robots-tondeuses/automower-430x/",
+            "https://www.amazon.fr/dp/B09WNF4V5G",
             "https://www.leroymerlin.fr/recherche?q=husqvarna+automower+430x",
             "https://www.boulanger.com/recherche/husqvarna+automower+430",
         ],
@@ -363,12 +353,10 @@ ROBOTS = {
     "luba2_1000": {
         "name": "Mammotion LUBA 2 AWD 1000",
         "sources": [
-            {"url": "https://www.amazon.fr/dp/B0DT46TJDP", "method": "amazon"},
-            {"url": "https://eu.mammotion.com/fr/products/luba-2-awd-1000", "method": "shopify"},
+            {"url": "https://www.amazon.fr/dp/B0CQQDYFSM", "method": "amazon"},
         ],
         "buy_links": [
-            "https://www.amazon.fr/dp/B0DT46TJDP",
-            "https://eu.mammotion.com/fr/products/luba-2-awd-1000",
+            "https://www.amazon.fr/dp/B0CQQDYFSM",
             "https://www.boulanger.com/recherche/mammotion+luba+2+1000",
             "https://www.darty.com/nav/extra/recherche/mammotion+luba+2.html",
         ],
