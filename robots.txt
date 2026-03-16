@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+
+Disallow: /acces-premium.html
+Disallow: /acces-gratuit.html
+Disallow: /guide-pdf.html
+Disallow: /checklist.html
+Disallow: /scripts/
+
+Sitemap: https://lardouille-cloud.github.io/robottondeuse/sitemap.xml
