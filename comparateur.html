@@ -43,15 +43,14 @@ nav{
   background:rgba(8,15,26,0.92);backdrop-filter:blur(20px);
   border-bottom:1px solid var(--border);
 }
-.nav-back{
-  display:flex;align-items:center;gap:8px;
-  color:var(--text2);font-size:.88rem;font-weight:500;
-  padding:8px 14px;border-radius:10px;
-  border:1px solid var(--border);
-  transition:all .2s;
-}
-.nav-back:hover{color:var(--text);border-color:rgba(255,255,255,.18);background:rgba(255,255,255,.06);}
-.nav-back svg{width:16px;height:16px;flex-shrink:0;}
+.nav-links{display:flex;align-items:center;gap:4px;}
+.nav-links a{padding:8px 14px;border-radius:10px;font-size:.88rem;font-weight:500;color:var(--text2);transition:all .2s;}
+.nav-links a:hover,.nav-links a.nav-active{color:var(--text);background:rgba(255,255,255,.06);}
+.nav-premium-btn{display:inline-flex;align-items:center;gap:7px;padding:8px 16px;border-radius:10px;font-size:.8rem;font-weight:700;background:rgba(22,163,74,.1);border:1px solid rgba(34,197,94,.35);color:var(--green-xl);cursor:pointer;transition:all .2s;white-space:nowrap;text-decoration:none;letter-spacing:.1px;}
+.nav-premium-btn:hover{background:rgba(22,163,74,.18);border-color:rgba(34,197,94,.55);}
+.nav-premium-btn.active-paid{color:var(--green-l);border-color:rgba(34,197,94,.25);background:rgba(22,163,74,.06);}
+.nav-premium-btn.active-paid svg{display:none;}
+@media(max-width:768px){.nav-links{display:none;}}
 .nav-logo{
   display:flex;align-items:center;gap:10px;
   font-weight:800;font-size:1.05rem;letter-spacing:-.5px;
@@ -414,15 +413,23 @@ footer{
 <div class="grid-lines"></div>
 
 <!-- NAV -->
-<nav>
-  <a href="index.html" class="nav-back">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
-    Retour au guide
-  </a>
-  <div class="nav-logo">
+<nav id="nav">
+  <a href="index.html" class="nav-logo">
     <div class="nav-logo-dot"></div>
     RobotTondeuse<span>.guide</span>
+  </a>
+  <div class="nav-links">
+    <a href="index.html">Accueil</a>
+    <a href="quiz.html">Mon robot idéal</a>
+    <a href="robots.html">Robots 2026</a>
+    <a href="comparatif.html">Comparatif</a>
+    <a href="comparateur.html" id="nav-comparateur" class="nav-active" onclick="if(!isPaid()){event.preventDefault();showPaywall();}">Comparateur 🔒</a>
+    <a href="classement.html" id="nav-classement" onclick="if(!isPaid()){event.preventDefault();showPaywall();}">Classement 🔒</a>
   </div>
+  <a id="nav-premium" class="nav-premium-btn" href="#" onclick="handleNavPremium(event)">
+    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+    Accès Complet — 9,90 €
+  </a>
 </nav>
 
 <!-- MAIN -->
@@ -578,8 +585,32 @@ document.addEventListener('click', e => {
 });
 
 /* ─── PAYWALL ─── */
+const STRIPE_URL = 'https://buy.stripe.com/fZueVdauK41z29nccYfEk01';
 const _k=atob('X19ydGdw'),_v=atob('Z3JhbnRlZF8yMDI2');
 function isPaid(){return localStorage.getItem(_k)===_v;}
+function handleNavPremium(e){
+  e.preventDefault();
+  if(isPaid()){ alert('✅ Accès Complet actif — toutes les fiches sont débloquées !'); return; }
+  window.location.href = STRIPE_URL;
+}
+function handleStripeReturn(){
+  const params = new URLSearchParams(window.location.search);
+  if(params.get('access') === 'granted'){
+    localStorage.setItem(_k,_v);
+    history.replaceState({}, '', window.location.pathname);
+  }
+}
+function updatePremiumUI(){
+  const navBtn = document.getElementById('nav-premium');
+  if(isPaid()){
+    if(navBtn){ navBtn.textContent = '✅ Accès Complet actif'; navBtn.classList.add('active-paid'); }
+    const navCmp = document.getElementById('nav-comparateur'); if(navCmp) navCmp.textContent = 'Comparateur';
+    const navCls = document.getElementById('nav-classement'); if(navCls) navCls.textContent = 'Classement';
+    document.getElementById('paywall-screen').classList.remove('active');
+  }
+}
+handleStripeReturn();
+updatePremiumUI();
 (function checkAccess(){
   if(!isPaid()){
     document.getElementById('paywall-screen').classList.add('active');
