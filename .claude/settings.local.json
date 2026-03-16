@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git push:*)",
+      "Bash(git add:*)",
+      "WebSearch",
+      "WebFetch(domain:www.amazon.fr)",
+      "Bash(grep:*)",
+      "Bash(python3:*)",
+      "Bash(cat:*)"
+    ]
+  }
+}

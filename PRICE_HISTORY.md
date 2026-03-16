@@ -33,3 +33,17 @@ Mis à jour automatiquement chaque jour par GitHub Actions.
 - **Husqvarna Automower 320 NERA** : 2463 € → 2574 € (+111 €)
 - **MOVA LiDAX Ultra 1200** : 1099 € → 999 € (-100 €)
 - **Husqvarna Automower 450X NERA** : 3499 € → 2574 € (-925 €)
+
+## 2026-03-16 — Prix
+- **Ecovacs Goat O800 RTK** : 699 € → 899 €
+- **Worx Landroid Vision WR208E** : 699 € → 949 €
+- **Bosch Indego XS 300** : 299 € → 434 €
+- **Bosch Indego M+ 700** : 599 € → 949 €
+- **Gardena Sileno Minimo 250** : 329 € → 427 €
+- **Gardena Sileno Life 750** : 549 € → 870 €
+- **Honda Miimo 520** : 899 € → 1 899 €
+- **Stihl iMow RMI 422 PC** : 999 € → 895 €
+- **Ecovacs GOAT G1** : 799 € → 1 289 €
+- **EcoFlow Blade** : 2 199 € → 2 999 €
+- **Husqvarna Automower 430X** : 1 799 € → 3 495 €
+- **Mammotion LUBA 2 AWD 1000** : 1 499 € → 2 199 €
