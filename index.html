@@ -277,6 +277,16 @@ section{padding:90px 5%;}
 .compare-table tr:nth-child(even) td{background:rgba(255,255,255,.02);}
 .compare-table tr:hover td{background:rgba(22,163,74,.05);}
 .compare-table td:first-child{color:var(--text);font-weight:600;}
+/* Blurred score column */
+.compare-table.score-blurred td:last-child{
+  filter:blur(5px);user-select:none;cursor:pointer;transition:filter .2s;
+}
+.compare-table.score-blurred th:last-child{
+  cursor:pointer;
+}
+.compare-table.score-blurred th:last-child::after{
+  content:' 🔒';font-size:.85em;
+}
 .ctag{
   display:inline-block;padding:3px 9px;border-radius:6px;
   font-size:.72rem;font-weight:700;
@@ -1106,7 +1116,7 @@ footer{
     <p class="section-sub">Tous les modèles côte à côte pour comparer d'un coup d'œil.</p>
   </div>
   <div class="reveal" style="overflow-x:auto;border-radius:var(--r);border:1px solid var(--border)">
-    <table class="compare-table">
+    <table class="compare-table" id="compareTable">
       <thead>
         <tr>
           <th>Modèle</th><th>Surface max</th><th>Navigation</th><th>Pentes</th><th>Bruit</th><th>Prix</th><th>Note</th>
@@ -1669,12 +1679,20 @@ function updatePremiumUI(rerender){
   const navBtn = document.getElementById('nav-premium');
   const banner = document.getElementById('premium-banner');
   const gates = ['pieges-gate','outils-gate','questions-gate'].map(id=>document.getElementById(id));
+  const table = document.getElementById('compareTable');
   if(isPaid()){
     if(navBtn){ navBtn.textContent = '✅ Accès Complet actif'; navBtn.classList.add('active-paid'); }
     if(banner){ banner.style.display = 'none'; }
     gates.forEach(g=>{ if(g) g.classList.remove('locked'); });
+    if(table) table.classList.remove('score-blurred');
   } else {
     gates.forEach(g=>{ if(g) g.classList.add('locked'); });
+    if(table){
+      table.classList.add('score-blurred');
+      table.addEventListener('click', function handler(e){
+        if(e.target.closest('td:last-child, th:last-child')) showPaywall();
+      }, {once:false});
+    }
   }
   if(rerender) renderGrid();
 }
