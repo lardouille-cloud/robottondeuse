@@ -149,7 +149,7 @@ main{padding:100px 5% 60px;min-height:100vh;position:relative;}
 ═══════════════════════════════════════ */
 .selector-wrap{
   display:grid;grid-template-columns:1fr auto 1fr;
-  gap:24px;align-items:end;margin-bottom:40px;
+  gap:24px;align-items:center;margin-bottom:16px;
   background:var(--card);border:1px solid var(--border);
   border-radius:var(--r);padding:28px 32px;
 }
@@ -465,8 +465,10 @@ footer{
         </button>
         <div class="cs-dropdown" id="cs-b-dropdown"></div>
       </div>
-      <button class="compare-btn" onclick="runCompare()" style="margin-top:10px;">Comparer →</button>
     </div>
+  </div>
+  <div style="text-align:center;margin-bottom:32px;">
+    <button class="compare-btn" onclick="runCompare()">Comparer →</button>
   </div>
 
   <!-- COMPARISON TABLE -->
