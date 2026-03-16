@@ -13,3 +13,23 @@ Mis à jour automatiquement chaque jour par GitHub Actions.
 - **MOVA LiDAX Ultra 1200** : 1 099 €
 - **Dreame A3 AWD Pro 3500** : 2 299 € *(offre lancement → 2 599 € après le 23 mars)*
 - **Mammotion LUBA 3 AWD 3000** : 2 699 €
+
+## 2026-03-16 — Prix
+- **Dreame A1 Pro** : 899 € → 879 € (-20 €)
+- **Worx Landroid Vision WR208E** : 949 € → 699 € (-250 €)
+- **Mammotion LUBA 2 AWD 3000X** : 2599 € → 2299 € (-300 €)
+- **Husqvarna Automower 320 NERA** : 2463 € → 2574 € (+111 €)
+- **MOVA LiDAX Ultra 1200** : 1099 € → 999 € (-100 €)
+- **Husqvarna Automower 450X NERA** : 3499 € → 2574 € (-925 €)
+
+## 2026-03-16 — Prix
+- **Mammotion LUBA 2 AWD 3000X** : 2599 € → 2299 € (-300 €)
+- **Husqvarna Automower 320 NERA** : 2463 € → 2574 € (+111 €)
+- **MOVA LiDAX Ultra 1200** : 1099 € → 999 € (-100 €)
+- **Husqvarna Automower 450X NERA** : 3499 € → 2574 € (-925 €)
+
+## 2026-03-16 — Prix
+- **Mammotion LUBA 2 AWD 3000X** : 2599 € → 2299 € (-300 €)
+- **Husqvarna Automower 320 NERA** : 2463 € → 2574 € (+111 €)
+- **MOVA LiDAX Ultra 1200** : 1099 € → 999 € (-100 €)
+- **Husqvarna Automower 450X NERA** : 3499 € → 2574 € (-925 €)

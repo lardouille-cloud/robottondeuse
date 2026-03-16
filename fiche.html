@@ -2,8 +2,11 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8"/>
+<meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; frame-ancestors 'none';">
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Fiche produit — RobotTondeuse.guide</title>
+<meta name="description" content="Fiche technique complète d'un robot tondeuse 2026 : caractéristiques, note, avis, prix, comparaison et liens d'achat au meilleur prix."/>
 <link href="fonts/inter.css" rel="stylesheet"/>
 <style>
 /* ═══════════════════════════════════════════════
@@ -313,6 +316,8 @@ nav{
   border:1px solid rgba(255,255,255,.12);
 }
 .buy-btn-other:hover{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.2);}
+.buy-btn-disabled{background:rgba(255,255,255,.04);color:rgba(255,255,255,.35);border:1px solid rgba(255,255,255,.08);cursor:not-allowed;pointer-events:none;}
+.btn-disabled{display:inline-flex;align-items:center;gap:8px;padding:14px 28px;border-radius:14px;font-size:.95rem;font-weight:700;background:rgba(255,255,255,.04);color:rgba(255,255,255,.35);border:1px solid rgba(255,255,255,.08);cursor:not-allowed;}
 
 /* ═══════════════════════════════════════════════
    NAVIGATION PRODUITS
@@ -506,7 +511,7 @@ footer a{color:var(--green-l);}
       <span class="pw-new">9,90 €</span>
       <span class="pw-once">une seule fois</span>
     </div>
-    <a class="pw-btn" id="pw-stripe-btn" href="STRIPE_LINK_PLACEHOLDER" target="_blank">Débloquer maintenant →</a>
+    <a class="pw-btn" id="pw-stripe-btn" href="https://buy.stripe.com/test_14AaEX32nfDP4cledxdwc00" target="_blank" rel="noopener noreferrer">Débloquer maintenant →</a>
     <p class="pw-guarantee">🛡️ Paiement sécurisé Stripe · Sans abonnement · Accès immédiat</p>
     <button class="pw-close" onclick="closePaywall()">Continuer sans accès complet</button>
   </div>
@@ -538,7 +543,7 @@ footer a{color:var(--green-l);}
 /* ═══════════════════════════════════════════════
    PAYWALL
 ═══════════════════════════════════════════════ */
-const STRIPE_URL = 'STRIPE_LINK_PLACEHOLDER'; // ← remplace par ton lien Stripe
+const STRIPE_URL = 'https://buy.stripe.com/test_14AaEX32nfDP4cledxdwc00'; // ← remplace par ton lien Stripe
 const _k=atob('X19ydGdw'),_v=atob('Z3JhbnRlZF8yMDI2');
 
 function isPaid(){return localStorage.getItem(_k)===_v;}
@@ -559,9 +564,7 @@ function handleStripeReturn(){
   const params = new URLSearchParams(window.location.search);
   if(params.get('access') === 'granted'){
     localStorage.setItem(_k,_v);
-    params.delete('access');
-    const clean = window.location.pathname + (params.toString() ? '?'+params.toString() : '') + (window.location.hash||'');
-    window.history.replaceState({}, '', clean);
+    history.replaceState({}, '', window.location.pathname);
   }
 }
 function updateNavPremium(){
@@ -697,7 +700,7 @@ const ROBOTS = {
   dreame: {
     id: 'dreame',
     name: 'Dreame A1 Pro',
-    price: '899 €',
+    price: '879 €',
     surface: '2 000 m²',
     navigation: 'LiDAR 360° + RTK + Vision 3D (OmniSense)',
     slope: '45%',
@@ -756,7 +759,7 @@ const ROBOTS = {
   worx: {
     id: 'worx',
     name: 'Worx Landroid Vision WR208E',
-    price: '949 €',
+    price: '699 €',
     surface: '800 m²',
     navigation: 'Caméra 4K HDR + IA adaptative',
     slope: '30%',
@@ -1014,7 +1017,7 @@ const ROBOTS = {
     tagBorder: 'rgba(253,164,175,0.3)',
     priceNote: '— Offre lancement −300 € (prix normal 2 599 €)',
     desc: "Le Dreame A3 AWD Pro est le 4×4 de la tonte : OmniSense 3.0 combine LiDAR 3D 360° (portée 70 m) et vision IA binoculaire HD. 4 moteurs de roue intégrés, 80% de pente, double lames 40 cm et EdgeMaster 2.0 à moins de 3 cm des bordures.",
-    amazon: null,
+    amazon: 'https://fr.dreametech.com/products/dreame-robot-tondeuse-a3-awd-pro-3500',
     shop2: { label: 'Dreame France', url: 'https://fr.dreametech.com/pages/lancement-des-nouveaux-robot-tondeuse-serie-a3-awd-pro-2026' },
     shop3: { label: 'Robocleaners', url: 'https://www.robocleaners.com/en/dreame-a3-awd-pro-3500.html' },
     verdict: '"Le Dreame A3 AWD Pro redéfinit le haut de gamme des robots tondeuses : 4WD, LiDAR 3D centimétrique et 80% de pente dans un package sans RTK ni fil. Technique impressionnante, on attend les premiers retours terrain pour confirmer."',
@@ -1193,7 +1196,7 @@ const ROBOTS = {
     tagBg: 'rgba(163,230,53,0.1)',
     tagBorder: 'rgba(163,230,53,0.3)',
     desc: "Le Bosch Indego XS 300 est le robot tondeuse le plus abordable du marché. Navigation GPS LogiCut sans câble ni antenne, installation en 20 minutes, parfait pour les petits jardins jusqu'à 300 m².",
-    amazon: 'https://www.amazon.fr/dp/B085FCXY97',
+    amazon: 'https://www.cdiscount.com/search/10/bosch+indego+xs+300.html',
     verdict: '"Pour un premier robot tondeuse sans prise de tête, le XS 300 de Bosch fait exactement ce qu\'on attend — navigation GPS en lignes droites, zéro câble, et une marque rassurante."',
     verdictSource: '— Jardinage-Media',
     pros: ['GPS LogiCut sans câble ni antenne', 'Installation en 20 minutes', 'Marque Bosch — SAV France', 'Prix < 300 €', 'Lignes de tonte parallèles'],
@@ -1240,7 +1243,7 @@ const ROBOTS = {
     tagBg: 'rgba(163,230,53,0.1)',
     tagBorder: 'rgba(163,230,53,0.3)',
     desc: "Le Bosch Indego M+ 700 navigue en lignes parallèles grâce au GPS LogiCut — sans câble ni antenne externe. 700 m², app Bosch simple et claire, compatible Alexa.",
-    amazon: 'https://www.amazon.fr/dp/B09FDMXHRL',
+    amazon: null,
     verdict: '"Le M+ 700 est un bon choix pour ceux qui veulent du GPS sans câble sans se ruiner. Tonte en lignes, app correcte, marque Bosch rassurante — mais le bruit à 68 dB est son principal défaut."',
     verdictSource: '— Meilleure-Innovation',
     pros: ['GPS LogiCut sans câble ni antenne', 'Tonte en lignes parallèles élégantes', 'App Bosch Indego claire', 'Réseau SAV Bosch France', 'Compatible Alexa'],
@@ -1287,7 +1290,7 @@ const ROBOTS = {
     tagBg: 'rgba(134,239,172,0.12)',
     tagBorder: 'rgba(134,239,172,0.3)',
     desc: "Le Gardena Sileno Minimo 250 est le robot le plus silencieux de sa catégorie avec seulement 57 dB. Ultra-compact (4,5 kg), parfait pour les petits jardins jusqu'à 250 m² en zone résidentielle.",
-    amazon: 'https://www.amazon.fr/dp/B07GBRZFV2',
+    amazon: 'https://www.cdiscount.com/search/10/gardena+sileno+minimo.html',
     verdict: '"Le Sileno Minimo est quasi inaudible — 57 dB, c\'est remarquable pour un robot à ce prix. Compact, léger, marque Gardena rassurante. La référence pour les petits jardins silencieux."',
     verdictSource: '— Clubic',
     pros: ['57 dB — record entrée de gamme', 'Ultra-compact 4,5 kg', 'Marque Gardena — SAV France', 'App Gardena intuitive', 'Tonte silencieuse pour quartiers résidentiels'],
@@ -1334,7 +1337,7 @@ const ROBOTS = {
     tagBg: 'rgba(134,239,172,0.12)',
     tagBorder: 'rgba(134,239,172,0.3)',
     desc: "Le Gardena Sileno Life 750 allie silence (58 dB) et fiabilité Gardena pour les jardins jusqu'à 750 m². Compatible Alexa, app intuitive, le choix rassurant pour un jardin classique.",
-    amazon: 'https://www.amazon.fr/dp/B07GBQWPSD',
+    amazon: 'https://www.cdiscount.com/search/10/gardena+sileno+life+750.html',
     verdict: '"Parmi les robots à câble de cette catégorie, le Sileno Life 750 est une référence stable. 58 dB, app soignée, marque sérieuse. Pour un jardin classique sans prise de tête."',
     verdictSource: '— JardinsPlus',
     pros: ['58 dB très silencieux', 'SAV Gardena réseau France', 'App Gardena intuitive et bien notée', 'Compatible Alexa', 'Bon rapport qualité/prix'],
@@ -1381,7 +1384,7 @@ const ROBOTS = {
     tagBg: 'rgba(147,197,253,0.1)',
     tagBorder: 'rgba(147,197,253,0.3)',
     desc: "L'Husqvarna Automower 115H est le modèle d'entrée de la marque suédoise. Câble périmétrique, GPS intégré, 1 500 m², réseau SAV France — la porte d'entrée vers la fiabilité Husqvarna.",
-    amazon: 'https://www.amazon.fr/dp/B09FDMXHRL',
+    amazon: null,
     shop2: { label: 'Husqvarna Direct', url: 'https://www.husqvarna.com/fr/robots-tondeuses/automower-115h/' },
     verdict: '"Le 115H est la porte d\'entrée vers l\'univers Husqvarna. Robustesse reconnue, réseau SAV France, 1 500 m². Pour ceux qui veulent la sécurité d\'une grande marque sans dépenser 2 000 €."',
     verdictSource: '— Clubic',
@@ -1429,7 +1432,7 @@ const ROBOTS = {
     tagBg: 'rgba(134,239,172,0.12)',
     tagBorder: 'rgba(134,239,172,0.3)',
     desc: "Le Segway Navimow i108E est le grand frère du bestseller i105E : mêmes performances RTK centimétrique, même installation sans câble en 30 minutes, pour les jardins jusqu'à 1 000 m².",
-    amazon: 'https://www.amazon.fr/dp/B0D3KWNDBY',
+    amazon: null,
     shop2: { label: 'Leroy Merlin', url: 'https://www.leroymerlin.fr/' },
     verdict: '"Le i108E reprend la formule gagnante du i105E — GPS RTK précision 1 cm, installation 30 min, 0 câble — et la décline sur 1 000 m². Le choix évident si votre jardin dépasse 600 m²."',
     verdictSource: '— Clubic',
@@ -1477,7 +1480,7 @@ const ROBOTS = {
     tagBg: 'rgba(252,211,77,0.1)',
     tagBorder: 'rgba(252,211,77,0.3)',
     desc: "Le Stiga A 1000 propose la navigation GPS RTK sans câble pour 749 € — une rareté à ce prix. Marque suédoise Stiga fondée en 1943, précision 1-2 cm, pentes jusqu'à 45%.",
-    amazon: 'https://www.amazon.fr/dp/B0BT5W5NNS',
+    amazon: 'https://www.cdiscount.com/search/10/stiga+a+1000.html',
     verdict: '"Le Stiga A 1000 est souvent ignoré face à Navimow ou Mammotion, mais il offre le RTK sans câble à 749 € — soit moins cher que le i105E. La précision est au rendez-vous."',
     verdictSource: '— LaboMaison',
     pros: ['RTK sans câble à 749 €', 'Marque Stiga fiable depuis 1943', '45% de pente supporté', 'Précision 1-2 cm', 'SAV réseau européen'],
@@ -1524,7 +1527,7 @@ const ROBOTS = {
     tagBg: 'rgba(252,211,77,0.1)',
     tagBorder: 'rgba(252,211,77,0.3)',
     desc: "Le Kress Mission 5 RTK est conçu par une marque d'outillage professionnel. Robustesse pro-grade, navigation RTK sans câble, 1 500 m², pentes jusqu'à 45%. Pour les exigeants.",
-    amazon: 'https://www.amazon.fr/dp/B0C1MKBJ5Y',
+    amazon: null,
     verdict: '"Kress vient de l\'outillage pro — ça se voit dans la qualité de construction. RTK sans câble, 1 500 m², finitions soignées. Pour ceux qui veulent du solide avant tout."',
     verdictSource: '— Meilleure-Innovation',
     pros: ['Robustesse pro-grade Kress', 'RTK sans câble', '1 500 m² à 899 €', 'Construction qualité professionnelle', 'Pentes 45%'],
@@ -1571,7 +1574,7 @@ const ROBOTS = {
     tagBg: 'rgba(147,197,253,0.1)',
     tagBorder: 'rgba(147,197,253,0.3)',
     desc: "Le Honda Miimo 520 associe le légendaire silence Honda (58 dB) à une large couverture de 2 000 m² et une fiabilité japonaise sans égale. Réseau SAV Honda France.",
-    amazon: 'https://www.amazon.fr/dp/B07G1CC2SM',
+    amazon: 'https://www.honda.fr/lawn-and-garden/products/miimo.html',
     shop2: { label: 'Honda Direct', url: 'https://www.honda.fr/lawn-and-garden/products/miimo.html' },
     verdict: '"Honda = fiabilité légendaire. Le Miimo 520 tond 2 000 m² en silence (58 dB), sans faille, avec le réseau SAV Honda France. Pour ceux qui ne veulent absolument pas de mauvaises surprises."',
     verdictSource: '— JardinsPlus',
@@ -1619,7 +1622,7 @@ const ROBOTS = {
     tagBg: 'rgba(253,186,116,0.1)',
     tagBorder: 'rgba(253,186,116,0.3)',
     desc: "Le Stihl iMow RMI 422 PC est l'alliance de la qualité allemande et de la tonte intelligente. GPS intégré, 2 200 m², réseau de revendeurs Stihl partout en France.",
-    amazon: 'https://www.amazon.fr/dp/B0B3VLJHQ4',
+    amazon: null,
     shop2: { label: 'Stihl Direct', url: 'https://www.stihl.fr/robots-tondeuses-imow.aspx' },
     verdict: '"Stihl c\'est la garantie qualité allemande avec un réseau de réparateurs agréés partout en France. Le RMI 422 PC couvre 2 200 m² avec GPS. La tranquillité absolue."',
     verdictSource: '— Jardinage-Media',
@@ -1667,7 +1670,7 @@ const ROBOTS = {
     tagBg: 'rgba(125,211,252,0.1)',
     tagBorder: 'rgba(125,211,252,0.3)',
     desc: "L'Ecovacs GOAT G1 propose la navigation par vision IA (2 caméras) sans câble ni antenne pour 799 €. Plus silencieux que le Worx (60 dB), avec la qualité reconnue Ecovacs.",
-    amazon: 'https://www.amazon.fr/dp/B0CL7NX96J',
+    amazon: 'https://www.ecovacs.com/fr/goat-robotic-lawn-mower/goat-g1',
     shop2: { label: 'Leroy Merlin', url: 'https://www.leroymerlin.fr/' },
     verdict: '"Le GOAT G1 apporte la vision sans câble à 799 €. Ecovacs a l\'expérience de la navigation par caméra sur ses aspirateurs — et ça se voit. Plus silencieux que le Worx Vision."',
     verdictSource: '— Clubic',
@@ -1715,7 +1718,7 @@ const ROBOTS = {
     tagBg: 'rgba(252,211,77,0.1)',
     tagBorder: 'rgba(252,211,77,0.3)',
     desc: "Le Robomow RS635 Pro est la solution économique pour les grands terrains jusqu'à 3 500 m². Robuste, double lame large (28 cm), marque spécialiste depuis 25 ans.",
-    amazon: 'https://www.amazon.fr/dp/B09MHQKYRR',
+    amazon: 'https://www.cdiscount.com/search/10/robomow+rs635.html',
     verdict: '"Pour couvrir 3 500 m² sans dépenser 2 000+ €, le RS635 Pro est une option sérieuse. Double lame, 1 199 €, Robomow spécialise dans les grandes surfaces depuis 25 ans."',
     verdictSource: '— LaboMaison',
     pros: ['3 500 m² à 1 199 € — meilleur ratio prix/surface', 'Double lame large 28 cm', 'Marque spécialiste grandes surfaces', 'Robuste et résistant'],
@@ -1762,7 +1765,7 @@ const ROBOTS = {
     tagBg: 'rgba(252,211,77,0.1)',
     tagBorder: 'rgba(252,211,77,0.3)',
     desc: "Le Stiga A 3000 étend le GPS RTK sans câble aux grands jardins jusqu'à 3 000 m². Navigation précise au centimètre, pentes 45%, marque suédoise Stiga depuis 1943.",
-    amazon: 'https://www.amazon.fr/dp/B0BT5KGXNJ',
+    amazon: 'https://www.cdiscount.com/search/10/stiga+a+3000.html',
     verdict: '"Pour 1 499 €, le Stiga A 3000 offre la navigation RTK sans câble sur 3 000 m² — rare à ce prix. Le rapport qualité/prix pour les grands terrains qui veulent de la précision."',
     verdictSource: '— Meilleure-Innovation',
     pros: ['RTK sans câble sur 3 000 m²', 'Précision 1-2 cm', 'Pentes 45%', 'Marque Stiga fiable depuis 1943', 'Meilleur prix RTK grande surface'],
@@ -1809,7 +1812,7 @@ const ROBOTS = {
     tagBg: 'rgba(147,197,253,0.1)',
     tagBorder: 'rgba(147,197,253,0.3)',
     desc: "Le Viking iMow MI 632 PC est un robot grand format (3 200 m²) de la galaxie Stihl. Même qualité de fabrication, même réseau SAV partout en France.",
-    amazon: 'https://www.amazon.fr/dp/B09BNYTCC9',
+    amazon: null,
     shop2: { label: 'Viking Direct', url: 'https://www.viking-garden.fr/' },
     verdict: '"Viking est la marque jardin du groupe Stihl — même qualité de fabrication allemande, même réseau SAV. Le MI 632 PC couvre 3 200 m² avec GPS. Pour les grandes surfaces avec SAV garanti."',
     verdictSource: '— JardinsPlus',
@@ -1857,7 +1860,7 @@ const ROBOTS = {
     tagBg: 'rgba(196,181,253,0.1)',
     tagBorder: 'rgba(196,181,253,0.3)',
     desc: "L'EcoFlow Blade est unique : le seul robot tondeuse avec souffleur de feuilles intégré. Navigation Vision + GPS sans câble, 3 200 m², batterie EcoFlow interchangeable avec toute la gamme.",
-    amazon: 'https://www.amazon.fr/dp/B0B1C5J36N',
+    amazon: null,
     shop2: { label: 'EcoFlow Direct', url: 'https://www.ecoflow.com/fr/blade' },
     verdict: '"L\'EcoFlow Blade est l\'originalité du marché — tondeuse + souffleur de feuilles dans un seul produit. Navigation sans câble, batterie compatible gamme EcoFlow. Pour les propriétaires qui optimisent tout."',
     verdictSource: '— Clubic',
@@ -1905,7 +1908,7 @@ const ROBOTS = {
     tagBg: 'rgba(147,197,253,0.1)',
     tagBorder: 'rgba(147,197,253,0.3)',
     desc: "L'Husqvarna Automower 430X est la référence Husqvarna pour les grands jardins jusqu'à 3 200 m². Navigation EPOS satellite, pentes 45%, réseau SAV France — et remboursement jusqu'à -849 € en cours.",
-    amazon: 'https://www.amazon.fr/dp/B0CF5NP8SR',
+    amazon: 'https://www.husqvarna.com/fr/robots-tondeuses/automower-430x/',
     shop2: { label: 'Husqvarna Direct', url: 'https://www.husqvarna.com/fr/robots-tondeuses/automower-430x/' },
     verdict: '"Le 430X est le choix des propriétaires de grands jardins qui ne veulent pas de compromis : 3 200 m², 45% de pente, EPOS satellite précis, réseau SAV France partout."',
     verdictSource: '— Jardinage-Media',
@@ -1953,7 +1956,7 @@ const ROBOTS = {
     tagBg: 'rgba(253,186,116,0.1)',
     tagBorder: 'rgba(253,186,116,0.3)',
     desc: "Ambrogio est le seul spécialiste qui ne fait que des robots tondeuses depuis 30 ans. L'L15 Elite se démarque par une robustesse industrielle et des finitions premium rarement vues.",
-    amazon: 'https://www.amazon.fr/dp/B07YZ1KQP6',
+    amazon: 'https://www.cdiscount.com/search/10/ambrogio+l15.html',
     verdict: '"Ambrogio ne fait QUE des robots tondeuses depuis 30 ans — contrairement aux marques qui diversifient tout. L\'L15 Elite est conçu pour durer 10+ ans. La robustesse italienne à l\'état pur."',
     verdictSource: '— Meilleure-Innovation',
     pros: ['30 ans d\'expertise robots tondeuses exclusifs', 'Robustesse industrielle unique', 'Pas d\'abonnement cloud requis', 'Finition et matériaux premium', 'Conçu pour durer 10+ ans'],
@@ -2000,7 +2003,7 @@ const ROBOTS = {
     tagBg: 'rgba(253,186,116,0.1)',
     tagBorder: 'rgba(253,186,116,0.3)',
     desc: "Le Mammotion LUBA 2 AWD 1000 est la version compacte du champion de pentes. Toutes les capacités 4WD + pentes 80% + RTK du LUBA 2 3000X, pour les jardins jusqu'à 1 000 m².",
-    amazon: 'https://www.amazon.fr/dp/B0DT46TJDP',
+    amazon: null,
     shop2: { label: 'Mammotion Direct', url: 'https://eu.mammotion.com/' },
     verdict: '"Jardin accidenté <1 000 m² ? Le LUBA 2 AWD 1000 offre exactement les mêmes capacités (4WD, pentes 80%, RTK précision) que le 3000X pour 800 € de moins."',
     verdictSource: '— LaboMaison',
@@ -2096,7 +2099,7 @@ const ROBOTS = {
     tagBg: 'rgba(147,197,253,0.1)',
     tagBorder: 'rgba(147,197,253,0.3)',
     desc: "L'Husqvarna Automower 435X AWD est le seul 4×4 de la gamme Husqvarna. EPOS satellite, pentes jusqu'à 70%, réseau SAV France, 3 500 m². L'alliance du meilleur des deux mondes.",
-    amazon: 'https://www.amazon.fr/dp/B0CF5QSDYB',
+    amazon: 'https://www.husqvarna.com/fr/robots-tondeuses/automower-435x-awd/',
     shop2: { label: 'Husqvarna Direct', url: 'https://www.husqvarna.com/fr/robots-tondeuses/automower-435x-awd/' },
     verdict: '"Le 435X AWD combine 4 roues motrices + EPOS satellite Husqvarna + réseau SAV France. Pour les jardins accidentés 3 500 m² qui veulent une marque établie avec support local."',
     verdictSource: '— Jardinage-Media',
@@ -2373,22 +2376,39 @@ function render(robot) {
     </div>
   `}).join('');
 
-  // Buy buttons
-  const buyBtnsHtml = (() => {
-    let html = '';
-    if(robot.amazon) html += `<a href="${robot.amazon}" target="_blank" rel="noopener" class="buy-btn buy-btn-amazon">Voir sur Amazon</a>`;
-    if(robot.shop2) html += `<a href="${robot.shop2.url}" target="_blank" rel="noopener" class="buy-btn buy-btn-other">${escape(robot.shop2.label)}</a>`;
-    if(robot.shop3) html += `<a href="${robot.shop3.url}" target="_blank" rel="noopener" class="buy-btn buy-btn-other">${escape(robot.shop3.label)}</a>`;
-    return html;
-  })();
+  // Détecte le nom du revendeur depuis l'URL
+  function getRetailerLabel(url) {
+    if(!url) return 'Voir l\'offre';
+    try {
+      const host = new URL(url).hostname.replace('www.','');
+      if(host.includes('amazon'))       return 'Voir sur Amazon';
+      if(host.includes('leroymerlin'))  return 'Voir sur Leroy Merlin';
+      if(host.includes('boulanger'))    return 'Voir sur Boulanger';
+      if(host.includes('darty'))        return 'Voir sur Darty';
+      if(host.includes('cdiscount'))    return 'Voir sur Cdiscount';
+      if(host.includes('husqvarna'))    return 'Voir sur Husqvarna';
+      if(host.includes('mammotion'))    return 'Voir sur Mammotion';
+      if(host.includes('dreametech'))   return 'Voir sur Dreame';
+      if(host.includes('ecovacs'))      return 'Voir sur Ecovacs';
+      if(host.includes('segway') || host.includes('navimow')) return 'Voir sur Segway';
+      if(host.includes('ecoflow'))      return 'Voir sur EcoFlow';
+      if(host.includes('mova'))         return 'Voir sur Mova';
+      if(host.includes('worx'))         return 'Voir sur Worx';
+      if(host.includes('honda'))        return 'Voir sur Honda';
+      if(host.includes('stihl'))        return 'Voir sur Stihl';
+    } catch(e) {}
+    return 'Voir l\'offre';
+  }
+
+  // Buy buttons — 1 seul bouton, Amazon en priorité, sinon meilleur revendeur dispo
+  const buyBtnsHtml = robot.amazon
+    ? `<a href="${robot.amazon}" target="_blank" rel="noopener noreferrer" class="buy-btn buy-btn-amazon">${getRetailerLabel(robot.amazon)}</a>`
+    : '';
 
   // Hero buy buttons
-  const heroBtnsHtml = (() => {
-    let html = '';
-    if(robot.amazon) html += `<a href="${robot.amazon}" target="_blank" rel="noopener" class="btn-primary">Voir sur Amazon</a>`;
-    if(robot.shop2) html += `<a href="${robot.shop2.url}" target="_blank" rel="noopener" class="btn-secondary">${escape(robot.shop2.label)}</a>`;
-    return html;
-  })();
+  const heroBtnsHtml = robot.amazon
+    ? `<a href="${robot.amazon}" target="_blank" rel="noopener noreferrer" class="btn-primary">${getRetailerLabel(robot.amazon)}</a>`
+    : '';
 
   // Prev / Next nav
   const prevHtml = prevRobot ? `

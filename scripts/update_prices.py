@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
 """
 update_prices.py
-Vérifie les prix actuels des robots tondeuses et met à jour index.html + fiche.html.
-Exécuté quotidiennement via GitHub Actions.
+Vérifie quotidiennement :
+  1. Les prix des robots tondeuses (Amazon, sites officiels)
+  2. La validité des liens d'achat → bascule automatiquement sur un revendeur alternatif
+Exécuté via GitHub Actions chaque jour à 06h00 UTC.
 """
 
 import re
@@ -41,15 +43,22 @@ MIN_PRICE = 300    # Prix minimum raisonnable (€)
 MAX_PRICE = 6000   # Prix maximum raisonnable (€)
 DELAY = 3          # Secondes entre chaque requête (politesse)
 
-# ─── Configuration des sources par robot ─────────────────────────────────────
-# Ordre des sources : le script essaie la première, puis la suivante si échec.
-# "method" peut être : "json_ld", "amazon", "shopify", "meta"
+# ─── Configuration par robot ──────────────────────────────────────────────────
+# sources   : utilisées pour scraper le prix (ordre de priorité)
+# buy_links : liens d'achat vérifiés quotidiennement (ordre de priorité)
+#             → le premier lien valide (HTTP < 400) est mis dans fiche.html
 ROBOTS = {
     "navimow": {
         "name": "Segway Navimow i105E",
         "sources": [
             {"url": "https://navimow.segway.com/fr-fr/products/navimow-i105e", "method": "json_ld"},
             {"url": "https://www.amazon.fr/dp/B0CXDNFZLL", "method": "amazon"},
+        ],
+        "buy_links": [
+            "https://www.amazon.fr/i105E-p%C3%A9riph%C3%A9rique-Recommand%C3%A9-cartographie-Automatique/dp/B0CXDNFZLL",
+            "https://navimow.segway.com/fr-fr/products/navimow-i105e",
+            "https://www.boulanger.com/recherche/navimow+i105e",
+            "https://www.darty.com/nav/extra/recherche/navimow+i105e.html",
         ],
     },
     "ecovacs": {
@@ -58,12 +67,24 @@ ROBOTS = {
             {"url": "https://www.ecovacs.com/fr/goat-robotic-lawn-mower/goat-o800-rtk", "method": "json_ld"},
             {"url": "https://www.amazon.fr/dp/B0DQ8KYLYR", "method": "amazon"},
         ],
+        "buy_links": [
+            "https://www.amazon.fr/ECOVACS-O800-RTK-p%C3%A9riph%C3%A9rique-Cartographie/dp/B0DQ8KYLYR",
+            "https://www.ecovacs.com/fr/goat-robotic-lawn-mower/goat-o800-rtk",
+            "https://www.boulanger.com/recherche/ecovacs+goat+o800",
+            "https://www.darty.com/nav/extra/recherche/ecovacs+goat+o800.html",
+        ],
     },
     "dreame": {
         "name": "Dreame A1 Pro",
         "sources": [
             {"url": "https://fr.dreametech.com/products/robot-tondeuse-dreame-a1-pro", "method": "shopify"},
             {"url": "https://www.amazon.fr/dp/B0DR35G7P3", "method": "amazon"},
+        ],
+        "buy_links": [
+            "https://www.amazon.fr/robotis%C3%A9e-Intelligente-p%C3%A9rim%C3%A9trique-OmniSense-Intelligent/dp/B0DR35G7P3",
+            "https://fr.dreametech.com/products/robot-tondeuse-dreame-a1-pro",
+            "https://www.boulanger.com/recherche/dreame+a1+pro+tondeuse",
+            "https://www.leroymerlin.fr/recherche?q=dreame+a1+pro",
         ],
     },
     "worx": {
@@ -72,12 +93,24 @@ ROBOTS = {
             {"url": "https://www.amazon.fr/dp/B0CTTWLLZZ", "method": "amazon"},
             {"url": "https://eu.worx.com/fr/products/wr208e", "method": "json_ld"},
         ],
+        "buy_links": [
+            "https://www.amazon.fr/WORX-p%C3%A9riph%C3%A9rique-Evitement-dobstacles-Contr%C3%B4lable/dp/B0CTTWLLZZ",
+            "https://eu.worx.com/fr/products/wr208e",
+            "https://www.leroymerlin.fr/recherche?q=worx+landroid+vision",
+            "https://www.boulanger.com/recherche/worx+landroid+vision",
+        ],
     },
     "yuka": {
         "name": "Mammotion Yuka Mini Vision",
         "sources": [
             {"url": "https://www.amazon.fr/dp/B0FKTBKDQ1", "method": "amazon"},
             {"url": "https://eu.mammotion.com/fr/products/yuka-mini-vision", "method": "shopify"},
+        ],
+        "buy_links": [
+            "https://www.amazon.fr/dp/B0FKTBKDQ1",
+            "https://eu.mammotion.com/fr/products/yuka-mini-vision",
+            "https://www.boulanger.com/recherche/mammotion+yuka",
+            "https://www.darty.com/nav/extra/recherche/mammotion+yuka.html",
         ],
     },
     "luba2": {
@@ -86,12 +119,25 @@ ROBOTS = {
             {"url": "https://www.amazon.fr/dp/B0DT46VJPG", "method": "amazon"},
             {"url": "https://eu.mammotion.com/fr/products/luba-2-awd-3000x", "method": "shopify"},
         ],
+        "buy_links": [
+            "https://www.amazon.fr/MAMMOTION-LUBA-AWD-P%C3%A9riph%C3%A9rique-Recommand%C3%A9/dp/B0DT46VJPG",
+            "https://eu.mammotion.com/fr/products/luba-2-awd-3000x",
+            "https://www.boulanger.com/recherche/mammotion+luba+2+3000",
+            "https://www.darty.com/nav/extra/recherche/mammotion+luba+2.html",
+        ],
     },
     "husqvarna": {
         "name": "Husqvarna Automower 320 NERA",
         "sources": [
             {"url": "https://www.husqvarna.com/fr/robots-tondeuses/automower-320nera/", "method": "json_ld"},
             {"url": "https://www.amazon.fr/dp/B0CF5Q64QS", "method": "amazon"},
+        ],
+        "buy_links": [
+            "https://www.amazon.fr/Husqvarna-Automower-320-Nera/dp/B0CF5Q64QS",
+            "https://www.husqvarna.com/fr/robots-tondeuses/automower-320nera/",
+            "https://www.leroymerlin.fr/recherche?q=husqvarna+automower+320",
+            "https://www.boulanger.com/recherche/husqvarna+automower+320",
+            "https://www.darty.com/nav/extra/recherche/husqvarna+automower+320.html",
         ],
     },
     "mova": {
@@ -100,11 +146,22 @@ ROBOTS = {
             {"url": "https://fr.mova.tech/products/robot-tondeuse-lidax-ultra", "method": "shopify"},
             {"url": "https://www.amazon.fr/dp/B0GD23KKHC", "method": "amazon"},
         ],
+        "buy_links": [
+            "https://www.amazon.fr/dp/B0GD23KKHC",
+            "https://fr.mova.tech/products/robot-tondeuse-lidax-ultra",
+            "https://www.boulanger.com/recherche/mova+lidax",
+            "https://www.darty.com/nav/extra/recherche/mova+lidax.html",
+        ],
     },
     "a3pro": {
         "name": "Dreame A3 AWD Pro 3500",
         "sources": [
             {"url": "https://fr.dreametech.com/products/dreame-robot-tondeuse-a3-awd-pro-3500", "method": "shopify"},
+        ],
+        "buy_links": [
+            "https://fr.dreametech.com/products/dreame-robot-tondeuse-a3-awd-pro-3500",
+            "https://www.boulanger.com/recherche/dreame+a3+awd+pro",
+            "https://www.leroymerlin.fr/recherche?q=dreame+a3+pro+tondeuse",
         ],
     },
     "luba3": {
@@ -113,22 +170,55 @@ ROBOTS = {
             {"url": "https://www.amazon.fr/dp/B0GCZSSZRZ", "method": "amazon"},
             {"url": "https://eu.mammotion.com/fr/products/luba-3-awd-3000", "method": "shopify"},
         ],
+        "buy_links": [
+            "https://www.amazon.fr/Mammotion-LUBA-AWD-3000-Positionnement/dp/B0GCZSSZRZ",
+            "https://eu.mammotion.com/fr/products/luba-3-awd-3000",
+            "https://www.boulanger.com/recherche/mammotion+luba+3",
+            "https://www.darty.com/nav/extra/recherche/mammotion+luba+3.html",
+        ],
     },
     "boschxs": {
         "name": "Bosch Indego XS 300",
         "sources": [{"url": "https://www.amazon.fr/dp/B085FCXY97", "method": "amazon"}],
+        "buy_links": [
+            "https://www.amazon.fr/dp/B085FCXY97",
+            "https://www.leroymerlin.fr/recherche?q=bosch+indego+xs+300",
+            "https://www.boulanger.com/recherche/bosch+indego+xs+300",
+            "https://www.darty.com/nav/extra/recherche/bosch+indego+xs+300.html",
+            "https://www.cdiscount.com/search/10/bosch+indego+xs+300.html",
+        ],
     },
     "boschm700": {
         "name": "Bosch Indego M+ 700",
         "sources": [{"url": "https://www.amazon.fr/dp/B09FDMXHRL", "method": "amazon"}],
+        "buy_links": [
+            "https://www.amazon.fr/dp/B09FDMXHRL",
+            "https://www.leroymerlin.fr/recherche?q=bosch+indego+m+700",
+            "https://www.boulanger.com/recherche/bosch+indego+m700",
+            "https://www.darty.com/nav/extra/recherche/bosch+indego+m700.html",
+        ],
     },
     "gardenaminimo": {
         "name": "Gardena Sileno Minimo 250",
         "sources": [{"url": "https://www.amazon.fr/dp/B07GBRZFV2", "method": "amazon"}],
+        "buy_links": [
+            "https://www.amazon.fr/dp/B07GBRZFV2",
+            "https://www.leroymerlin.fr/recherche?q=gardena+sileno+minimo+250",
+            "https://www.boulanger.com/recherche/gardena+sileno+minimo",
+            "https://www.darty.com/nav/extra/recherche/gardena+sileno+minimo.html",
+            "https://www.cdiscount.com/search/10/gardena+sileno+minimo.html",
+        ],
     },
     "gardena750": {
         "name": "Gardena Sileno Life 750",
         "sources": [{"url": "https://www.amazon.fr/dp/B07GBQWPSD", "method": "amazon"}],
+        "buy_links": [
+            "https://www.amazon.fr/dp/B07GBQWPSD",
+            "https://www.leroymerlin.fr/recherche?q=gardena+sileno+life+750",
+            "https://www.boulanger.com/recherche/gardena+sileno+life+750",
+            "https://www.darty.com/nav/extra/recherche/gardena+sileno+life.html",
+            "https://www.cdiscount.com/search/10/gardena+sileno+life+750.html",
+        ],
     },
     "husqvarna115h": {
         "name": "Husqvarna Automower 115H",
@@ -136,18 +226,43 @@ ROBOTS = {
             {"url": "https://www.husqvarna.com/fr/robots-tondeuses/automower-115h/", "method": "json_ld"},
             {"url": "https://www.amazon.fr/dp/B09FDMXHRL", "method": "amazon"},
         ],
+        "buy_links": [
+            "https://www.amazon.fr/dp/B09FDMXHRL",
+            "https://www.husqvarna.com/fr/robots-tondeuses/automower-115h/",
+            "https://www.leroymerlin.fr/recherche?q=husqvarna+automower+115h",
+            "https://www.boulanger.com/recherche/husqvarna+automower+115h",
+        ],
     },
     "navimow108": {
         "name": "Segway Navimow i108E",
         "sources": [{"url": "https://www.amazon.fr/dp/B0D3KWNDBY", "method": "amazon"}],
+        "buy_links": [
+            "https://www.amazon.fr/dp/B0D3KWNDBY",
+            "https://navimow.segway.com/fr-fr/products/navimow-i108e",
+            "https://www.boulanger.com/recherche/navimow+i108e",
+            "https://www.darty.com/nav/extra/recherche/navimow+i108e.html",
+        ],
     },
     "stiga1000": {
         "name": "Stiga A 1000",
         "sources": [{"url": "https://www.amazon.fr/dp/B0BT5W5NNS", "method": "amazon"}],
+        "buy_links": [
+            "https://www.amazon.fr/dp/B0BT5W5NNS",
+            "https://www.leroymerlin.fr/recherche?q=stiga+a+1000+tondeuse",
+            "https://www.boulanger.com/recherche/stiga+a+1000",
+            "https://www.darty.com/nav/extra/recherche/stiga+a+1000.html",
+            "https://www.cdiscount.com/search/10/stiga+a+1000.html",
+        ],
     },
     "kress": {
         "name": "Kress Mission 5 RTK",
         "sources": [{"url": "https://www.amazon.fr/dp/B0C1MKBJ5Y", "method": "amazon"}],
+        "buy_links": [
+            "https://www.amazon.fr/dp/B0C1MKBJ5Y",
+            "https://www.leroymerlin.fr/recherche?q=kress+mission+rtk+tondeuse",
+            "https://www.boulanger.com/recherche/kress+mission+5+rtk",
+            "https://www.darty.com/nav/extra/recherche/kress+mission+rtk.html",
+        ],
     },
     "honda520": {
         "name": "Honda Miimo 520",
@@ -155,32 +270,77 @@ ROBOTS = {
             {"url": "https://www.amazon.fr/dp/B07G1CC2SM", "method": "amazon"},
             {"url": "https://www.honda.fr/lawn-and-garden/products/miimo.html", "method": "json_ld"},
         ],
+        "buy_links": [
+            "https://www.amazon.fr/dp/B07G1CC2SM",
+            "https://www.honda.fr/lawn-and-garden/products/miimo.html",
+            "https://www.leroymerlin.fr/recherche?q=honda+miimo+520",
+            "https://www.boulanger.com/recherche/honda+miimo+520",
+            "https://www.darty.com/nav/extra/recherche/honda+miimo+520.html",
+        ],
     },
     "stihl422": {
         "name": "Stihl iMow RMI 422 PC",
         "sources": [{"url": "https://www.amazon.fr/dp/B0B3VLJHQ4", "method": "amazon"}],
+        "buy_links": [
+            "https://www.amazon.fr/dp/B0B3VLJHQ4",
+            "https://www.stihl.fr/tondeuses-et-robots-tondeuses/robots-tondeuses/robot-tondeuse-imow-rmi-422-pc.html",
+            "https://www.leroymerlin.fr/recherche?q=stihl+imow+422",
+            "https://www.boulanger.com/recherche/stihl+imow+422",
+        ],
     },
     "ecovacsG1": {
         "name": "Ecovacs GOAT G1",
         "sources": [{"url": "https://www.amazon.fr/dp/B0CL7NX96J", "method": "amazon"}],
+        "buy_links": [
+            "https://www.amazon.fr/dp/B0CL7NX96J",
+            "https://www.ecovacs.com/fr/goat-robotic-lawn-mower/goat-g1",
+            "https://www.boulanger.com/recherche/ecovacs+goat+g1",
+            "https://www.darty.com/nav/extra/recherche/ecovacs+goat+g1.html",
+        ],
     },
     "robomow635": {
         "name": "Robomow RS635 Pro",
         "sources": [{"url": "https://www.amazon.fr/dp/B09MHQKYRR", "method": "amazon"}],
+        "buy_links": [
+            "https://www.amazon.fr/dp/B09MHQKYRR",
+            "https://www.leroymerlin.fr/recherche?q=robomow+rs635",
+            "https://www.boulanger.com/recherche/robomow+rs635",
+            "https://www.darty.com/nav/extra/recherche/robomow+rs635.html",
+            "https://www.cdiscount.com/search/10/robomow+rs635.html",
+        ],
     },
     "stiga3000": {
         "name": "Stiga A 3000",
         "sources": [{"url": "https://www.amazon.fr/dp/B0BT5KGXNJ", "method": "amazon"}],
+        "buy_links": [
+            "https://www.amazon.fr/dp/B0BT5KGXNJ",
+            "https://www.leroymerlin.fr/recherche?q=stiga+a+3000+tondeuse",
+            "https://www.boulanger.com/recherche/stiga+a+3000",
+            "https://www.darty.com/nav/extra/recherche/stiga+a+3000.html",
+            "https://www.cdiscount.com/search/10/stiga+a+3000.html",
+        ],
     },
     "vikingmi632": {
         "name": "Viking iMow MI 632 PC",
         "sources": [{"url": "https://www.amazon.fr/dp/B09BNYTCC9", "method": "amazon"}],
+        "buy_links": [
+            "https://www.amazon.fr/dp/B09BNYTCC9",
+            "https://www.leroymerlin.fr/recherche?q=viking+imow+mi+632",
+            "https://www.boulanger.com/recherche/viking+imow+632",
+            "https://www.darty.com/nav/extra/recherche/viking+imow+632.html",
+        ],
     },
     "ecoflowblade": {
         "name": "EcoFlow Blade",
         "sources": [
             {"url": "https://www.amazon.fr/dp/B0B1C5J36N", "method": "amazon"},
             {"url": "https://www.ecoflow.com/fr/blade", "method": "json_ld"},
+        ],
+        "buy_links": [
+            "https://www.amazon.fr/dp/B0B1C5J36N",
+            "https://www.ecoflow.com/fr/blade",
+            "https://www.boulanger.com/recherche/ecoflow+blade",
+            "https://www.darty.com/nav/extra/recherche/ecoflow+blade.html",
         ],
     },
     "husqvarna430x": {
@@ -189,10 +349,23 @@ ROBOTS = {
             {"url": "https://www.husqvarna.com/fr/robots-tondeuses/automower-430x/", "method": "json_ld"},
             {"url": "https://www.amazon.fr/dp/B0CF5NP8SR", "method": "amazon"},
         ],
+        "buy_links": [
+            "https://www.amazon.fr/dp/B0CF5NP8SR",
+            "https://www.husqvarna.com/fr/robots-tondeuses/automower-430x/",
+            "https://www.leroymerlin.fr/recherche?q=husqvarna+automower+430x",
+            "https://www.boulanger.com/recherche/husqvarna+automower+430",
+        ],
     },
     "ambrogio": {
         "name": "Ambrogio L15 Elite",
         "sources": [{"url": "https://www.amazon.fr/dp/B07YZ1KQP6", "method": "amazon"}],
+        "buy_links": [
+            "https://www.amazon.fr/dp/B07YZ1KQP6",
+            "https://www.leroymerlin.fr/recherche?q=ambrogio+l15",
+            "https://www.boulanger.com/recherche/ambrogio+l15",
+            "https://www.darty.com/nav/extra/recherche/ambrogio+l15.html",
+            "https://www.cdiscount.com/search/10/ambrogio+l15.html",
+        ],
     },
     "luba2_1000": {
         "name": "Mammotion LUBA 2 AWD 1000",
@@ -200,12 +373,22 @@ ROBOTS = {
             {"url": "https://www.amazon.fr/dp/B0DT46TJDP", "method": "amazon"},
             {"url": "https://eu.mammotion.com/fr/products/luba-2-awd-1000", "method": "shopify"},
         ],
+        "buy_links": [
+            "https://www.amazon.fr/dp/B0DT46TJDP",
+            "https://eu.mammotion.com/fr/products/luba-2-awd-1000",
+            "https://www.boulanger.com/recherche/mammotion+luba+2+1000",
+            "https://www.darty.com/nav/extra/recherche/mammotion+luba+2.html",
+        ],
     },
     "husqvarna450": {
         "name": "Husqvarna Automower 450X NERA",
         "sources": [
             {"url": "https://www.husqvarna.com/fr/robots-tondeuses/automower-450x-nera/", "method": "json_ld"},
-            {"url": "https://www.amazon.fr/dp/B0CF5Q64QS", "method": "amazon"},
+        ],
+        "buy_links": [
+            "https://www.husqvarna.com/fr/robots-tondeuses/automower-450x-nera/",
+            "https://www.leroymerlin.fr/recherche?q=husqvarna+automower+450x",
+            "https://www.boulanger.com/recherche/husqvarna+automower+450",
         ],
     },
     "husqvarna435": {
@@ -213,6 +396,12 @@ ROBOTS = {
         "sources": [
             {"url": "https://www.husqvarna.com/fr/robots-tondeuses/automower-435x-awd/", "method": "json_ld"},
             {"url": "https://www.amazon.fr/dp/B0CF5QSDYB", "method": "amazon"},
+        ],
+        "buy_links": [
+            "https://www.amazon.fr/dp/B0CF5QSDYB",
+            "https://www.husqvarna.com/fr/robots-tondeuses/automower-435x-awd/",
+            "https://www.leroymerlin.fr/recherche?q=husqvarna+automower+435x+awd",
+            "https://www.boulanger.com/recherche/husqvarna+automower+435",
         ],
     },
 }
@@ -224,15 +413,12 @@ def parse_price(raw: str) -> Optional[int]:
     if not raw:
         return None
     cleaned = str(raw).strip().replace("\xa0", " ").replace("\u202f", " ")
-    # Supprimer symboles monétaires
     cleaned = re.sub(r"[€$£]", "", cleaned)
-    # Si terminé par ,XX ou .XX (centimes) : garder la partie entière
     m = re.match(r"^[\s]*([\d\s]+)[,.](\d{2})[\s]*$", cleaned.strip())
     if m:
         integer_part = re.sub(r"\s", "", m.group(1))
         val = int(integer_part) if integer_part.isdigit() else None
     else:
-        # Sinon extraire la première suite de 3 à 5 chiffres consécutifs (avec espaces)
         cleaned_digits = re.sub(r"\s", "", cleaned)
         m2 = re.search(r"(\d{3,5})", cleaned_digits)
         val = int(m2.group(1)) if m2 else None
@@ -243,7 +429,6 @@ def parse_price(raw: str) -> Optional[int]:
 
 
 def extract_json_ld(soup: BeautifulSoup) -> Optional[int]:
-    """Extrait le prix depuis les balises JSON-LD (structured data)."""
     for tag in soup.find_all("script", type="application/ld+json"):
         try:
             data = json.loads(tag.string or "")
@@ -272,25 +457,20 @@ def extract_json_ld(soup: BeautifulSoup) -> Optional[int]:
 
 
 def extract_shopify(soup: BeautifulSoup) -> Optional[int]:
-    """Extrait le prix depuis une boutique Shopify (window.ShopifyAnalytics ou JSON-LD)."""
-    # Méthode 1 : JSON-LD standard Shopify
     price = extract_json_ld(soup)
     if price:
         return price
-    # Méthode 2 : balise meta og:price:amount
     tag = soup.find("meta", {"property": "product:price:amount"}) or \
           soup.find("meta", {"property": "og:price:amount"})
     if tag and tag.get("content"):
         return parse_price(tag["content"])
-    # Méthode 3 : window.ShopifyAnalytics.meta dans les scripts
     for script in soup.find_all("script"):
         text = script.string or ""
         m = re.search(r'"price"\s*:\s*(\d+)', text)
         if m:
-            # Prix Shopify en centimes (ex: 94900 = 949 €)
             raw = int(m.group(1))
             if raw > MAX_PRICE:
-                raw = raw // 100  # convertir centimes → euros
+                raw = raw // 100
             p = parse_price(str(raw))
             if p:
                 return p
@@ -298,7 +478,6 @@ def extract_shopify(soup: BeautifulSoup) -> Optional[int]:
 
 
 def extract_amazon(soup: BeautifulSoup) -> Optional[int]:
-    """Extrait le prix depuis une page produit Amazon.fr."""
     selectors = [
         "span.a-price.aok-align-center span.a-offscreen",
         ".a-price .a-offscreen",
@@ -313,11 +492,10 @@ def extract_amazon(soup: BeautifulSoup) -> Optional[int]:
             p = parse_price(el.get_text())
             if p:
                 return p
-    # Fallback : JSON-LD (Amazon en intègre parfois)
     return extract_json_ld(soup)
 
 
-# ─── Fetch ────────────────────────────────────────────────────────────────────
+# ─── Session HTTP ─────────────────────────────────────────────────────────────
 
 session = requests.Session()
 session.headers.update(HEADERS)
@@ -366,11 +544,9 @@ def fetch_price(robot_id: str, config: dict) -> Optional[int]:
     return None
 
 
-# ─── Lecture du prix actuel dans les fichiers HTML ────────────────────────────
+# ─── Lecture / mise à jour des prix dans les fichiers HTML ───────────────────
 
 def get_current_price(content: str, robot_id: str) -> Optional[int]:
-    """Lit le prix actuellement dans le fichier HTML pour un robot donné."""
-    # Style index.html (ligne unique) : id:'worx',...price:'949 €',...
     m = re.search(
         rf"id:'{re.escape(robot_id)}'[^\n]*?price:'([\d\s]+) €'",
         content
@@ -378,7 +554,6 @@ def get_current_price(content: str, robot_id: str) -> Optional[int]:
     if m:
         return int(m.group(1).replace(" ", ""))
 
-    # Style fiche.html (multi-ligne) : worx: { ... price: '949 €', ...
     m = re.search(
         rf"(?s){re.escape(robot_id)}:\s*\{{[^{{}}]{{0,500}}?price:\s*'([\d\s]+) €'",
         content
@@ -391,15 +566,13 @@ def get_current_price(content: str, robot_id: str) -> Optional[int]:
 
 def fmt(price: int) -> str:
     """Formate un entier en prix français : 2599 → '2 599'"""
-    return f"{price:,}".replace(",", "\u202f")  # espace fine
+    return f"{price:,}".replace(",", "\u202f")
 
 
 def update_price_in_file(content: str, robot_id: str, old_price: int, new_price: int) -> str:
-    """Remplace toutes les occurrences du prix pour un robot dans un fichier HTML."""
     old_str = fmt(old_price)
     new_str = fmt(new_price)
 
-    # 1. price:'2 599 €' ou price: '2 599 €' (espace fine ou espace normale)
     content = re.sub(
         rf"((?:id:'{re.escape(robot_id)}'[^\n]*?|{re.escape(robot_id)}:\s*\{{[^{{}}]{{0,500}}?)price:\s*')([\d\s\u202f]+) €'",
         lambda m: m.group(0).replace(f"{old_str} €", f"{new_str} €").replace(
@@ -409,23 +582,18 @@ def update_price_in_file(content: str, robot_id: str, old_price: int, new_price:
         flags=re.DOTALL,
     )
 
-    # Fallback simple si le pattern ci-dessus n'a rien changé :
-    # Remplace price:'OLD €' partout sur une courte fenêtre après l'id
     for pattern in [
         rf"(id:'{re.escape(robot_id)}'[^\n]{{0,400}}?price:')({re.escape(old_str)} €|{old_price} €)(')",
         rf"({re.escape(robot_id)}:\s*\{{[^{{}}]{{0,500}}?price:\s*')({re.escape(old_str)} €|{old_price} €)(')",
     ]:
         content = re.sub(pattern, rf"\g<1>{new_str} €\g<3>", content, flags=re.DOTALL)
 
-    # 2. priceN:2599 (index.html uniquement, même ligne que l'id)
     content = re.sub(
         rf"(id:'{re.escape(robot_id)}'[^\n]{{0,400}}?priceN:){old_price}\b",
         rf"\g<1>{new_price}",
         content,
     )
 
-    # 3. Tableau comparatif index.html : <strong>2 599 €</strong>
-    # On ne remplace que si la ligne contient aussi le nom du robot (sécurité)
     lines = content.split("\n")
     robot_name = ROBOTS[robot_id]["name"]
     for i, line in enumerate(lines):
@@ -438,10 +606,106 @@ def update_price_in_file(content: str, robot_id: str, old_price: int, new_price:
     return content
 
 
-# ─── Main ─────────────────────────────────────────────────────────────────────
+# ─── Vérification et mise à jour des liens d'achat ───────────────────────────
+
+def check_link(url: str) -> bool:
+    """Retourne True si l'URL est accessible (code HTTP < 400)."""
+    try:
+        resp = session.head(url, timeout=10, allow_redirects=True)
+        if resp.status_code < 400:
+            return True
+        # HEAD bloqué par certains sites → réessayer avec GET partiel
+        resp = session.get(url, timeout=10, allow_redirects=True, stream=True)
+        resp.close()
+        return resp.status_code < 400
+    except Exception:
+        return False
+
+
+def find_best_buy_link(robot_id: str, config: dict) -> Optional[str]:
+    """
+    Teste les buy_links dans l'ordre et retourne le premier lien valide.
+    Si aucun n'est accessible, retourne None.
+    """
+    for url in config.get("buy_links", []):
+        log.info(f"  [{robot_id}] 🔗 Test lien → {url[:65]}...")
+        if check_link(url):
+            log.info(f"  [{robot_id}] ✓ Lien valide")
+            return url
+        else:
+            log.warning(f"  [{robot_id}] ✗ Lien mort ou inaccessible")
+        time.sleep(1)
+    return None
+
+
+def _find_robot_amazon_span(content: str, robot_id: str):
+    """
+    Localise le champ 'amazon:' d'un robot dans fiche.html.
+    Retourne (start_of_value, end_of_value, current_value) ou None.
+    On cherche le robot_id dans le contenu, puis on scanne vers l'avant
+    pour trouver 'amazon:' — sans se limiter aux accolades.
+    """
+    # Trouver l'identifiant du robot (ex: "  navimow: {")
+    m = re.search(rf"(?m)^\s*{re.escape(robot_id)}:\s*\{{", content)
+    if not m:
+        return None
+    # Chercher 'amazon:' dans les 6000 premiers caractères après le début du bloc
+    segment_start = m.start()
+    segment = content[segment_start: segment_start + 6000]
+
+    # Trouver 'amazon: null' ou "amazon: 'url'"
+    m2 = re.search(r"amazon:\s*(?:'([^']*)'|(null))", segment)
+    if not m2:
+        return None
+
+    val = m2.group(1)  # None si c'est null, sinon la valeur entre guillemets
+    abs_start = segment_start + m2.start()
+    abs_end   = segment_start + m2.end()
+    return abs_start, abs_end, val
+
+
+def get_current_buy_link(content: str, robot_id: str) -> Optional[str]:
+    """Lit le lien d'achat actuel pour un robot (amazon: 'url' ou null)."""
+    result = _find_robot_amazon_span(content, robot_id)
+    if result is None:
+        return None
+    _, _, val = result
+    return val  # None si amazon: null, sinon l'URL
+
+
+def update_buy_link_in_file(content: str, robot_id: str, new_link: str) -> str:
+    """Met à jour amazon: pour un robot — gère 'url' et null."""
+    result = _find_robot_amazon_span(content, robot_id)
+    if result is None:
+        return content
+    start, end, _ = result
+    old_text = content[start:end]
+    # Remplacer par la nouvelle valeur
+    new_text = re.sub(r"amazon:\s*(?:'[^']*'|null)", f"amazon: '{new_link}'", old_text, count=1)
+    return content[:start] + new_text + content[end:]
+
+
+def disable_buy_link_in_file(content: str, robot_id: str) -> str:
+    """Désactive amazon: d'un robot (met null) quand tous les liens sont morts."""
+    result = _find_robot_amazon_span(content, robot_id)
+    if result is None:
+        return content
+    start, end, current_val = result
+    if current_val is None:
+        return content  # déjà null
+    old_text = content[start:end]
+    new_text = re.sub(r"amazon:\s*'[^']*'", "amazon: null", old_text, count=1)
+    return content[:start] + new_text + content[end:]
+
+
+# ─── Fichiers à mettre à jour ─────────────────────────────────────────────────
 
 FILES = ["index.html", "fiche.html", "robots.html", "comparatif.html", "classement.html", "quiz.html"]
+# fiche.html contient les champs amazon: → c'est lui qui stocke les liens d'achat
+LINK_FILE = "fiche.html"
 
+
+# ─── Main ─────────────────────────────────────────────────────────────────────
 
 def main():
     # Lire les fichiers
@@ -454,76 +718,118 @@ def main():
             log.error(f"Fichier introuvable : {f}. Le script doit s'exécuter à la racine du projet.")
             sys.exit(1)
 
-    changes = []
+    price_changes = []
+    link_changes = []
     skipped = []
 
     for robot_id, config in ROBOTS.items():
-        log.info(f"\n[{robot_id}] Vérification : {config['name']}")
+        log.info(f"\n[{robot_id}] ── {config['name']} ──────────────────────────")
 
-        # Prix actuel dans les fichiers (lecture directe)
+        # ── 1. Vérification du prix ──────────────────────────────────────────
         current_price = get_current_price(contents["index.html"], robot_id) or \
                         get_current_price(contents["fiche.html"], robot_id)
 
         if current_price is None:
-            log.warning(f"  [{robot_id}] Impossible de lire le prix actuel dans les fichiers.")
+            log.warning(f"  [{robot_id}] Impossible de lire le prix actuel.")
             skipped.append(robot_id)
+        else:
+            log.info(f"  [{robot_id}] Prix actuel : {current_price} €")
+            fetched_price = fetch_price(robot_id, config)
+
+            if fetched_price is None:
+                log.warning(f"  [{robot_id}] Prix en ligne introuvable — inchangé.")
+                skipped.append(robot_id)
+            elif abs(fetched_price - current_price) <= 1:
+                log.info(f"  [{robot_id}] ✅ Prix inchangé : {current_price} €")
+            else:
+                diff = fetched_price - current_price
+                sign = "+" if diff > 0 else ""
+                log.info(f"  [{robot_id}] 💰 {current_price} € → {fetched_price} € ({sign}{diff} €)")
+                price_changes.append({
+                    "id": robot_id, "name": config["name"],
+                    "old": current_price, "new": fetched_price, "diff": diff,
+                })
+                for fname in FILES:
+                    contents[fname] = update_price_in_file(
+                        contents[fname], robot_id, current_price, fetched_price
+                    )
+
+        # ── 2. Vérification du lien d'achat ─────────────────────────────────
+        if not config.get("buy_links"):
+            log.info(f"  [{robot_id}] Pas de buy_links configurés — ignoré.")
             continue
 
-        log.info(f"  [{robot_id}] Prix actuel dans le site : {current_price} €")
+        current_link = get_current_buy_link(contents[LINK_FILE], robot_id)
 
-        # Récupérer le prix en ligne
-        fetched_price = fetch_price(robot_id, config)
-
-        if fetched_price is None:
-            log.warning(f"  [{robot_id}] Impossible de récupérer le prix en ligne — inchangé.")
-            skipped.append(robot_id)
+        # Vérifier d'abord si le lien actuel est toujours valide
+        if current_link and check_link(current_link):
+            log.info(f"  [{robot_id}] ✅ Lien actuel valide : {current_link[:60]}...")
+            time.sleep(1)
             continue
 
-        # Comparer
-        if abs(fetched_price - current_price) <= 1:
-            log.info(f"  [{robot_id}] ✅ Prix inchangé : {current_price} €")
-            continue
+        if current_link:
+            log.warning(f"  [{robot_id}] ⚠️  Lien actuel mort : {current_link[:60]}...")
+        else:
+            log.info(f"  [{robot_id}] Aucun lien actuel — recherche du meilleur lien...")
 
-        # Mise à jour
-        diff = fetched_price - current_price
-        sign = "+" if diff > 0 else ""
-        log.info(f"  [{robot_id}] 💰 Changement : {current_price} € → {fetched_price} € ({sign}{diff} €)")
-        changes.append({
-            "id": robot_id,
-            "name": config["name"],
-            "old": current_price,
-            "new": fetched_price,
-            "diff": diff,
-        })
+        # Chercher le meilleur lien fonctionnel parmi les alternatives
+        best_link = find_best_buy_link(robot_id, config)
 
-        for fname in FILES:
-            contents[fname] = update_price_in_file(contents[fname], robot_id, current_price, fetched_price)
+        if best_link and best_link != current_link:
+            log.info(f"  [{robot_id}] 🔄 Nouveau lien : {best_link[:60]}...")
+            link_changes.append({
+                "id": robot_id, "name": config["name"],
+                "old": current_link or "null", "new": best_link,
+            })
+            contents[LINK_FILE] = update_buy_link_in_file(
+                contents[LINK_FILE], robot_id, best_link
+            )
+        elif not best_link:
+            if current_link:
+                log.warning(f"  [{robot_id}] ❌ Tous les liens morts — bouton désactivé.")
+                link_changes.append({
+                    "id": robot_id, "name": config["name"],
+                    "old": current_link, "new": "null (désactivé)",
+                })
+                contents[LINK_FILE] = disable_buy_link_in_file(contents[LINK_FILE], robot_id)
+            else:
+                log.warning(f"  [{robot_id}] ❌ Aucun lien fonctionnel trouvé — bouton déjà désactivé.")
 
-    # ── Résumé ──────────────────────────────────────────────────────────────
+    # ── Résumé et écriture ────────────────────────────────────────────────────
     log.info("\n" + "═" * 60)
-    if not changes:
-        log.info("✅ Aucun changement de prix — fichiers non modifiés.")
+    has_changes = bool(price_changes or link_changes)
+
+    if not has_changes:
+        log.info("✅ Aucun changement (prix ni liens) — fichiers non modifiés.")
     else:
-        # Écrire les fichiers mis à jour
         for fname in FILES:
             with open(fname, "w", encoding="utf-8") as fh:
                 fh.write(contents[fname])
             log.info(f"📝 {fname} mis à jour")
 
-        log.info(f"\n💰 {len(changes)} prix mis à jour :")
-        for c in changes:
-            sign = "+" if c["diff"] > 0 else ""
-            log.info(f"  {c['name']}: {c['old']} € → {c['new']} € ({sign}{c['diff']} €)")
+        today = datetime.now().strftime("%Y-%m-%d")
 
-        # Historique des prix
-        with open("PRICE_HISTORY.md", "a", encoding="utf-8") as fh:
-            fh.write(f"\n## {datetime.now().strftime('%Y-%m-%d')}\n")
-            for c in changes:
-                sign = "+" if c["diff"] > 0 else ""
-                fh.write(f"- **{c['name']}** : {c['old']} € → {c['new']} € ({sign}{c['diff']} €)\n")
+        if price_changes:
+            log.info(f"\n💰 {len(price_changes)} prix mis à jour :")
+            with open("PRICE_HISTORY.md", "a", encoding="utf-8") as fh:
+                fh.write(f"\n## {today} — Prix\n")
+                for c in price_changes:
+                    sign = "+" if c["diff"] > 0 else ""
+                    msg = f"- **{c['name']}** : {c['old']} € → {c['new']} € ({sign}{c['diff']} €)"
+                    log.info(f"  {msg}")
+                    fh.write(msg + "\n")
+
+        if link_changes:
+            log.info(f"\n🔗 {len(link_changes)} liens mis à jour :")
+            with open("LINKS_HISTORY.md", "a", encoding="utf-8") as fh:
+                fh.write(f"\n## {today} — Liens\n")
+                for c in link_changes:
+                    msg = f"- **{c['name']}** : `{c['old'][:60]}` → `{c['new'][:60]}`"
+                    log.info(f"  {c['name']}: {c['old'][:50]} → {c['new'][:50]}")
+                    fh.write(msg + "\n")
 
     if skipped:
-        log.info(f"\n⚠️  Robots ignorés (échec fetch ou parsing) : {', '.join(skipped)}")
+        log.info(f"\n⚠️  Ignorés (échec fetch/parsing) : {', '.join(skipped)}")
 
     log.info("═" * 60)
 

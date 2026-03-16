@@ -2,8 +2,12 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8"/>
+<meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; frame-ancestors 'none';">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Classement par note — 30 robots 2026 | RoboTondeuse.guide</title>
+<meta name="description" content="Classement des 30 meilleurs robots tondeuses 2026 par note expert : score global, fiabilité, rapport qualité/prix et satisfaction utilisateurs."/>
 <link href="fonts/inter.css" rel="stylesheet"/>
 <style>
 /* ═══════════════════════════════════════════════
@@ -247,7 +251,7 @@ footer{
       <span class="pw-new">9,90 €</span>
       <span class="pw-once">une seule fois</span>
     </div>
-    <a class="pw-btn" href="STRIPE_LINK_PLACEHOLDER" target="_blank">Débloquer maintenant →</a>
+    <a class="pw-btn" href="https://buy.stripe.com/test_14AaEX32nfDP4cledxdwc00" target="_blank" rel="noopener noreferrer">Débloquer maintenant →</a>
     <p class="pw-guarantee">🛡️ Paiement sécurisé Stripe · Sans abonnement · Accès immédiat</p>
     <button class="pw-close" onclick="closePaywall()">Continuer sans accès complet</button>
   </div>
@@ -266,10 +270,11 @@ footer{
   </a>
   <div class="nav-links">
     <a href="index.html">Accueil</a>
+    <a href="quiz.html">Mon robot idéal</a>
     <a href="robots.html">Robots 2026</a>
     <a href="comparatif.html">Comparatif</a>
     <a href="classement.html" class="nav-active" onclick="if(!isPaid()){event.preventDefault();showPaywall();}">Classement 🔒</a>
-    <a href="quiz.html">Mon robot idéal</a>
+    
   </div>
   <a id="nav-premium" class="nav-premium-btn" href="#" onclick="handleNavPremium(event)">
     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
@@ -327,10 +332,10 @@ footer{
   </div>
   <div class="footer-note">
     <div class="footer-col-title">Sources</div>
-    <a href="https://www.clubic.com/guide-achat/article-829280-1-selection-tondeuse-robot.html" target="_blank" rel="noopener">Clubic</a>
-    <a href="https://www.futura-sciences.com/conso/comparatifs/meilleur-robot-tondeuse-comparatif/" target="_blank" rel="noopener">Futura-Sciences</a>
-    <a href="https://jardinsplus.com/robot-tondeuse/" target="_blank" rel="noopener">JardinsPlus</a>
-    <a href="https://www.jardinage-media.com/blog/top-robot-tondeuse-autonome" target="_blank" rel="noopener">Jardinage-Media</a>
+    <a href="https://www.clubic.com/guide-achat/article-829280-1-selection-tondeuse-robot.html" target="_blank" rel="noopener noreferrer">Clubic</a>
+    <a href="https://www.futura-sciences.com/conso/comparatifs/meilleur-robot-tondeuse-comparatif/" target="_blank" rel="noopener noreferrer">Futura-Sciences</a>
+    <a href="https://jardinsplus.com/robot-tondeuse/" target="_blank" rel="noopener noreferrer">JardinsPlus</a>
+    <a href="https://www.jardinage-media.com/blog/top-robot-tondeuse-autonome" target="_blank" rel="noopener noreferrer">Jardinage-Media</a>
     <span style="color:var(--muted);font-size:.72rem;margin-top:8px;display:block;">Avis : Trustpilot · Amazon.fr · Forums Kelrobot</span>
   </div>
 </footer>
@@ -339,7 +344,7 @@ footer{
 /* ════════════════════════════
    PAYWALL
 ════════════════════════════ */
-const STRIPE_URL = 'STRIPE_LINK_PLACEHOLDER';
+const STRIPE_URL = 'https://buy.stripe.com/test_14AaEX32nfDP4cledxdwc00';
 const _k=atob('X19ydGdw'),_v=atob('Z3JhbnRlZF8yMDI2');
 
 function isPaid(){return localStorage.getItem(_k)===_v;}
@@ -360,9 +365,7 @@ function handleStripeReturn(){
   const params = new URLSearchParams(window.location.search);
   if(params.get('access') === 'granted'){
     localStorage.setItem(_k,_v);
-    params.delete('access');
-    const clean = window.location.pathname + (params.toString() ? '?'+params.toString() : '') + (window.location.hash||'');
-    window.history.replaceState({}, '', clean);
+    history.replaceState({}, '', window.location.pathname);
   }
 }
 
@@ -370,21 +373,21 @@ function handleStripeReturn(){
    PRODUCTS DATA
 ════════════════════════════ */
 const PRODUCTS=[
-  {id:'navimow',rank:1,tag:'Meilleur rapport qualité/prix',name:'Segway Navimow i105E',price:'649 €',score:'4.3',img:'images/robots/navimow.png'},
-  {id:'ecovacs',rank:2,tag:'Le plus silencieux — 55 dB',name:'Ecovacs Goat O800 RTK',price:'699 €',score:'4.2',img:'images/robots/ecovacs.png'},
-  {id:'dreame',rank:3,tag:'Polyvalent triple-capteur 2026',name:'Dreame A1 Pro',price:'899 €',score:'4.4',img:'images/robots/dreame.jpg'},
-  {id:'worx',rank:4,tag:'Zero câble, tond dès l\'unboxing',name:'Worx Landroid Vision WR208E',price:'949 €',score:'4.1',img:'images/robots/worx.jpg'},
-  {id:'yuka',rank:5,tag:'Note #1 toutes catégories — 8.7/10',name:'Mammotion Yuka Mini Vision',price:'1 199 €',score:'4.5',img:'images/robots/yuka.jpg'},
+  {id:'navimow',rank:1,tag:'Rapport qualité/prix',name:'Segway Navimow i105E',price:'649 €',score:'4.3',img:'images/robots/navimow.png'},
+  {id:'ecovacs',rank:2,tag:'Silencieux — 55 dB',name:'Ecovacs Goat O800 RTK',price:'699 €',score:'4.2',img:'images/robots/ecovacs.png'},
+  {id:'dreame',rank:3,tag:'Polyvalent triple-capteur 2026',name:'Dreame A1 Pro',price:'879 €',score:'4.4',img:'images/robots/dreame.jpg'},
+  {id:'worx',rank:4,tag:'Zero câble, tond dès l\'unboxing',name:'Worx Landroid Vision WR208E',price:'699 €',score:'4.1',img:'images/robots/worx.jpg'},
+  {id:'yuka',rank:5,tag:'4G intégré · Triple caméra IA · 8.7/10',name:'Mammotion Yuka Mini Vision',price:'1 199 €',score:'4.5',img:'images/robots/yuka.jpg'},
   {id:'luba2',rank:6,tag:'Champion pentes — jusqu\'à 80%',name:'Mammotion LUBA 2 AWD 3000X',price:'2 599 €',score:'4.4',img:'images/robots/luba2.jpg'},
-  {id:'husqvarna',rank:7,tag:'Référence fiabilité & SAV France',name:'Husqvarna Automower 320 NERA',price:'2 463 €',score:'4.6',img:'images/robots/husqvarna.webp'},
+  {id:'husqvarna',rank:7,tag:'Fiabilité & SAV France',name:'Husqvarna Automower 320 NERA',price:'2 463 €',score:'4.6',img:'images/robots/husqvarna.webp'},
   {id:'mova',rank:8,tag:'Nouveau — LiDAR 3D 360° sans RTK',name:'MOVA LiDAX Ultra 1200',price:'1 099 €',score:'4.4',img:'images/robots/mova.png'},
   {id:'a3pro',rank:9,tag:'Nouveau — 4WD · LiDAR 3D',name:'Dreame A3 AWD Pro 3500',price:'2 299 €',score:'4.5',img:'images/robots/a3pro.jpg'},
   {id:'luba3',rank:10,tag:'Nouveau — Tri-Fusion LiDAR+RTK+Vision',name:'Mammotion LUBA 3 AWD 3000',price:'2 699 €',score:'4.5',img:'images/robots/luba3.png'},
-  {id:'boschxs',rank:11,tag:'Entrée de gamme — le moins cher',name:'Bosch Indego XS 300',price:'299 €',score:'3.9',img:'images/robots/boschxs.jpg'},
+  {id:'boschxs',rank:11,tag:'Entrée de gamme — petit jardin',name:'Bosch Indego XS 300',price:'299 €',score:'3.9',img:'images/robots/boschxs.jpg'},
   {id:'boschm700',rank:12,tag:'GPS sans câble — 700 m²',name:'Bosch Indego M+ 700',price:'599 €',score:'3.8',img:'images/robots/boschm700.jpg'},
   {id:'gardenaminimo',rank:13,tag:'Le plus silencieux entrée de gamme',name:'Gardena Sileno Minimo 250',price:'329 €',score:'4.0',img:'images/robots/gardenaminimo.png'},
   {id:'gardena750',rank:14,tag:'Silencieux & fiable — 58 dB',name:'Gardena Sileno Life 750',price:'549 €',score:'4.0',img:'images/robots/gardena750.png'},
-  {id:'husqvarna115h',rank:15,tag:'La valeur sûre Husqvarna entrée de gamme',name:'Husqvarna Automower 115H',price:'599 €',score:'4.1',img:'images/robots/husqvarna115h.webp'},
+  {id:'husqvarna115h',rank:15,tag:'Husqvarna entrée de gamme',name:'Husqvarna Automower 115H',price:'599 €',score:'4.1',img:'images/robots/husqvarna115h.webp'},
   {id:'navimow108',rank:16,tag:'RTK sans câble — double surface',name:'Segway Navimow i108E',price:'849 €',score:'4.3',img:'images/robots/navimow108.png'},
   {id:'stiga1000',rank:17,tag:'RTK sans câble — marque suédoise',name:'Stiga A 1000',price:'749 €',score:'4.2',img:'images/robots/stiga1000.jpg'},
   {id:'kress',rank:18,tag:'RTK professionnel — pro-grade',name:'Kress Mission 5 RTK',price:'899 €',score:'4.1',img:'images/robots/kress.png'},
@@ -402,6 +405,8 @@ const PRODUCTS=[
   {id:'husqvarna435',rank:30,tag:'4WD + EPOS — roi des pentes',name:'Husqvarna Automower 435X AWD',price:'3 199 €',score:'4.5',img:'images/robots/husqvarna435.webp'}
 ];
 
+function esc(s){const d=document.createElement('div');d.textContent=s;return d.innerHTML;}
+
 function buildRanking(){
   const gate = document.getElementById('classement-gate');
   const content = document.getElementById('classement-content');
@@ -412,16 +417,16 @@ function buildRanking(){
     const pos = i < 3
       ? `<span class="rank-pos rank-medal-${i+1}">${medals[i]}</span>`
       : `<span class="rank-pos rank-medal-n">#${i+1}</span>`;
-    return `<div class="rank-row" onclick="window.location.href='fiche.html?id=${p.id}'" style="cursor:pointer">
+    return `<div class="rank-row" onclick="window.location.href='fiche.html?id=${esc(p.id)}'" style="cursor:pointer">
       ${pos}
-      <img class="rank-img" src="${p.img}" alt="${p.name}" onerror="this.style.opacity='.2'"/>
+      <img class="rank-img" src="${esc(p.img)}" alt="${esc(p.name)}" onerror="this.style.opacity='.2'"/>
       <div class="rank-info">
-        <div class="rank-name">${p.name}</div>
-        <div class="rank-tag">${p.tag}</div>
+        <div class="rank-name">${esc(p.name)}</div>
+        <div class="rank-tag">${esc(p.tag)}</div>
       </div>
       <div>
-        <div class="rank-score">⭐ ${p.score}/5</div>
-        <div class="rank-price">${p.price}</div>
+        <div class="rank-score">⭐ ${esc(p.score)}/5</div>
+        <div class="rank-price">${esc(p.price)}</div>
       </div>
     </div>`;
   }).join('')}</div>`;
@@ -447,14 +452,14 @@ function updatePremiumUI(){
           : `<span class="rank-pos rank-medal-n">#${i+1}</span>`;
         return `<div class="rank-row">
           ${pos}
-          <img class="rank-img" src="${p.img}" alt="${p.name}" onerror="this.style.opacity='.2'"/>
+          <img class="rank-img" src="${esc(p.img)}" alt="${esc(p.name)}" onerror="this.style.opacity='.2'"/>
           <div class="rank-info">
-            <div class="rank-name">${p.name}</div>
-            <div class="rank-tag">${p.tag}</div>
+            <div class="rank-name">${esc(p.name)}</div>
+            <div class="rank-tag">${esc(p.tag)}</div>
           </div>
           <div>
-            <div class="rank-score">⭐ ${p.score}/5</div>
-            <div class="rank-price">${p.price}</div>
+            <div class="rank-score">⭐ ${esc(p.score)}/5</div>
+            <div class="rank-price">${esc(p.price)}</div>
           </div>
         </div>`;
       }).join('')}</div>`;

@@ -2,8 +2,11 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8"/>
+<meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; frame-ancestors 'none';">
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Mon robot idéal — Sélection personnalisée 2026 | RoboTondeuse.guide</title>
+<meta name="description" content="Répondez à 5 questions sur votre jardin et obtenez votre sélection personnalisée parmi 30 robots tondeuses 2026. Résultat immédiat et gratuit."/>
 <link href="fonts/inter.css" rel="stylesheet"/>
 <style>
 /* ═══════════════════════════════════════════════
@@ -422,7 +425,7 @@ footer{
       <span class="pw-new">9,90 €</span>
       <span class="pw-once">une seule fois</span>
     </div>
-    <a class="pw-btn" href="STRIPE_LINK_PLACEHOLDER" target="_blank">Débloquer maintenant →</a>
+    <a class="pw-btn" href="https://buy.stripe.com/test_14AaEX32nfDP4cledxdwc00" target="_blank" rel="noopener noreferrer">Débloquer maintenant →</a>
     <p class="pw-guarantee">🛡️ Paiement sécurisé Stripe · Sans abonnement · Accès immédiat</p>
     <button class="pw-close" onclick="closePaywall()">Continuer sans accès complet</button>
   </div>
@@ -441,10 +444,10 @@ footer{
   </a>
   <div class="nav-links">
     <a href="index.html">Accueil</a>
+    <a href="quiz.html" class="nav-active">Mon robot idéal</a>
     <a href="robots.html">Robots 2026</a>
     <a href="comparatif.html">Comparatif</a>
     <a href="classement.html" onclick="if(!isPaid()){event.preventDefault();showPaywall();}">Classement 🔒</a>
-    <a href="quiz.html" class="nav-active">Mon robot idéal</a>
   </div>
   <a id="nav-premium" class="nav-premium-btn" href="#" onclick="handleNavPremium(event)">
     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
@@ -578,8 +581,8 @@ footer{
         </div>
         <button class="qbtn-restart" onclick="qRestart()">Refaire le questionnaire</button>
         <div style="text-align:center;font-size:.7rem;color:var(--muted);margin-top:20px;line-height:1.8;">
-          Sources : <a href="https://www.clubic.com/guide-achat/article-829280-1-selection-tondeuse-robot.html" target="_blank" style="color:rgba(34,197,94,.6)">Clubic</a> ·
-          <a href="https://www.jardinage-media.com/blog/top-robot-tondeuse-autonome" target="_blank" style="color:rgba(34,197,94,.6)">Jardinage-Media</a> ·
+          Sources : <a href="https://www.clubic.com/guide-achat/article-829280-1-selection-tondeuse-robot.html" target="_blank" rel="noopener noreferrer" style="color:rgba(34,197,94,.6)">Clubic</a> ·
+          <a href="https://www.jardinage-media.com/blog/top-robot-tondeuse-autonome" target="_blank" rel="noopener noreferrer" style="color:rgba(34,197,94,.6)">Jardinage-Media</a> ·
           Trustpilot Mammotion 4.5/5 · Forums Kelrobot<br/>
           ⚠️ Remplacez les liens par vos liens d'affiliation
         </div>
@@ -618,10 +621,10 @@ footer{
   </div>
   <div class="footer-note">
     <div class="footer-col-title">Sources</div>
-    <a href="https://www.clubic.com/guide-achat/article-829280-1-selection-tondeuse-robot.html" target="_blank" rel="noopener">Clubic</a>
-    <a href="https://www.futura-sciences.com/conso/comparatifs/meilleur-robot-tondeuse-comparatif/" target="_blank" rel="noopener">Futura-Sciences</a>
-    <a href="https://jardinsplus.com/robot-tondeuse/" target="_blank" rel="noopener">JardinsPlus</a>
-    <a href="https://www.jardinage-media.com/blog/top-robot-tondeuse-autonome" target="_blank" rel="noopener">Jardinage-Media</a>
+    <a href="https://www.clubic.com/guide-achat/article-829280-1-selection-tondeuse-robot.html" target="_blank" rel="noopener noreferrer">Clubic</a>
+    <a href="https://www.futura-sciences.com/conso/comparatifs/meilleur-robot-tondeuse-comparatif/" target="_blank" rel="noopener noreferrer">Futura-Sciences</a>
+    <a href="https://jardinsplus.com/robot-tondeuse/" target="_blank" rel="noopener noreferrer">JardinsPlus</a>
+    <a href="https://www.jardinage-media.com/blog/top-robot-tondeuse-autonome" target="_blank" rel="noopener noreferrer">Jardinage-Media</a>
     <span style="color:var(--muted);font-size:.72rem;margin-top:8px;display:block;">Avis : Trustpilot · Amazon.fr · Forums Kelrobot</span>
   </div>
 </footer>
@@ -630,7 +633,7 @@ footer{
 /* ════════════════════════════
    PAYWALL
 ════════════════════════════ */
-const STRIPE_URL = 'STRIPE_LINK_PLACEHOLDER';
+const STRIPE_URL = 'https://buy.stripe.com/test_14AaEX32nfDP4cledxdwc00';
 const _k=atob('X19ydGdw'),_v=atob('Z3JhbnRlZF8yMDI2');
 
 function isPaid(){return localStorage.getItem(_k)===_v;}
@@ -647,13 +650,13 @@ function handleNavPremium(e){
   if(isPaid()){ alert('✅ Accès Complet actif — toutes les fiches sont débloquées !'); return; }
   showPaywall();
 }
+function esc(s){const d=document.createElement('div');d.textContent=s;return d.innerHTML;}
+
 function handleStripeReturn(){
   const params = new URLSearchParams(window.location.search);
   if(params.get('access') === 'granted'){
     localStorage.setItem(_k,_v);
-    params.delete('access');
-    const clean = window.location.pathname + (params.toString() ? '?'+params.toString() : '') + (window.location.hash||'');
-    window.history.replaceState({}, '', clean);
+    history.replaceState({}, '', window.location.pathname);
   }
 }
 function updatePremiumUI(){
@@ -669,42 +672,42 @@ function updatePremiumUI(){
    PRODUCTS DATA
 ════════════════════════════ */
 const PRODUCTS=[
-  {id:'navimow',rank:1,tag:'Meilleur rapport qualité/prix',tagColor:'#86efac',name:'Segway Navimow i105E',price:'649 €',priceN:649,surface:'600 m²',nav:'GPS RTK',slope:'45%',noise:'65 dB',score:'4.3',stars:'★★★★☆',count:'1 200+',img:'images/robots/navimow.png',imgBg:'linear-gradient(135deg,#0a2a1e,#061a10)',
+  {id:'navimow',rank:1,tag:'Rapport qualité/prix',tagColor:'#86efac',name:'Segway Navimow i105E',price:'649 €',priceN:649,surface:'600 m²',nav:'GPS RTK',slope:'45%',noise:'65 dB',score:'4.3',stars:'★★★★☆',count:'1 200+',img:'images/robots/navimow.png',imgBg:'linear-gradient(135deg,#0a2a1e,#061a10)',
    why:'Plébiscité par les experts ET les utilisateurs pour son installation sans câble en moins de 30 min, ses lignes de tonte parallèles au centimètre. <strong>-35% en ce moment sur Amazon.</strong>',
    tags:['small','medium','flat','low','mid'],prios:['install','precision','noWire','silent'],
    links:[{l:'Amazon',c:'bb-amazon',ico:'🛒',url:'https://www.amazon.fr/i105E-p%C3%A9riph%C3%A9rique-Recommand%C3%A9-cartographie-Automatique/dp/B0CXDNFZLL'},{l:'Leroy Merlin',c:'bb-leroy',ico:'🌿',url:'https://www.leroymerlin.fr/produits/robot-tondeuse-segway-i105e-navimow-91166726.html'}]},
 
-  {id:'ecovacs',rank:2,tag:'Le plus silencieux — 55 dB',tagColor:'#7dd3fc',name:'Ecovacs Goat O800 RTK',price:'699 €',priceN:699,surface:'800 m²',nav:'RTK + LiDAR',slope:'45%',noise:'55 dB',score:'4.2',stars:'★★★★☆',count:'800+',img:'images/robots/ecovacs.png',imgBg:'linear-gradient(135deg,#091c2b,#060f1a)',
+  {id:'ecovacs',rank:2,tag:'Silencieux — 55 dB',tagColor:'#7dd3fc',name:'Ecovacs Goat O800 RTK',price:'699 €',priceN:699,surface:'800 m²',nav:'RTK + LiDAR',slope:'45%',noise:'55 dB',score:'4.2',stars:'★★★★☆',count:'800+',img:'images/robots/ecovacs.png',imgBg:'linear-gradient(135deg,#091c2b,#060f1a)',
    why:'Champion du silence à <strong>55 dB</strong>, avec navigation RTK + LiDAR ultra précise. Passages étroits de 70 cm gérés. App très bien notée utilisateurs.',
    tags:['small','medium','flat','low','mid'],prios:['silent','precision','noWire','app'],
    links:[{l:'Amazon',c:'bb-amazon',ico:'🛒',url:'https://www.amazon.fr/ECOVACS-O800-RTK-p%C3%A9riph%C3%A9rique-Cartographie/dp/B0DQ8KYLYR'},{l:'Leroy Merlin',c:'bb-leroy',ico:'🌿',url:'https://www.leroymerlin.fr/produits/robot-tondeuse-connecte-goat-ecovacs-o800rtk-94048028.html'}]},
 
-  {id:'dreame',rank:3,tag:'Polyvalent triple-capteur 2026',tagColor:'#fcd34d',name:'Dreame A1 Pro',price:'899 €',priceN:899,surface:'2 000 m²',nav:'LiDAR+RTK+Vision',slope:'45%',noise:'~65 dB',score:'4.4',stars:'★★★★½',count:'950+',img:'images/robots/dreame.jpg',imgBg:'linear-gradient(135deg,#12122b,#0a0a1f)',
+  {id:'dreame',rank:3,tag:'Polyvalent triple-capteur 2026',tagColor:'#fcd34d',name:'Dreame A1 Pro',price:'879 €',priceN:879,surface:'2 000 m²',nav:'LiDAR+RTK+Vision',slope:'45%',noise:'~65 dB',score:'4.4',stars:'★★★★½',count:'950+',img:'images/robots/dreame.jpg',imgBg:'linear-gradient(135deg,#12122b,#0a0a1f)',
    why:'Noté <strong>8.5/10 experts</strong> — 2 000 m² pour 899 €, le meilleur ratio surface/prix. Triple navigation (LiDAR 360° + RTK + Vision 3D) idéal jardins complexes.',
    tags:['large','medium','complex','slopes','mid','low'],prios:['precision','obstacles','noWire','install'],
    links:[{l:'Amazon',c:'bb-amazon',ico:'🛒',url:'https://www.amazon.fr/robotis%C3%A9e-Intelligente-p%C3%A9rim%C3%A9trique-OmniSense-Intelligent/dp/B0DR35G7P3'},{l:'Boulanger',c:'bb-boulanger',ico:'📦',url:'https://www.boulanger.com/ref/1220215'},{l:'Dreame Direct',c:'bb-dreame',ico:'🌐',url:'https://fr.dreametech.com/products/robot-tondeuse-dreame-a1-pro'}]},
 
-  {id:'worx',rank:4,tag:'Zero câble, tond dès l\'unboxing',tagColor:'#fde68a',name:'Worx Landroid Vision WR208E',price:'949 €',priceN:949,surface:'800 m²',nav:'Caméra 4K + IA',slope:'30%',noise:'~66 dB',score:'4.1',stars:'★★★★☆',count:'8 378',img:'images/robots/worx.jpg',imgBg:'linear-gradient(135deg,#1f1800,#140f00)',
+  {id:'worx',rank:4,tag:'Zero câble, tond dès l\'unboxing',tagColor:'#fde68a',name:'Worx Landroid Vision WR208E',price:'699 €',priceN:699,surface:'800 m²',nav:'Caméra 4K + IA',slope:'30%',noise:'~66 dB',score:'4.1',stars:'★★★★☆',count:'8 378',img:'images/robots/worx.jpg',imgBg:'linear-gradient(135deg,#1f1800,#140f00)',
    why:'<strong>8 378 avis</strong> — le plus populaire. Caméra 4K + IA détecte bordures et obstacles sans rien installer. Compatible <strong>Alexa & Google Home</strong>.',
    tags:['small','medium','flat','low','mid'],prios:['install','voice','noWire','obstacles'],
    links:[{l:'Amazon',c:'bb-amazon',ico:'🛒',url:'https://www.amazon.fr/WORX-p%C3%A9riph%C3%A9rique-Evitement-dobstacles-Contr%C3%B4lable/dp/B0CTTWLLZZ'}]},
 
-  {id:'yuka',rank:5,tag:'Note #1 toutes catégories — 8.7/10',tagColor:'#86efac',name:'Mammotion Yuka Mini Vision',price:'1 199 €',priceN:1199,surface:'700 m²',nav:'Triple caméra IA',slope:'45%',noise:'~64 dB',score:'4.5',stars:'★★★★½',count:'2 392',img:'images/robots/yuka.jpg',imgBg:'linear-gradient(135deg,#081f10,#040e08)',
+  {id:'yuka',rank:5,tag:'4G intégré · Triple caméra IA · 8.7/10',tagColor:'#86efac',name:'Mammotion Yuka Mini Vision',price:'1 199 €',priceN:1199,surface:'700 m²',nav:'Triple caméra IA',slope:'45%',noise:'~64 dB',score:'4.5',stars:'★★★★½',count:'2 392',img:'images/robots/yuka.jpg',imgBg:'linear-gradient(135deg,#081f10,#040e08)',
    why:'<strong>8.7/10 meilleure note 2026</strong> (Jardinage-Media). 4.5/5 Trustpilot sur 2 392 avis. Triple caméra IA sans RTK ni câble, 4G intégré, batterie remplaçable.',
    tags:['small','medium','complex','mid','high'],prios:['precision','obstacles','app','noWire'],
    links:[{l:'Amazon',c:'bb-amazon',ico:'🛒',url:'https://www.amazon.fr/Mammotion-Intelligent-Cartographie-Automatique-P%C3%A9riph%C3%A9rique/dp/B0FKTBKDQ1'},{l:'Mammotion Direct',c:'bb-mammotion',ico:'🌿',url:'https://us.mammotion.com/'}]},
 
-  {id:'luba2',rank:6,tag:'Champion pentes — jusqu\'à 80%',tagColor:'#fdba74',name:'Mammotion LUBA 2 AWD 3000X',price:'2 599 €',priceN:2599,surface:'3 000 m²',nav:'RTK+IMU+Vision',slope:'80%',noise:'<60 dB',score:'4.4',stars:'★★★★½',count:'2 392',img:'images/robots/luba2.jpg',imgBg:'linear-gradient(135deg,#1a0d00,#0d0600)',
+  {id:'luba2',rank:6,tag:'Champion pentes — jusqu\'à 80%',tagColor:'#fdba74',name:'Mammotion LUBA 2 AWD 3000X',price:'2 599 €',priceN:2299,surface:'3 000 m²',nav:'RTK+IMU+Vision',slope:'80%',noise:'<60 dB',score:'4.4',stars:'★★★★½',count:'2 392',img:'images/robots/luba2.jpg',imgBg:'linear-gradient(135deg,#1a0d00,#0d0600)',
    why:'Pour les grands terrains accidentés : <strong>4WD, pentes 80%, 3 000 m²</strong>.',
    tags:['xlarge','large','slopes','complex','high'],prios:['precision','noWire','obstacles'],
    links:[{l:'Amazon',c:'bb-amazon',ico:'🛒',url:'https://www.amazon.fr/MAMMOTION-LUBA-AWD-P%C3%A9riph%C3%A9rique-Recommand%C3%A9/dp/B0DT46VJPG'},{l:'Mammotion Direct',c:'bb-mammotion',ico:'🌿',url:'https://us.mammotion.com/'}]},
 
-  {id:'husqvarna',rank:7,tag:'Référence fiabilité & SAV France',tagColor:'#93c5fd',name:'Husqvarna Automower 320 NERA',price:'2 463 €',priceN:2463,surface:'2 200 m²',nav:'EPOS satellites',slope:'50%',noise:'60 dB',score:'4.6',stars:'★★★★★',count:'SAV FR',img:'images/robots/husqvarna.webp',imgBg:'linear-gradient(135deg,#091429,#040a1a)',
+  {id:'husqvarna',rank:7,tag:'Fiabilité & SAV France',tagColor:'#93c5fd',name:'Husqvarna Automower 320 NERA',price:'2 463 €',priceN:2574,surface:'2 200 m²',nav:'EPOS satellites',slope:'50%',noise:'60 dB',score:'4.6',stars:'★★★★★',count:'SAV FR',img:'images/robots/husqvarna.webp',imgBg:'linear-gradient(135deg,#091429,#040a1a)',
    why:'<strong>4.6/5 — meilleure note utilisateurs</strong>. 20 ans de perfectionnement, réseau SAV France réactif.',
    tags:['large','xlarge','slopes','complex','high'],prios:['sav','silent','precision'],
    links:[{l:'Amazon',c:'bb-amazon',ico:'🛒',url:'https://www.amazon.fr/Husqvarna-Automower-320-Nera/dp/B0CF5Q64QS'},{l:'Husqvarna Direct',c:'bb-husqvarna',ico:'🌐',url:'https://www.husqvarna.com/fr/robots-tondeuses/automower-320nera/'}]},
 
-  {id:'mova',rank:8,tag:'Nouveau — LiDAR 3D 360° sans RTK',tagColor:'#c4b5fd',name:'MOVA LiDAX Ultra 1200',price:'1 099 €',priceN:1099,surface:'1 200 m²',nav:'LiDAR 3D 360°',slope:'45%',noise:'~62 dB',score:'4.4',stars:'★★★★½',count:'Nouveau 2026',img:'images/robots/mova.png',imgBg:'linear-gradient(135deg,#1a0d2e,#0d0618)',
+  {id:'mova',rank:8,tag:'Nouveau — LiDAR 3D 360° sans RTK',tagColor:'#c4b5fd',name:'MOVA LiDAX Ultra 1200',price:'1 099 €',priceN:999,surface:'1 200 m²',nav:'LiDAR 3D 360°',slope:'45%',noise:'~62 dB',score:'4.4',stars:'★★★★½',count:'Nouveau 2026',img:'images/robots/mova.png',imgBg:'linear-gradient(135deg,#1a0d2e,#0d0618)',
    why:'<strong>LiDAR 3D 360° sans station RTK externe</strong> — le seul à 1 099 €.',
    tags:['small','medium','large','flat','complex','mid'],prios:['precision','obstacles','noWire','install'],
    links:[{l:'Amazon',c:'bb-amazon',ico:'🛒',url:'https://www.amazon.fr/dp/B0GD23KKHC'},{l:'MOVA Direct',c:'bb-mammotion',ico:'🌐',url:'https://fr.mova.tech/products/robot-tondeuse-lidax-ultra'}]},
@@ -719,7 +722,7 @@ const PRODUCTS=[
    tags:['xlarge','large','slopes','complex','high'],prios:['precision','obstacles','noWire','sav'],
    links:[{l:'Amazon',c:'bb-amazon',ico:'🛒',url:'https://www.amazon.fr/Mammotion-LUBA-AWD-3000-Positionnement/dp/B0GCZSSZRZ'},{l:'Mammotion Direct',c:'bb-mammotion',ico:'🌿',url:'https://eu.mammotion.com/products/luba-3-awd-robot-lawn-mower'}]},
 
-  {id:'boschxs',rank:11,tag:'Entrée de gamme — le moins cher',tagColor:'#a3e635',name:'Bosch Indego XS 300',price:'299 €',priceN:299,surface:'300 m²',nav:'GPS LogiCut',slope:'25%',noise:'~63 dB',score:'3.9',stars:'★★★★☆',count:'2 400+',img:'images/robots/boschxs.jpg',imgBg:'linear-gradient(135deg,#0f1a00,#0a1200)',
+  {id:'boschxs',rank:11,tag:'Entrée de gamme — petit jardin',tagColor:'#a3e635',name:'Bosch Indego XS 300',price:'299 €',priceN:299,surface:'300 m²',nav:'GPS LogiCut',slope:'25%',noise:'~63 dB',score:'3.9',stars:'★★★★☆',count:'2 400+',img:'images/robots/boschxs.jpg',imgBg:'linear-gradient(135deg,#0f1a00,#0a1200)',
    why:'Pour moins de 300 €, GPS LogiCut en lignes parallèles.',
    tags:['small','flat','low'],prios:['install','silent'],
    links:[{l:'Amazon',c:'bb-amazon',ico:'🛒',url:'https://www.amazon.fr/dp/B085FCXY97'}]},
@@ -809,7 +812,7 @@ const PRODUCTS=[
    tags:['small','medium','slopes','complex','high'],prios:['precision','obstacles','noWire'],
    links:[{l:'Amazon',c:'bb-amazon',ico:'🛒',url:'https://www.amazon.fr/dp/B0DT46TJDP'}]},
 
-  {id:'husqvarna450',rank:29,tag:'5 000 m², zéro câble, SAV France',tagColor:'#93c5fd',name:'Husqvarna Automower 450X NERA',price:'3 499 €',priceN:3499,surface:'5 000 m²',nav:'EPOS sans câble',slope:'50%',noise:'58 dB',score:'4.7',stars:'★★★★★',count:'SAV FR',img:'images/robots/husqvarna450.webp',imgBg:'linear-gradient(135deg,#091429,#040a1a)',
+  {id:'husqvarna450',rank:29,tag:'5 000 m², zéro câble, SAV France',tagColor:'#93c5fd',name:'Husqvarna Automower 450X NERA',price:'3 499 €',priceN:2574,surface:'5 000 m²',nav:'EPOS sans câble',slope:'50%',noise:'58 dB',score:'4.7',stars:'★★★★★',count:'SAV FR',img:'images/robots/husqvarna450.webp',imgBg:'linear-gradient(135deg,#091429,#040a1a)',
    why:'0 câble, 0 antenne, EPOS satellite, 58 dB, 5 000 m², SAV France.',
    tags:['xlarge','large','slopes','complex','high'],prios:['sav','precision','noWire','silent'],
    links:[{l:'Amazon',c:'bb-amazon',ico:'🛒',url:'https://www.amazon.fr/dp/B0CF5Q64QS'}]},
@@ -912,32 +915,32 @@ function qShowResult(){
     div.className = 'rcard '+rcls[i];
     div.innerHTML = `
       <div class="rcard-top">
-        <div class="rcard-img" style="background:${p.imgBg}">
-          <img src="${p.img}" alt="${p.name}" onerror="this.textContent='🤖';this.style.fontSize='3rem'"/>
+        <div class="rcard-img" style="background:${esc(p.imgBg)}">
+          <img src="${esc(p.img)}" alt="${esc(p.name)}" onerror="this.textContent='🤖';this.style.fontSize='3rem'"/>
         </div>
         <div class="rcard-info">
           <span class="rcard-badge ${badgeCls[i]}">${badgeLabels[i]}</span>
-          <div class="rcard-name">${p.name}</div>
-          <div class="rcard-tag">${p.tag}</div>
+          <div class="rcard-name">${esc(p.name)}</div>
+          <div class="rcard-tag">${esc(p.tag)}</div>
           <div class="rcard-specs">
-            <span class="rcard-spec"><strong>${p.surface}</strong> surface</span>
-            <span class="rcard-spec"><strong>${p.nav}</strong></span>
-            <span class="rcard-spec"><strong>${p.slope}</strong> pentes</span>
-            <span class="rcard-spec"><strong>${p.noise}</strong></span>
+            <span class="rcard-spec"><strong>${esc(p.surface)}</strong> surface</span>
+            <span class="rcard-spec"><strong>${esc(p.nav)}</strong></span>
+            <span class="rcard-spec"><strong>${esc(p.slope)}</strong> pentes</span>
+            <span class="rcard-spec"><strong>${esc(p.noise)}</strong></span>
           </div>
           <div class="rcard-why">${p.why}</div>
         </div>
       </div>
       <div class="rcard-bottom">
         <div>
-          <div class="rcard-price">${p.price}</div>
-          <div class="rcard-rating"><span class="rcard-stars">${p.stars}</span><span>${p.score}/5 · ${p.count} avis</span></div>
+          <div class="rcard-price">${esc(p.price)}</div>
+          <div class="rcard-rating"><span class="rcard-stars">${esc(p.stars)}</span><span>${esc(p.score)}/5 · ${esc(p.count)} avis</span></div>
         </div>
         <div class="buy-btns-row">
           ${p.rank>9 && !isPaid()
             ? `<button class="buy-btn-pro bb-fiche" onclick="showPaywall()">🔒 Fiche complète — Accès Complet</button>`
-            : `<a class="buy-btn-pro bb-fiche" href="fiche.html?id=${p.id}">📋 Fiche complète</a>`}
-          ${p.links.map(l => `<a class="buy-btn-pro ${l.c}" href="${l.url}" target="_blank" rel="noopener">${l.ico} ${l.l}</a>`).join('')}
+            : `<a class="buy-btn-pro bb-fiche" href="fiche.html?id=${esc(p.id)}">📋 Fiche complète</a>`}
+          ${p.links.map(l => `<a class="buy-btn-pro ${esc(l.c)}" href="${esc(l.url)}" target="_blank" rel="noopener noreferrer">${l.ico} ${esc(l.l)}</a>`).join('')}
         </div>
         <div class="buy-note">* Remplacez par vos liens d'affiliation</div>
       </div>`;

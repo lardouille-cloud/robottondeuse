@@ -1,4 +1,4 @@
-name: 🔄 Mise à jour des prix
+name: 🔄 Mise à jour prix et liens
 
 on:
   schedule:
@@ -23,7 +23,7 @@ jobs:
       - name: Installer les dépendances
         run: pip install requests beautifulsoup4 lxml
 
-      - name: Vérifier et mettre à jour les prix
+      - name: Vérifier et mettre à jour les prix et liens
         run: python scripts/update_prices.py
 
       - name: Committer les changements si nécessaire
@@ -31,9 +31,9 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           if ! git diff --quiet; then
-            git add index.html fiche.html robots.html comparatif.html classement.html quiz.html PRICE_HISTORY.md
-            git commit -m "chore: mise à jour prix robots $(date +%Y-%m-%d)"
+            git add index.html fiche.html robots.html comparatif.html classement.html quiz.html PRICE_HISTORY.md LINKS_HISTORY.md
+            git commit -m "chore: mise à jour prix et liens $(date +%Y-%m-%d)"
             git push
           else
-            echo "✅ Aucun changement de prix détecté."
+            echo "✅ Aucun changement de prix ni de liens détecté."
           fi
