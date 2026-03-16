@@ -505,8 +505,9 @@ def fetch_page(url: str) -> Optional[BeautifulSoup]:
 
 
 def fetch_price(robot_id: str, config: dict) -> Optional[int]:
-    """Essaie toutes les sources pour un robot et retourne le premier prix valide."""
-    for source in config["sources"]:
+    """Essaie les sources Amazon uniquement pour un robot et retourne le premier prix valide."""
+    amazon_sources = [s for s in config["sources"] if s["method"] == "amazon"]
+    for source in amazon_sources:
         url = source["url"]
         method = source["method"]
         log.info(f"  [{robot_id}] {method} → {url[:65]}...")
@@ -617,10 +618,11 @@ def check_link(url: str) -> bool:
 
 def find_best_buy_link(robot_id: str, config: dict) -> Optional[str]:
     """
-    Teste les buy_links dans l'ordre et retourne le premier lien valide.
-    Si aucun n'est accessible, retourne None.
+    Teste les buy_links Amazon uniquement et retourne le premier lien valide.
+    Si aucun lien Amazon n'est accessible, retourne None.
     """
-    for url in config.get("buy_links", []):
+    amazon_links = [u for u in config.get("buy_links", []) if "amazon.fr" in u]
+    for url in amazon_links:
         log.info(f"  [{robot_id}] 🔗 Test lien → {url[:65]}...")
         if check_link(url):
             log.info(f"  [{robot_id}] ✓ Lien valide")
