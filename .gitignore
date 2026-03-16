@@ -9,7 +9,7 @@ desktop.ini
 *.swp
 *.swo
 
-# Node (scripts de maintenance)
+# Node
 node_modules/
 *.log
 
@@ -17,3 +17,10 @@ node_modules/
 __pycache__/
 *.pyc
 .env
+.env.local
+.env.*.local
+
+# Secrets — ne jamais committer
+stripe_config.js
+secrets.js
+config.local.js
