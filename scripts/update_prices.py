@@ -220,6 +220,7 @@ ROBOTS = {
     "husqvarna115h": {
         "name": "Husqvarna Automower 115H",
         "sources": [
+            {"url": "https://www.husqvarna.com/fr/robots-tondeuses/automower-115h/", "method": "json_ld"},
             {"url": "https://www.amazon.fr/dp/B087YZCNDJ", "method": "amazon"},
         ],
         "buy_links": [
@@ -263,6 +264,7 @@ ROBOTS = {
         "name": "Honda Miimo 520",
         "sources": [
             {"url": "https://www.amazon.fr/dp/B06XD17QP4", "method": "amazon"},
+            {"url": "https://www.honda.fr/lawn-and-garden/products/miimo.html", "method": "json_ld"},
         ],
         "buy_links": [
             "https://www.amazon.fr/dp/B06XD17QP4",
@@ -283,7 +285,10 @@ ROBOTS = {
     },
     "ecovacsG1": {
         "name": "Ecovacs GOAT G1",
-        "sources": [{"url": "https://www.amazon.fr/dp/B0BQ35NDW1", "method": "amazon"}],
+        "sources": [
+            {"url": "https://www.amazon.fr/dp/B0BQ35NDW1", "method": "amazon"},
+            {"url": "https://www.ecovacs.com/fr/goat-robotic-lawn-mower/goat-g1", "method": "json_ld"},
+        ],
         "buy_links": [
             "https://www.amazon.fr/dp/B0BQ35NDW1",
             "https://www.boulanger.com/recherche/ecovacs+goat+g1",
@@ -322,6 +327,7 @@ ROBOTS = {
         "name": "EcoFlow Blade",
         "sources": [
             {"url": "https://www.amazon.fr/dp/B0C2BSZ45V", "method": "amazon"},
+            {"url": "https://www.ecoflow.com/fr/blade", "method": "json_ld"},
         ],
         "buy_links": [
             "https://www.amazon.fr/dp/B0C2BSZ45V",
@@ -332,6 +338,7 @@ ROBOTS = {
     "husqvarna430x": {
         "name": "Husqvarna Automower 430X",
         "sources": [
+            {"url": "https://www.husqvarna.com/fr/robots-tondeuses/automower-430x/", "method": "json_ld"},
             {"url": "https://www.amazon.fr/dp/B09WNF4V5G", "method": "amazon"},
         ],
         "buy_links": [
@@ -354,6 +361,7 @@ ROBOTS = {
         "name": "Mammotion LUBA 2 AWD 1000",
         "sources": [
             {"url": "https://www.amazon.fr/dp/B0CQQDYFSM", "method": "amazon"},
+            {"url": "https://eu.mammotion.com/fr/products/luba-2-awd-1000", "method": "shopify"},
         ],
         "buy_links": [
             "https://www.amazon.fr/dp/B0CQQDYFSM",
@@ -493,9 +501,8 @@ def fetch_page(url: str) -> Optional[BeautifulSoup]:
 
 
 def fetch_price(robot_id: str, config: dict) -> Optional[int]:
-    """Essaie les sources Amazon uniquement pour un robot et retourne le premier prix valide."""
-    amazon_sources = [s for s in config["sources"] if s["method"] == "amazon"]
-    for source in amazon_sources:
+    """Essaie toutes les sources pour un robot et retourne le premier prix valide."""
+    for source in config["sources"]:
         url = source["url"]
         method = source["method"]
         log.info(f"  [{robot_id}] {method} → {url[:65]}...")
