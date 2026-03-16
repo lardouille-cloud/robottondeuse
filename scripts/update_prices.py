@@ -199,9 +199,9 @@ ROBOTS = {
     },
     "gardenaminimo": {
         "name": "Gardena Sileno Minimo 250",
-        "sources": [{"url": "https://www.amazon.fr/dp/B07GBRZFV2", "method": "amazon"}],
+        "sources": [{"url": "https://www.amazon.fr/dp/B08LVZKXNY", "method": "amazon"}],
         "buy_links": [
-            "https://www.amazon.fr/dp/B07GBRZFV2",
+            "https://www.amazon.fr/dp/B08LVZKXNY",
             "https://www.leroymerlin.fr/recherche?q=gardena+sileno+minimo+250",
             "https://www.boulanger.com/recherche/gardena+sileno+minimo",
             "https://www.darty.com/nav/extra/recherche/gardena+sileno+minimo.html",
