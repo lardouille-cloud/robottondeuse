@@ -1941,8 +1941,6 @@ function renderGrid(){
     }
     pg.appendChild(div);
   });
-  // re-observe new cards for reveal animation
-  document.querySelectorAll('.product-card.reveal:not(.visible)').forEach(el=>obs.observe(el));
 }
 renderGrid();
 
