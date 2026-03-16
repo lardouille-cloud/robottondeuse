@@ -273,7 +273,7 @@ footer{
     <a href="quiz.html">Mon robot idéal</a>
     <a href="robots.html">Robots 2026</a>
     <a href="comparatif.html" class="nav-active">Comparatif</a>
-    <a href="classement.html" onclick="if(!isPaid()){event.preventDefault();showPaywall();}">Classement 🔒</a>
+    <a href="classement.html" id="nav-classement" onclick="if(!isPaid()){event.preventDefault();showPaywall();}">Classement 🔒</a>
   </div>
   <a id="nav-premium" class="nav-premium-btn" href="#" onclick="handleNavPremium(event)">
     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
@@ -404,6 +404,7 @@ function updatePremiumUI(){
   const table = document.getElementById('compareTable');
   if(isPaid()){
     if(navBtn){ navBtn.textContent = '✅ Accès Complet actif'; navBtn.classList.add('active-paid'); }
+    const navCls = document.getElementById('nav-classement'); if(navCls) navCls.textContent = 'Classement';
     if(table) table.classList.remove('score-blurred');
   } else {
     if(table){

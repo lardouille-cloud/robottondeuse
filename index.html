@@ -931,7 +931,7 @@ footer{
     <a href="quiz.html">Mon robot idéal</a>
     <a href="robots.html">Robots 2026</a>
     <a href="comparatif.html">Comparatif</a>
-    <a href="classement.html" onclick="if(!isPaid()){event.preventDefault();showPaywall();}">Classement 🔒</a>
+    <a href="classement.html" id="nav-classement" onclick="if(!isPaid()){event.preventDefault();showPaywall();}">Classement 🔒</a>
   </div>
   <a id="nav-premium" class="nav-premium-btn" href="#" onclick="handleNavPremium(event)">
     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
@@ -1176,7 +1176,7 @@ footer{
       <div style="font-size:.82rem;color:var(--text2);line-height:1.55;">Tous les modèles côte à côte : surface, navigation, pentes, bruit, prix. Vue d'ensemble en un coup d'œil.</div>
       <div style="font-size:.78rem;font-weight:700;color:var(--green-l);margin-top:auto;">Comparer →</div>
     </a>
-    <a href="classement.html" onclick="if(!isPaid()){event.preventDefault();showPaywall();}" style="background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:32px 28px;display:flex;flex-direction:column;gap:12px;transition:all .25s;text-decoration:none;color:inherit;" onmouseover="this.style.borderColor='rgba(34,197,94,.35)';this.style.background='rgba(255,255,255,.07)'" onmouseout="this.style.borderColor='rgba(255,255,255,.07)';this.style.background='rgba(255,255,255,.04)'">
+    <a href="classement.html" id="nav-classement" onclick="if(!isPaid()){event.preventDefault();showPaywall();}" style="background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:32px 28px;display:flex;flex-direction:column;gap:12px;transition:all .25s;text-decoration:none;color:inherit;" onmouseover="this.style.borderColor='rgba(34,197,94,.35)';this.style.background='rgba(255,255,255,.07)'" onmouseout="this.style.borderColor='rgba(255,255,255,.07)';this.style.background='rgba(255,255,255,.04)'">
       <div style="font-size:2rem;">🏆</div>
       <div style="font-size:1rem;font-weight:800;letter-spacing:-.3px;">Classement 🔒</div>
       <div style="font-size:.82rem;color:var(--text2);line-height:1.55;">Les 30 robots classés du meilleur au moins bon selon leur note globale. Accès Complet requis.</div>
@@ -1583,6 +1583,7 @@ function updatePremiumUI(){
   const gates = ['pieges-gate','outils-gate','questions-gate'].map(id=>document.getElementById(id));
   if(isPaid()){
     if(navBtn){ navBtn.textContent = '✅ Accès Complet actif'; navBtn.classList.add('active-paid'); }
+    const navCls = document.getElementById('nav-classement'); if(navCls) navCls.textContent = 'Classement';
     gates.forEach(g=>{ if(g) g.classList.remove('locked'); });
   } else {
     gates.forEach(g=>{ if(g) g.classList.add('locked'); });

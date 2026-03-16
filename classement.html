@@ -289,7 +289,7 @@ footer{
     <a href="quiz.html">Mon robot idéal</a>
     <a href="robots.html">Robots 2026</a>
     <a href="comparatif.html">Comparatif</a>
-    <a href="classement.html" class="nav-active" onclick="if(!isPaid()){event.preventDefault();showPaywall();}">Classement 🔒</a>
+    <a href="classement.html" id="nav-classement" class="nav-active" onclick="if(!isPaid()){event.preventDefault();showPaywall();}">Classement 🔒</a>
     
   </div>
   <a id="nav-premium" class="nav-premium-btn" href="#" onclick="handleNavPremium(event)">
@@ -454,6 +454,7 @@ function updatePremiumUI(){
   const gate = document.getElementById('classement-gate');
   if(isPaid()){
     if(navBtn){ navBtn.textContent = '✅ Accès Complet actif'; navBtn.classList.add('active-paid'); }
+    const navCls = document.getElementById('nav-classement'); if(navCls) navCls.textContent = 'Classement';
     buildRanking();
   } else {
     if(gate) gate.classList.add('locked');
