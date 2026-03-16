@@ -273,6 +273,7 @@ footer{
     <a href="quiz.html">Mon robot idéal</a>
     <a href="robots.html">Robots 2026</a>
     <a href="comparatif.html" class="nav-active">Comparatif</a>
+    <a href="comparateur.html" id="nav-comparateur" onclick="if(!isPaid()){event.preventDefault();showPaywall();}">Comparateur 🔒</a>
     <a href="classement.html" id="nav-classement" onclick="if(!isPaid()){event.preventDefault();showPaywall();}">Classement 🔒</a>
   </div>
   <a id="nav-premium" class="nav-premium-btn" href="#" onclick="handleNavPremium(event)">
@@ -405,6 +406,7 @@ function updatePremiumUI(){
   if(isPaid()){
     if(navBtn){ navBtn.textContent = '✅ Accès Complet actif'; navBtn.classList.add('active-paid'); }
     const navCls = document.getElementById('nav-classement'); if(navCls) navCls.textContent = 'Classement';
+    const navCmp = document.getElementById('nav-comparateur'); if(navCmp) navCmp.textContent = 'Comparateur';
     if(table) table.classList.remove('score-blurred');
   } else {
     if(table){
