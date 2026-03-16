@@ -565,6 +565,22 @@ input[type=range]::-webkit-slider-thumb{
 }
 .card-lock-overlay .cl-btn:hover{transform:translateY(-2px);box-shadow:0 6px 22px rgba(34,197,94,.45);}
 
+/* Classement */
+.rank-list{display:flex;flex-direction:column;gap:10px;padding:4px 0;}
+.rank-row{display:flex;align-items:center;gap:14px;padding:12px 16px;border-radius:12px;background:rgba(255,255,255,.04);border:1px solid var(--border);transition:background .15s;}
+.rank-row:hover{background:rgba(34,197,94,.07);}
+.rank-pos{font-size:1.2rem;font-weight:900;min-width:36px;text-align:center;}
+.rank-img{width:52px;height:52px;border-radius:8px;object-fit:contain;background:rgba(255,255,255,.05);flex-shrink:0;}
+.rank-info{flex:1;min-width:0;}
+.rank-name{font-weight:700;font-size:.92rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.rank-tag{font-size:.75rem;color:var(--text2);margin-top:2px;}
+.rank-score{font-weight:900;font-size:1.05rem;color:var(--green-l);min-width:54px;text-align:right;}
+.rank-price{font-size:.8rem;color:var(--text2);text-align:right;min-width:60px;}
+.rank-medal-1{color:#f59e0b;}
+.rank-medal-2{color:#94a3b8;}
+.rank-medal-3{color:#b45309;}
+.rank-medal-n{color:var(--text2);font-size:1rem;}
+
 /* Outils Complet */
 .outils-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px;margin-top:28px;}
 .outil-card{
@@ -889,6 +905,7 @@ footer{
     <a href="#technos" data-section="technos">Technologies</a>
     <a href="#produits" data-section="produits">Robots 2026</a>
     <a href="#comparaison" data-section="comparaison">Comparatif</a>
+    <a href="#classement" data-section="classement">Classement 🔒</a>
     <a href="#conseils" data-section="conseils">Conseils</a>
     <a href="#outils" data-section="outils">Outils</a>
   </div>
@@ -1155,6 +1172,24 @@ footer{
         <tr><td>Husqvarna Automower 435X AWD</td><td>3 500 m²</td><td><span class="ctag ctag-g">EPOS + 4WD</span></td><td>70%</td><td>60 dB</td><td><strong>3 199 €</strong></td><td>⭐ 4.5/5</td></tr>
       </tbody>
     </table>
+  </div>
+</section>
+
+<!-- ══ CLASSEMENT ══ -->
+<section id="classement">
+  <div class="reveal">
+    <div class="section-label">Accès Complet</div>
+    <h2 class="section-title">Classement par note</h2>
+    <p class="section-sub">Les 30 robots classés du meilleur au moins bon selon leur note globale — avis utilisateurs, fiabilité et rapport qualité/prix.</p>
+  </div>
+  <div class="premium-gate reveal" id="classement-gate">
+    <div class="pg-content" id="classement-content"><!-- rempli par JS --></div>
+    <div class="pg-overlay" onclick="showPaywall()">
+      <div class="pg-lock-icon">🏆</div>
+      <div class="pg-lock-title">Classement complet — 30 robots notés</div>
+      <div class="pg-lock-desc">Découvrez quel robot mérite vraiment votre argent. Classement complet avec notes, prix et verdict pour chaque modèle.</div>
+      <button class="pg-lock-btn" onclick="showPaywall()">Débloquer le classement — 4,99 €</button>
+    </div>
   </div>
 </section>
 
@@ -1685,6 +1720,7 @@ function updatePremiumUI(rerender){
     if(banner){ banner.style.display = 'none'; }
     gates.forEach(g=>{ if(g) g.classList.remove('locked'); });
     if(table) table.classList.remove('score-blurred');
+    buildRanking();
   } else {
     gates.forEach(g=>{ if(g) g.classList.add('locked'); });
     if(table){
@@ -1696,6 +1732,31 @@ function updatePremiumUI(rerender){
   }
   if(rerender) renderGrid();
 }
+
+function buildRanking(){
+  const gate = document.getElementById('classement-gate');
+  const content = document.getElementById('classement-content');
+  if(!gate||!content) return;
+  const sorted = [...PRODUCTS].sort((a,b)=>parseFloat(b.score)-parseFloat(a.score));
+  const medals = ['🥇','🥈','🥉'];
+  content.innerHTML = `<div class="rank-list">${sorted.map((p,i)=>{
+    const pos = i<3 ? `<span class="rank-pos rank-medal-${i+1}">${medals[i]}</span>`
+                    : `<span class="rank-pos rank-medal-n">#${i+1}</span>`;
+    return `<div class="rank-row" onclick="window.location.href='fiche.html?id=${p.id}'" style="cursor:pointer">
+      ${pos}
+      <img class="rank-img" src="${p.img}" alt="${p.name}" onerror="this.style.opacity='.2'"/>
+      <div class="rank-info">
+        <div class="rank-name">${p.name}</div>
+        <div class="rank-tag">${p.tag}</div>
+      </div>
+      <div>
+        <div class="rank-score">⭐ ${p.score}/5</div>
+        <div class="rank-price">${p.price}</div>
+      </div>
+    </div>`;
+  }).join('')}</div>`;
+  gate.classList.remove('locked');
+}
 handleStripeReturn();
 updatePremiumUI();
 
@@ -1703,7 +1764,7 @@ updatePremiumUI();
    ACTIVE NAV DETECTION
 ════════════════════════════ */
 (function(){
-  const sections = ['technos','produits','comparaison','quiz','conseils','outils','questions'];
+  const sections = ['technos','produits','comparaison','classement','quiz','conseils','outils','questions'];
   const navLinks = document.querySelectorAll('.nav-links a[data-section]');
   if(!navLinks.length) return;
 
@@ -1927,7 +1988,6 @@ function renderGrid(){
     div.className='product-card reveal'+(locked?' card-locked':'');
     div.innerHTML=`
       <div class="pc-img" style="background:${p.imgBg}">
-        <span class="pc-rank ${p.rankCls}">${p.rank}</span>
         <img src="${p.img}" alt="${p.name}" onerror="this.style.opacity='.2'"/>
         <span class="pc-score">⭐ ${p.score}</span>
       </div>
