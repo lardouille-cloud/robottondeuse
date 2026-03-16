@@ -531,6 +531,30 @@ input[type=range]::-webkit-slider-thumb{
 }
 .pg-lock-btn:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(34,197,94,.45);}
 
+/* Locked product card */
+.product-card.card-locked{position:relative;cursor:pointer;}
+.product-card.card-locked .pc-img{filter:blur(4px);transition:filter .3s;}
+.product-card.card-locked .pc-body{filter:blur(3px);pointer-events:none;user-select:none;}
+.card-lock-overlay{
+  position:absolute;inset:0;z-index:3;
+  background:rgba(8,15,26,.6);
+  border-radius:var(--r);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:20px;text-align:center;
+  backdrop-filter:blur(1px);
+}
+.card-lock-overlay .cl-icon{font-size:1.8rem;margin-bottom:8px;}
+.card-lock-overlay .cl-name{font-weight:800;font-size:.88rem;color:#fff;margin-bottom:4px;}
+.card-lock-overlay .cl-sub{font-size:.75rem;color:var(--text2);margin-bottom:14px;line-height:1.5;}
+.card-lock-overlay .cl-btn{
+  padding:9px 20px;border-radius:10px;
+  background:linear-gradient(135deg,var(--green),var(--green-l));
+  color:#fff;font-weight:800;font-size:.82rem;border:none;cursor:pointer;
+  font-family:'Inter',sans-serif;box-shadow:0 4px 16px rgba(34,197,94,.3);
+  transition:all .2s;
+}
+.card-lock-overlay .cl-btn:hover{transform:translateY(-2px);box-shadow:0 6px 22px rgba(34,197,94,.45);}
+
 /* Outils Complet */
 .outils-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px;margin-top:28px;}
 .outil-card{
@@ -1641,7 +1665,7 @@ function handleStripeReturn(){
     window.history.replaceState({}, '', clean);
   }
 }
-function updatePremiumUI(){
+function updatePremiumUI(rerender){
   const navBtn = document.getElementById('nav-premium');
   const banner = document.getElementById('premium-banner');
   const gates = ['pieges-gate','outils-gate','questions-gate'].map(id=>document.getElementById(id));
@@ -1652,6 +1676,7 @@ function updatePremiumUI(){
   } else {
     gates.forEach(g=>{ if(g) g.classList.add('locked'); });
   }
+  if(rerender) renderGrid();
 }
 handleStripeReturn();
 updatePremiumUI();
@@ -1876,35 +1901,50 @@ const PRODUCTS=[
 
 /* Render products */
 const pg=document.getElementById('productGrid');
-PRODUCTS.forEach(p=>{
-  const div=document.createElement('div');
-  div.className='product-card reveal';
-  div.style.cursor='pointer';
-  div.innerHTML=`
-    <div class="pc-img" style="background:${p.imgBg}">
-      <span class="pc-rank ${p.rankCls}">${p.rank}</span>
-      <img src="${p.img}" alt="${p.name}" onerror="this.style.opacity='.2'"/>
-      <span class="pc-score">⭐ ${p.score}</span>
-    </div>
-    <div class="pc-body">
-      <div class="pc-tag" style="color:${p.tagColor}">${p.tag}</div>
-      <div class="pc-name">${p.name}</div>
-      <div class="pc-desc">${p.desc}</div>
-      <div class="pc-specs">
-        <div class="pc-spec"><div class="psl">Surface</div><div class="psv">${p.surface}</div></div>
-        <div class="pc-spec"><div class="psl">Pentes</div><div class="psv">${p.slope}</div></div>
-        <div class="pc-spec"><div class="psl">Bruit</div><div class="psv">${p.noise}</div></div>
+function renderGrid(){
+  pg.innerHTML='';
+  PRODUCTS.forEach(p=>{
+    const locked=p.rank>10&&!isPaid();
+    const div=document.createElement('div');
+    div.className='product-card reveal'+(locked?' card-locked':'');
+    div.innerHTML=`
+      <div class="pc-img" style="background:${p.imgBg}">
+        <span class="pc-rank ${p.rankCls}">${p.rank}</span>
+        <img src="${p.img}" alt="${p.name}" onerror="this.style.opacity='.2'"/>
+        <span class="pc-score">⭐ ${p.score}</span>
       </div>
-      <div class="pc-footer">
-        <div class="pc-price">${p.price}</div>
-        <span class="pc-fiche">Voir la fiche →</span>
+      <div class="pc-body">
+        <div class="pc-tag" style="color:${p.tagColor}">${p.tag}</div>
+        <div class="pc-name">${p.name}</div>
+        <div class="pc-desc">${p.desc}</div>
+        <div class="pc-specs">
+          <div class="pc-spec"><div class="psl">Surface</div><div class="psv">${p.surface}</div></div>
+          <div class="pc-spec"><div class="psl">Pentes</div><div class="psv">${p.slope}</div></div>
+          <div class="pc-spec"><div class="psl">Bruit</div><div class="psv">${p.noise}</div></div>
+        </div>
+        <div class="pc-footer">
+          <div class="pc-price">${p.price}</div>
+          <span class="pc-fiche">Voir la fiche →</span>
+        </div>
       </div>
-    </div>`;
-  div.addEventListener('click', e=>{
-    if(!e.target.closest('a')) window.location.href='fiche.html?id='+p.id;
+      ${locked?`<div class="card-lock-overlay" onclick="showPaywall()">
+        <div class="cl-icon">🔒</div>
+        <div class="cl-name">${p.name}</div>
+        <div class="cl-sub">Accès Complet requis<br>pour voir ce robot</div>
+        <button class="cl-btn">Débloquer — 4,99 €</button>
+      </div>`:''}`;
+    if(!locked){
+      div.style.cursor='pointer';
+      div.addEventListener('click',e=>{
+        if(!e.target.closest('a')) window.location.href='fiche.html?id='+p.id;
+      });
+    }
+    pg.appendChild(div);
   });
-  pg.appendChild(div);
-});
+  // re-observe new cards for reveal animation
+  document.querySelectorAll('.product-card.reveal:not(.visible)').forEach(el=>obs.observe(el));
+}
+renderGrid();
 
 /* ════════════════════════════
    QUIZ LOGIC
@@ -2019,7 +2059,9 @@ function qShowResult(){
           <div class="rcard-rating"><span class="rcard-stars">${p.stars}</span><span>${p.score}/5 · ${p.count} avis</span></div>
         </div>
         <div class="buy-btns-row">
-          <a class="buy-btn-pro bb-fiche" href="fiche.html?id=${p.id}">📋 Fiche complète</a>
+          ${p.rank>10&&!isPaid()
+            ?`<button class="buy-btn-pro bb-fiche" onclick="showPaywall()">🔒 Fiche complète — Accès Complet</button>`
+            :`<a class="buy-btn-pro bb-fiche" href="fiche.html?id=${p.id}">📋 Fiche complète</a>`}
           ${p.links.map(l=>`<a class="buy-btn-pro ${l.c}" href="${l.url}" target="_blank" rel="noopener">${l.ico} ${l.l}</a>`).join('')}
         </div>
         <div class="buy-note">* Remplacez par vos liens d'affiliation</div>

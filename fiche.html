@@ -2619,6 +2619,26 @@ function renderNotFound(id) {
     return;
   }
 
+  // Robots 11-30 require paid access
+  const FREE_ROBOTS = ['navimow','ecovacs','dreame','worx','yuka','luba2','husqvarna','mova','a3pro','luba3'];
+  if(!FREE_ROBOTS.includes(id) && !isPaid()){
+    app.innerHTML = `
+      <div style="min-height:60vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px 20px;">
+        <div style="font-size:3rem;margin-bottom:16px;">🔒</div>
+        <h2 style="font-size:1.4rem;font-weight:900;margin-bottom:8px;">Accès Complet requis</h2>
+        <p style="color:var(--text2);max-width:400px;margin-bottom:24px;line-height:1.6;">
+          La fiche de <strong>${robot.name}</strong> fait partie des 20 robots réservés à l'Accès Complet.
+          Débloquez les 30 robots pour 4,99 € en paiement unique.
+        </p>
+        <button onclick="showPaywall()" style="padding:14px 32px;border-radius:12px;background:linear-gradient(135deg,var(--green),var(--green-l));color:#fff;font-weight:800;font-size:1rem;border:none;cursor:pointer;font-family:'Inter',sans-serif;">
+          Débloquer — 4,99 €
+        </button>
+        <a href="index.html" style="margin-top:16px;color:var(--text2);font-size:.85rem;text-decoration:underline;">Retour au comparatif</a>
+      </div>`;
+    showPaywall();
+    return;
+  }
+
   app.innerHTML = render(robot);
 
   // IntersectionObserver for fade-in animations
