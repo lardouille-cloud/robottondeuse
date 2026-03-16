@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Quel robot tondeuse choisir en 2026 ?</title>
+<style>
+  @import url('../fonts/inter.css');
+
+  :root {
+    --g1:#0f172a; --g2:#0d2618; --g3:#0a1f3d;
+    --green:#22c55e; --green-d:#15803d; --green-glow:rgba(34,197,94,0.25);
+    --blue:#38bdf8; --purple:#a78bfa; --orange:#fb923c;
+    --card:rgba(255,255,255,0.04); --card-hover:rgba(255,255,255,0.08);
+    --border:rgba(255,255,255,0.08); --border-h:rgba(34,197,94,0.4);
+    --text:#f1f5f9; --muted:#94a3b8; --radius:20px;
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+
+  body{
+    font-family:'Inter',system-ui,sans-serif;
+    background:linear-gradient(135deg,var(--g1) 0%,var(--g2) 50%,var(--g3) 100%);
+    min-height:100vh;color:var(--text);
+    background-attachment:fixed;
+  }
+
+  /* ── ANIMATED BG ── */
+  body::before{
+    content:'';position:fixed;inset:0;
+    background:radial-gradient(ellipse 80% 50% at 20% 20%,rgba(34,197,94,0.06) 0%,transparent 60%),
+               radial-gradient(ellipse 60% 40% at 80% 80%,rgba(56,189,248,0.06) 0%,transparent 60%);
+    pointer-events:none;z-index:0;
+  }
+
+  /* ── HEADER ── */
+  header{
+    position:relative;text-align:center;
+    padding:70px 20px 50px;overflow:hidden;z-index:1;
+  }
+  .header-glow{
+    position:absolute;top:-60px;left:50%;transform:translateX(-50%);
+    width:600px;height:300px;
+    background:radial-gradient(ellipse,rgba(34,197,94,0.15) 0%,transparent 70%);
+    pointer-events:none;
+  }
+  .logo{
+    display:inline-flex;align-items:center;gap:10px;
+    background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.25);
+    border-radius:999px;padding:8px 20px;margin-bottom:28px;
+    font-size:0.8rem;font-weight:600;color:var(--green);letter-spacing:1px;text-transform:uppercase;
+  }
+  header h1{
+    font-size:clamp(2rem,5vw,3.8rem);font-weight:900;
+    line-height:1.1;letter-spacing:-2px;margin-bottom:16px;
+  }
+  header h1 .hl{
+    background:linear-gradient(135deg,var(--green),var(--blue));
+    -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  }
+  header p{color:var(--muted);font-size:1.05rem;margin-bottom:32px;}
+
+  /* ── STEP PILLS ── */
+  .step-pills{display:flex;justify-content:center;gap:6px;flex-wrap:wrap;}
+  .pill{
+    padding:6px 16px;border-radius:999px;font-size:0.78rem;font-weight:600;
+    border:1px solid var(--border);color:var(--muted);transition:all .3s;cursor:default;
+  }
+  .pill.active{background:var(--green);border-color:var(--green);color:#000;font-weight:700;}
+  .pill.done{border-color:rgba(34,197,94,0.3);color:var(--green);}
+
+  /* ── MAIN ── */
+  main{max-width:800px;margin:0 auto;padding:0 20px 100px;position:relative;z-index:1;}
+
+  /* ── PROGRESS ── */
+  .prog-wrap{height:3px;background:rgba(255,255,255,0.06);border-radius:2px;margin-bottom:36px;overflow:hidden;}
+  .prog-fill{height:100%;background:linear-gradient(90deg,var(--green),var(--blue));border-radius:2px;transition:width .5s cubic-bezier(.4,0,.2,1);}
+
+  /* ── STEP CARD ── */
+  .step{
+    display:none;
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:var(--radius);
+    padding:40px;
+    backdrop-filter:blur(20px);
+    animation:slideUp .4s cubic-bezier(.4,0,.2,1);
+  }
+  .step.active{display:block;}
+  @keyframes slideUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+
+  .step-num{
+    font-size:0.72rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;
+    color:var(--green);margin-bottom:10px;display:flex;align-items:center;gap:8px;
+  }
+  .step-num::after{content:'';flex:1;height:1px;background:linear-gradient(to right,rgba(34,197,94,.3),transparent);}
+  .step h2{font-size:1.5rem;font-weight:800;margin-bottom:8px;letter-spacing:-.5px;}
+  .step .hint{color:var(--muted);font-size:0.9rem;margin-bottom:28px;line-height:1.6;}
+
+  /* ── OPTIONS ── */
+  .opts{display:grid;gap:12px;}
+  .opts.g2{grid-template-columns:1fr 1fr;}
+  .opts.g3{grid-template-columns:repeat(3,1fr);}
+
+  .opt{
+    border:1px solid var(--border);border-radius:14px;padding:18px 20px;
+    cursor:pointer;transition:all .2s;background:rgba(255,255,255,0.02);
+    position:relative;overflow:hidden;
+  }
+  .opt::before{
+    content:'';position:absolute;inset:0;
+    background:linear-gradient(135deg,rgba(34,197,94,.08),rgba(56,189,248,.04));
+    opacity:0;transition:opacity .2s;
+  }
+  .opt:hover{border-color:rgba(34,197,94,.35);transform:translateY(-2px);}
+  .opt:hover::before{opacity:1;}
+  .opt.sel{border-color:var(--green);background:rgba(34,197,94,.08);}
+  .opt.sel::before{opacity:1;}
+  .opt.sel::after{
+    content:'✓';position:absolute;top:14px;right:16px;
+    width:22px;height:22px;border-radius:50%;
+    background:var(--green);color:#000;font-weight:800;font-size:.8rem;
+    display:flex;align-items:center;justify-content:center;line-height:22px;text-align:center;
+  }
+  .opt-icon{font-size:1.8rem;margin-bottom:8px;display:block;}
+  .opt h3{font-size:.95rem;font-weight:700;margin-bottom:3px;}
+  .opt p{font-size:.8rem;color:var(--muted);line-height:1.4;}
+
+  /* ── BUDGET ── */
+  .budget-num{
+    text-align:center;font-size:2.8rem;font-weight:900;
+    background:linear-gradient(135deg,var(--green),var(--blue));
+    -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+    margin:8px 0 4px;letter-spacing:-2px;
+  }
+  .budget-sub{text-align:center;color:var(--muted);font-size:.85rem;margin-bottom:20px;}
+  input[type=range]{
+    width:100%;-webkit-appearance:none;height:4px;
+    background:rgba(255,255,255,.1);border-radius:2px;outline:none;cursor:pointer;margin:16px 0;
+  }
+  input[type=range]::-webkit-slider-thumb{
+    -webkit-appearance:none;width:22px;height:22px;border-radius:50%;
+    background:linear-gradient(135deg,var(--green),var(--blue));
+    box-shadow:0 0 12px rgba(34,197,94,.5);cursor:pointer;
+  }
+  .range-labs{display:flex;justify-content:space-between;font-size:.75rem;color:var(--muted);margin-bottom:20px;}
+
+  /* ── PRIORITIES ── */
+  .prios{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+  .prio{
+    display:flex;align-items:center;gap:12px;padding:14px 16px;
+    border:1px solid var(--border);border-radius:12px;cursor:pointer;
+    transition:all .2s;background:rgba(255,255,255,.02);
+  }
+  .prio:hover{border-color:rgba(167,139,250,.4);background:rgba(167,139,250,.05);}
+  .prio.sel{border-color:var(--purple);background:rgba(167,139,250,.1);}
+  .prio-icon{font-size:1.3rem;flex-shrink:0;}
+  .prio span{font-size:.88rem;font-weight:600;}
+
+  /* ── NAV ── */
+  .nav{display:flex;gap:12px;margin-top:32px;justify-content:flex-end;}
+  .btn{padding:13px 28px;border-radius:12px;border:none;font-size:.9rem;font-weight:700;cursor:pointer;transition:all .2s;font-family:'Inter',sans-serif;}
+  .btn-back{background:rgba(255,255,255,.06);color:var(--muted);border:1px solid var(--border);}
+  .btn-back:hover{background:rgba(255,255,255,.1);color:var(--text);}
+  .btn-next{
+    background:linear-gradient(135deg,var(--green-d),var(--green));
+    color:#000;font-weight:800;padding:13px 36px;
+    box-shadow:0 4px 20px rgba(34,197,94,.3);
+  }
+  .btn-next:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(34,197,94,.4);}
+  .btn-next:disabled{background:rgba(255,255,255,.1);color:var(--muted);box-shadow:none;transform:none;cursor:not-allowed;}
+
+  /* ══════════════════════════════════════
+     RESULT PAGE
+  ══════════════════════════════════════ */
+  #result{display:none;}
+  #result.on{display:block;animation:slideUp .5s ease;}
+
+  .res-hero{
+    background:linear-gradient(135deg,rgba(34,197,94,.12),rgba(56,189,248,.08));
+    border:1px solid rgba(34,197,94,.2);
+    border-radius:var(--radius);padding:36px;text-align:center;margin-bottom:28px;
+    position:relative;overflow:hidden;
+  }
+  .res-hero::before{
+    content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;
+    background:radial-gradient(ellipse at center,rgba(34,197,94,.06) 0%,transparent 60%);
+    animation:pulse 4s ease-in-out infinite;pointer-events:none;
+  }
+  @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
+  .res-hero h2{font-size:1.6rem;font-weight:900;margin-bottom:8px;letter-spacing:-.5px;}
+  .res-hero p{color:var(--muted);font-size:.9rem;}
+
+  /* ── REC CARD ── */
+  .rec{
+    background:var(--card);border:1px solid var(--border);
+    border-radius:var(--radius);margin-bottom:20px;overflow:hidden;
+    transition:border-color .2s,transform .2s;
+  }
+  .rec:hover{border-color:rgba(34,197,94,.3);transform:translateY(-3px);}
+  .rec.top{border-color:rgba(34,197,94,.35);}
+  .rec.alt{border-color:rgba(56,189,248,.25);}
+  .rec.three{border-color:rgba(167,139,250,.25);}
+
+  /* Product image / visual */
+  .rec-visual{
+    height:180px;display:flex;align-items:center;justify-content:center;
+    position:relative;overflow:hidden;
+  }
+  .rec-visual img{
+    max-height:160px;max-width:80%;object-fit:contain;
+    filter:drop-shadow(0 8px 24px rgba(0,0,0,.5));
+    transition:transform .3s;z-index:1;position:relative;
+  }
+  .rec:hover .rec-visual img{transform:scale(1.05);}
+  .rec-visual .vis-bg{
+    position:absolute;inset:0;opacity:.15;
+  }
+  .rec-visual .vis-fallback{
+    font-size:5rem;z-index:1;
+    filter:drop-shadow(0 4px 16px rgba(0,0,0,.4));
+  }
+  .rank-badge{
+    position:absolute;top:14px;left:14px;z-index:2;
+    padding:5px 12px;border-radius:999px;font-size:.72rem;font-weight:800;letter-spacing:.5px;
+  }
+  .rank-1{background:linear-gradient(135deg,#f59e0b,#fbbf24);color:#000;}
+  .rank-2{background:linear-gradient(135deg,#64748b,#94a3b8);color:#000;}
+  .rank-3{background:linear-gradient(135deg,#92400e,#b45309);color:#fff;}
+
+  /* Info */
+  .rec-info{padding:22px 24px 0;}
+  .rec-label{
+    font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;
+    margin-bottom:8px;
+  }
+  .rec-name{font-size:1.2rem;font-weight:800;letter-spacing:-.4px;margin-bottom:4px;}
+  .rec-tag{font-size:.83rem;color:var(--muted);margin-bottom:16px;}
+
+  /* Specs strip */
+  .specs{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:16px;}
+  .spec{padding:11px 14px;text-align:center;border-right:1px solid var(--border);}
+  .spec:last-child{border-right:none;}
+  .spec .sl{font-size:.65rem;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);font-weight:600;}
+  .spec .sv{font-size:.88rem;font-weight:700;margin-top:3px;}
+
+  /* Why box */
+  .why{
+    background:rgba(34,197,94,.06);border-left:2px solid var(--green);
+    border-radius:0 10px 10px 0;padding:12px 16px;
+    font-size:.85rem;line-height:1.65;color:rgba(255,255,255,.85);
+    margin-bottom:14px;
+  }
+  .why strong{color:var(--green);}
+
+  /* Pills */
+  .pills{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:14px;}
+  .pill-g{background:rgba(34,197,94,.12);color:#86efac;border:1px solid rgba(34,197,94,.2);padding:4px 10px;border-radius:999px;font-size:.75rem;font-weight:600;}
+  .pill-o{background:rgba(251,146,60,.1);color:#fdba74;border:1px solid rgba(251,146,60,.2);padding:4px 10px;border-radius:999px;font-size:.75rem;font-weight:600;}
+
+  /* Stars */
+  .rating{display:flex;align-items:center;gap:8px;margin-bottom:20px;}
+  .stars{color:#fbbf24;font-size:1rem;letter-spacing:2px;}
+  .rat-num{font-weight:700;font-size:.9rem;}
+  .rat-count{color:var(--muted);font-size:.8rem;}
+
+  /* ── BUY SECTION ── */
+  .buy{
+    border-top:1px solid var(--border);padding:18px 24px 22px;
+    background:rgba(0,0,0,.2);
+  }
+  .buy-title{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-bottom:12px;}
+  .buy-btns{display:flex;gap:10px;flex-wrap:wrap;}
+  .buy-btn{
+    display:inline-flex;align-items:center;gap:8px;
+    padding:10px 20px;border-radius:10px;font-size:.88rem;font-weight:700;
+    text-decoration:none;color:#000;transition:all .2s;border:none;cursor:pointer;
+    font-family:'Inter',sans-serif;
+  }
+  .buy-btn:hover{transform:translateY(-2px);filter:brightness(1.1);}
+  .buy-btn .bi{font-size:1rem;}
+  .buy-amazon{background:linear-gradient(135deg,#FF9900,#ffb347);}
+  .buy-leroy{background:linear-gradient(135deg,#78be20,#9dd635);}
+  .buy-boulanger{background:linear-gradient(135deg,#0070c0,#4096d4);color:white;}
+  .buy-dreame{background:linear-gradient(135deg,#6366f1,#818cf8);color:white;}
+  .buy-mammotion{background:linear-gradient(135deg,#059669,#34d399);}
+  .buy-husqvarna{background:linear-gradient(135deg,#1d4ed8,#3b82f6);color:white;}
+  .buy-note{font-size:.7rem;color:var(--muted);margin-top:10px;font-style:italic;}
+
+  /* ── RESTART ── */
+  .btn-restart{
+    width:100%;padding:17px;margin-top:8px;
+    background:rgba(255,255,255,.05);border:1px solid var(--border);
+    color:var(--text);border-radius:14px;font-size:.95rem;font-weight:700;
+    cursor:pointer;transition:all .2s;font-family:'Inter',sans-serif;
+  }
+  .btn-restart:hover{background:rgba(255,255,255,.1);border-color:var(--green);}
+
+  .footer-note{
+    text-align:center;font-size:.72rem;color:var(--muted);
+    margin-top:28px;line-height:1.8;
+  }
+  .footer-note a{color:rgba(34,197,94,.7);text-decoration:none;}
+  .footer-note a:hover{color:var(--green);}
+
+  /* ── RESPONSIVE ── */
+  @media(max-width:600px){
+    .opts.g2,.opts.g3{grid-template-columns:1fr;}
+    .prios{grid-template-columns:1fr;}
+    .specs{grid-template-columns:repeat(2,1fr);}
+    .spec:nth-child(2){border-right:none;}
+    .step{padding:24px 20px;}
+    header{padding:50px 20px 36px;}
+    .buy-btns{flex-direction:column;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-glow"></div>
+  <div class="logo">🌿 Guide 2026</div>
+  <h1>Quel robot tondeuse<br/><span class="hl">vous correspond ?</span></h1>
+  <p>5 questions · Sélection croisée experts + 15 000+ avis utilisateurs réels</p>
+  <div class="step-pills" id="pills">
+    <div class="pill active" id="p1">Surface</div>
+    <div class="pill" id="p2">Terrain</div>
+    <div class="pill" id="p3">Budget</div>
+    <div class="pill" id="p4">Priorités</div>
+    <div class="pill" id="p5">Profil</div>
+  </div>
+</header>
+
+<main>
+  <div class="prog-wrap"><div class="prog-fill" id="pf" style="width:0%"></div></div>
+
+  <!-- Q1 -->
+  <div class="step active" id="s1">
+    <div class="step-num">Question 1 / 5</div>
+    <h2>Surface de pelouse à tondre</h2>
+    <p class="hint">Comptez uniquement la pelouse, sans les allées, terrasses et massifs.</p>
+    <div class="opts g2">
+      <div class="opt" data-q="surface" data-v="small" onclick="pick(this)">
+        <span class="opt-icon">🏡</span><h3>Petit jardin</h3><p>Moins de 400 m²</p>
+      </div>
+      <div class="opt" data-q="surface" data-v="medium" onclick="pick(this)">
+        <span class="opt-icon">🌳</span><h3>Jardin moyen</h3><p>400 à 800 m²</p>
+      </div>
+      <div class="opt" data-q="surface" data-v="large" onclick="pick(this)">
+        <span class="opt-icon">🏞️</span><h3>Grand jardin</h3><p>800 à 2 000 m²</p>
+      </div>
+      <div class="opt" data-q="surface" data-v="xlarge" onclick="pick(this)">
+        <span class="opt-icon">🌾</span><h3>Très grand terrain</h3><p>Plus de 2 000 m²</p>
+      </div>
+    </div>
+    <div class="nav"><button class="btn btn-next" onclick="go(2)" id="n1" disabled>Suivant →</button></div>
+  </div>
+
+  <!-- Q2 -->
+  <div class="step" id="s2">
+    <div class="step-num">Question 2 / 5</div>
+    <h2>Type de terrain</h2>
+    <p class="hint">La complexité détermine quelle technologie de navigation est nécessaire.</p>
+    <div class="opts">
+      <div class="opt" data-q="terrain" data-v="flat" onclick="pick(this)">
+        <span class="opt-icon">🟩</span><h3>Plat et simple</h3><p>Rectangulaire, peu d'obstacles, terrain dégagé</p>
+      </div>
+      <div class="opt" data-q="terrain" data-v="medium" onclick="pick(this)">
+        <span class="opt-icon">🌿</span><h3>Forme irrégulière</h3><p>Arbres, massifs, allées, contours non rectilignes</p>
+      </div>
+      <div class="opt" data-q="terrain" data-v="slopes" onclick="pick(this)">
+        <span class="opt-icon">⛰️</span><h3>Terrain en pente</h3><p>Dénivelé important, zone accidentée, plus de 30 %</p>
+      </div>
+      <div class="opt" data-q="terrain" data-v="complex" onclick="pick(this)">
+        <span class="opt-icon">🗺️</span><h3>Très complexe / multi-zones</h3><p>Zones séparées, nombreux obstacles, piscine, allées multiples</p>
+      </div>
+    </div>
+    <div class="nav">
+      <button class="btn btn-back" onclick="go(1)">← Retour</button>
+      <button class="btn btn-next" onclick="go(3)" id="n2" disabled>Suivant →</button>
+    </div>
+  </div>
+
+  <!-- Q3 -->
+  <div class="step" id="s3">
+    <div class="step-num">Question 3 / 5</div>
+    <h2>Budget maximum</h2>
+    <p class="hint">D'excellents modèles sans fil existent dès 649 €. Le marché 2026 est très concurrentiel.</p>
+    <div class="budget-num" id="bn">1 000 €</div>
+    <div class="budget-sub">budget maximum</div>
+    <input type="range" id="br" min="600" max="3000" step="50" value="1000" oninput="updBudget(this.value)"/>
+    <div class="range-labs"><span>600 €</span><span>1 500 €</span><span>3 000 €</span></div>
+    <div class="opts g3">
+      <div class="opt" data-q="budget" data-v="low" onclick="setBudget(800,this)">
+        <span class="opt-icon">💚</span><h3>Économique</h3><p>≤ 800 €</p>
+      </div>
+      <div class="opt" data-q="budget" data-v="mid" onclick="setBudget(1500,this)">
+        <span class="opt-icon">💛</span><h3>Milieu de gamme</h3><p>800 – 1 700 €</p>
+      </div>
+      <div class="opt" data-q="budget" data-v="high" onclick="setBudget(3000,this)">
+        <span class="opt-icon">🏅</span><h3>Haut de gamme</h3><p>+ 1 700 €</p>
+      </div>
+    </div>
+    <div class="nav">
+      <button class="btn btn-back" onclick="go(2)">← Retour</button>
+      <button class="btn btn-next" onclick="go(4)">Suivant →</button>
+    </div>
+  </div>
+
+  <!-- Q4 -->
+  <div class="step" id="s4">
+    <div class="step-num">Question 4 / 5</div>
+    <h2>Vos priorités</h2>
+    <p class="hint">Choisissez jusqu'à 3 critères qui comptent le plus pour vous.</p>
+    <div class="prios">
+      <div class="prio" data-key="install" onclick="togPrio(this)"><span class="prio-icon">⚡</span><span>Installation rapide</span></div>
+      <div class="prio" data-key="precision" onclick="togPrio(this)"><span class="prio-icon">🎯</span><span>Précision de tonte</span></div>
+      <div class="prio" data-key="obstacles" onclick="togPrio(this)"><span class="prio-icon">🚧</span><span>Évitement d'obstacles</span></div>
+      <div class="prio" data-key="silent" onclick="togPrio(this)"><span class="prio-icon">🔇</span><span>Silencieux</span></div>
+      <div class="prio" data-key="app" onclick="togPrio(this)"><span class="prio-icon">📱</span><span>Application mobile</span></div>
+      <div class="prio" data-key="sav" onclick="togPrio(this)"><span class="prio-icon">🔧</span><span>SAV & fiabilité</span></div>
+      <div class="prio" data-key="voice" onclick="togPrio(this)"><span class="prio-icon">🗣️</span><span>Contrôle vocal</span></div>
+      <div class="prio" data-key="noWire" onclick="togPrio(this)"><span class="prio-icon">📡</span><span>Sans câble périmétrique</span></div>
+    </div>
+    <div class="nav">
+      <button class="btn btn-back" onclick="go(3)">← Retour</button>
+      <button class="btn btn-next" onclick="go(5)">Suivant →</button>
+    </div>
+  </div>
+
+  <!-- Q5 -->
+  <div class="step" id="s5">
+    <div class="step-num">Question 5 / 5</div>
+    <h2>Votre niveau tech</h2>
+    <p class="hint">Certains robots sont prêts en 30 min, d'autres demandent une configuration avancée.</p>
+    <div class="opts">
+      <div class="opt" data-q="tech" data-v="beginner" onclick="pick(this)">
+        <span class="opt-icon">😊</span><h3>Je veux simple</h3><p>Plug & play, sans configuration complexe, prêt à l'emploi</p>
+      </div>
+      <div class="opt" data-q="tech" data-v="intermediate" onclick="pick(this)">
+        <span class="opt-icon">🙂</span><h3>À l'aise avec une app</h3><p>Paramétrage mobile, zones, planning — pas de problème</p>
+      </div>
+      <div class="opt" data-q="tech" data-v="advanced" onclick="pick(this)">
+        <span class="opt-icon">🤓</span><h3>Profil avancé</h3><p>GPS, RTK, multi-zones, options réseau — j'assume tout</p>
+      </div>
+    </div>
+    <div class="nav">
+      <button class="btn btn-back" onclick="go(4)">← Retour</button>
+      <button class="btn btn-next" onclick="showRes()" id="n5" disabled>Voir ma recommandation 🌿</button>
+    </div>
+  </div>
+
+  <!-- RESULT -->
+  <div id="result">
+    <div class="res-hero">
+      <div style="font-size:3rem;margin-bottom:12px;">🏆</div>
+      <h2>Votre sélection personnalisée</h2>
+      <p>Basée sur votre profil · Croisée avec 15 000+ avis utilisateurs réels · Mars 2026</p>
+    </div>
+    <div id="rcards"></div>
+    <button class="btn-restart" onclick="restart()">🔄 Refaire le questionnaire</button>
+    <div class="footer-note">
+      Sources : <a href="https://www.clubic.com/guide-achat/article-829280-1-selection-tondeuse-robot.html" target="_blank">Clubic</a> ·
+      <a href="https://www.futura-sciences.com/conso/comparatifs/meilleur-robot-tondeuse-comparatif/" target="_blank">Futura-Sciences</a> ·
+      <a href="https://jardinsplus.com/robot-tondeuse/" target="_blank">JardinsPlus</a> ·
+      <a href="https://www.jardinage-media.com/blog/top-robot-tondeuse-autonome" target="_blank">Jardinage-Media</a> ·
+      Trustpilot Mammotion (4.5/5 · 2 392 avis) · Forums Kelrobot & ForumGazon<br/>
+      ⚠️ Les liens d'achat sont directs — remplacez-les par vos liens d'affiliation
+    </div>
+  </div>
+</main>
+
+<script>
+const DB = {
+  navimow:{
+    name:"Segway Navimow i105E",tag:"Meilleur rapport qualité/prix 2026",
+    price:"649 €",priceN:649,surface:"600 m²",nav:"GPS RTK",slope:"45%",noise:"65 dB",
+    score:"4.3/5",count:"1 200+ avis",stars:"★★★★☆",
+    img:"images/robots/navimow.png",
+    imgBg:"linear-gradient(135deg,#0f3d2b,#0a2a1e)",
+    why:"Plébiscité en 2026 pour son <strong>installation sans câble en moins de 30 min</strong>, ses lignes de tonte parallèles au centimètre près grâce au GPS RTK. Actuellement à <strong>-35% sur Amazon</strong>. Le choix n°1 rapport qualité/prix.",
+    pros:["Installation 30 min sans câble","Précision RTK au cm","65 dB silencieux","Prix imbattable"],
+    cons:["Max 600 m²","Signal GPS requis"],
+    tags:["small","medium","flat","medium","low","mid"],
+    prios:["install","precision","noWire","silent"],
+    links:[
+      {label:"Amazon",cls:"buy-amazon",icon:"🛒",url:"https://www.amazon.fr/i105E-p%C3%A9riph%C3%A9rique-Recommand%C3%A9-cartographie-Automatique/dp/B0CXDNFZLL"},
+      {label:"Leroy Merlin",cls:"buy-leroy",icon:"🌿",url:"https://www.leroymerlin.fr/produits/robot-tondeuse-segway-i105e-navimow-91166726.html"}
+    ]
+  },
+  ecovacs:{
+    name:"Ecovacs Goat O800 RTK",tag:"Le plus silencieux — 55 dB",
+    price:"699 €",priceN:699,surface:"800 m²",nav:"RTK + LiDAR",slope:"45%",noise:"55 dB",
+    score:"4.2/5",count:"800+ avis",stars:"★★★★☆",
+    img:"https://site-static.ecovacs.com/upload/fr/image/product/2025/02/26/081750_7136$GOATO800RTK.jpg",
+    imgBg:"linear-gradient(135deg,#0a2535,#091c2b)",
+    why:"Le robot le plus <strong>silencieux du comparatif à 55 dB</strong>, avec navigation RTK haute précision renforcée par LiDAR. App très bien notée. <strong>Idéal pour quartiers résidentiels</strong> ou jardin avec voisins proches.",
+    pros:["55 dB, champion du silence","RTK + LiDAR précis","App notée 4.2/5","Passages étroits 70 cm"],
+    cons:["Antenne RTK à installer","Max 800 m²"],
+    tags:["small","medium","flat","medium","low","mid"],
+    prios:["silent","precision","noWire","app"],
+    links:[
+      {label:"Amazon",cls:"buy-amazon",icon:"🛒",url:"https://www.amazon.fr/ECOVACS-O800-RTK-p%C3%A9riph%C3%A9rique-Cartographie/dp/B0DQ8KYLYR"},
+      {label:"Leroy Merlin",cls:"buy-leroy",icon:"🌿",url:"https://www.leroymerlin.fr/produits/robot-tondeuse-connecte-goat-ecovacs-o800rtk-94048028.html"}
+    ]
+  },
+  dreame:{
+    name:"Dreame A1 Pro",tag:"Polyvalent triple-capteur, best-seller 2026",
+    price:"899 €",priceN:899,surface:"2 000 m²",nav:"LiDAR 360°+RTK",slope:"45%",noise:"~65 dB",
+    score:"4.4/5",count:"950+ avis",stars:"★★★★½",
+    img:"images/robots/dreame.jpg",
+    imgBg:"linear-gradient(135deg,#1a1a3e,#12122b)",
+    why:"Noté <strong>8.5/10 par les experts</strong> — triple système LiDAR 360° + RTK + Vision 3D. Couvre <strong>2 000 m² pour seulement 899 €</strong>, le meilleur ratio surface/prix du marché. Idéal jardins complexes avec obstacles.",
+    pros:["2 000 m² à 899 €","LiDAR 360° + RTK + Vision","Jardins complexes OK","8.5/10 experts"],
+    cons:["Marque récente (SAV à confirmer)","Cycles de tonte longs"],
+    tags:["large","medium","complex","slopes","mid","low"],
+    prios:["precision","obstacles","noWire","install"],
+    links:[
+      {label:"Amazon",cls:"buy-amazon",icon:"🛒",url:"https://www.amazon.fr/robotis%C3%A9e-Intelligente-p%C3%A9rim%C3%A9trique-OmniSense-Intelligent/dp/B0DR35G7P3"},
+      {label:"Boulanger",cls:"buy-boulanger",icon:"📦",url:"https://www.boulanger.com/ref/1220215"},
+      {label:"Dreame Direct",cls:"buy-dreame",icon:"🌐",url:"https://fr.dreametech.com/products/robot-tondeuse-dreame-a1-pro"}
+    ]
+  },
+  worx:{
+    name:"Worx Landroid Vision WR208E",tag:"Zero câble, tond dès l'unboxing",
+    price:"699 €",priceN:699,surface:"800 m²",nav:"Caméra 4K + IA",slope:"30%",noise:"~66 dB",
+    score:"4.1/5",count:"8 378 avis",stars:"★★★★☆",
+    img:"https://eu.worx.com/wp-content/plugins/woocommerce-onpage/storage/cache/3f3c6506208b86639e1f0247bb00f15747d45dda.x900.webp/WR208E_main%20%281%29.webp",
+    imgBg:"linear-gradient(135deg,#1f1a00,#2a2200)",
+    why:"<strong>8 378 avis utilisateurs — le plus populaire du comparatif</strong>. Sa caméra 4K + IA détecte automatiquement les bordures et tous les obstacles, <strong>sans câble ni antenne</strong>. Compatible Alexa & Google Assistant. Pose le robot, appuie sur start — c'est tout.",
+    pros:["Zero câble ni antenne","8 378 avis positifs","Alexa & Google Home","Détection obstacles IA temps réel"],
+    cons:["Pentes max 30%","Dépend de la luminosité"],
+    tags:["small","medium","flat","medium","low","mid"],
+    prios:["install","voice","noWire","obstacles"],
+    links:[
+      {label:"Amazon",cls:"buy-amazon",icon:"🛒",url:"https://www.amazon.fr/WORX-p%C3%A9riph%C3%A9rique-Evitement-dobstacles-Contr%C3%B4lable/dp/B0CTTWLLZZ"}
+    ]
+  },
+  yuka:{
+    name:"Mammotion Yuka Mini Vision",tag:"Note #1 toutes catégories 2026 — 8.7/10",
+    price:"1 199 €",priceN:1199,surface:"700 m²",nav:"Triple caméra IA",slope:"45%",noise:"~64 dB",
+    score:"4.5/5",count:"2 392 avis",stars:"★★★★½",
+    img:"https://cdn.webshopapp.com/shops/210536/files/491308113/1652x1652x2/mammotion-mammotion-yuka-mini-vision-700.jpg",
+    imgBg:"linear-gradient(135deg,#0d2e1a,#081f10)",
+    why:"<strong>8.7/10 — la meilleure note toutes catégories 2026</strong> selon Jardinage-Media. Triple caméra IA, cartographie auto sans RTK ni câble, batterie remplaçable, 4G intégré. Mammotion : <strong>4.5/5 Trustpilot sur 2 392 avis</strong>.",
+    pros:["8.7/10 meilleure note 2026","4.5/5 Trustpilot (2 392 avis)","Triple caméra IA sans RTK","4G + batterie remplaçable"],
+    cons:["App parfois instable","Prix élevé pour 700 m²"],
+    tags:["small","medium","complex","mid","high"],
+    prios:["precision","obstacles","app","noWire"],
+    links:[
+      {label:"Amazon",cls:"buy-amazon",icon:"🛒",url:"https://www.amazon.fr/Mammotion-Intelligent-Cartographie-Automatique-P%C3%A9riph%C3%A9rique/dp/B0FKTBKDQ1"},
+      {label:"Mammotion Direct",cls:"buy-mammotion",icon:"🌿",url:"https://us.mammotion.com/"}
+    ]
+  },
+  luba2:{
+    name:"Mammotion LUBA 2 AWD 3000X",tag:"Champion des grandes surfaces et pentes extrêmes",
+    price:"2 299 €",priceN:2299,surface:"3 000 m²",nav:"RTK + IMU + Vision",slope:"80%",noise:"<60 dB",
+    score:"4.4/5",count:"2 392 avis (Mammotion)",stars:"★★★★½",
+    img:"https://m.media-amazon.com/images/I/61RN-N3nFnL._AC_SL1500_.jpg",
+    imgBg:"linear-gradient(135deg,#1a0d00,#120900)",
+    why:"Pour les grands terrains accidentés : <strong>4 roues motrices, pentes jusqu'à 80%, 3 000 m²</strong>. Les utilisateurs Mammotion rapportent en moyenne <strong>5h de temps libéré par semaine</strong>. Le modèle le plus abouti pour terrain exigeant.",
+    pros:["3 000 m² + pentes 80%","4WD all-terrain","4G + NetRTK intégré","5h/semaine libérées (témoignages)"],
+    cons:["Prix élevé","App encore en rodage","Ciel dégagé requis"],
+    tags:["xlarge","large","slopes","complex","high"],
+    prios:["precision","noWire","obstacles"],
+    links:[
+      {label:"Amazon",cls:"buy-amazon",icon:"🛒",url:"https://www.amazon.fr/MAMMOTION-LUBA-AWD-P%C3%A9riph%C3%A9rique-Recommand%C3%A9/dp/B0DT46VJPG"},
+      {label:"Mammotion Direct",cls:"buy-mammotion",icon:"🌿",url:"https://us.mammotion.com/"}
+    ]
+  },
+  husqvarna:{
+    name:"Husqvarna Automower 320 NERA",tag:"Référence fiabilité & SAV France — 20 ans d'expertise",
+    price:"2 463 €",priceN:2463,surface:"2 200 m²",nav:"EPOS satellites + IMU",slope:"50%",noise:"60 dB",
+    score:"4.6/5",count:"SAV réseau FR",stars:"★★★★★",
+    img:"https://www-static-nw.husqvarna.com/-/images/aprimo/husqvarna/robotic-mowers/photos/studio/q/qz/qz-188053.webp",
+    imgBg:"linear-gradient(135deg,#0d1b3e,#091429)",
+    why:"La <strong>référence incontestée selon les forums spécialisés</strong> (Kelrobot, Automower-Fans) pour la fiabilité long terme. 20 ans de perfectionnement logiciel, réseau SAV français réactif, 60 dB. <strong>Jusqu'à -849 € de remboursement</strong> en cours jusqu'au 30 juin 2026.",
+    pros:["SAV réseau national France","20 ans d'expertise","4.6/5 — meilleure note","Remboursement jusqu'à 849 €"],
+    cons:["Prix élevé","Détection obstacles basique"],
+    tags:["large","xlarge","slopes","complex","high"],
+    prios:["sav","silent","precision","noWire"],
+    links:[
+      {label:"Amazon",cls:"buy-amazon",icon:"🛒",url:"https://www.amazon.fr/Husqvarna-Automower-320-Nera/dp/B0CF5Q64QS"},
+      {label:"Husqvarna Direct",cls:"buy-husqvarna",icon:"🌐",url:"https://www.husqvarna.com/fr/robots-tondeuses/automower-320nera/"}
+    ]
+  }
+};
+
+const A={surface:null,terrain:null,budget:1000,tech:null,prios:[]};
+let cur=1;
+
+function updPills(){
+  for(let i=1;i<=5;i++){
+    const p=document.getElementById('p'+i);
+    p.className='pill'+(i===cur?' active':i<cur?' done':'');
+  }
+  document.getElementById('pf').style.width=(((cur-1)/5)*100)+'%';
+}
+
+function pick(el){
+  const q=el.dataset.q;
+  document.querySelectorAll('[data-q="'+q+'"]').forEach(o=>o.classList.remove('sel'));
+  el.classList.add('sel');
+  A[q]=el.dataset.v;
+  const nb=document.getElementById('n'+cur);
+  if(nb)nb.disabled=false;
+}
+
+function setBudget(v,el){
+  document.getElementById('br').value=v;
+  updBudget(v);
+  document.querySelectorAll('[data-q="budget"]').forEach(o=>o.classList.remove('sel'));
+  el.classList.add('sel');
+  A.budgetT=el.dataset.v;
+}
+
+function updBudget(v){
+  v=parseInt(v);A.budget=v;
+  document.getElementById('bn').textContent=v.toLocaleString('fr-FR')+' €';
+  const pct=((v-600)/(3000-600))*100;
+  document.getElementById('br').style.background=
+    `linear-gradient(to right,#22c55e 0%,#22c55e ${pct}%,rgba(255,255,255,.1) ${pct}%)`;
+  const tiers=document.querySelectorAll('[data-q="budget"]');
+  tiers.forEach(o=>o.classList.remove('sel'));
+  if(v<=800){tiers[0].classList.add('sel');A.budgetT='low';}
+  else if(v<=1700){tiers[1].classList.add('sel');A.budgetT='mid';}
+  else{tiers[2].classList.add('sel');A.budgetT='high';}
+}
+
+function togPrio(el){
+  const k=el.dataset.key;
+  if(el.classList.contains('sel')){
+    el.classList.remove('sel');
+    A.prios=A.prios.filter(p=>p!==k);
+  } else {
+    if(A.prios.length>=3){
+      const old=A.prios.shift();
+      document.querySelector('.prio[data-key="'+old+'"]').classList.remove('sel');
+    }
+    el.classList.add('sel');
+    A.prios.push(k);
+  }
+}
+
+function go(n){
+  document.getElementById('s'+cur).classList.remove('active');
+  cur=n;
+  document.getElementById('s'+cur).classList.add('active');
+  updPills();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function score(r){
+  let s=0;
+  if(A.surface==='small'&&r.tags.includes('small'))s+=30;
+  if(A.surface==='medium'&&r.tags.includes('medium'))s+=30;
+  if(A.surface==='large'&&r.tags.includes('large'))s+=30;
+  if(A.surface==='xlarge'&&r.tags.includes('xlarge'))s+=30;
+  if(A.surface==='large'&&!r.tags.includes('large')&&!r.tags.includes('xlarge'))s-=40;
+  if(A.surface==='xlarge'&&!r.tags.includes('xlarge'))s-=50;
+  if(A.terrain==='slopes'&&r.tags.includes('slopes'))s+=25;
+  if(A.terrain==='complex'&&r.tags.includes('complex'))s+=20;
+  if(A.terrain==='flat'&&r.tags.includes('flat'))s+=10;
+  if(A.terrain==='slopes'&&!r.tags.includes('slopes'))s-=20;
+  if(r.priceN<=A.budget)s+=20; else s-=40;
+  A.prios.forEach(p=>{if(r.prios.includes(p))s+=15;});
+  return s;
+}
+
+function showRes(){
+  document.getElementById('s5').classList.remove('active');
+  document.getElementById('result').classList.add('on');
+  updPills();
+
+  const ranked=Object.values(DB).map(r=>({r,s:score(r)})).sort((a,b)=>b.s-a.s);
+  const top3=ranked.slice(0,3);
+  const c=document.getElementById('rcards');
+  c.innerHTML='';
+
+  const rankCls=['top','alt','three'];
+  const rankBadge=['rank-1','rank-2','rank-3'];
+  const rankLabel=['🥇 Recommandation #1','🥈 Alternative #2','🥉 Option #3'];
+
+  top3.forEach(({r},i)=>{
+    const d=document.createElement('div');
+    d.className='rec '+rankCls[i];
+    d.innerHTML=`
+      <div class="rec-visual" style="background:${r.imgBg}">
+        <span class="rank-badge ${rankBadge[i]}">${rankLabel[i]}</span>
+        <img src="${r.img}" alt="${r.name}" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"/>
+        <span class="vis-fallback" style="display:none">🤖</span>
+      </div>
+      <div class="rec-info">
+        <div class="rec-label" style="color:${i===0?'#22c55e':i===1?'#38bdf8':'#a78bfa'}">${r.tag}</div>
+        <div class="rec-name">${r.name}</div>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+          <div class="rating">
+            <span class="stars">${r.stars}</span>
+            <span class="rat-num">${r.score}</span>
+            <span class="rat-count">— ${r.count}</span>
+          </div>
+          <div style="font-size:1.6rem;font-weight:900;background:linear-gradient(135deg,#22c55e,#38bdf8);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">${r.price}</div>
+        </div>
+        <div class="specs">
+          <div class="spec"><div class="sl">Surface</div><div class="sv">≤ ${r.surface}</div></div>
+          <div class="spec"><div class="sl">Navigation</div><div class="sv">${r.nav}</div></div>
+          <div class="spec"><div class="sl">Pentes</div><div class="sv">${r.slope}</div></div>
+          <div class="spec"><div class="sl">Bruit</div><div class="sv">${r.noise}</div></div>
+        </div>
+        <div class="why">${r.why}</div>
+        <div class="pills">
+          ${r.pros.map(p=>`<span class="pill-g">✓ ${p}</span>`).join('')}
+          ${r.cons.map(p=>`<span class="pill-o">⚠ ${p}</span>`).join('')}
+        </div>
+      </div>
+      <div class="buy">
+        <div class="buy-title">🛍️ Où acheter</div>
+        <div class="buy-btns">
+          ${r.links.map(l=>`<a class="buy-btn ${l.cls}" href="${l.url}" target="_blank" rel="noopener"><span class="bi">${l.icon}</span>${l.label}</a>`).join('')}
+        </div>
+        <div class="buy-note">* Remplacez par vos liens d'affiliation — les prix peuvent varier</div>
+      </div>
+    `;
+    c.appendChild(d);
+  });
+
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function restart(){
+  Object.assign(A,{surface:null,terrain:null,budget:1000,tech:null,prios:[]});
+  document.querySelectorAll('.opt,.prio').forEach(e=>e.classList.remove('sel'));
+  document.getElementById('br').value=1000;
+  updBudget(1000);
+  document.getElementById('result').classList.remove('on');
+  ['n1','n2','n5'].forEach(id=>{const e=document.getElementById(id);if(e)e.disabled=true;});
+  go(1);
+}
+
+updPills();
+updBudget(1000);
+</script>
+</body>
+</html>

@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Comparateur côte à côte — RobotTondeuse.guide</title>
+<link href="fonts/inter.css" rel="stylesheet"/>
+<style>
+/* ═══════════════════════════════════════
+   VARIABLES & RESET
+═══════════════════════════════════════ */
+:root{
+  --dark:#080f1a;--dark2:#0d1829;--dark3:#111e33;
+  --green:#16a34a;--green-l:#22c55e;--green-xl:#4ade80;
+  --blue:#0ea5e9;--purple:#8b5cf6;--amber:#f59e0b;
+  --text:#f8fafc;--text2:#cbd5e1;--muted:#64748b;
+  --card:rgba(255,255,255,0.04);--card-h:rgba(255,255,255,0.07);
+  --border:rgba(255,255,255,0.07);--border-h:rgba(34,197,94,0.35);
+  --r:18px;--shadow:0 20px 60px rgba(0,0,0,0.4);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--dark);color:var(--text);overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+
+/* ═══════════════════════════════════════
+   NAV
+═══════════════════════════════════════ */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  padding:0 5%;height:68px;display:flex;align-items:center;justify-content:space-between;
+  background:rgba(8,15,26,0.92);backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border);
+}
+.nav-back{
+  display:flex;align-items:center;gap:8px;
+  color:var(--text2);font-size:.88rem;font-weight:500;
+  padding:8px 14px;border-radius:10px;
+  border:1px solid var(--border);
+  transition:all .2s;
+}
+.nav-back:hover{color:var(--text);border-color:rgba(255,255,255,.18);background:rgba(255,255,255,.06);}
+.nav-back svg{width:16px;height:16px;flex-shrink:0;}
+.nav-logo{
+  display:flex;align-items:center;gap:10px;
+  font-weight:800;font-size:1.05rem;letter-spacing:-.5px;
+}
+.nav-logo-dot{width:8px;height:8px;border-radius:50%;background:var(--green-l);animation:blink 2s infinite;}
+.nav-logo span{color:var(--green-l);}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+
+/* ═══════════════════════════════════════
+   PAYWALL FULLSCREEN
+═══════════════════════════════════════ */
+#paywall-screen{
+  position:fixed;inset:0;z-index:9999;
+  background:rgba(4,8,18,0.97);backdrop-filter:blur(14px);
+  display:none;align-items:center;justify-content:center;padding:20px;
+  flex-direction:column;
+}
+#paywall-screen.active{display:flex;}
+.pw-box{
+  background:linear-gradient(145deg,#0f1f38,#091525);
+  border:1px solid rgba(34,197,94,.3);border-radius:24px;
+  padding:44px 40px;max-width:480px;width:100%;text-align:center;
+  box-shadow:0 40px 100px rgba(0,0,0,.8),0 0 0 1px rgba(255,255,255,.04);
+  animation:pwSlide .35s ease;
+}
+@keyframes pwSlide{from{transform:translateY(28px) scale(.95);opacity:0}to{transform:none;opacity:1}}
+.pw-lock-icon{font-size:2.6rem;margin-bottom:16px;}
+.pw-badge{
+  display:inline-flex;align-items:center;gap:6px;
+  background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.3);
+  color:var(--green-l);font-size:.72rem;font-weight:700;letter-spacing:.8px;
+  padding:5px 14px;border-radius:20px;margin-bottom:18px;text-transform:uppercase;
+}
+.pw-title{font-size:1.8rem;font-weight:900;margin-bottom:8px;line-height:1.2;}
+.pw-sub{font-size:.9rem;color:var(--text2);margin-bottom:24px;}
+.pw-price-row{
+  display:flex;align-items:center;justify-content:center;gap:12px;
+  margin-bottom:22px;background:rgba(255,255,255,.03);
+  border:1px solid rgba(255,255,255,.06);border-radius:14px;padding:14px;
+}
+.pw-old{font-size:.95rem;color:var(--muted);text-decoration:line-through;}
+.pw-new{font-size:2.2rem;font-weight:900;color:var(--green-l);}
+.pw-once{font-size:.75rem;color:var(--muted);background:rgba(255,255,255,.06);padding:3px 9px;border-radius:6px;}
+.pw-btn{
+  display:block;width:100%;padding:16px;border-radius:14px;
+  background:linear-gradient(135deg,#16a34a,#22c55e);
+  color:#fff;font-weight:800;font-size:1rem;
+  border:none;cursor:pointer;text-decoration:none;
+  transition:all .2s;margin-bottom:14px;
+  box-shadow:0 6px 30px rgba(34,197,94,.4);font-family:'Inter',sans-serif;
+}
+.pw-btn:hover{transform:translateY(-2px);box-shadow:0 12px 40px rgba(34,197,94,.55);}
+.pw-back-link{
+  display:inline-flex;align-items:center;gap:6px;
+  color:var(--muted);font-size:.82rem;text-decoration:none;transition:color .2s;
+}
+.pw-back-link:hover{color:var(--text2);}
+
+/* ═══════════════════════════════════════
+   MAIN WRAPPER
+═══════════════════════════════════════ */
+main{padding:100px 5% 60px;min-height:100vh;position:relative;}
+.page-bg{
+  position:fixed;inset:0;z-index:-1;
+  background:linear-gradient(135deg,#040a12 0%,#061a0f 40%,#040d1a 100%);
+}
+.page-bg::before{
+  content:'';position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 70% 50% at 80% 30%,rgba(22,163,74,.08) 0%,transparent 55%),
+    radial-gradient(ellipse 50% 40% at 15% 70%,rgba(14,165,233,.06) 0%,transparent 50%);
+}
+.grid-lines{
+  position:fixed;inset:0;z-index:-1;opacity:.025;
+  background-image:linear-gradient(rgba(255,255,255,.8) 1px,transparent 1px),
+                   linear-gradient(90deg,rgba(255,255,255,.8) 1px,transparent 1px);
+  background-size:56px 56px;
+}
+
+/* ═══════════════════════════════════════
+   HEADER PAGE
+═══════════════════════════════════════ */
+.page-header{text-align:center;margin-bottom:48px;}
+.page-eyebrow{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(14,165,233,.1);border:1px solid rgba(14,165,233,.25);
+  color:var(--blue);font-size:.75rem;font-weight:700;letter-spacing:.8px;
+  padding:6px 16px;border-radius:999px;margin-bottom:20px;text-transform:uppercase;
+}
+.page-title{font-size:2.4rem;font-weight:900;letter-spacing:-.04em;margin-bottom:12px;line-height:1.1;}
+.page-title span{color:var(--green-l);}
+.page-desc{font-size:1rem;color:var(--text2);max-width:540px;margin:0 auto;}
+
+/* ═══════════════════════════════════════
+   SELECTOR AREA
+═══════════════════════════════════════ */
+.selector-wrap{
+  display:grid;grid-template-columns:1fr auto 1fr;
+  gap:24px;align-items:end;margin-bottom:40px;
+  background:var(--card);border:1px solid var(--border);
+  border-radius:var(--r);padding:28px 32px;
+}
+.selector-col{display:flex;flex-direction:column;gap:10px;}
+.selector-label{font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--muted);}
+.selector-label .robot-label{font-size:.85rem;font-weight:700;text-transform:none;letter-spacing:0;}
+.selector-label.a{color:var(--blue);}
+.selector-label.b{color:var(--purple);}
+/* Custom dropdown */
+.custom-select{position:relative;width:100%;}
+.cs-trigger{
+  width:100%;padding:12px 40px 12px 16px;border-radius:12px;
+  background:rgba(255,255,255,.06);border:1px solid var(--border);
+  color:var(--text);font-family:'Inter',sans-serif;font-size:.92rem;font-weight:500;
+  cursor:pointer;outline:none;transition:all .2s;text-align:left;
+  display:flex;align-items:center;justify-content:space-between;gap:8px;
+  white-space:nowrap;overflow:hidden;
+}
+.cs-trigger:hover{border-color:rgba(255,255,255,.22);background:rgba(255,255,255,.09);}
+.cs-trigger.open{border-color:rgba(34,197,94,.4);background:rgba(255,255,255,.08);}
+.cs-trigger-text{overflow:hidden;text-overflow:ellipsis;flex:1;min-width:0;}
+.cs-trigger-text.placeholder{color:var(--muted);}
+.cs-arrow{
+  flex-shrink:0;width:16px;height:16px;transition:transform .2s;
+  color:var(--muted);
+}
+.cs-trigger.open .cs-arrow{transform:rotate(180deg);}
+.cs-dropdown{
+  position:absolute;top:calc(100% + 6px);left:0;right:0;z-index:200;
+  background:#0d1829;border:1px solid rgba(255,255,255,.12);
+  border-radius:12px;overflow:hidden;
+  box-shadow:0 16px 48px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.04);
+  display:none;max-height:320px;overflow-y:auto;
+}
+.cs-dropdown.open{display:block;animation:dropIn .15s ease;}
+@keyframes dropIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
+.cs-dropdown::-webkit-scrollbar{width:4px;}
+.cs-dropdown::-webkit-scrollbar-track{background:transparent;}
+.cs-dropdown::-webkit-scrollbar-thumb{background:rgba(255,255,255,.12);border-radius:2px;}
+.cs-option{
+  padding:11px 16px;cursor:pointer;font-size:.88rem;font-weight:500;
+  color:var(--text2);transition:all .15s;display:flex;align-items:center;
+  justify-content:space-between;gap:12px;
+}
+.cs-option:not(:last-child){border-bottom:1px solid rgba(255,255,255,.05);}
+.cs-option:hover{background:rgba(255,255,255,.07);color:var(--text);}
+.cs-option.selected{
+  background:rgba(34,197,94,.08);color:var(--green-xl);
+}
+.cs-option.selected::after{
+  content:'✓';font-size:.8rem;color:var(--green-l);font-weight:900;flex-shrink:0;
+}
+.cs-option-name{font-weight:600;}
+.cs-option-price{font-size:.78rem;color:var(--muted);white-space:nowrap;}
+.vs-divider{
+  display:flex;align-items:center;justify-content:center;
+  width:48px;height:48px;border-radius:50%;
+  background:rgba(255,255,255,.06);border:1px solid var(--border);
+  font-weight:900;font-size:1rem;color:var(--muted);
+  align-self:center;flex-shrink:0;
+}
+.compare-btn{
+  display:block;width:100%;padding:13px 20px;margin-top:4px;
+  border-radius:12px;background:linear-gradient(135deg,var(--green),var(--green-l));
+  color:#fff;font-weight:800;font-size:.95rem;border:none;cursor:pointer;
+  font-family:'Inter',sans-serif;transition:all .2s;
+  box-shadow:0 4px 20px rgba(34,197,94,.3);
+}
+.compare-btn:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(34,197,94,.45);}
+
+/* ═══════════════════════════════════════
+   COMPARISON TABLE
+═══════════════════════════════════════ */
+#comparison{display:none;}
+#comparison.visible{display:block;}
+
+.cmp-header{
+  display:grid;grid-template-columns:220px 1fr 1fr;
+  gap:0;border-radius:16px 16px 0 0;overflow:hidden;
+  border:1px solid var(--border);border-bottom:none;
+}
+.cmp-header-cell{
+  padding:22px 24px;background:rgba(255,255,255,.05);
+  display:flex;flex-direction:column;gap:6px;
+}
+.cmp-header-cell:first-child{
+  background:rgba(255,255,255,.02);border-right:1px solid var(--border);
+  justify-content:flex-end;
+}
+.cmp-header-cell:nth-child(2){
+  border-right:1px solid var(--border);
+  border-left:2px solid rgba(14,165,233,.35);
+}
+.cmp-header-cell:nth-child(3){
+  border-left:2px solid rgba(139,92,246,.35);
+}
+.cmp-robot-tag{
+  display:inline-flex;align-items:center;gap:6px;
+  font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.8px;
+  padding:4px 10px;border-radius:20px;margin-bottom:4px;width:fit-content;
+}
+.tag-a{background:rgba(14,165,233,.12);color:var(--blue);border:1px solid rgba(14,165,233,.25);}
+.tag-b{background:rgba(139,92,246,.12);color:var(--purple);border:1px solid rgba(139,92,246,.25);}
+.cmp-robot-name{font-size:1rem;font-weight:800;line-height:1.3;}
+.cmp-robot-price{font-size:1.35rem;font-weight:900;color:var(--green-l);}
+.cmp-robot-score{
+  display:flex;align-items:center;gap:6px;
+  font-size:.78rem;color:var(--amber);font-weight:600;margin-top:2px;
+}
+.cmp-robot-tagline{font-size:.75rem;color:var(--muted);font-style:italic;}
+
+.cmp-table{
+  border:1px solid var(--border);border-top:none;border-radius:0 0 16px 16px;
+  overflow:hidden;
+}
+.cmp-row{
+  display:grid;grid-template-columns:220px 1fr 1fr;
+  border-top:1px solid var(--border);transition:background .15s;
+}
+.cmp-row:hover{background:rgba(255,255,255,.02);}
+.cmp-row:last-child{}
+.cmp-row-label{
+  padding:16px 24px;
+  display:flex;align-items:center;gap:10px;
+  font-size:.8rem;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;
+  border-right:1px solid var(--border);background:rgba(255,255,255,.02);
+}
+.cmp-row-label svg{width:15px;height:15px;flex-shrink:0;opacity:.7;}
+.cmp-cell{
+  padding:16px 24px;display:flex;align-items:center;
+  font-size:.9rem;font-weight:500;color:var(--text2);
+  border-right:1px solid var(--border);
+  border-left:2px solid transparent;
+}
+.cmp-cell:last-child{border-right:none;}
+.cmp-cell.winner{
+  background:rgba(34,197,94,.06);
+  border-left:2px solid rgba(34,197,94,.5);
+  color:var(--green-xl);font-weight:700;
+}
+.cmp-cell.winner::after{
+  content:'✓';font-size:.7rem;margin-left:auto;
+  background:rgba(34,197,94,.15);color:var(--green-l);
+  width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-weight:900;flex-shrink:0;
+}
+.cmp-cell-a{border-left:2px solid rgba(14,165,233,.15);}
+.cmp-cell-b{}
+.cmp-cell.a-winner{
+  background:rgba(14,165,233,.06);
+  border-left:2px solid rgba(14,165,233,.5);
+  color:#7dd3fc;font-weight:700;
+}
+.cmp-cell.a-winner::after{
+  content:'✓';font-size:.7rem;margin-left:auto;
+  background:rgba(14,165,233,.15);color:var(--blue);
+  width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-weight:900;flex-shrink:0;
+}
+.cmp-cell.b-winner{
+  background:rgba(139,92,246,.06);
+  border-left:2px solid rgba(139,92,246,.5);
+  color:#c4b5fd;font-weight:700;
+}
+.cmp-cell.b-winner::after{
+  content:'✓';font-size:.7rem;margin-left:auto;
+  background:rgba(139,92,246,.15);color:var(--purple);
+  width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-weight:900;flex-shrink:0;
+}
+
+/* ═══════════════════════════════════════
+   VERDICT
+═══════════════════════════════════════ */
+#verdict{display:none;margin-top:32px;}
+#verdict.visible{display:block;}
+.verdict-card{
+  background:linear-gradient(135deg,rgba(22,163,74,.07),rgba(14,165,233,.06));
+  border:1px solid rgba(34,197,94,.2);border-radius:var(--r);padding:32px;
+}
+.verdict-eyebrow{
+  font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.8px;
+  color:var(--green-l);margin-bottom:14px;display:flex;align-items:center;gap:8px;
+}
+.verdict-title{font-size:1.3rem;font-weight:800;margin-bottom:12px;}
+.verdict-text{font-size:.92rem;color:var(--text2);line-height:1.65;margin-bottom:20px;}
+.verdict-cta-row{display:flex;gap:14px;flex-wrap:wrap;}
+.verdict-btn{
+  padding:11px 22px;border-radius:11px;font-size:.85rem;font-weight:700;
+  font-family:'Inter',sans-serif;cursor:pointer;text-decoration:none;
+  transition:all .2s;border:none;
+}
+.vbtn-a{
+  background:rgba(14,165,233,.15);color:var(--blue);
+  border:1px solid rgba(14,165,233,.3);
+}
+.vbtn-a:hover{background:rgba(14,165,233,.25);}
+.vbtn-b{
+  background:rgba(139,92,246,.15);color:var(--purple);
+  border:1px solid rgba(139,92,246,.3);
+}
+.vbtn-b:hover{background:rgba(139,92,246,.25);}
+
+/* ═══════════════════════════════════════
+   FOOTER
+═══════════════════════════════════════ */
+footer{
+  padding:32px 5%;border-top:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;gap:12px;
+}
+.footer-logo{font-weight:800;font-size:.95rem;letter-spacing:-.3px;}
+.footer-logo span{color:var(--green-l);}
+.footer-links{display:flex;gap:20px;flex-wrap:wrap;}
+.footer-links a{font-size:.82rem;color:var(--muted);transition:color .2s;}
+.footer-links a:hover{color:var(--text2);}
+.footer-copy{font-size:.78rem;color:var(--muted);width:100%;padding-top:12px;border-top:1px solid var(--border);}
+
+/* ═══════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════ */
+@media(max-width:900px){
+  .selector-wrap{grid-template-columns:1fr;gap:16px;}
+  .vs-divider{width:100%;height:32px;border-radius:8px;}
+  .cmp-header,.cmp-row{grid-template-columns:120px 1fr 1fr;}
+  .cmp-header-cell:first-child,.cmp-row-label{padding:12px 14px;font-size:.72rem;}
+  .cmp-cell,.cmp-header-cell{padding:12px 14px;}
+}
+@media(max-width:580px){
+  nav{padding:0 4%;}
+  main{padding:90px 4% 48px;}
+  .page-title{font-size:1.8rem;}
+  .cmp-header,.cmp-row{grid-template-columns:100px 1fr 1fr;}
+  .cmp-robot-name{font-size:.82rem;}
+}
+</style>
+</head>
+<body>
+
+<!-- PAYWALL FULLSCREEN -->
+<div id="paywall-screen">
+  <div class="pw-box">
+    <div class="pw-lock-icon">🔒</div>
+    <div class="pw-badge">Accès Complet requis</div>
+    <h2 class="pw-title">Comparateur<br>côte à côte</h2>
+    <p class="pw-sub">Comparez 10 robots sur 16 critères · Verdict expert · Accès illimité</p>
+    <div class="pw-price-row">
+      <span class="pw-old">9,99 €</span>
+      <span class="pw-new">4,99 €</span>
+      <span class="pw-once">une seule fois</span>
+    </div>
+    <a class="pw-btn" href="STRIPE_LINK_PLACEHOLDER" target="_blank">Débloquer maintenant →</a>
+    <a href="index.html" class="pw-back-link">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+      Retourner au guide gratuit
+    </a>
+  </div>
+</div>
+
+<div class="page-bg"></div>
+<div class="grid-lines"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-back">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+    Retour au guide
+  </a>
+  <div class="nav-logo">
+    <div class="nav-logo-dot"></div>
+    RobotTondeuse<span>.guide</span>
+  </div>
+</nav>
+
+<!-- MAIN -->
+<main>
+  <div class="page-header">
+    <div class="page-eyebrow">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M8 12h8M12 8v8"/></svg>
+      Comparateur Complet
+    </div>
+    <h1 class="page-title">Comparez <span>deux robots</span><br>côte à côte</h1>
+    <p class="page-desc">Sélectionnez deux robots et obtenez un tableau comparatif complet sur 16 critères avec verdict expert.</p>
+  </div>
+
+  <!-- SELECTOR -->
+  <div class="selector-wrap">
+    <div class="selector-col">
+      <div class="selector-label a">Robot A</div>
+      <div class="custom-select" id="cs-a">
+        <button class="cs-trigger" type="button" onclick="toggleDropdown('a')">
+          <span class="cs-trigger-text placeholder" id="cs-a-text">— Choisir un robot —</span>
+          <svg class="cs-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="cs-dropdown" id="cs-a-dropdown"></div>
+      </div>
+    </div>
+    <div class="vs-divider">VS</div>
+    <div class="selector-col">
+      <div class="selector-label b">Robot B</div>
+      <div class="custom-select" id="cs-b">
+        <button class="cs-trigger" type="button" onclick="toggleDropdown('b')">
+          <span class="cs-trigger-text placeholder" id="cs-b-text">— Choisir un robot —</span>
+          <svg class="cs-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="cs-dropdown" id="cs-b-dropdown"></div>
+      </div>
+      <button class="compare-btn" onclick="runCompare()" style="margin-top:10px;">Comparer →</button>
+    </div>
+  </div>
+
+  <!-- COMPARISON TABLE -->
+  <div id="comparison">
+    <div class="cmp-header" id="cmp-header"></div>
+    <div class="cmp-table" id="cmp-table"></div>
+  </div>
+
+  <!-- VERDICT -->
+  <div id="verdict">
+    <div class="verdict-card">
+      <div class="verdict-eyebrow">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        Verdict Expert
+      </div>
+      <div class="verdict-title" id="verdict-title"></div>
+      <div class="verdict-text" id="verdict-text"></div>
+      <div class="verdict-cta-row" id="verdict-cta"></div>
+    </div>
+  </div>
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">RobotTondeuse<span>.guide</span></div>
+  <div class="footer-links">
+    <a href="index.html">Guide complet</a>
+    <a href="fiche.html">Fiches produits</a>
+    <a href="guide-pdf.html">Guide PDF</a>
+  </div>
+  <div class="footer-copy">© 2026 RobotTondeuse.guide — Guide indépendant. Non affilié aux marques citées.</div>
+</footer>
+
+<script>
+/* ─── CUSTOM DROPDOWNS ─── */
+const OPTIONS = [
+  { value:'navimow',   name:'Segway Navimow i105E',    price:'649 €' },
+  { value:'ecovacs',   name:'Ecovacs Goat O800 RTK',   price:'699 €' },
+  { value:'dreame',    name:'Dreame A1 Pro',            price:'899 €' },
+  { value:'worx',      name:'Worx Landroid WR208E',    price:'949 €' },
+  { value:'yuka',      name:'Mammotion Yuka Mini',     price:'1 199 €' },
+  { value:'luba2',     name:'Mammotion LUBA 2 AWD',    price:'2 599 €' },
+  { value:'husqvarna', name:'Husqvarna 320 NERA',      price:'2 463 €' },
+  { value:'mova',      name:'MOVA LiDAX Ultra 1200',   price:'1 099 €' },
+  { value:'a3pro',     name:'Dreame A3 AWD Pro 3500',  price:'2 299 €' },
+  { value:'luba3',     name:'Mammotion LUBA 3 AWD',    price:'2 699 €' },
+  { value:'boschxs',       name:'Bosch Indego XS 300',            price:'299 €' },
+  { value:'boschm700',     name:'Bosch Indego M+ 700',            price:'599 €' },
+  { value:'gardenaminimo', name:'Gardena Sileno Minimo 250',       price:'329 €' },
+  { value:'gardena750',    name:'Gardena Sileno Life 750',         price:'549 €' },
+  { value:'husqvarna115h', name:'Husqvarna Automower 115H',        price:'599 €' },
+  { value:'navimow108',    name:'Segway Navimow i108E',            price:'849 €' },
+  { value:'stiga1000',     name:'Stiga A 1000',                    price:'749 €' },
+  { value:'kress',         name:'Kress Mission 5 RTK',             price:'899 €' },
+  { value:'honda520',      name:'Honda Miimo 520',                 price:'899 €' },
+  { value:'stihl422',      name:'Stihl iMow RMI 422 PC',          price:'999 €' },
+  { value:'ecovacsG1',     name:'Ecovacs GOAT G1',                 price:'799 €' },
+  { value:'robomow635',    name:'Robomow RS635 Pro',               price:'1 199 €' },
+  { value:'stiga3000',     name:'Stiga A 3000',                    price:'1 499 €' },
+  { value:'vikingmi632',   name:'Viking iMow MI 632 PC',           price:'1 199 €' },
+  { value:'ecoflowblade',  name:'EcoFlow Blade',                   price:'2 199 €' },
+  { value:'husqvarna430x', name:'Husqvarna Automower 430X',        price:'1 799 €' },
+  { value:'ambrogio',      name:'Ambrogio L15 Elite',              price:'1 299 €' },
+  { value:'luba2_1000',    name:'Mammotion LUBA 2 AWD 1000',       price:'1 799 €' },
+  { value:'husqvarna450',  name:'Husqvarna Automower 450X NERA',   price:'3 499 €' },
+  { value:'husqvarna435',  name:'Husqvarna Automower 435X AWD',    price:'3 199 €' },
+];
+const selected = { a: null, b: null };
+
+function buildDropdowns() {
+  ['a','b'].forEach(side => {
+    const dd = document.getElementById(`cs-${side}-dropdown`);
+    dd.innerHTML = OPTIONS.map(o => `
+      <div class="cs-option" data-value="${o.value}" data-side="${side}" onclick="selectOption('${side}','${o.value}')">
+        <span class="cs-option-name">${o.name}</span>
+        <span class="cs-option-price">${o.price}</span>
+      </div>
+    `).join('');
+  });
+}
+
+function toggleDropdown(side) {
+  const trigger = document.querySelector(`#cs-${side} .cs-trigger`);
+  const dd = document.getElementById(`cs-${side}-dropdown`);
+  const isOpen = dd.classList.contains('open');
+  // close all
+  document.querySelectorAll('.cs-dropdown').forEach(d => d.classList.remove('open'));
+  document.querySelectorAll('.cs-trigger').forEach(t => t.classList.remove('open'));
+  if (!isOpen) {
+    dd.classList.add('open');
+    trigger.classList.add('open');
+  }
+}
+
+function selectOption(side, value) {
+  selected[side] = value;
+  const opt = OPTIONS.find(o => o.value === value);
+  const textEl = document.getElementById(`cs-${side}-text`);
+  textEl.textContent = `${opt.name} — ${opt.price}`;
+  textEl.classList.remove('placeholder');
+  // update selected styling
+  document.querySelectorAll(`#cs-${side}-dropdown .cs-option`).forEach(el => {
+    el.classList.toggle('selected', el.dataset.value === value);
+  });
+  // close
+  document.getElementById(`cs-${side}-dropdown`).classList.remove('open');
+  document.querySelector(`#cs-${side} .cs-trigger`).classList.remove('open');
+}
+
+// Close dropdowns on outside click
+document.addEventListener('click', e => {
+  if (!e.target.closest('.custom-select')) {
+    document.querySelectorAll('.cs-dropdown').forEach(d => d.classList.remove('open'));
+    document.querySelectorAll('.cs-trigger').forEach(t => t.classList.remove('open'));
+  }
+});
+
+/* ─── PAYWALL ─── */
+const ACCESS_KEY = 'rt_premium_v1';
+function isPaid(){ return localStorage.getItem(ACCESS_KEY) === 'true'; }
+(function checkAccess(){
+  if(!isPaid()){
+    document.getElementById('paywall-screen').classList.add('active');
+  }
+})();
+buildDropdowns();
+
+/* ─── ROBOTS DATA ─── */
+const ROBOTS = {
+  navimow:   { name:'Segway Navimow i105E',   price:'649 €',   surface:'600 m²',  nav:'GPS RTK',                    slope:'45%',  noise:'65 dB',  blades:'~50 €/an',  sub:'0 €/an',   install:'Facile (30 min)',  obstacles:'Moyen',    app:'4.1/5', sav:'Envoi (~1 sem)',  warranty:'2 ans', water:'IPX5', weight:'10,9 kg', cutW:'22 cm',  score:4.3, tag:'Meilleur rapport qualité/prix' },
+  ecovacs:   { name:'Ecovacs Goat O800 RTK',  price:'699 €',   surface:'800 m²',  nav:'RTK + LiDAR',                slope:'45%',  noise:'55 dB',  blades:'~40 €/an',  sub:'0 €/an',   install:'Facile (45 min)',  obstacles:'Bon',      app:'4.2/5', sav:'Envoi (~1 sem)',  warranty:'2 ans', water:'IPX6', weight:'9,5 kg',  cutW:'22 cm',  score:4.2, tag:'Le plus silencieux' },
+  dreame:    { name:'Dreame A1 Pro',           price:'899 €',   surface:'2 000 m²',nav:'LiDAR+RTK+Vision',           slope:'45%',  noise:'~65 dB', blades:'~50 €/an',  sub:'0 €/an',   install:'Moyen (1h)',       obstacles:'Très bon', app:'4.0/5', sav:'Envoi (~2 sem)',  warranty:'2 ans', water:'IPX5', weight:'11 kg',   cutW:'22 cm',  score:4.4, tag:'Meilleur polyvalent' },
+  worx:      { name:'Worx Landroid WR208E',   price:'949 €',   surface:'800 m²',  nav:'Caméra 4K + IA',             slope:'30%',  noise:'~66 dB', blades:'~35 €/an',  sub:'0 €/an',   install:'Très facile',      obstacles:'Très bon', app:'4.1/5', sav:'Réseau FR',      warranty:'2 ans', water:'IPX4', weight:'8,4 kg',  cutW:'19 cm',  score:4.1, tag:'Zéro câble, zéro antenne' },
+  yuka:      { name:'Mammotion Yuka Mini',    price:'1 199 €', surface:'700 m²',  nav:'Triple caméra IA',           slope:'45%',  noise:'~64 dB', blades:'~50 €/an',  sub:'30 €/an',  install:'Facile (45 min)',  obstacles:'Bon',      app:'4.3/5', sav:'Envoi (~2 sem)',  warranty:'2 ans', water:'IPX6', weight:'10 kg',   cutW:'22 cm',  score:4.5, tag:'Note n°1 toutes catégories' },
+  luba2:     { name:'Mammotion LUBA 2 AWD',   price:'2 599 €', surface:'3 000 m²',nav:'RTK+IMU+Vision',             slope:'75%',  noise:'<60 dB', blades:'~60 €/an',  sub:'30 €/an',  install:'Moyen (1h30)',     obstacles:'Bon',      app:'3.9/5', sav:'Envoi (~2 sem)',  warranty:'2 ans', water:'IPX6', weight:'15 kg',   cutW:'26 cm',  score:4.4, tag:'Champion pentes' },
+  husqvarna: { name:'Husqvarna 320 NERA',     price:'2 463 €', surface:'2 200 m²',nav:'EPOS satellites',            slope:'50%',  noise:'60 dB',  blades:'~80 €/an',  sub:'0 €/an',   install:'Complexe (2h+)',   obstacles:'Basique',  app:'4.0/5', sav:'Technicien FR',  warranty:'2 ans', water:'IPX5', weight:'9,4 kg',  cutW:'24 cm',  score:4.6, tag:'Référence fiabilité SAV France' },
+  mova:      { name:'MOVA LiDAX Ultra 1200',  price:'1 099 €', surface:'1 200 m²',nav:'LiDAR 3D 360°',             slope:'45%',  noise:'~62 dB', blades:'~40 €/an',  sub:'0 €/an',   install:'Facile (40 min)',  obstacles:'Très bon', app:'4.2/5', sav:'Envoi (~1 sem)',  warranty:'2 ans', water:'IPX5', weight:'N/D',     cutW:'22 cm',  score:4.4, tag:'Nouveau LiDAR 3D sans RTK' },
+  a3pro:     { name:'Dreame A3 AWD Pro 3500', price:'2 299 €', surface:'3 500 m²',nav:'LiDAR 3D + Vision 4WD',     slope:'80%',  noise:'~63 dB', blades:'~70 €/an',  sub:'0 €/an',   install:'Facile (1h)',      obstacles:'Excellent',app:'4.1/5', sav:'Envoi (~2 sem)',  warranty:'2 ans', water:'IPX6', weight:'N/D',     cutW:'40 cm',  score:4.5, tag:'4WD + LiDAR 3D' },
+  luba3:     { name:'Mammotion LUBA 3 AWD',   price:'2 699 €', surface:'3 000 m²',nav:'Tri-Fusion LiDAR+RTK+Vision',slope:'80%', noise:'<60 dB', blades:'~70 €/an',  sub:'30 €/an',  install:'Moyen (1h30)',     obstacles:'Très bon', app:'4.0/5', sav:'Envoi (~2 sem)',  warranty:'2 ans', water:'IPX6', weight:'N/D',     cutW:'40 cm',  score:4.5, tag:'Triple fusion navigation' },
+  boschxs:       { name:'Bosch Indego XS 300',           price:'299 €',   surface:'300 m²',   nav:'GPS LogiCut',                slope:'25%',  noise:'~63 dB', blades:'~25 €/an',  sub:'0 €/an',   install:'Très facile',     obstacles:'Basique',  app:'3.5/5', sav:'Réseau Bosch',   warranty:'2 ans', water:'IPX4', weight:'6,5 kg',  cutW:'18 cm',  score:3.9, tag:'Entrée de gamme' },
+  boschm700:     { name:'Bosch Indego M+ 700',           price:'599 €',   surface:'700 m²',   nav:'GPS LogiCut',                slope:'27%',  noise:'~68 dB', blades:'~25 €/an',  sub:'0 €/an',   install:'Très facile',     obstacles:'Basique',  app:'3.6/5', sav:'Réseau Bosch',   warranty:'2 ans', water:'IPX4', weight:'7,2 kg',  cutW:'19 cm',  score:3.8, tag:'GPS sans câble abordable' },
+  gardenaminimo: { name:'Gardena Sileno Minimo 250',     price:'329 €',   surface:'250 m²',   nav:'Fil périmètre',              slope:'25%',  noise:'57 dB',  blades:'~20 €/an',  sub:'0 €/an',   install:'Facile',          obstacles:'Basique',  app:'3.7/5', sav:'Réseau Gardena', warranty:'2 ans', water:'IP54', weight:'4,5 kg',  cutW:'16 cm',  score:4.0, tag:'Le plus silencieux entrée gamme' },
+  gardena750:    { name:'Gardena Sileno Life 750',       price:'549 €',   surface:'750 m²',   nav:'Fil périmètre',              slope:'25%',  noise:'58 dB',  blades:'~25 €/an',  sub:'0 €/an',   install:'Facile',          obstacles:'Basique',  app:'3.8/5', sav:'Réseau Gardena', warranty:'2 ans', water:'IP54', weight:'7,4 kg',  cutW:'22 cm',  score:4.0, tag:'Silencieux et fiable' },
+  husqvarna115h: { name:'Husqvarna Automower 115H',     price:'599 €',   surface:'1 500 m²', nav:'Fil + GPS',                  slope:'25%',  noise:'~65 dB', blades:'~50 €/an',  sub:'0 €/an',   install:'Facile',          obstacles:'Basique',  app:'3.9/5', sav:'Technicien FR',  warranty:'2 ans', water:'IPX5', weight:'7,5 kg',  cutW:'22 cm',  score:4.1, tag:'Valeur sûre Husqvarna' },
+  navimow108:    { name:'Segway Navimow i108E',          price:'849 €',   surface:'1 000 m²', nav:'GPS RTK',                    slope:'45%',  noise:'~65 dB', blades:'~50 €/an',  sub:'0 €/an',   install:'Facile (30 min)', obstacles:'Moyen',    app:'4.1/5', sav:'Envoi (~1 sem)',  warranty:'2 ans', water:'IPX5', weight:'11 kg',   cutW:'22 cm',  score:4.3, tag:'RTK sans câble 1 000 m²' },
+  stiga1000:     { name:'Stiga A 1000',                 price:'749 €',   surface:'1 000 m²', nav:'GPS RTK',                    slope:'45%',  noise:'~62 dB', blades:'~45 €/an',  sub:'0 €/an',   install:'Facile (45 min)', obstacles:'Moyen',    app:'3.8/5', sav:'Envoi (~1 sem)',  warranty:'2 ans', water:'IPX5', weight:'10 kg',   cutW:'22 cm',  score:4.2, tag:'RTK sans câble moins cher' },
+  kress:         { name:'Kress Mission 5 RTK',          price:'899 €',   surface:'1 500 m²', nav:'GPS RTK',                    slope:'45%',  noise:'~63 dB', blades:'~45 €/an',  sub:'0 €/an',   install:'Moyen (1h)',       obstacles:'Moyen',    app:'3.7/5', sav:'Envoi (~2 sem)',  warranty:'2 ans', water:'IPX5', weight:'11 kg',   cutW:'22 cm',  score:4.1, tag:'RTK pro-grade' },
+  honda520:      { name:'Honda Miimo 520',              price:'899 €',   surface:'2 000 m²', nav:'Fil + gyroscope',            slope:'35%',  noise:'58 dB',  blades:'~50 €/an',  sub:'0 €/an',   install:'Moyen (1h30)',    obstacles:'Basique',  app:'3.5/5', sav:'Technicien FR',  warranty:'2 ans', water:'IPX4', weight:'8,5 kg',  cutW:'28 cm',  score:4.0, tag:'Fiabilité Honda légendaire' },
+  stihl422:      { name:'Stihl iMow RMI 422 PC',       price:'999 €',   surface:'2 200 m²', nav:'Fil + GPS',                  slope:'35%',  noise:'~64 dB', blades:'~50 €/an',  sub:'0 €/an',   install:'Moyen (1h30)',    obstacles:'Basique',  app:'3.7/5', sav:'Technicien FR',  warranty:'2 ans', water:'IPX4', weight:'9,5 kg',  cutW:'24 cm',  score:4.1, tag:'Qualité allemande Stihl' },
+  ecovacsG1:     { name:'Ecovacs GOAT G1',             price:'799 €',   surface:'1 000 m²', nav:'Vision IA 2 caméras',        slope:'45%',  noise:'~60 dB', blades:'~40 €/an',  sub:'0 €/an',   install:'Facile (45 min)', obstacles:'Bon',      app:'3.9/5', sav:'Envoi (~1 sem)',  warranty:'2 ans', water:'IPX6', weight:'9 kg',    cutW:'20 cm',  score:4.0, tag:'Vision sans câble silencieux' },
+  robomow635:    { name:'Robomow RS635 Pro',            price:'1 199 €', surface:'3 500 m²', nav:'Fil + GPS',                  slope:'30%',  noise:'~65 dB', blades:'~60 €/an',  sub:'0 €/an',   install:'Complexe (2h)',   obstacles:'Basique',  app:'3.6/5', sav:'Envoi (~2 sem)',  warranty:'2 ans', water:'IPX4', weight:'15 kg',   cutW:'28 cm',  score:4.0, tag:'Grand terrain abordable' },
+  stiga3000:     { name:'Stiga A 3000',                price:'1 499 €', surface:'3 000 m²', nav:'GPS RTK',                    slope:'45%',  noise:'~63 dB', blades:'~50 €/an',  sub:'0 €/an',   install:'Moyen (1h)',       obstacles:'Moyen',    app:'3.8/5', sav:'Envoi (~1 sem)',  warranty:'2 ans', water:'IPX5', weight:'12 kg',   cutW:'24 cm',  score:4.2, tag:'RTK grand terrain' },
+  vikingmi632:   { name:'Viking iMow MI 632 PC',       price:'1 199 €', surface:'3 200 m²', nav:'Fil + GPS',                  slope:'35%',  noise:'~63 dB', blades:'~55 €/an',  sub:'0 €/an',   install:'Complexe (2h)',   obstacles:'Basique',  app:'3.6/5', sav:'Technicien FR',  warranty:'2 ans', water:'IPX4', weight:'13 kg',   cutW:'24 cm',  score:4.0, tag:'Grande surface SAV Stihl' },
+  ecoflowblade:  { name:'EcoFlow Blade',               price:'2 199 €', surface:'3 200 m²', nav:'Vision + GPS',               slope:'30%',  noise:'~64 dB', blades:'~55 €/an',  sub:'0 €/an',   install:'Facile (1h)',      obstacles:'Bon',      app:'4.0/5', sav:'Envoi (~2 sem)',  warranty:'2 ans', water:'IPX5', weight:'14 kg',   cutW:'26 cm',  score:4.2, tag:'Souffleur feuilles intégré' },
+  husqvarna430x: { name:'Husqvarna Automower 430X',   price:'1 799 €', surface:'3 200 m²', nav:'EPOS satellites + fil',      slope:'45%',  noise:'63 dB',  blades:'~80 €/an',  sub:'0 €/an',   install:'Complexe (2h+)',   obstacles:'Basique',  app:'4.0/5', sav:'Technicien FR',  warranty:'2 ans', water:'IPX5', weight:'11 kg',   cutW:'24 cm',  score:4.4, tag:'Expert grande surface SAV France' },
+  ambrogio:      { name:'Ambrogio L15 Elite',          price:'1 299 €', surface:'1 500 m²', nav:'Fil périmètre',              slope:'35%',  noise:'~65 dB', blades:'~45 €/an',  sub:'0 €/an',   install:'Moyen (1h30)',    obstacles:'Basique',  app:'3.5/5', sav:'Envoi (~2 sem)',  warranty:'2 ans', water:'IPX4', weight:'9,5 kg',  cutW:'22 cm',  score:4.1, tag:'30 ans expertise robustesse' },
+  luba2_1000:    { name:'Mammotion LUBA 2 AWD 1000',  price:'1 799 €', surface:'1 000 m²', nav:'RTK+IMU+Vision 4WD',         slope:'80%',  noise:'~58 dB', blades:'~60 €/an',  sub:'30 €/an',  install:'Moyen (1h30)',    obstacles:'Bon',      app:'3.9/5', sav:'Envoi (~2 sem)',  warranty:'2 ans', water:'IPX6', weight:'14 kg',   cutW:'26 cm',  score:4.3, tag:'4WD compact pentes 80%' },
+  husqvarna450:  { name:'Husqvarna Automower 450X NERA', price:'3 499 €', surface:'5 000 m²', nav:'EPOS sans câble',         slope:'50%',  noise:'58 dB',  blades:'~80 €/an',  sub:'0 €/an',   install:'Facile (1h)',      obstacles:'Basique',  app:'4.0/5', sav:'Technicien FR',  warranty:'2 ans', water:'IPX5', weight:'12 kg',   cutW:'24 cm',  score:4.7, tag:'Haut de gamme zéro câble' },
+  husqvarna435:  { name:'Husqvarna Automower 435X AWD', price:'3 199 €', surface:'3 500 m²', nav:'EPOS + 4WD',              slope:'70%',  noise:'60 dB',  blades:'~80 €/an',  sub:'0 €/an',   install:'Complexe (2h+)',   obstacles:'Basique',  app:'4.0/5', sav:'Technicien FR',  warranty:'2 ans', water:'IPX5', weight:'13 kg',   cutW:'24 cm',  score:4.5, tag:'4WD EPOS pentes 70%' }
+};
+
+/* ─── CRITERIA DEFINITIONS ─── */
+const CRITERIA = [
+  {
+    key:'price', label:'Prix', icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>',
+    compare:(a,b)=>{
+      const pa = parseFloat(a.replace(/[^\d]/g,''));
+      const pb = parseFloat(b.replace(/[^\d]/g,''));
+      if(pa < pb) return 'a';
+      if(pb < pa) return 'b';
+      return 'tie';
+    }
+  },
+  {
+    key:'surface', label:'Surface max', icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="M3 9h18M9 21V9"/></svg>',
+    compare:(a,b)=>{
+      const pa = parseInt(a.replace(/[^\d]/g,''));
+      const pb = parseInt(b.replace(/[^\d]/g,''));
+      if(pa > pb) return 'a';
+      if(pb > pa) return 'b';
+      return 'tie';
+    }
+  },
+  {
+    key:'nav', label:'Navigation', icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>',
+    compare:()=>'tie'
+  },
+  {
+    key:'slope', label:'Pentes max', icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 20L21 4M3 20h6M21 4v6"/></svg>',
+    compare:(a,b)=>{
+      const pa = parseInt(a);
+      const pb = parseInt(b);
+      if(pa > pb) return 'a';
+      if(pb > pa) return 'b';
+      return 'tie';
+    }
+  },
+  {
+    key:'noise', label:'Niveau sonore', icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M11 5L6 9H2v6h4l5 4V5zM19.07 4.93a10 10 0 010 14.14M15.54 8.46a5 5 0 010 7.07"/></svg>',
+    compare:(a,b)=>{
+      const extract = s => parseInt(s.replace(/[^\d]/g,''));
+      const pa = extract(a);
+      const pb = extract(b);
+      if(pa < pb) return 'a';
+      if(pb < pa) return 'b';
+      return 'tie';
+    }
+  },
+  {
+    key:'cutW', label:'Largeur de coupe', icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M8 3H5a2 2 0 00-2 2v3m18 0V5a2 2 0 00-2-2h-3m0 18h3a2 2 0 002-2v-3M3 16v3a2 2 0 002 2h3"/></svg>',
+    compare:(a,b)=>{
+      const pa = parseInt(a);
+      const pb = parseInt(b);
+      if(pa > pb) return 'a';
+      if(pb > pa) return 'b';
+      return 'tie';
+    }
+  },
+  {
+    key:'obstacles', label:'Évitement obstacles', icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M4.93 4.93l14.14 14.14"/></svg>',
+    compare:(a,b)=>{
+      const rank = {Excellent:5,'Très bon':4,Bon:3,Moyen:2,Basique:1};
+      const pa = rank[a] || 0;
+      const pb = rank[b] || 0;
+      if(pa > pb) return 'a';
+      if(pb > pa) return 'b';
+      return 'tie';
+    }
+  },
+  {
+    key:'app', label:'Application', icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="5" y="2" width="14" height="20" rx="2"/><path d="M12 18h.01"/></svg>',
+    compare:(a,b)=>{
+      const pa = parseFloat(a);
+      const pb = parseFloat(b);
+      if(pa > pb) return 'a';
+      if(pb > pa) return 'b';
+      return 'tie';
+    }
+  },
+  {
+    key:'sav', label:'SAV', icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8 19.79 19.79 0 012 2.18 2 2 0 014 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>',
+    compare:(a,b)=>{
+      if(a.includes('Technicien FR') || a.includes('Réseau FR')) return 'a';
+      if(b.includes('Technicien FR') || b.includes('Réseau FR')) return 'b';
+      const extractWeeks = s => { const m = s.match(/(\d+)/g); return m ? parseInt(m[0]) : 99; };
+      const wa = extractWeeks(a);
+      const wb = extractWeeks(b);
+      if(wa < wb) return 'a';
+      if(wb < wa) return 'b';
+      return 'tie';
+    }
+  },
+  {
+    key:'warranty', label:'Garantie', icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>',
+    compare:()=>'tie'
+  },
+  {
+    key:'water', label:'Étanchéité', icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2.69l5.66 5.66a8 8 0 11-11.31 0z"/></svg>',
+    compare:(a,b)=>{
+      const rank = {IPX6:3,IPX5:2,IPX4:1};
+      const pa = rank[a] || 0;
+      const pb = rank[b] || 0;
+      if(pa > pb) return 'a';
+      if(pb > pa) return 'b';
+      return 'tie';
+    }
+  },
+  {
+    key:'weight', label:'Poids', icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/></svg>',
+    compare:(a,b)=>{
+      if(a==='N/D' || b==='N/D') return 'tie';
+      const pa = parseFloat(a);
+      const pb = parseFloat(b);
+      if(pa < pb) return 'a';
+      if(pb < pa) return 'b';
+      return 'tie';
+    }
+  },
+  {
+    key:'blades', label:'Coût lames/an', icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 3l18 18M3 21L21 3"/></svg>',
+    compare:(a,b)=>{
+      const pa = parseInt(a.replace(/[^\d]/g,''));
+      const pb = parseInt(b.replace(/[^\d]/g,''));
+      if(pa < pb) return 'a';
+      if(pb < pa) return 'b';
+      return 'tie';
+    }
+  },
+  {
+    key:'sub', label:'Abonnement/an', icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>',
+    compare:(a,b)=>{
+      const pa = parseInt(a.replace(/[^\d]/g,''));
+      const pb = parseInt(b.replace(/[^\d]/g,''));
+      if(pa < pb) return 'a';
+      if(pb < pa) return 'b';
+      return 'tie';
+    }
+  },
+  {
+    key:'install', label:'Installation', icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 010 14.14M4.93 4.93a10 10 0 000 14.14"/></svg>',
+    compare:(a,b)=>{
+      const rank = {'Très facile':4,'Facile (30 min)':3,'Facile (40 min)':3,'Facile (45 min)':3,'Facile (1h)':2.5,'Moyen (1h)':2,'Moyen (1h30)':1.5,'Complexe (2h+)':1};
+      const pa = rank[a] || 2;
+      const pb = rank[b] || 2;
+      if(pa > pb) return 'a';
+      if(pb > pa) return 'b';
+      return 'tie';
+    }
+  },
+  {
+    key:'score', label:'Note utilisateurs', icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>',
+    compare:(a,b)=>{
+      if(a > b) return 'a';
+      if(b > a) return 'b';
+      return 'tie';
+    }
+  }
+];
+
+/* ─── COMPARE FUNCTION ─── */
+function runCompare(){
+  const keyA = selected.a;
+  const keyB = selected.b;
+  if(!keyA || !keyB){ alert('Veuillez sélectionner deux robots.'); return; }
+  if(keyA === keyB){ alert('Veuillez sélectionner deux robots différents.'); return; }
+
+  const rA = ROBOTS[keyA];
+  const rB = ROBOTS[keyB];
+
+  /* Build header */
+  const header = document.getElementById('cmp-header');
+  const starsA = '★'.repeat(Math.floor(rA.score)) + (rA.score % 1 >= 0.5 ? '½' : '');
+  const starsB = '★'.repeat(Math.floor(rB.score)) + (rB.score % 1 >= 0.5 ? '½' : '');
+  header.innerHTML = `
+    <div class="cmp-header-cell">
+      <span style="font-size:.72rem;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.5px;">Critère</span>
+    </div>
+    <div class="cmp-header-cell">
+      <span class="cmp-robot-tag tag-a">Robot A</span>
+      <div class="cmp-robot-name">${rA.name}</div>
+      <div class="cmp-robot-price">${rA.price}</div>
+      <div class="cmp-robot-score">${starsA} ${rA.score}/5</div>
+      <div class="cmp-robot-tagline">${rA.tag}</div>
+    </div>
+    <div class="cmp-header-cell">
+      <span class="cmp-robot-tag tag-b">Robot B</span>
+      <div class="cmp-robot-name">${rB.name}</div>
+      <div class="cmp-robot-price">${rB.price}</div>
+      <div class="cmp-robot-score">${starsB} ${rB.score}/5</div>
+      <div class="cmp-robot-tagline">${rB.tag}</div>
+    </div>
+  `;
+
+  /* Build rows */
+  let scoreA = 0, scoreB = 0;
+  const tableEl = document.getElementById('cmp-table');
+  tableEl.innerHTML = '';
+
+  CRITERIA.forEach(c => {
+    const valA = c.key === 'score' ? rA.score + '/5' : rA[c.key];
+    const valB = c.key === 'score' ? rB.score + '/5' : rB[c.key];
+    const rawA = rA[c.key];
+    const rawB = rB[c.key];
+    const winner = c.compare(rawA, rawB);
+
+    if(winner === 'a') scoreA++;
+    if(winner === 'b') scoreB++;
+
+    const classA = winner === 'a' ? 'cmp-cell a-winner' : 'cmp-cell cmp-cell-a';
+    const classB = winner === 'b' ? 'cmp-cell b-winner' : 'cmp-cell';
+
+    const row = document.createElement('div');
+    row.className = 'cmp-row';
+    row.innerHTML = `
+      <div class="cmp-row-label">${c.icon} ${c.label}</div>
+      <div class="${classA}">${valA}</div>
+      <div class="${classB}">${valB}</div>
+    `;
+    tableEl.appendChild(row);
+  });
+
+  document.getElementById('comparison').classList.add('visible');
+
+  /* Build verdict */
+  buildVerdict(keyA, keyB, rA, rB, scoreA, scoreB);
+  document.getElementById('verdict').classList.add('visible');
+  document.getElementById('comparison').scrollIntoView({behavior:'smooth', block:'start'});
+}
+
+function buildVerdict(keyA, keyB, rA, rB, scoreA, scoreB){
+  const titleEl = document.getElementById('verdict-title');
+  const textEl = document.getElementById('verdict-text');
+  const ctaEl = document.getElementById('verdict-cta');
+
+  let winner, loser, wKey, lKey;
+  if(scoreA > scoreB){ winner = rA; loser = rB; wKey = keyA; lKey = keyB; }
+  else if(scoreB > scoreA){ winner = rB; loser = rA; wKey = keyB; lKey = keyA; }
+  else { winner = null; }
+
+  if(!winner){
+    titleEl.textContent = `Match nul entre les deux robots (${scoreA}–${scoreB})`;
+    textEl.innerHTML = `
+      Le <strong>${rA.name}</strong> et le <strong>${rB.name}</strong> se neutralisent sur la majorité des critères.
+      Votre choix doit alors reposer sur des priorités personnelles : si vous avez un budget serré, préférez le modèle le moins cher.
+      Si le SAV local est crucial pour vous, le réseau après-vente doit peser dans la balance.
+      Consultez les fiches détaillées pour les avis utilisateurs réels avant de décider.
+    `;
+  } else {
+    titleEl.textContent = `${winner.name} remporte la comparaison (${Math.max(scoreA,scoreB)}–${Math.min(scoreA,scoreB)})`;
+
+    /* Build contextual advice */
+    const priceDiff = Math.abs(
+      parseInt(rA.price.replace(/[^\d]/g,'')) - parseInt(rB.price.replace(/[^\d]/g,''))
+    );
+    let advice = `Le <strong>${winner.name}</strong> s'impose sur ${Math.max(scoreA,scoreB)} critères contre ${Math.min(scoreA,scoreB)} pour le <strong>${loser.name}</strong>. `;
+
+    if(priceDiff > 300){
+      const cheaper = parseInt(rA.price.replace(/[^\d]/g,'')) < parseInt(rB.price.replace(/[^\d]/g,'')) ? rA : rB;
+      advice += `L'écart de prix est significatif (${priceDiff} €) : si votre budget est limité, le <strong>${cheaper.name}</strong> reste une option solide. `;
+    }
+
+    if(winner.slope === '80%' || winner.slope === '75%'){
+      advice += `Si votre jardin est pentu, le <strong>${winner.name}</strong> est clairement avantagé avec sa capacité de ${winner.slope} de pente. `;
+    }
+    if(winner.sav.includes('FR') || winner.sav.includes('Technicien')){
+      advice += `Le service après-vente en France du <strong>${winner.name}</strong> est un atout non négligeable pour une tranquillité d'esprit optimale. `;
+    }
+    if(winner.obstacles === 'Excellent'){
+      advice += `La détection d'obstacles du <strong>${winner.name}</strong> est classée Excellente — un critère clé pour les jardins avec mobilier, jouets ou animaux. `;
+    }
+    advice += `Consultez la fiche complète pour les avis d'acheteurs vérifiés.`;
+
+    textEl.innerHTML = advice;
+  }
+
+  ctaEl.innerHTML = `
+    <a href="fiche.html?id=${keyA}" class="verdict-btn vbtn-a">Fiche ${rA.name.split(' ')[0]} ${rA.name.split(' ')[1]} →</a>
+    <a href="fiche.html?id=${keyB}" class="verdict-btn vbtn-b">Fiche ${rB.name.split(' ')[0]} ${rB.name.split(' ')[1]} →</a>
+  `;
+}
+</script>
+</body>
+</html>

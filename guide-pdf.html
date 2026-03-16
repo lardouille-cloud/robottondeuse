@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Guide Expert — Les 7 erreurs à ne pas faire — RobotTondeuse.guide</title>
+<link href="fonts/inter.css" rel="stylesheet"/>
+<style>
+/* ═══════════════════════════════════════════════
+   VARIABLES & RESET
+═══════════════════════════════════════════════ */
+:root{
+  --dark:#080f1a;--dark2:#0d1829;--dark3:#111e33;
+  --green:#16a34a;--green-l:#22c55e;--green-xl:#4ade80;
+  --blue:#0ea5e9;--purple:#8b5cf6;--amber:#f59e0b;
+  --text:#f8fafc;--text2:#cbd5e1;--muted:#64748b;
+  --card:rgba(255,255,255,0.04);--card-h:rgba(255,255,255,0.07);
+  --border:rgba(255,255,255,0.07);--border-h:rgba(34,197,94,0.35);
+  --r:16px;--shadow:0 20px 60px rgba(0,0,0,0.4);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--dark);color:var(--text);overflow-x:hidden;min-height:100vh}
+img{max-width:100%;display:block}
+a{text-decoration:none;color:inherit}
+
+/* ═══════════════════════════════════════════════
+   NAV
+═══════════════════════════════════════════════ */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  padding:0 5%;height:68px;display:flex;align-items:center;justify-content:space-between;
+  background:rgba(8,15,26,0.92);backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border);
+}
+.nav-back{
+  display:flex;align-items:center;gap:8px;
+  color:var(--text2);font-size:.88rem;font-weight:500;
+  padding:8px 14px;border-radius:10px;
+  border:1px solid var(--border);
+  transition:all .2s;
+}
+.nav-back:hover{color:var(--text);border-color:rgba(255,255,255,.18);background:rgba(255,255,255,.06);}
+.nav-back svg{width:16px;height:16px;flex-shrink:0;}
+.nav-logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:1.05rem;letter-spacing:-.5px;}
+.nav-logo span{color:var(--green-l);}
+.nav-logo-dot{width:8px;height:8px;border-radius:50%;background:var(--green-l);animation:blink 2s infinite;}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+.nav-premium{
+  padding:9px 18px;border-radius:10px;font-size:.82rem;font-weight:700;
+  background:rgba(22,163,74,.12);border:1px solid rgba(34,197,94,.3);
+  color:var(--green-xl);transition:all .2s;cursor:pointer;
+  font-family:'Inter',sans-serif;
+}
+.nav-premium.active{background:rgba(34,197,94,.15);border-color:rgba(34,197,94,.45);}
+.nav-premium:hover{background:rgba(34,197,94,.2);}
+
+/* ═══════════════════════════════════════════════
+   PAYWALL OVERLAY
+═══════════════════════════════════════════════ */
+#paywall{
+  position:fixed;inset:0;z-index:500;
+  background:rgba(8,15,26,0.97);backdrop-filter:blur(24px);
+  display:flex;align-items:center;justify-content:center;
+  padding:20px;
+}
+#paywall.hidden{display:none;}
+.paywall-card{
+  background:var(--dark2);border:1px solid rgba(139,92,246,.3);
+  border-radius:24px;padding:52px 44px;max-width:500px;width:100%;
+  text-align:center;box-shadow:0 40px 80px rgba(0,0,0,.6),0 0 60px rgba(139,92,246,.07);
+}
+.paywall-icon{
+  width:76px;height:76px;border-radius:20px;
+  background:rgba(139,92,246,.1);border:1px solid rgba(139,92,246,.25);
+  display:flex;align-items:center;justify-content:center;
+  margin:0 auto 24px;font-size:2.2rem;
+}
+.paywall-badge{
+  display:inline-flex;align-items:center;gap:6px;
+  background:rgba(139,92,246,.1);border:1px solid rgba(139,92,246,.25);
+  border-radius:999px;padding:5px 14px;font-size:.78rem;font-weight:600;
+  color:#c4b5fd;margin-bottom:20px;
+}
+.paywall-badge-dot{width:6px;height:6px;border-radius:50%;background:#c4b5fd;animation:blink 2s infinite;}
+.paywall-card h2{font-size:1.6rem;font-weight:800;letter-spacing:-.5px;margin-bottom:12px;}
+.paywall-card p{color:var(--text2);font-size:.95rem;line-height:1.65;margin-bottom:24px;}
+.paywall-price-row{
+  display:flex;align-items:center;justify-content:center;gap:14px;
+  margin-bottom:28px;
+}
+.paywall-old-price{font-size:1rem;color:var(--muted);text-decoration:line-through;}
+.paywall-new-price{font-size:2rem;font-weight:800;color:var(--green-l);}
+.paywall-perks{display:flex;flex-direction:column;gap:8px;text-align:left;margin-bottom:28px;}
+.paywall-perk{
+  display:flex;align-items:center;gap:10px;
+  background:rgba(255,255,255,.03);border:1px solid var(--border);
+  border-radius:10px;padding:10px 14px;font-size:.85rem;color:var(--text2);
+}
+.paywall-perk-icon{color:var(--green-xl);font-size:1rem;flex-shrink:0;}
+.btn-unlock{
+  display:block;width:100%;padding:17px 24px;border-radius:14px;
+  background:linear-gradient(135deg,var(--green) 0%,var(--green-l) 100%);
+  color:#fff;font-size:1.05rem;font-weight:700;border:none;cursor:pointer;
+  font-family:'Inter',sans-serif;transition:all .25s;
+  box-shadow:0 8px 24px rgba(22,163,74,.35);text-align:center;
+  letter-spacing:-.2px;margin-bottom:14px;
+}
+.btn-unlock:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(22,163,74,.45);}
+.paywall-back{color:var(--muted);font-size:.85rem;transition:color .2s;}
+.paywall-back:hover{color:var(--text2);}
+
+/* ═══════════════════════════════════════════════
+   PAGE HERO
+═══════════════════════════════════════════════ */
+.page-hero{
+  padding:120px 5% 56px;
+  background:linear-gradient(160deg,#040a12 0%,#0a0614 50%,#040d1a 100%);
+  position:relative;overflow:hidden;
+}
+.page-hero::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 60% 50% at 80% 40%,rgba(139,92,246,.1) 0%,transparent 60%),
+             radial-gradient(ellipse 30% 40% at 10% 80%,rgba(22,163,74,.07) 0%,transparent 50%);
+}
+.page-hero-grid{
+  position:absolute;inset:0;opacity:.025;
+  background-image:linear-gradient(rgba(255,255,255,.6) 1px,transparent 1px),
+                   linear-gradient(90deg,rgba(255,255,255,.6) 1px,transparent 1px);
+  background-size:60px 60px;
+}
+.page-hero-inner{position:relative;z-index:1;max-width:760px;}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(139,92,246,.12);border:1px solid rgba(139,92,246,.3);
+  border-radius:999px;padding:7px 16px;font-size:.78rem;font-weight:600;
+  color:#c4b5fd;margin-bottom:22px;letter-spacing:.3px;
+}
+.hero-badge-dot{width:6px;height:6px;border-radius:50%;background:#c4b5fd;animation:blink 2s infinite;}
+.page-hero h1{font-size:clamp(1.9rem,4vw,2.9rem);font-weight:800;letter-spacing:-.8px;line-height:1.15;margin-bottom:16px;}
+.page-hero h1 span{
+  background:linear-gradient(135deg,#a78bfa,var(--green-l));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.page-hero p{color:var(--text2);font-size:1.05rem;line-height:1.7;max-width:600px;}
+.hero-actions{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:28px;}
+.btn-print{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:12px 22px;border-radius:12px;font-size:.9rem;font-weight:700;
+  background:var(--green);color:#fff;border:none;cursor:pointer;
+  font-family:'Inter',sans-serif;transition:all .25s;
+  box-shadow:0 4px 16px rgba(22,163,74,.3);
+}
+.btn-print:hover{background:var(--green-l);transform:translateY(-1px);}
+.hero-meta{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-top:24px;}
+.hero-meta-item{display:flex;align-items:center;gap:6px;font-size:.82rem;color:var(--muted);}
+.hero-meta-item span{color:var(--text2);}
+
+/* ═══════════════════════════════════════════════
+   MAIN LAYOUT
+═══════════════════════════════════════════════ */
+main{max-width:860px;margin:0 auto;padding:52px 5% 80px;}
+
+/* ═══════════════════════════════════════════════
+   SECTION INTRO
+═══════════════════════════════════════════════ */
+.section-intro{
+  text-align:center;margin-bottom:40px;
+}
+.section-intro h2{
+  font-size:clamp(1.3rem,3vw,1.7rem);font-weight:800;
+  letter-spacing:-.4px;margin-bottom:8px;
+}
+.section-intro p{color:var(--muted);font-size:.92rem;line-height:1.6;max-width:540px;margin:0 auto;}
+
+/* ═══════════════════════════════════════════════
+   ERROR CARDS
+═══════════════════════════════════════════════ */
+.errors-grid{display:flex;flex-direction:column;gap:20px;}
+
+.error-card{
+  background:var(--dark2);border:1px solid var(--border);
+  border-radius:var(--r);padding:32px 36px;
+  display:flex;gap:28px;align-items:flex-start;
+  transition:border-color .2s,transform .2s;
+  animation:fadeUp .4s ease both;
+}
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+.error-card:hover{border-color:rgba(255,255,255,.12);transform:translateY(-1px);}
+
+.error-num{
+  font-size:3.5rem;font-weight:900;letter-spacing:-3px;line-height:1;
+  opacity:.18;flex-shrink:0;
+  min-width:80px;text-align:right;
+  transition:opacity .2s;user-select:none;
+  font-variant-numeric:tabular-nums;
+}
+.error-card:hover .error-num{opacity:.3;}
+
+.error-body{flex:1;min-width:0;}
+.error-label{
+  display:inline-flex;align-items:center;gap:6px;
+  background:rgba(139,92,246,.1);border:1px solid rgba(139,92,246,.2);
+  border-radius:999px;padding:3px 12px;font-size:.73rem;font-weight:700;
+  color:#c4b5fd;letter-spacing:.5px;text-transform:uppercase;margin-bottom:12px;
+}
+.error-title{
+  font-size:1.15rem;font-weight:800;letter-spacing:-.3px;
+  color:var(--text);margin-bottom:12px;line-height:1.3;
+}
+.error-text{
+  font-size:.93rem;color:var(--text2);line-height:1.7;
+}
+.error-text strong{color:var(--text);font-weight:600;}
+
+/* Accent left border + number color per card */
+.error-card:nth-child(1){border-left:3px solid var(--green-l);}
+.error-card:nth-child(1) .error-num{color:var(--green-xl);}
+
+.error-card:nth-child(2){border-left:3px solid var(--amber);}
+.error-card:nth-child(2) .error-num{color:var(--amber);}
+
+.error-card:nth-child(3){border-left:3px solid var(--blue);}
+.error-card:nth-child(3) .error-num{color:var(--blue);}
+
+.error-card:nth-child(4){border-left:3px solid #ef4444;}
+.error-card:nth-child(4) .error-num{color:#f87171;}
+
+.error-card:nth-child(5){border-left:3px solid var(--purple);}
+.error-card:nth-child(5) .error-num{color:#a78bfa;}
+
+.error-card:nth-child(6){border-left:3px solid var(--amber);}
+.error-card:nth-child(6) .error-num{color:var(--amber);}
+
+.error-card:nth-child(7){border-left:3px solid var(--blue);}
+.error-card:nth-child(7) .error-num{color:var(--blue);}
+
+/* ═══════════════════════════════════════════════
+   QUICK CHECKLIST
+═══════════════════════════════════════════════ */
+.quick-section{margin-top:40px;}
+.quick-header{
+  display:flex;align-items:center;gap:12px;margin-bottom:20px;flex-wrap:wrap;
+}
+.quick-header h2{font-size:1.15rem;font-weight:800;letter-spacing:-.3px;}
+.quick-badge{
+  display:inline-flex;align-items:center;gap:6px;
+  background:rgba(22,163,74,.1);border:1px solid rgba(22,163,74,.25);
+  border-radius:999px;padding:4px 12px;font-size:.73rem;font-weight:700;
+  color:var(--green-xl);letter-spacing:.3px;
+}
+
+.quick-card{
+  background:var(--dark2);border:1px solid var(--border);
+  border-radius:var(--r);overflow:hidden;
+}
+.quick-card-header{
+  padding:18px 24px;
+  background:rgba(22,163,74,.05);border-bottom:1px solid var(--border);
+  font-size:.85rem;color:var(--muted);font-style:italic;
+}
+.quick-items{padding:8px 0;}
+.quick-item{
+  display:flex;align-items:flex-start;gap:16px;
+  padding:14px 24px;border-bottom:1px solid rgba(255,255,255,.04);
+  transition:background .15s;
+}
+.quick-item:last-child{border-bottom:none;}
+.quick-item:hover{background:rgba(255,255,255,.02);}
+.quick-check{
+  width:22px;height:22px;border-radius:50%;
+  border:2px solid rgba(34,197,94,.35);
+  flex-shrink:0;margin-top:2px;
+  display:flex;align-items:center;justify-content:center;
+  background:rgba(22,163,74,.07);
+}
+.quick-check::after{content:'?';font-size:.72rem;font-weight:800;color:var(--green-xl);}
+.quick-text{font-size:.9rem;color:var(--text2);line-height:1.55;}
+.quick-text strong{color:var(--text);font-weight:600;}
+
+/* ═══════════════════════════════════════════════
+   FOOTER
+═══════════════════════════════════════════════ */
+footer{
+  border-top:1px solid var(--border);padding:32px 5%;
+  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;
+  background:rgba(8,15,26,.6);
+}
+.footer-logo{display:flex;align-items:center;gap:8px;font-weight:700;font-size:.95rem;}
+.footer-logo span{color:var(--green-l);}
+.footer-links{display:flex;gap:20px;}
+.footer-links a{font-size:.85rem;color:var(--muted);transition:color .2s;}
+.footer-links a:hover{color:var(--text2);}
+.footer-copy{font-size:.8rem;color:var(--muted);}
+
+/* ═══════════════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════════════ */
+@media(max-width:640px){
+  nav{padding:0 4%;}
+  main{padding:40px 4% 60px;}
+  .error-card{padding:22px 20px;gap:16px;flex-direction:column;}
+  .error-num{font-size:2.8rem;min-width:auto;text-align:left;}
+  .paywall-card{padding:36px 24px;}
+  .quick-item{padding:12px 18px;}
+  .quick-card-header{padding:14px 18px;}
+}
+
+/* ═══════════════════════════════════════════════
+   PRINT STYLES
+═══════════════════════════════════════════════ */
+@media print{
+  nav,.hero-actions,footer,#paywall{display:none!important;}
+  body{background:#fff!important;color:#111!important;font-size:12pt;}
+  .page-hero{
+    background:#fff!important;padding:20pt 0 14pt!important;
+    border-bottom:2pt solid #8b5cf6;margin-bottom:14pt;
+  }
+  .page-hero::before,.page-hero-grid{display:none!important;}
+  .page-hero h1{font-size:18pt!important;color:#111!important;}
+  .page-hero h1 span{-webkit-text-fill-color:#8b5cf6!important;color:#8b5cf6!important;}
+  .page-hero p{color:#444!important;}
+  .hero-badge{background:#f5f3ff!important;border-color:#8b5cf6!important;color:#6d28d9!important;}
+  main{max-width:100%;padding:0!important;}
+  .section-intro p,.section-intro h2{color:#333!important;}
+  .error-card{
+    background:#fff!important;border:1pt solid #e2e8f0!important;
+    border-radius:4pt!important;margin-bottom:10pt;
+    break-inside:avoid;box-shadow:none!important;
+    padding:14pt!important;transform:none!important;
+  }
+  .error-card:nth-child(1){border-left:3pt solid #22c55e!important;}
+  .error-card:nth-child(2){border-left:3pt solid #f59e0b!important;}
+  .error-card:nth-child(3){border-left:3pt solid #0ea5e9!important;}
+  .error-card:nth-child(4){border-left:3pt solid #ef4444!important;}
+  .error-card:nth-child(5){border-left:3pt solid #8b5cf6!important;}
+  .error-card:nth-child(6){border-left:3pt solid #f59e0b!important;}
+  .error-card:nth-child(7){border-left:3pt solid #0ea5e9!important;}
+  .error-num{opacity:.15!important;font-size:24pt!important;color:#aaa!important;}
+  .error-title{color:#111!important;font-size:11pt!important;}
+  .error-text{color:#333!important;font-size:10pt!important;}
+  .error-label{background:#f5f3ff!important;color:#6d28d9!important;border-color:#ddd8fe!important;}
+  .quick-card{background:#f9fafb!important;border:1pt solid #e2e8f0!important;box-shadow:none!important;}
+  .quick-card-header{background:#f0fdf4!important;color:#555!important;border-color:#e2e8f0!important;}
+  .quick-item{border-bottom:1pt solid #f1f5f9!important;}
+  .quick-check{border-color:#16a34a!important;background:#f0fdf4!important;}
+  .quick-check::after{color:#16a34a!important;}
+  .quick-text{color:#333!important;}
+  .quick-text strong{color:#111!important;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-back">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+    Retour
+  </a>
+  <div class="nav-logo">
+    <div class="nav-logo-dot"></div>
+    🌿 Robot<span>Tondeuse</span>.guide
+  </div>
+  <button class="nav-premium" id="nav-premium" onclick="window.location='acces-gratuit.html'">
+    🔒 Accès Complet — 4,99 €
+  </button>
+</nav>
+
+<!-- PAYWALL OVERLAY -->
+<div id="paywall">
+  <div class="paywall-card">
+    <div class="paywall-icon">⚠️</div>
+    <div class="paywall-badge"><span class="paywall-badge-dot"></span>Contenu Accès Complet</div>
+    <h2>🔒 Contenu Accès Complet</h2>
+    <p>Ce guide détaille les 7 erreurs les plus fréquentes lors de l'achat d'un robot tondeuse — et comment les éviter. Rédigé après analyse de centaines de retours d'expérience.</p>
+    <div class="paywall-price-row">
+      <span class="paywall-old-price">9,99 €</span>
+      <span class="paywall-new-price">4,99 €</span>
+    </div>
+    <div class="paywall-perks">
+      <div class="paywall-perk"><span class="paywall-perk-icon">✓</span>Les 7 erreurs à éviter absolument avant achat</div>
+      <div class="paywall-perk"><span class="paywall-perk-icon">✓</span>Checklist rapide avant achat (5 questions clés)</div>
+      <div class="paywall-perk"><span class="paywall-perk-icon">✓</span>Checklist compatibilité jardin imprimable (24 points)</div>
+      <div class="paywall-perk"><span class="paywall-perk-icon">✓</span>Comparatif complet des 10 meilleurs robots 2026</div>
+    </div>
+    <a href="acces-gratuit.html" class="btn-unlock">Débloquer l'accès pour 4,99 €</a>
+    <a href="index.html" class="paywall-back">← Retour au comparatif</a>
+  </div>
+</div>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="page-hero-grid"></div>
+  <div class="page-hero-inner">
+    <div class="hero-badge">
+      <span class="hero-badge-dot"></span>
+      Accès Complet — Guide exclusif
+    </div>
+    <h1>Les <span>7 erreurs</span> à ne pas faire</h1>
+    <p>Avant d'acheter un robot tondeuse, évitez ces pièges que font 80% des acheteurs. Chaque erreur peut vous coûter des centaines d'euros ou vous condamner à revendre votre robot au bout d'un an.</p>
+    <div class="hero-actions">
+      <button class="btn-print" onclick="window.print()">🖨️ Imprimer le guide</button>
+    </div>
+    <div class="hero-meta">
+      <div class="hero-meta-item">📖 <span>7 erreurs documentées</span></div>
+      <div class="hero-meta-item">✅ <span>Checklist avant achat</span></div>
+      <div class="hero-meta-item">⏱️ <span>~8 min de lecture</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN -->
+<main>
+
+<div class="section-intro">
+  <h2>Les erreurs qui coûtent cher</h2>
+  <p>Ces 7 erreurs sont classées par fréquence et impact financier. Lisez-les avant tout achat, même si vous pensez avoir déjà bien fait vos recherches.</p>
+</div>
+
+<div class="errors-grid">
+
+  <!-- ERREUR 1 -->
+  <div class="error-card">
+    <div class="error-num">01</div>
+    <div class="error-body">
+      <div class="error-label">Erreur #1</div>
+      <div class="error-title">Choisir un robot sous-dimensionné</div>
+      <div class="error-text">
+        La surface annoncée par les fabricants est mesurée dans des conditions idéales. En pratique, comptez <strong>75% de la capacité max</strong>. Un jardin de 800 m² avec obstacles et zones d'ombre nécessite un robot certifié <strong>1 000 m²+</strong>. Un robot sous-dimensionné tournera en permanence à pleine charge, usera sa batterie prématurément et ne finira jamais sa tâche dans les délais prévus.
+      </div>
+    </div>
+  </div>
+
+  <!-- ERREUR 2 -->
+  <div class="error-card">
+    <div class="error-num">02</div>
+    <div class="error-body">
+      <div class="error-label">Erreur #2</div>
+      <div class="error-title">Ignorer les pentes réelles</div>
+      <div class="error-text">
+        La pente maximale annoncée correspond au pic, pas à la pente continue. Pour une utilisation quotidienne sur tout le jardin, prenez la limite déclarée et <strong>multipliez par 0,85</strong>. Un robot "<strong>45%</strong>" est sûr jusqu'à <strong>38%</strong> en usage réel. Au-delà, les roues patinent, le robot se bloque et la batterie est sollicitée en permanence — une panne en moins de 18 mois est quasi certaine.
+      </div>
+    </div>
+  </div>
+
+  <!-- ERREUR 3 -->
+  <div class="error-card">
+    <div class="error-num">03</div>
+    <div class="error-body">
+      <div class="error-label">Erreur #3</div>
+      <div class="error-title">Négliger l'emplacement de la station de recharge</div>
+      <div class="error-text">
+        La station doit être sur <strong>terrain plat</strong>, à l'abri des intempéries directes et accessible depuis n'importe quel coin du jardin. Un mauvais emplacement = retours ratés, batterie non rechargée, robot bloqué en pleine nuit. Prévoyez également que la station soit dans le <strong>champ de vision direct</strong> du robot lors de son retour — les obstacles entre la station et le robot multiplient les échecs de reconnaissance.
+      </div>
+    </div>
+  </div>
+
+  <!-- ERREUR 4 -->
+  <div class="error-card">
+    <div class="error-num">04</div>
+    <div class="error-body">
+      <div class="error-label">Erreur #4</div>
+      <div class="error-title">Sous-estimer les coûts cachés</div>
+      <div class="error-text">
+        Prix du robot affiché ≠ coût réel. Ajoutez : <strong>lames de rechange</strong> (30–80 €/an), <strong>abonnement SIM</strong> pour Mammotion (30 €/an), <strong>installation câble périphérique</strong> pour Husqvarna (150–250 €), accessoires (câbles, stations supplémentaires). Le vrai coût sur 3 ans dépasse souvent de <strong>30%</strong> le prix d'achat. Utilisez toujours la formule : <strong>budget réel = prix robot × 1,25</strong> pour la première année.
+      </div>
+    </div>
+  </div>
+
+  <!-- ERREUR 5 -->
+  <div class="error-card">
+    <div class="error-num">05</div>
+    <div class="error-body">
+      <div class="error-label">Erreur #5</div>
+      <div class="error-title">Acheter sans tester l'application</div>
+      <div class="error-text">
+        L'app, c'est <strong>50% de l'expérience</strong>. Avant d'acheter, téléchargez l'application du robot — toutes sont disponibles en mode démo — et testez-la pendant <strong>10 minutes</strong>. Une interface instable ou peu intuitive vous suivra <strong>365 jours par an</strong>. Les marques qui changent d'app sans préavis (cela arrive) vous forcent à réapprendre l'interface en pleine saison. Privilégiez les apps avec plus de 10 000 avis et une note supérieure à 4/5.
+      </div>
+    </div>
+  </div>
+
+  <!-- ERREUR 6 -->
+  <div class="error-card">
+    <div class="error-num">06</div>
+    <div class="error-body">
+      <div class="error-label">Erreur #6</div>
+      <div class="error-title">Négliger le SAV</div>
+      <div class="error-text">
+        En Europe, les normes de garantie imposent <strong>2 ans minimum</strong>. Mais la qualité du SAV varie : certaines marques réparent en <strong>5 jours</strong>, d'autres renvoient l'appareil en entrepôt pour <strong>3–4 semaines</strong>. Vérifiez les avis <strong>Google / Trustpilot du SAV</strong> avant d'acheter, pas seulement les avis produit. En été, un robot en panne 3 semaines = votre jardin en friche. Demandez explicitement le délai de réparation moyen au revendeur.
+      </div>
+    </div>
+  </div>
+
+  <!-- ERREUR 7 -->
+  <div class="error-card">
+    <div class="error-num">07</div>
+    <div class="error-body">
+      <div class="error-label">Erreur #7</div>
+      <div class="error-title">Oublier l'hivernage</div>
+      <div class="error-text">
+        Un robot qu'on laisse dehors sous la pluie et le gel en décembre, c'est une <strong>panne garantie au printemps</strong>. Prévoyez : un espace de stockage intérieur, une <strong>vérification de batterie avant remisage</strong> (idéalement chargée à 60–80%), et un démarrage progressif en mars avec une <strong>tonte manuelle préalable</strong> si le gazon a dépassé 8 cm. Négliger l'hivernage réduit la durée de vie de la batterie de 30 à 50%.
+      </div>
+    </div>
+  </div>
+
+</div><!-- /.errors-grid -->
+
+<!-- QUICK CHECKLIST -->
+<div class="quick-section">
+  <div class="quick-header">
+    <h2>✅ Checklist rapide avant achat</h2>
+    <span class="quick-badge">5 questions essentielles</span>
+  </div>
+  <div class="quick-card">
+    <div class="quick-card-header">
+      Répondez "oui" aux 5 questions avant de valider votre commande.
+    </div>
+    <div class="quick-items">
+      <div class="quick-item">
+        <div class="quick-check"></div>
+        <div class="quick-text"><strong>Surface réelle</strong> &lt; 75% de la capacité max du robot ?</div>
+      </div>
+      <div class="quick-item">
+        <div class="quick-check"></div>
+        <div class="quick-text"><strong>Pente réelle</strong> &lt; 85% de la limite déclarée ?</div>
+      </div>
+      <div class="quick-item">
+        <div class="quick-check"></div>
+        <div class="quick-text"><strong>SAV France</strong> avec délai confirmé &lt; 10 jours ?</div>
+      </div>
+      <div class="quick-item">
+        <div class="quick-check"></div>
+        <div class="quick-text"><strong>Application testée</strong> en mode démo et jugée intuitive ?</div>
+      </div>
+      <div class="quick-item">
+        <div class="quick-check"></div>
+        <div class="quick-text"><strong>Budget total</strong> (robot + 3 ans de consommables) acceptable ?</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">
+    <div class="nav-logo-dot"></div>
+    🌿 Robot<span>Tondeuse</span>.guide
+  </div>
+  <div class="footer-links">
+    <a href="index.html">← Comparatif complet</a>
+    <a href="checklist.html">Checklist jardin</a>
+    <a href="simulateur.html">Simulateur coût</a>
+  </div>
+  <div class="footer-copy">© 2026 RobotTondeuse.guide</div>
+</footer>
+
+<script>
+/* ═══════════════════ PAYWALL ═══════════════════ */
+const ACCESS_KEY = 'rt_premium_v1';
+function isPaid(){ return localStorage.getItem(ACCESS_KEY) === 'true'; }
+
+document.addEventListener('DOMContentLoaded', function(){
+  const paid = isPaid();
+  if(paid){
+    document.getElementById('paywall').classList.add('hidden');
+    const btn = document.getElementById('nav-premium');
+    btn.textContent = '✅ Accès Complet actif';
+    btn.classList.add('active');
+    btn.onclick = null;
+    btn.style.cursor = 'default';
+  }
+  /* Stagger animation for error cards */
+  document.querySelectorAll('.error-card').forEach(function(card, idx){
+    card.style.animationDelay = (idx * 70) + 'ms';
+  });
+});
+</script>
+</body>
+</html>
