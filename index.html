@@ -1725,13 +1725,15 @@ function updatePremiumUI(rerender){
     if(banner){ banner.style.display = 'none'; }
     gates.forEach(g=>{ if(g) g.classList.remove('locked'); });
     if(table) table.classList.remove('score-blurred');
-    if(pg) pg.classList.remove('scores-blurred');
+    const gridEl = document.getElementById('productGrid');
+    if(gridEl) gridEl.classList.remove('scores-blurred');
     buildRanking();
   } else {
     gates.forEach(g=>{ if(g) g.classList.add('locked'); });
-    if(pg){
-      pg.classList.add('scores-blurred');
-      pg.addEventListener('click', function(e){
+    const gridEl = document.getElementById('productGrid');
+    if(gridEl){
+      gridEl.classList.add('scores-blurred');
+      gridEl.addEventListener('click', function(e){
         if(e.target.closest('.pc-score')) showPaywall();
       }, {once:false});
     }
