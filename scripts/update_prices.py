@@ -185,7 +185,6 @@ ROBOTS = {
             "https://www.leroymerlin.fr/recherche?q=bosch+indego+xs+300",
             "https://www.boulanger.com/recherche/bosch+indego+xs+300",
             "https://www.darty.com/nav/extra/recherche/bosch+indego+xs+300.html",
-            "https://www.cdiscount.com/search/10/bosch+indego+xs+300.html",
         ],
     },
     "boschm700": {
@@ -206,7 +205,6 @@ ROBOTS = {
             "https://www.leroymerlin.fr/recherche?q=gardena+sileno+minimo+250",
             "https://www.boulanger.com/recherche/gardena+sileno+minimo",
             "https://www.darty.com/nav/extra/recherche/gardena+sileno+minimo.html",
-            "https://www.cdiscount.com/search/10/gardena+sileno+minimo.html",
         ],
     },
     "gardena750": {
@@ -217,7 +215,6 @@ ROBOTS = {
             "https://www.leroymerlin.fr/recherche?q=gardena+sileno+life+750",
             "https://www.boulanger.com/recherche/gardena+sileno+life+750",
             "https://www.darty.com/nav/extra/recherche/gardena+sileno+life.html",
-            "https://www.cdiscount.com/search/10/gardena+sileno+life+750.html",
         ],
     },
     "husqvarna115h": {
@@ -251,7 +248,6 @@ ROBOTS = {
             "https://www.leroymerlin.fr/recherche?q=stiga+a+1000+tondeuse",
             "https://www.boulanger.com/recherche/stiga+a+1000",
             "https://www.darty.com/nav/extra/recherche/stiga+a+1000.html",
-            "https://www.cdiscount.com/search/10/stiga+a+1000.html",
         ],
     },
     "kress": {
@@ -306,7 +302,6 @@ ROBOTS = {
             "https://www.leroymerlin.fr/recherche?q=robomow+rs635",
             "https://www.boulanger.com/recherche/robomow+rs635",
             "https://www.darty.com/nav/extra/recherche/robomow+rs635.html",
-            "https://www.cdiscount.com/search/10/robomow+rs635.html",
         ],
     },
     "stiga3000": {
@@ -317,7 +312,6 @@ ROBOTS = {
             "https://www.leroymerlin.fr/recherche?q=stiga+a+3000+tondeuse",
             "https://www.boulanger.com/recherche/stiga+a+3000",
             "https://www.darty.com/nav/extra/recherche/stiga+a+3000.html",
-            "https://www.cdiscount.com/search/10/stiga+a+3000.html",
         ],
     },
     "vikingmi632": {
@@ -364,7 +358,6 @@ ROBOTS = {
             "https://www.leroymerlin.fr/recherche?q=ambrogio+l15",
             "https://www.boulanger.com/recherche/ambrogio+l15",
             "https://www.darty.com/nav/extra/recherche/ambrogio+l15.html",
-            "https://www.cdiscount.com/search/10/ambrogio+l15.html",
         ],
     },
     "luba2_1000": {
