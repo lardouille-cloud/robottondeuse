@@ -1764,33 +1764,27 @@ updatePremiumUI();
    ACTIVE NAV DETECTION
 ════════════════════════════ */
 (function(){
-  const sections = ['technos','produits','comparaison','classement','quiz','conseils','outils','questions'];
+  const sectionIds = ['technos','produits','comparaison','classement','quiz','conseils','outils','questions'];
   const navLinks = document.querySelectorAll('.nav-links a[data-section]');
+  const nav = document.getElementById('nav');
   if(!navLinks.length) return;
 
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if(entry.isIntersecting){
-        const id = entry.target.id;
-        navLinks.forEach(a => {
-          a.classList.toggle('nav-active', a.dataset.section === id);
-        });
+  function updateActive(){
+    const scrollY = window.scrollY;
+    const offset = 80; // nav height + margin
+    let current = sectionIds[0];
+    for(const id of sectionIds){
+      const el = document.getElementById(id);
+      if(el && el.getBoundingClientRect().top + scrollY - offset <= scrollY){
+        current = id;
       }
-    });
-  }, { threshold: 0.25, rootMargin: '-60px 0px -40% 0px' });
+    }
+    navLinks.forEach(a => a.classList.toggle('nav-active', a.dataset.section === current));
+    nav.style.background = scrollY > 40 ? 'rgba(8,15,26,0.97)' : 'rgba(8,15,26,0.85)';
+  }
 
-  sections.forEach(id => {
-    const el = document.getElementById(id);
-    if(el) observer.observe(el);
-  });
-
-  // Nav background on scroll
-  const nav = document.getElementById('nav');
-  window.addEventListener('scroll', () => {
-    nav.style.background = window.scrollY > 40
-      ? 'rgba(8,15,26,0.97)'
-      : 'rgba(8,15,26,0.85)';
-  }, { passive: true });
+  window.addEventListener('scroll', updateActive, { passive: true });
+  updateActive();
 })();
 
 /* ════════════════════════════
