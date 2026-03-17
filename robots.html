@@ -515,6 +515,7 @@ const PRODUCTS=[
 ];
 
 function esc(s){const d=document.createElement('div');d.textContent=s;return d.innerHTML;}
+function toSlug(name){return name.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[×]/g,'x').replace(/[^a-z0-9]+/g,'-').replace(/^-+|-+$/g,'');}
 
 /* Render products */
 const pg = document.getElementById('productGrid');
@@ -540,7 +541,7 @@ function renderGrid(){
         </div>
         <div class="pc-footer">
           <div class="pc-price">${esc(p.price)}</div>
-          <span class="pc-fiche">Voir la fiche →</span>
+          <a href="${toSlug(p.name)}.html" class="pc-fiche">Voir la fiche →</a>
         </div>
       </div>
       ${locked ? `<div class="card-lock-overlay" onclick="showPaywall()">
@@ -552,7 +553,7 @@ function renderGrid(){
     if(!locked){
       div.style.cursor = 'pointer';
       div.addEventListener('click', e => {
-        if(!e.target.closest('a')) window.location.href = 'fiche.html?id=' + p.id;
+        if(!e.target.closest('a')) window.location.href = toSlug(p.name) + '.html';
       });
     }
     pg.appendChild(div);

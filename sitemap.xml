@@ -86,215 +86,187 @@
     <priority>0.85</priority>
   </url>
 
-  <!-- Fiches produits individuelles — 30 robots -->
+  <!-- Fiches produits statiques — 30 robots -->
+
   <url>
-    <loc>https://tondeuserobotguide.fr/fiche.html?id=navimow</loc>
+    <loc>https://tondeuserobotguide.fr/segway-navimow-i105e.html</loc>
     <lastmod>2026-03-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
-
   <url>
-    <loc>https://tondeuserobotguide.fr/fiche.html?id=ecovacs</loc>
+    <loc>https://tondeuserobotguide.fr/ecovacs-goat-o800-rtk.html</loc>
     <lastmod>2026-03-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
-
   <url>
-    <loc>https://tondeuserobotguide.fr/fiche.html?id=dreame</loc>
+    <loc>https://tondeuserobotguide.fr/dreame-a1-pro.html</loc>
     <lastmod>2026-03-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
-
   <url>
-    <loc>https://tondeuserobotguide.fr/fiche.html?id=worx</loc>
+    <loc>https://tondeuserobotguide.fr/worx-landroid-vision-wr208e.html</loc>
     <lastmod>2026-03-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
-
   <url>
-    <loc>https://tondeuserobotguide.fr/fiche.html?id=yuka</loc>
+    <loc>https://tondeuserobotguide.fr/mammotion-yuka-mini-vision.html</loc>
     <lastmod>2026-03-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
-
   <url>
-    <loc>https://tondeuserobotguide.fr/fiche.html?id=luba2</loc>
+    <loc>https://tondeuserobotguide.fr/mammotion-luba-2-awd-3000x.html</loc>
     <lastmod>2026-03-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
-
   <url>
-    <loc>https://tondeuserobotguide.fr/fiche.html?id=husqvarna</loc>
+    <loc>https://tondeuserobotguide.fr/husqvarna-automower-320-nera.html</loc>
     <lastmod>2026-03-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
-
   <url>
-    <loc>https://tondeuserobotguide.fr/fiche.html?id=mova</loc>
+    <loc>https://tondeuserobotguide.fr/mova-lidax-ultra-1200.html</loc>
     <lastmod>2026-03-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
-
   <url>
-    <loc>https://tondeuserobotguide.fr/fiche.html?id=a3pro</loc>
+    <loc>https://tondeuserobotguide.fr/dreame-a3-awd-pro-3500.html</loc>
     <lastmod>2026-03-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
-
   <url>
-    <loc>https://tondeuserobotguide.fr/fiche.html?id=luba3</loc>
+    <loc>https://tondeuserobotguide.fr/mammotion-luba-3-awd-3000.html</loc>
     <lastmod>2026-03-17</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.85</priority>
   </url>
-
   <url>
-    <loc>https://tondeuserobotguide.fr/fiche.html?id=boschxs</loc>
+    <loc>https://tondeuserobotguide.fr/bosch-indego-xs-300.html</loc>
     <lastmod>2026-03-17</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.85</priority>
   </url>
-
   <url>
-    <loc>https://tondeuserobotguide.fr/fiche.html?id=boschm700</loc>
+    <loc>https://tondeuserobotguide.fr/bosch-indego-m-700.html</loc>
     <lastmod>2026-03-17</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.85</priority>
   </url>
-
   <url>
-    <loc>https://tondeuserobotguide.fr/fiche.html?id=gardenaminimo</loc>
+    <loc>https://tondeuserobotguide.fr/gardena-sileno-minimo-250.html</loc>
     <lastmod>2026-03-17</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.85</priority>
   </url>
-
   <url>
-    <loc>https://tondeuserobotguide.fr/fiche.html?id=gardena750</loc>
+    <loc>https://tondeuserobotguide.fr/gardena-sileno-life-750.html</loc>
     <lastmod>2026-03-17</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.85</priority>
   </url>
-
   <url>
-    <loc>https://tondeuserobotguide.fr/fiche.html?id=husqvarna115h</loc>
+    <loc>https://tondeuserobotguide.fr/husqvarna-automower-115h.html</loc>
     <lastmod>2026-03-17</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.85</priority>
   </url>
-
   <url>
-    <loc>https://tondeuserobotguide.fr/fiche.html?id=navimow108</loc>
+    <loc>https://tondeuserobotguide.fr/segway-navimow-i108e.html</loc>
     <lastmod>2026-03-17</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.85</priority>
   </url>
-
   <url>
-    <loc>https://tondeuserobotguide.fr/fiche.html?id=stiga1000</loc>
+    <loc>https://tondeuserobotguide.fr/stiga-a-1000.html</loc>
     <lastmod>2026-03-17</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.85</priority>
   </url>
-
   <url>
-    <loc>https://tondeuserobotguide.fr/fiche.html?id=kress</loc>
+    <loc>https://tondeuserobotguide.fr/kress-mission-5-rtk.html</loc>
     <lastmod>2026-03-17</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.85</priority>
   </url>
-
   <url>
-    <loc>https://tondeuserobotguide.fr/fiche.html?id=honda520</loc>
+    <loc>https://tondeuserobotguide.fr/honda-miimo-520.html</loc>
     <lastmod>2026-03-17</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.85</priority>
   </url>
-
   <url>
-    <loc>https://tondeuserobotguide.fr/fiche.html?id=stihl422</loc>
+    <loc>https://tondeuserobotguide.fr/stihl-imow-rmi-422-pc.html</loc>
     <lastmod>2026-03-17</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.85</priority>
   </url>
-
   <url>
-    <loc>https://tondeuserobotguide.fr/fiche.html?id=ecovacsG1</loc>
+    <loc>https://tondeuserobotguide.fr/ecovacs-goat-g1.html</loc>
     <lastmod>2026-03-17</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.85</priority>
   </url>
-
   <url>
-    <loc>https://tondeuserobotguide.fr/fiche.html?id=robomow635</loc>
+    <loc>https://tondeuserobotguide.fr/robomow-rs635-pro.html</loc>
     <lastmod>2026-03-17</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.85</priority>
   </url>
-
   <url>
-    <loc>https://tondeuserobotguide.fr/fiche.html?id=stiga3000</loc>
+    <loc>https://tondeuserobotguide.fr/stiga-a-3000.html</loc>
     <lastmod>2026-03-17</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.85</priority>
   </url>
-
   <url>
-    <loc>https://tondeuserobotguide.fr/fiche.html?id=vikingmi632</loc>
+    <loc>https://tondeuserobotguide.fr/viking-imow-mi-632-pc.html</loc>
     <lastmod>2026-03-17</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.85</priority>
   </url>
-
   <url>
-    <loc>https://tondeuserobotguide.fr/fiche.html?id=ecoflowblade</loc>
+    <loc>https://tondeuserobotguide.fr/ecoflow-blade.html</loc>
     <lastmod>2026-03-17</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.85</priority>
   </url>
-
   <url>
-    <loc>https://tondeuserobotguide.fr/fiche.html?id=husqvarna430x</loc>
+    <loc>https://tondeuserobotguide.fr/husqvarna-automower-430x.html</loc>
     <lastmod>2026-03-17</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.85</priority>
   </url>
-
   <url>
-    <loc>https://tondeuserobotguide.fr/fiche.html?id=ambrogio</loc>
+    <loc>https://tondeuserobotguide.fr/ambrogio-l15-elite.html</loc>
     <lastmod>2026-03-17</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.85</priority>
   </url>
-
   <url>
-    <loc>https://tondeuserobotguide.fr/fiche.html?id=luba2_1000</loc>
+    <loc>https://tondeuserobotguide.fr/mammotion-luba-2-awd-1000.html</loc>
     <lastmod>2026-03-17</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.85</priority>
   </url>
-
   <url>
-    <loc>https://tondeuserobotguide.fr/fiche.html?id=husqvarna450</loc>
+    <loc>https://tondeuserobotguide.fr/husqvarna-automower-450x-nera.html</loc>
     <lastmod>2026-03-17</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.85</priority>
   </url>
-
   <url>
-    <loc>https://tondeuserobotguide.fr/fiche.html?id=husqvarna435</loc>
+    <loc>https://tondeuserobotguide.fr/husqvarna-automower-435x-awd.html</loc>
     <lastmod>2026-03-17</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
+    <priority>0.85</priority>
   </url>
 
 </urlset>
