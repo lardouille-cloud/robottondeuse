@@ -728,8 +728,8 @@ function runCompare(){
 
   /* Build header */
   const header = document.getElementById('cmp-header');
-  const starsA = '★'.repeat(Math.floor(rA.score)) + (rA.score % 1 >= 0.5 ? '½' : '');
-  const starsB = '★'.repeat(Math.floor(rB.score)) + (rB.score % 1 >= 0.5 ? '½' : '');
+  const starsA = '★'.repeat(Math.floor(rA.score)) + (rA.score % 1 >= 0.5 ? '☆' : '');
+  const starsB = '★'.repeat(Math.floor(rB.score)) + (rB.score % 1 >= 0.5 ? '☆' : '');
   header.innerHTML = `
     <div class="cmp-header-cell">
       <span style="font-size:.72rem;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.5px;">Critère</span>

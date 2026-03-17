@@ -19,7 +19,12 @@
       "Bash(wc:*)",
       "Bash(awk:*)",
       "Bash(perl:*)",
-      "Bash(cd:*)"
+      "Bash(cd:*)",
+      "Bash(node:*)",
+      "Bash(for file:*)",
+      "Bash(do echo:*)",
+      "Read(//d/IA/**)",
+      "Bash(done)"
     ]
   }
 }
