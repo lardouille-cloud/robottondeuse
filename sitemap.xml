@@ -50,6 +50,20 @@
     <priority>0.6</priority>
   </url>
 
+  <url>
+    <loc>https://tondeuserobotguide.fr/choisir_robot_tondeuse_2026.html</loc>
+    <lastmod>2026-03-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://tondeuserobotguide.fr/guide-pdf.html</loc>
+    <lastmod>2026-03-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
   <!-- Fiches produits individuelles — 30 robots -->
   <url>
     <loc>https://tondeuserobotguide.fr/fiche.html?id=navimow</loc>
