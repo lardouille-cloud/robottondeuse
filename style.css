@@ -135,6 +135,38 @@ section{padding:90px 5%;}
 .pw-close:hover{color:var(--text2);}
 
 /* ═══════════════════════════════════════
+   GUIDE GATE (paywall block in guides)
+═══════════════════════════════════════ */
+.guide-gate{
+  background:linear-gradient(135deg,rgba(22,163,74,.07),rgba(139,92,246,.06));
+  border:1px solid rgba(34,197,94,.28);border-radius:16px;
+  padding:32px 28px;text-align:center;margin:32px 0;
+}
+.guide-gate .gg-lock{font-size:2rem;margin-bottom:12px;}
+.guide-gate .gg-title{font-size:1.05rem;font-weight:700;color:var(--text);margin-bottom:6px;}
+.guide-gate .gg-sub{font-size:.88rem;color:var(--text2);margin-bottom:20px;}
+.guide-gate ul{list-style:none;text-align:left;margin:0 0 22px;display:inline-block;padding:0;}
+.guide-gate ul li{display:flex;align-items:flex-start;gap:8px;font-size:.84rem;color:var(--text2);margin-bottom:8px;line-height:1.4;}
+.guide-gate ul li::before{content:'✓';color:var(--green-l);font-weight:900;flex-shrink:0;margin-top:1px;}
+.guide-gate .gg-btn{
+  display:inline-block;padding:14px 32px;border-radius:12px;
+  background:linear-gradient(135deg,#16a34a,#22c55e);color:#fff;font-weight:800;font-size:.95rem;
+  border:none;cursor:pointer;font-family:'Inter',sans-serif;
+  box-shadow:0 6px 24px rgba(34,197,94,.35);transition:all .2s;text-decoration:none;
+}
+.guide-gate .gg-btn:hover{transform:translateY(-2px);box-shadow:0 10px 32px rgba(34,197,94,.5);}
+.guide-gate .gg-note{font-size:.72rem;color:var(--muted);margin-top:10px;}
+/* Locked robot card (preview after gate) */
+.rc-locked{opacity:.65;pointer-events:none;}
+.rc-unlock-btn{
+  display:block;width:100%;padding:9px 0;border-radius:8px;font-size:.82rem;font-weight:700;
+  background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);
+  color:var(--muted);cursor:pointer;font-family:'Inter',sans-serif;
+  pointer-events:all;opacity:1;transition:all .2s;
+}
+.rc-unlock-btn:hover{background:rgba(34,197,94,.1);border-color:rgba(34,197,94,.3);color:var(--green-xl);}
+
+/* ═══════════════════════════════════════
    ANIMATIONS
 ═══════════════════════════════════════ */
 .reveal{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease;}
