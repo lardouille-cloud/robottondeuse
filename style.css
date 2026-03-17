@@ -198,6 +198,7 @@ footer{
    RESPONSIVE BASE
 ═══════════════════════════════════════ */
 .buy-buttons:empty{display:none;}
+.rc-img{display:block;width:100%;height:110px;object-fit:contain;margin-bottom:12px;border-radius:6px;}
 
 @media(max-width:680px){
   nav{padding:0 4%;}
