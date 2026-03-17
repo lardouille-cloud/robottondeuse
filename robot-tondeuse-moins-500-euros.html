@@ -150,7 +150,7 @@
       <div class="rc-price">449 €</div>
       <span class="rc-tag">La plus grande surface sous 500 €</span>
       <p class="rc-desc">700 m² pour 449 €, navigation en lignes droites, 62 dB très silencieux, câble inclus.</p>
-      <button onclick="showPaywall()" class="rc-unlock-btn">Voir la fiche complète →</button>
+      <button onclick="showPaywall()" class="rc-unlock-btn" data-href="bosch-indego-m-700.html">Voir la fiche complète →</button>
     </div>
     <div class="robot-card rc-locked">
       <div class="rc-rank silver">3</div>
@@ -158,7 +158,7 @@
       <div class="rc-price">483 €</div>
       <span class="rc-tag">Ultra-compact — jardins jusqu'à 300 m²</span>
       <p class="rc-desc">Le plus compact de la gamme Bosch, parfait pour jardins encombrés jusqu'à 300 m², 62 dB.</p>
-      <button onclick="showPaywall()" class="rc-unlock-btn">Voir la fiche complète →</button>
+      <button onclick="showPaywall()" class="rc-unlock-btn" data-href="bosch-indego-xs-300.html">Voir la fiche complète →</button>
     </div>
   </div>
 
@@ -272,6 +272,22 @@
   document.addEventListener('DOMContentLoaded',function(){
     const params=new URLSearchParams(window.location.search);
     if(params.get('access')==='granted'){localStorage.setItem(_k,_v);history.replaceState({},'',window.location.pathname);}
+    if(isPaid()){
+      // Déverrouille toutes les cartes rc-locked
+      document.querySelectorAll('.rc-locked').forEach(function(card){
+        card.classList.remove('rc-locked');
+        var btn = card.querySelector('.rc-unlock-btn');
+        if(btn && btn.dataset.href){
+          var a = document.createElement('a');
+          a.href = btn.dataset.href;
+          a.className = 'rc-link';
+          a.textContent = 'Voir la fiche complète →';
+          btn.parentNode.replaceChild(a, btn);
+        }
+      });
+      // Cache le bloc guide-gate
+      document.querySelectorAll('.guide-gate').forEach(function(g){g.style.display='none';});
+    }
     if(isPaid()){
       var nc=document.getElementById('nav-classement');if(nc)nc.textContent='Classement';
       var np=document.getElementById('nav-comparateur');if(np)np.textContent='Comparateur';

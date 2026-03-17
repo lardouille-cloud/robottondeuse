@@ -252,19 +252,19 @@
       <div class="rc-name">Husqvarna 450X NERA</div>
       <p class="rc-desc">Navigation EPOS satellite, 5 000 m², pentes 50%, SAV France réactif.</p>
       <span class="rc-pente mid">Pente max 50%</span>
-      <button onclick="showPaywall()" class="rc-unlock-btn">Voir la fiche complète →</button>
+      <button onclick="showPaywall()" class="rc-unlock-btn" data-href="husqvarna-automower-450x-nera.html">Voir la fiche complète →</button>
     </div>
     <div class="robot-card rc-locked">
       <div class="rc-name">Stihl Navimow i105E</div>
       <p class="rc-desc">GPS RTK, 600 m², pentes 45%, installation sans câble en 30 min.</p>
       <span class="rc-pente mid">Pente max 45%</span>
-      <button onclick="showPaywall()" class="rc-unlock-btn">Voir la fiche complète →</button>
+      <button onclick="showPaywall()" class="rc-unlock-btn" data-href="segway-navimow-i105e.html">Voir la fiche complète →</button>
     </div>
     <div class="robot-card rc-locked">
       <div class="rc-name">Husqvarna 430X H</div>
       <p class="rc-desc">Navigation EPOS, 3 200 m², pentes 45%, rapport robustesse/prix élevé.</p>
       <span class="rc-pente mid">Pente max 45%</span>
-      <button onclick="showPaywall()" class="rc-unlock-btn">Voir la fiche complète →</button>
+      <button onclick="showPaywall()" class="rc-unlock-btn" data-href="husqvarna-automower-430x.html">Voir la fiche complète →</button>
     </div>
   </div>
 
@@ -347,6 +347,22 @@
   document.addEventListener('DOMContentLoaded',function(){
     const params=new URLSearchParams(window.location.search);
     if(params.get('access')==='granted'){localStorage.setItem(_k,_v);history.replaceState({},'',window.location.pathname);}
+    if(isPaid()){
+      // Déverrouille toutes les cartes rc-locked
+      document.querySelectorAll('.rc-locked').forEach(function(card){
+        card.classList.remove('rc-locked');
+        var btn = card.querySelector('.rc-unlock-btn');
+        if(btn && btn.dataset.href){
+          var a = document.createElement('a');
+          a.href = btn.dataset.href;
+          a.className = 'rc-link';
+          a.textContent = 'Voir la fiche complète →';
+          btn.parentNode.replaceChild(a, btn);
+        }
+      });
+      // Cache le bloc guide-gate
+      document.querySelectorAll('.guide-gate').forEach(function(g){g.style.display='none';});
+    }
     if(isPaid()){
       var nc=document.getElementById('nav-classement');if(nc)nc.textContent='Classement';
       var np=document.getElementById('nav-comparateur');if(np)np.textContent='Comparateur';

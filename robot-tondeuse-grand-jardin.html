@@ -150,7 +150,7 @@
       <div class="rc-price">2 599 €</div>
       <span class="rc-tag">Référence pentes + grandes surfaces</span>
       <p class="rc-desc">4x4 intégral, 3 000 m², pentes 80%, la référence pour grands terrains accidentés.</p>
-      <button onclick="showPaywall()" class="rc-unlock-btn">Voir la fiche complète →</button>
+      <button onclick="showPaywall()" class="rc-unlock-btn" data-href="mammotion-luba-2-awd-3000x.html">Voir la fiche complète →</button>
     </div>
     <div class="robot-card rc-locked">
       <div class="rc-rank silver">3</div>
@@ -158,7 +158,7 @@
       <div class="rc-price">3 499 €</div>
       <span class="rc-tag">Premium SAV France — 5 000 m²</span>
       <p class="rc-desc">5 000 m², navigation EPOS satellite, réseau SAV France, le haut de gamme fiable.</p>
-      <button onclick="showPaywall()" class="rc-unlock-btn">Voir la fiche complète →</button>
+      <button onclick="showPaywall()" class="rc-unlock-btn" data-href="husqvarna-automower-450x-nera.html">Voir la fiche complète →</button>
     </div>
     <div class="robot-card rc-locked">
       <div class="rc-rank bronze">4</div>
@@ -166,7 +166,7 @@
       <div class="rc-price">2 999 €</div>
       <span class="rc-tag">Design + technologie haut de gamme</span>
       <p class="rc-desc">3 200 m², bac à herbe intégré, design premium, app intuitive — le choix lifestyle.</p>
-      <button onclick="showPaywall()" class="rc-unlock-btn">Voir la fiche complète →</button>
+      <button onclick="showPaywall()" class="rc-unlock-btn" data-href="ecoflow-blade.html">Voir la fiche complète →</button>
     </div>
   </div>
 
@@ -281,6 +281,22 @@
   document.addEventListener('DOMContentLoaded',function(){
     const params=new URLSearchParams(window.location.search);
     if(params.get('access')==='granted'){localStorage.setItem(_k,_v);history.replaceState({},'',window.location.pathname);}
+    if(isPaid()){
+      // Déverrouille toutes les cartes rc-locked
+      document.querySelectorAll('.rc-locked').forEach(function(card){
+        card.classList.remove('rc-locked');
+        var btn = card.querySelector('.rc-unlock-btn');
+        if(btn && btn.dataset.href){
+          var a = document.createElement('a');
+          a.href = btn.dataset.href;
+          a.className = 'rc-link';
+          a.textContent = 'Voir la fiche complète →';
+          btn.parentNode.replaceChild(a, btn);
+        }
+      });
+      // Cache le bloc guide-gate
+      document.querySelectorAll('.guide-gate').forEach(function(g){g.style.display='none';});
+    }
     if(isPaid()){
       var nc=document.getElementById('nav-classement');if(nc)nc.textContent='Classement';
       var np=document.getElementById('nav-comparateur');if(np)np.textContent='Comparateur';

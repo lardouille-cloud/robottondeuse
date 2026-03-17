@@ -233,25 +233,25 @@
       <div class="rc-name">Gardena Sileno Minimo 250</div>
       <p class="rc-desc">Le plus silencieux (57 dB), 250 m², installation simple, idéal voisinage.</p>
       <span class="rc-badge">Jusqu'à 250 m²</span>
-      <button onclick="showPaywall()" class="rc-unlock-btn">Voir la fiche complète →</button>
+      <button onclick="showPaywall()" class="rc-unlock-btn" data-href="gardena-sileno-minimo-250.html">Voir la fiche complète →</button>
     </div>
     <div class="robot-card rc-locked">
       <div class="rc-name">Bosch Indego M+ 700</div>
       <p class="rc-desc">700 m², navigation en lignes droites, 62 dB, câble inclus.</p>
       <span class="rc-badge">Jusqu'à 700 m²</span>
-      <button onclick="showPaywall()" class="rc-unlock-btn">Voir la fiche complète →</button>
+      <button onclick="showPaywall()" class="rc-unlock-btn" data-href="bosch-indego-m-700.html">Voir la fiche complète →</button>
     </div>
     <div class="robot-card rc-locked">
       <div class="rc-name">Ecovacs GOAT G1</div>
       <p class="rc-desc">Sans câble, détecte +100 obstacles, idéal jardins encombrés de jouets ou meubles.</p>
       <span class="rc-badge">Sans fil</span>
-      <button onclick="showPaywall()" class="rc-unlock-btn">Voir la fiche complète →</button>
+      <button onclick="showPaywall()" class="rc-unlock-btn" data-href="ecovacs-goat-g1.html">Voir la fiche complète →</button>
     </div>
     <div class="robot-card rc-locked">
       <div class="rc-name">Husqvarna 115H</div>
       <p class="rc-desc">Navigation EPOS, 550 m², polyvalent et fiable, réseau SAV France.</p>
       <span class="rc-badge">Polyvalent</span>
-      <button onclick="showPaywall()" class="rc-unlock-btn">Voir la fiche complète →</button>
+      <button onclick="showPaywall()" class="rc-unlock-btn" data-href="husqvarna-automower-115h.html">Voir la fiche complète →</button>
     </div>
   </div>
 
@@ -334,6 +334,22 @@
   document.addEventListener('DOMContentLoaded',function(){
     const params=new URLSearchParams(window.location.search);
     if(params.get('access')==='granted'){localStorage.setItem(_k,_v);history.replaceState({},'',window.location.pathname);}
+    if(isPaid()){
+      // Déverrouille toutes les cartes rc-locked
+      document.querySelectorAll('.rc-locked').forEach(function(card){
+        card.classList.remove('rc-locked');
+        var btn = card.querySelector('.rc-unlock-btn');
+        if(btn && btn.dataset.href){
+          var a = document.createElement('a');
+          a.href = btn.dataset.href;
+          a.className = 'rc-link';
+          a.textContent = 'Voir la fiche complète →';
+          btn.parentNode.replaceChild(a, btn);
+        }
+      });
+      // Cache le bloc guide-gate
+      document.querySelectorAll('.guide-gate').forEach(function(g){g.style.display='none';});
+    }
     if(isPaid()){
       var nc=document.getElementById('nav-classement');if(nc)nc.textContent='Classement';
       var np=document.getElementById('nav-comparateur');if(np)np.textContent='Comparateur';

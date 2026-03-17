@@ -243,31 +243,31 @@
       <div class="rc-name">Mammotion LUBA 2 AWD 3000</div>
       <p class="rc-desc">RTK GPS, 3 000 m², 4x4, sans antenne ni câble — tond les pentes les plus raides.</p>
       <span class="rc-tech rtk">RTK GPS</span>
-      <button onclick="showPaywall()" class="rc-unlock-btn">Voir la fiche complète →</button>
+      <button onclick="showPaywall()" class="rc-unlock-btn" data-href="mammotion-luba-2-awd-3000x.html">Voir la fiche complète →</button>
     </div>
     <div class="robot-card rc-locked">
       <div class="rc-name">Stihl Navimow i105E</div>
       <p class="rc-desc">GPS RTK, 600 m², installation en 30 min sans câble, robustesse allemande.</p>
       <span class="rc-tech gps">GPS</span>
-      <button onclick="showPaywall()" class="rc-unlock-btn">Voir la fiche complète →</button>
+      <button onclick="showPaywall()" class="rc-unlock-btn" data-href="segway-navimow-i105e.html">Voir la fiche complète →</button>
     </div>
     <div class="robot-card rc-locked">
       <div class="rc-name">Dreame A1 Pro</div>
       <p class="rc-desc">LiDAR 360° + RTK + Vision 3D, 2 000 m², aucun équipement extérieur à poser.</p>
       <span class="rc-tech vision">Vision + GPS</span>
-      <button onclick="showPaywall()" class="rc-unlock-btn">Voir la fiche complète →</button>
+      <button onclick="showPaywall()" class="rc-unlock-btn" data-href="dreame-a1-pro.html">Voir la fiche complète →</button>
     </div>
     <div class="robot-card rc-locked">
       <div class="rc-name">Ecovacs GOAT G1</div>
       <p class="rc-desc">Vision 3D + GPS, 2 700 m², détecte plus de 100 types d obstacles, sans câble.</p>
       <span class="rc-tech vision">Vision + GPS</span>
-      <button onclick="showPaywall()" class="rc-unlock-btn">Voir la fiche complète →</button>
+      <button onclick="showPaywall()" class="rc-unlock-btn" data-href="ecovacs-goat-g1.html">Voir la fiche complète →</button>
     </div>
     <div class="robot-card rc-locked">
       <div class="rc-name">Mammotion LUBA 3</div>
       <p class="rc-desc">RTK GPS nouvelle génération 2026, 3 000 m², 4x4, l évolution du LUBA 2.</p>
       <span class="rc-tech rtk">RTK GPS</span>
-      <button onclick="showPaywall()" class="rc-unlock-btn">Voir la fiche complète →</button>
+      <button onclick="showPaywall()" class="rc-unlock-btn" data-href="mammotion-luba-3-awd-3000.html">Voir la fiche complète →</button>
     </div>
   </div>
 
@@ -364,6 +364,22 @@
   document.addEventListener('DOMContentLoaded',function(){
     const params=new URLSearchParams(window.location.search);
     if(params.get('access')==='granted'){localStorage.setItem(_k,_v);history.replaceState({},'',window.location.pathname);}
+    if(isPaid()){
+      // Déverrouille toutes les cartes rc-locked
+      document.querySelectorAll('.rc-locked').forEach(function(card){
+        card.classList.remove('rc-locked');
+        var btn = card.querySelector('.rc-unlock-btn');
+        if(btn && btn.dataset.href){
+          var a = document.createElement('a');
+          a.href = btn.dataset.href;
+          a.className = 'rc-link';
+          a.textContent = 'Voir la fiche complète →';
+          btn.parentNode.replaceChild(a, btn);
+        }
+      });
+      // Cache le bloc guide-gate
+      document.querySelectorAll('.guide-gate').forEach(function(g){g.style.display='none';});
+    }
     if(isPaid()){
       var nc=document.getElementById('nav-classement');if(nc)nc.textContent='Classement';
       var np=document.getElementById('nav-comparateur');if(np)np.textContent='Comparateur';
