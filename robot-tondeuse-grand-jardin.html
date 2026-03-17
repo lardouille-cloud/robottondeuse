@@ -232,5 +232,21 @@
     <a href="guide-pdf.html">Guide 7 erreurs</a>
   </div>
 </footer>
+
+<script>
+/* NAV PAYWALL */
+(function(){
+  const _k=atob('X19ydGdw'),_v=atob('Z3JhbnRlZF8yMDI2');
+  window.isPaid=function(){return localStorage.getItem(_k)===_v;};
+  window.showPaywall=function(){window.location.href='index.html#premium';};
+  document.addEventListener('DOMContentLoaded',function(){
+    if(isPaid()){
+      var nc=document.getElementById('nav-classement');if(nc)nc.textContent='Classement';
+      var np=document.getElementById('nav-comparateur');if(np)np.textContent='Comparateur';
+      var nb=document.getElementById('nav-premium');if(nb){nb.textContent='✅ Accès Complet actif';nb.classList.add('active-paid');}
+    }
+  });
+})();
+</script>
 </body>
 </html>
