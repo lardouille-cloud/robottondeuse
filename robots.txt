@@ -7,4 +7,4 @@ Disallow: /guide-pdf.html
 Disallow: /checklist.html
 Disallow: /scripts/
 
-Sitemap: https://lardouille-cloud.github.io/robottondeuse/sitemap.xml
+Sitemap: https://tondeuserobotguide.fr/sitemap.xml

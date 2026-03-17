@@ -2567,6 +2567,20 @@ function renderNotFound(id) {
   });
   document.head.appendChild(jsonld);
 
+  // JSON-LD BreadcrumbList
+  const breadcrumb = document.createElement('script');
+  breadcrumb.type = 'application/ld+json';
+  breadcrumb.textContent = JSON.stringify({
+    "@context":"https://schema.org",
+    "@type":"BreadcrumbList",
+    "itemListElement":[
+      {"@type":"ListItem","position":1,"name":"Accueil","item":`${BASE}/`},
+      {"@type":"ListItem","position":2,"name":"Tous les robots","item":`${BASE}/robots.html`},
+      {"@type":"ListItem","position":3,"name":robot.name,"item":`${BASE}/fiche.html?id=${id}`}
+    ]
+  });
+  document.head.appendChild(breadcrumb);
+
   // Lazy loading images (sauf la première = hero)
   const imgs = app.querySelectorAll('img');
   imgs.forEach((img, i) => { if(i > 0) img.loading = 'lazy'; });
