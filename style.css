@@ -157,7 +157,7 @@ section{padding:90px 5%;}
 .guide-gate .gg-btn:hover{transform:translateY(-2px);box-shadow:0 10px 32px rgba(34,197,94,.5);}
 .guide-gate .gg-note{font-size:.72rem;color:var(--muted);margin-top:10px;}
 /* Locked robot card (preview after gate) */
-.rc-locked{opacity:.65;pointer-events:none;}
+.rc-locked{opacity:.65;}
 .rc-unlock-btn{
   display:block;width:100%;padding:9px 0;border-radius:8px;font-size:.82rem;font-weight:700;
   background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);
