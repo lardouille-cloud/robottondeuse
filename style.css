@@ -44,31 +44,6 @@ nav{
 .nav-links a.nav-active{color:var(--text);}
 .nav-links a.nav-active::after{transform:scaleX(1);}
 
-/* Dropdown Guides */
-.nav-dropdown{position:relative;display:flex;align-items:center;}
-.nav-dropdown-btn{
-  display:flex;align-items:center;gap:5px;
-  padding:8px 13px;border-radius:8px;font-size:.84rem;font-weight:500;
-  color:var(--text2);cursor:pointer;transition:color .2s;background:none;border:none;
-  font-family:'Inter',sans-serif;
-}
-.nav-dropdown-btn:hover{color:var(--text);}
-.nav-dropdown-btn svg{transition:transform .2s;}
-.nav-dropdown:hover .nav-dropdown-btn svg{transform:rotate(180deg);}
-.nav-dropdown-menu{
-  display:none;position:absolute;top:calc(100% + 8px);left:0;
-  background:var(--dark2);border:1px solid var(--border);border-radius:12px;
-  padding:8px;min-width:220px;box-shadow:0 16px 40px rgba(0,0,0,.5);z-index:200;
-}
-.nav-dropdown:hover .nav-dropdown-menu{display:block;}
-.nav-dropdown-menu a{
-  display:flex;align-items:center;gap:10px;
-  padding:9px 12px;border-radius:8px;font-size:.82rem;font-weight:500;
-  color:var(--text2);transition:all .15s;
-}
-.nav-dropdown-menu a:hover{background:var(--card-h);color:var(--text);}
-.nav-dropdown-menu a span.di{font-size:1rem;flex-shrink:0;}
-.nav-dropdown-menu a::after{display:none;}
 .nav-cta{
   padding:9px 22px;border-radius:10px;font-size:.85rem;font-weight:700;
   background:var(--green);color:#fff;transition:all .2s;border:none;cursor:pointer;

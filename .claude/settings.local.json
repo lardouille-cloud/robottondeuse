@@ -7,7 +7,19 @@
       "WebFetch(domain:www.amazon.fr)",
       "Bash(grep:*)",
       "Bash(python3:*)",
-      "Bash(cat:*)"
+      "Bash(cat:*)",
+      "WebFetch(domain:www.pricspy.fr)",
+      "WebFetch(domain:pricspy.fr)",
+      "WebFetch(domain:pricespy.fr)",
+      "WebFetch(domain:www.idealo.fr)",
+      "WebFetch(domain:ledenicheur.fr)",
+      "Bash(sed:*)",
+      "Bash(ls:*)",
+      "Bash(for f:*)",
+      "Bash(wc:*)",
+      "Bash(awk:*)",
+      "Bash(perl:*)",
+      "Bash(cd:*)"
     ]
   }
 }
