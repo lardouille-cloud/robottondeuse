@@ -278,31 +278,30 @@
     document.getElementById('paywall-modal').classList.remove('active');
     document.body.style.overflow='';
   };
-  document.addEventListener('DOMContentLoaded',function(){
-    const params=new URLSearchParams(window.location.search);
+  // Script en bas du body : DOM déjà prêt, on exécute directement
+  (function(){
+    var params=new URLSearchParams(window.location.search);
     if(params.get('access')==='granted'){localStorage.setItem(_k,_v);history.replaceState({},'',window.location.pathname);}
-    if(isPaid()){
-      // Déverrouille toutes les cartes rc-locked
-      document.querySelectorAll('.rc-locked').forEach(function(card){
-        card.classList.remove('rc-locked');
-        var btn = card.querySelector('.rc-unlock-btn');
-        if(btn && btn.dataset.href){
-          var a = document.createElement('a');
-          a.href = btn.dataset.href;
-          a.className = 'rc-link';
-          a.textContent = 'Voir la fiche complète →';
-          btn.parentNode.replaceChild(a, btn);
-        }
-      });
-      // Cache le bloc guide-gate
-      document.querySelectorAll('.guide-gate').forEach(function(g){g.style.display='none';});
-    }
-    if(isPaid()){
-      var nc=document.getElementById('nav-classement');if(nc)nc.textContent='Classement';
-      var np=document.getElementById('nav-comparateur');if(np)np.textContent='Comparateur';
-      var nb=document.getElementById('nav-premium');if(nb){nb.textContent='✅ Accès Complet actif';nb.classList.add('active-paid');}
-    }
-  });
+  })();
+  function unlockGuide(){
+    if(!isPaid()) return;
+    document.querySelectorAll('.rc-locked').forEach(function(card){
+      card.classList.remove('rc-locked');
+      var btn=card.querySelector('.rc-unlock-btn');
+      if(btn && btn.dataset.href){
+        var a=document.createElement('a');
+        a.href=btn.dataset.href;
+        a.className='rc-link';
+        a.textContent='Voir la fiche complète →';
+        btn.parentNode.replaceChild(a,btn);
+      }
+    });
+    document.querySelectorAll('.guide-gate').forEach(function(g){g.style.display='none';});
+    var nc=document.getElementById('nav-classement');if(nc)nc.textContent='Classement';
+    var np=document.getElementById('nav-comparateur');if(np)np.textContent='Comparateur';
+    var nb=document.getElementById('nav-premium');if(nb){nb.textContent='✅ Accès Complet actif';nb.classList.add('active-paid');}
+  }
+  unlockGuide();
 })();
 </script>
 </body>
