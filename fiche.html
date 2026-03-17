@@ -2667,6 +2667,63 @@ function renderNotFound(id) {
 
   app.innerHTML = render(robot);
 
+  // ── SEO dynamique ──────────────────────────────────────────────────────────
+  const BASE = 'https://tondeuserobotguide.fr';
+  const priceNum = parseInt((robot.price||'').replace(/[^0-9]/g,'')) || 0;
+  const reviewNum = parseInt((robot.reviews_count||'100').replace(/[^0-9]/g,'')) || 100;
+
+  // Title & meta description
+  document.title = `${robot.name} — Avis, prix & fiche technique 2026 | RoboTondeuse.guide`;
+  const metaDesc = document.querySelector('meta[name="description"]');
+  if(metaDesc) metaDesc.content = `${robot.name} : ${robot.price}. ${robot.desc.slice(0,120)}... Note ${robot.score}, avis vérifiés et meilleur lien d'achat.`;
+
+  // Canonical
+  let canon = document.querySelector('link[rel="canonical"]');
+  if(!canon){ canon = document.createElement('link'); canon.rel='canonical'; document.head.appendChild(canon); }
+  canon.href = `${BASE}/fiche.html?id=${id}`;
+
+  // Open Graph
+  const setMeta = (attr, key, val) => {
+    let el = document.querySelector(`meta[${attr}="${key}"]`);
+    if(!el){ el = document.createElement('meta'); el.setAttribute(attr, key); document.head.appendChild(el); }
+    el.content = val;
+  };
+  setMeta('property','og:title', `${robot.name} — Fiche technique & avis 2026`);
+  setMeta('property','og:description', `${robot.name} : ${robot.price}, ${robot.surface}. Note ${robot.score}. Avis vérifiés et meilleur prix.`);
+  setMeta('property','og:url', `${BASE}/fiche.html?id=${id}`);
+  setMeta('property','og:image', `${BASE}/${robot.image}`);
+  setMeta('property','og:type', 'product');
+
+  // JSON-LD Product
+  const jsonld = document.createElement('script');
+  jsonld.type = 'application/ld+json';
+  jsonld.textContent = JSON.stringify({
+    "@context":"https://schema.org",
+    "@type":"Product",
+    "name": robot.name,
+    "description": robot.desc,
+    "image": `${BASE}/${robot.image}`,
+    "brand":{"@type":"Brand","name": robot.name.split(' ')[0]},
+    "offers":{
+      "@type":"Offer",
+      "price": priceNum,
+      "priceCurrency":"EUR",
+      "availability": robot.amazon ? "https://schema.org/InStock" : "https://schema.org/OutOfStock",
+      "url": robot.amazon || `${BASE}/fiche.html?id=${id}`
+    },
+    "aggregateRating":{
+      "@type":"AggregateRating",
+      "ratingValue": robot.scoreRaw,
+      "bestRating":5,
+      "ratingCount": reviewNum
+    }
+  });
+  document.head.appendChild(jsonld);
+
+  // Lazy loading images (sauf la première = hero)
+  const imgs = app.querySelectorAll('img');
+  imgs.forEach((img, i) => { if(i > 0) img.loading = 'lazy'; });
+
   // IntersectionObserver for fade-in animations
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {

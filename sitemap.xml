@@ -2,52 +2,263 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
   <url>
-    <loc>https://lardouille-cloud.github.io/robottondeuse/</loc>
-    <lastmod>2026-03-16</lastmod>
+    <loc>https://tondeuserobotguide.fr/</loc>
+    <lastmod>2026-03-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
 
   <url>
-    <loc>https://lardouille-cloud.github.io/robottondeuse/robots.html</loc>
-    <lastmod>2026-03-16</lastmod>
+    <loc>https://tondeuserobotguide.fr/robots.html</loc>
+    <lastmod>2026-03-17</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.9</priority>
   </url>
 
   <url>
-    <loc>https://lardouille-cloud.github.io/robottondeuse/comparatif.html</loc>
-    <lastmod>2026-03-16</lastmod>
+    <loc>https://tondeuserobotguide.fr/comparatif.html</loc>
+    <lastmod>2026-03-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://lardouille-cloud.github.io/robottondeuse/classement.html</loc>
-    <lastmod>2026-03-16</lastmod>
+    <loc>https://tondeuserobotguide.fr/classement.html</loc>
+    <lastmod>2026-03-17</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
-    <loc>https://lardouille-cloud.github.io/robottondeuse/quiz.html</loc>
-    <lastmod>2026-03-16</lastmod>
+    <loc>https://tondeuserobotguide.fr/quiz.html</loc>
+    <lastmod>2026-03-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
-    <loc>https://lardouille-cloud.github.io/robottondeuse/simulateur.html</loc>
-    <lastmod>2026-03-16</lastmod>
+    <loc>https://tondeuserobotguide.fr/simulateur.html</loc>
+    <lastmod>2026-03-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
 
   <url>
-    <loc>https://lardouille-cloud.github.io/robottondeuse/comparateur.html</loc>
-    <lastmod>2026-03-16</lastmod>
+    <loc>https://tondeuserobotguide.fr/comparateur.html</loc>
+    <lastmod>2026-03-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
+  </url>
+
+  <!-- Fiches produits individuelles — 30 robots -->
+  <url>
+    <loc>https://tondeuserobotguide.fr/fiche.html?id=navimow</loc>
+    <lastmod>2026-03-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <url>
+    <loc>https://tondeuserobotguide.fr/fiche.html?id=ecovacs</loc>
+    <lastmod>2026-03-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <url>
+    <loc>https://tondeuserobotguide.fr/fiche.html?id=dreame</loc>
+    <lastmod>2026-03-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <url>
+    <loc>https://tondeuserobotguide.fr/fiche.html?id=worx</loc>
+    <lastmod>2026-03-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <url>
+    <loc>https://tondeuserobotguide.fr/fiche.html?id=yuka</loc>
+    <lastmod>2026-03-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <url>
+    <loc>https://tondeuserobotguide.fr/fiche.html?id=luba2</loc>
+    <lastmod>2026-03-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <url>
+    <loc>https://tondeuserobotguide.fr/fiche.html?id=husqvarna</loc>
+    <lastmod>2026-03-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <url>
+    <loc>https://tondeuserobotguide.fr/fiche.html?id=mova</loc>
+    <lastmod>2026-03-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <url>
+    <loc>https://tondeuserobotguide.fr/fiche.html?id=a3pro</loc>
+    <lastmod>2026-03-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <url>
+    <loc>https://tondeuserobotguide.fr/fiche.html?id=luba3</loc>
+    <lastmod>2026-03-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://tondeuserobotguide.fr/fiche.html?id=boschxs</loc>
+    <lastmod>2026-03-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://tondeuserobotguide.fr/fiche.html?id=boschm700</loc>
+    <lastmod>2026-03-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://tondeuserobotguide.fr/fiche.html?id=gardenaminimo</loc>
+    <lastmod>2026-03-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://tondeuserobotguide.fr/fiche.html?id=gardena750</loc>
+    <lastmod>2026-03-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://tondeuserobotguide.fr/fiche.html?id=husqvarna115h</loc>
+    <lastmod>2026-03-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://tondeuserobotguide.fr/fiche.html?id=navimow108</loc>
+    <lastmod>2026-03-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://tondeuserobotguide.fr/fiche.html?id=stiga1000</loc>
+    <lastmod>2026-03-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://tondeuserobotguide.fr/fiche.html?id=kress</loc>
+    <lastmod>2026-03-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://tondeuserobotguide.fr/fiche.html?id=honda520</loc>
+    <lastmod>2026-03-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://tondeuserobotguide.fr/fiche.html?id=stihl422</loc>
+    <lastmod>2026-03-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://tondeuserobotguide.fr/fiche.html?id=ecovacsG1</loc>
+    <lastmod>2026-03-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://tondeuserobotguide.fr/fiche.html?id=robomow635</loc>
+    <lastmod>2026-03-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://tondeuserobotguide.fr/fiche.html?id=stiga3000</loc>
+    <lastmod>2026-03-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://tondeuserobotguide.fr/fiche.html?id=vikingmi632</loc>
+    <lastmod>2026-03-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://tondeuserobotguide.fr/fiche.html?id=ecoflowblade</loc>
+    <lastmod>2026-03-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://tondeuserobotguide.fr/fiche.html?id=husqvarna430x</loc>
+    <lastmod>2026-03-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://tondeuserobotguide.fr/fiche.html?id=ambrogio</loc>
+    <lastmod>2026-03-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://tondeuserobotguide.fr/fiche.html?id=luba2_1000</loc>
+    <lastmod>2026-03-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://tondeuserobotguide.fr/fiche.html?id=husqvarna450</loc>
+    <lastmod>2026-03-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://tondeuserobotguide.fr/fiche.html?id=husqvarna435</loc>
+    <lastmod>2026-03-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
 
 </urlset>

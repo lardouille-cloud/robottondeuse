@@ -385,7 +385,7 @@ footer{
 <!-- ══ PAGE HEADER ══ -->
 <div class="page-header">
   <div class="section-label">Sélection 2026</div>
-  <h1 class="section-title">Les meilleurs robots 2026</h1>
+  <h1 class="section-title">Les 30 meilleurs robots tondeuses 2026</h1>
   <p class="section-sub">9 robots visibles gratuitement · 21 robots supplémentaires réservés à l'Accès Complet · Sélectionnés sur tests croisés &amp; 15 000+ avis réels.</p>
 </div>
 
@@ -432,7 +432,7 @@ footer{
     <div class="footer-col-title">Navigation</div>
     <a href="robots.html">Robots 2026</a>
     <a href="comparatif.html">Tableau comparatif</a>
-    <a href="quiz.html">Questionnaire</a>
+    <a href="quiz.html">Configurateur</a>
     <a href="index.html#conseils">Conseils d'achat</a>
   </div>
   <div class="footer-links-col">
@@ -699,7 +699,7 @@ function renderGrid(){
     div.className = 'product-card reveal' + (locked ? ' card-locked' : '');
     div.innerHTML = `
       <div class="pc-img" style="background:${esc(p.imgBg)}">
-        <img src="${esc(p.img)}" alt="${esc(p.name)}" onerror="this.style.opacity='.2'"/>
+        <img src="${esc(p.img)}" alt="${esc(p.name)}" onerror="this.style.opacity='.2'"/ loading="lazy">
         <span class="pc-score">⭐ ${esc(p.score)}</span>
       </div>
       <div class="pc-body">

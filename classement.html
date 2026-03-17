@@ -302,7 +302,7 @@ footer{
 <!-- ══ PAGE HEADER ══ -->
 <div class="page-header">
   <div class="section-label">Accès Complet</div>
-  <h1 class="section-title">Classement par note</h1>
+  <h1 class="section-title">Classement des meilleurs robots tondeuses 2026</h1>
   <p class="section-sub">Les 30 robots classés du meilleur au moins bon selon leur note globale — avis utilisateurs, fiabilité et rapport qualité/prix.</p>
 </div>
 
@@ -337,7 +337,7 @@ footer{
     <div class="footer-col-title">Navigation</div>
     <a href="robots.html">Robots 2026</a>
     <a href="comparatif.html">Tableau comparatif</a>
-    <a href="quiz.html">Questionnaire</a>
+    <a href="quiz.html">Configurateur</a>
     <a href="index.html#conseils">Conseils d'achat</a>
   </div>
   <div class="footer-links-col">
@@ -436,7 +436,7 @@ function buildRanking(){
       : `<span class="rank-pos rank-medal-n">#${i+1}</span>`;
     return `<div class="rank-row" onclick="window.location.href='fiche.html?id=${esc(p.id)}'" style="cursor:pointer">
       ${pos}
-      <img class="rank-img" src="${esc(p.img)}" alt="${esc(p.name)}" onerror="this.style.opacity='.2'"/>
+      <img class="rank-img" src="${esc(p.img)}" alt="${esc(p.name)}" onerror="this.style.opacity='.2'"/ loading="lazy">
       <div class="rank-info">
         <div class="rank-name">${esc(p.name)}</div>
         <div class="rank-tag">${esc(p.tag)}</div>
@@ -471,7 +471,7 @@ function updatePremiumUI(){
           : `<span class="rank-pos rank-medal-n">#${i+1}</span>`;
         return `<div class="rank-row">
           ${pos}
-          <img class="rank-img" src="${esc(p.img)}" alt="${esc(p.name)}" onerror="this.style.opacity='.2'"/>
+          <img class="rank-img" src="${esc(p.img)}" alt="${esc(p.name)}" onerror="this.style.opacity='.2'"/ loading="lazy">
           <div class="rank-info">
             <div class="rank-name">${esc(p.name)}</div>
             <div class="rank-tag">${esc(p.tag)}</div>

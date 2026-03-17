@@ -625,7 +625,7 @@ footer{
     <div class="footer-col-title">Navigation</div>
     <a href="robots.html">Robots 2026</a>
     <a href="comparatif.html">Tableau comparatif</a>
-    <a href="quiz.html">Questionnaire</a>
+    <a href="quiz.html">Configurateur</a>
     <a href="index.html#conseils">Conseils d'achat</a>
   </div>
   <div class="footer-links-col">
@@ -934,7 +934,7 @@ function qShowResult(){
     div.innerHTML = `
       <div class="rcard-top">
         <div class="rcard-img" style="background:${esc(p.imgBg)}">
-          <img src="${esc(p.img)}" alt="${esc(p.name)}" onerror="this.textContent='🤖';this.style.fontSize='3rem'"/>
+          <img src="${esc(p.img)}" alt="${esc(p.name)}" onerror="this.textContent='🤖';this.style.fontSize='3rem'"/ loading="lazy">
         </div>
         <div class="rcard-info">
           <span class="rcard-badge ${badgeCls[i]}">${badgeLabels[i]}</span>
