@@ -150,7 +150,7 @@
       <div class="rc-price">1 199 €</div>
       <span class="rc-tag">Mieux noté toutes catégories — 4,5/5</span>
       <p class="rc-desc">LiDAR + RTK, 1 200 m², note 4,5/5 sur plus de 2 000 avis — la référence tous critères confondus.</p>
-      <button onclick="showPaywall()" class="rc-unlock-btn" data-href="mammotion-yuka-mini-vision.html">Voir la fiche complète →</button>
+      <button onclick="showPaywall()" class="rc-unlock-btn" data-href="husqvarna-automower-320-nera.html">Voir la fiche complète →</button>
     </div>
     <div class="robot-card rc-locked">
       <div class="rc-rank silver">3</div>
@@ -158,7 +158,7 @@
       <div class="rc-price">879 €</div>
       <span class="rc-tag">Meilleur surface/prix — 2 000 m²</span>
       <p class="rc-desc">Triple navigation LiDAR 360° + RTK + Vision 3D, 2 000 m², sans antenne externe à installer.</p>
-      <button onclick="showPaywall()" class="rc-unlock-btn" data-href="dreame-a1-pro.html">Voir la fiche complète →</button>
+      <button onclick="showPaywall()" class="rc-unlock-btn" data-href="husqvarna-automower-320-nera.html">Voir la fiche complète →</button>
     </div>
     <div class="robot-card rc-locked">
       <div class="rc-rank bronze">4</div>
@@ -166,7 +166,7 @@
       <div class="rc-price">2 599 €</div>
       <span class="rc-tag">Champion pentes 80% — grands jardins</span>
       <p class="rc-desc">4x4 intégral, seul robot capable de 80% de pente sur 3 000 m², sans câble ni antenne.</p>
-      <button onclick="showPaywall()" class="rc-unlock-btn" data-href="mammotion-luba-2-awd-3000x.html">Voir la fiche complète →</button>
+      <button onclick="showPaywall()" class="rc-unlock-btn" data-href="husqvarna-automower-320-nera.html">Voir la fiche complète →</button>
     </div>
     <div class="robot-card rc-locked">
       <div class="rc-rank other">5</div>
@@ -291,30 +291,31 @@
     document.getElementById('paywall-modal').classList.remove('active');
     document.body.style.overflow='';
   };
-  // Script en bas du body : DOM déjà prêt, on exécute directement
-  (function(){
-    var params=new URLSearchParams(window.location.search);
+  document.addEventListener('DOMContentLoaded',function(){
+    const params=new URLSearchParams(window.location.search);
     if(params.get('access')==='granted'){localStorage.setItem(_k,_v);history.replaceState({},'',window.location.pathname);}
-  })();
-  function unlockGuide(){
-    if(!isPaid()) return;
-    document.querySelectorAll('.rc-locked').forEach(function(card){
-      card.classList.remove('rc-locked');
-      var btn=card.querySelector('.rc-unlock-btn');
-      if(btn && btn.dataset.href){
-        var a=document.createElement('a');
-        a.href=btn.dataset.href;
-        a.className='rc-link';
-        a.textContent='Voir la fiche complète →';
-        btn.parentNode.replaceChild(a,btn);
-      }
-    });
-    document.querySelectorAll('.guide-gate').forEach(function(g){g.style.display='none';});
-    var nc=document.getElementById('nav-classement');if(nc)nc.textContent='Classement';
-    var np=document.getElementById('nav-comparateur');if(np)np.textContent='Comparateur';
-    var nb=document.getElementById('nav-premium');if(nb){nb.textContent='✅ Accès Complet actif';nb.classList.add('active-paid');}
-  }
-  unlockGuide();
+    if(isPaid()){
+      // Déverrouille toutes les cartes rc-locked
+      document.querySelectorAll('.rc-locked').forEach(function(card){
+        card.classList.remove('rc-locked');
+        var btn = card.querySelector('.rc-unlock-btn');
+        if(btn && btn.dataset.href){
+          var a = document.createElement('a');
+          a.href = btn.dataset.href;
+          a.className = 'rc-link';
+          a.textContent = 'Voir la fiche complète →';
+          btn.parentNode.replaceChild(a, btn);
+        }
+      });
+      // Cache le bloc guide-gate
+      document.querySelectorAll('.guide-gate').forEach(function(g){g.style.display='none';});
+    }
+    if(isPaid()){
+      var nc=document.getElementById('nav-classement');if(nc)nc.textContent='Classement';
+      var np=document.getElementById('nav-comparateur');if(np)np.textContent='Comparateur';
+      var nb=document.getElementById('nav-premium');if(nb){nb.textContent='✅ Accès Complet actif';nb.classList.add('active-paid');}
+    }
+  });
 })();
 </script>
 </body>
