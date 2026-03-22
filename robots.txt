@@ -3,8 +3,6 @@ Allow: /
 
 Disallow: /acces-premium.html
 Disallow: /acces-gratuit.html
-Disallow: /guide-pdf.html
-Disallow: /checklist.html
 Disallow: /scripts/
 
 Sitemap: https://tondeuserobotguide.fr/sitemap.xml
