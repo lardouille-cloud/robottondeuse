@@ -377,7 +377,7 @@ footer a{color:var(--green-l);}
 
 <!-- NAV -->
 <nav>
-  <a href="index.html" class="nav-back">
+  <a href="/" class="nav-back">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
       <path d="M19 12H5M12 5l-7 7 7 7"/>
     </svg>
@@ -394,7 +394,7 @@ footer a{color:var(--green-l);}
 <main id="app"></main>
 
 <footer>
-  <p>© 2026 RobotTondeuse.guide — Guide indépendant. Les liens Amazon sont des liens affiliés. <a href="index.html">Retour au comparatif</a></p>
+  <p>© 2026 RobotTondeuse.guide — Guide indépendant. Les liens Amazon sont des liens affiliés. <a href="/">Retour au comparatif</a></p>
 </footer>
 
 <script>
@@ -2280,9 +2280,9 @@ function render(robot) {
 
       <div class="hero-left">
         <div class="hero-breadcrumb">
-          <a href="index.html">Accueil</a>
+          <a href="/">Accueil</a>
           <span>›</span>
-          <a href="index.html#produits">Robots 2026</a>
+          <a href="/#produits">Robots 2026</a>
           <span>›</span>
           <span style="color:var(--text2)">${escape(robot.name)}</span>
         </div>
@@ -2450,7 +2450,7 @@ function renderNotFound(id) {
       <h2>Robot introuvable</h2>
       <p>L'identifiant "<strong>${escape(id)}</strong>" ne correspond à aucun produit connu.<br>
       Essayez : navimow, ecovacs, dreame, worx, yuka, luba2, husqvarna, mova, a3pro, luba3</p>
-      <a href="index.html" class="btn-primary">Retour au comparatif</a>
+      <a href="/" class="btn-primary">Retour au comparatif</a>
     </div>
   `;
 }
@@ -2485,7 +2485,7 @@ function renderNotFound(id) {
         <button onclick="showPaywall()" style="padding:14px 32px;border-radius:12px;background:linear-gradient(135deg,var(--green),var(--green-l));color:#fff;font-weight:800;font-size:1rem;border:none;cursor:pointer;font-family:'Inter',sans-serif;">
           Débloquer — 9,90 €
         </button>
-        <a href="index.html" style="margin-top:16px;color:var(--text2);font-size:.85rem;text-decoration:underline;">Retour au comparatif</a>
+        <a href="/" style="margin-top:16px;color:var(--text2);font-size:.85rem;text-decoration:underline;">Retour au comparatif</a>
       </div>`;
     showPaywall();
     return;

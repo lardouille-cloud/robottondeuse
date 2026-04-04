@@ -24,7 +24,9 @@
       "Bash(for file:*)",
       "Bash(do echo:*)",
       "Read(//d/IA/**)",
-      "Bash(done)"
+      "Bash(done)",
+      "Bash(git commit:*)",
+      "Bash(find . -name \"*.html\" -type f ! -name \"acces-premium.html\" ! -name \"acces-gratuit.html\" ! -name \"google3949f67af5de0649.html\" ! -name \"fiche.html\" -exec basename {})"
     ]
   }
 }
