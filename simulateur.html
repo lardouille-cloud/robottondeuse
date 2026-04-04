@@ -599,7 +599,7 @@ document.getElementById('btn-calc').addEventListener('click', ()=>{
 (function(){
   const _k=atob('X19ydGdw'),_v=atob('Z3JhbnRlZF8yMDI2');
   window.isPaid=function(){return localStorage.getItem(_k)===_v;};
-  window.showPaywall=function(){window.location.href='index.html#premium';};
+  window.showPaywall=function(){window.location.href='/#premium';};
   document.addEventListener('DOMContentLoaded',function(){
     if(isPaid()){
       var nc=document.getElementById('nav-classement');if(nc)nc.textContent='Classement';
