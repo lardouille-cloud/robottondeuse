@@ -26,7 +26,10 @@
       "Read(//d/IA/**)",
       "Bash(done)",
       "Bash(git commit:*)",
-      "Bash(find . -name \"*.html\" -type f ! -name \"acces-premium.html\" ! -name \"acces-gratuit.html\" ! -name \"google3949f67af5de0649.html\" ! -name \"fiche.html\" -exec basename {})"
+      "Bash(find . -name \"*.html\" -type f ! -name \"acces-premium.html\" ! -name \"acces-gratuit.html\" ! -name \"google3949f67af5de0649.html\" ! -name \"fiche.html\" -exec basename {})",
+      "Bash(sed -i 's|<title>Guide Expert — Les 7 erreurs à ne pas faire — RobotTondeuse.guide</title>|<title>Les 7 erreurs à éviter — Guide Expert Robot Tondeuse</title>|' guide-pdf.html)",
+      "Bash(__NEW_LINE_72ee7a94d1f8522a__ sed:*)",
+      "Bash(__NEW_LINE_72ee7a94d1f8522a__ grep:*)"
     ]
   }
 }
