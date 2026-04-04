@@ -448,20 +448,25 @@ def fetch_price(robot_id: str, config: dict) -> Optional[int]:
 
 # ─── Lecture / mise à jour des prix dans les fichiers HTML ───────────────────
 
+def _clean_price_str(s: str) -> int:
+    """Supprime tous les séparateurs de milliers (espace, \u202f, \xa0) et convertit en int."""
+    return int(re.sub(r'[\s\u202f\xa0]', '', s))
+
+
 def get_current_price(content: str, robot_id: str) -> Optional[int]:
     m = re.search(
-        rf"id:'{re.escape(robot_id)}'[^\n]*?price:'([\d\s]+) €'",
+        rf"id:'{re.escape(robot_id)}'[^\n]*?price:'([\d\s\u202f\xa0]+) €'",
         content
     )
     if m:
-        return int(m.group(1).replace(" ", ""))
+        return _clean_price_str(m.group(1))
 
     m = re.search(
-        rf"(?s){re.escape(robot_id)}:\s*\{{[^{{}}]{{0,500}}?price:\s*'([\d\s]+) €'",
+        rf"(?s){re.escape(robot_id)}:\s*\{{[^{{}}]{{0,500}}?price:\s*'([\d\s\u202f\xa0]+) €'",
         content
     )
     if m:
-        return int(m.group(1).replace(" ", ""))
+        return _clean_price_str(m.group(1))
 
     return None
 

@@ -5,9 +5,6 @@ on:
     - cron: '0 6 * * *'   # Tous les jours à 06h00 UTC (08h00 Paris)
   workflow_dispatch:       # Déclenchement manuel possible depuis GitHub
 
-env:
-  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
-
 jobs:
   update-prices:
     runs-on: ubuntu-latest
@@ -16,10 +13,10 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v4.2.2
 
       - name: Setup Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v5.4.0
         with:
           python-version: '3.11'
 
@@ -34,7 +31,7 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           if ! git diff --quiet; then
-            git add index.html fiche.html robots.html comparatif.html classement.html quiz.html PRICE_HISTORY.md LINKS_HISTORY.md
+            git add index.html fiche.html robots.html comparatif.html classement.html quiz.html choisir_robot_tondeuse_2026.html PRICE_HISTORY.md LINKS_HISTORY.md
             git commit -m "chore: mise à jour prix et liens $(date +%Y-%m-%d)"
             git push
           else
