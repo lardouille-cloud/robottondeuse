@@ -81,3 +81,6 @@ Chaque entrée indique qu'un lien mort a été remplacé par un lien fonctionnel
 - **Kress Mission 5 RTK** : `null` → `https://www.amazon.fr/dp/B0C1MKBJ5Y`
 - **Viking iMow MI 632 PC** : `null` → `https://www.amazon.fr/dp/B09BNYTCC9`
 - **Ambrogio L15 Elite** : `null` → `https://www.amazon.fr/dp/B07YZ1KQP6`
+
+## 2026-04-06 — Liens
+- **Husqvarna Automower 435X AWD** : `null` → `https://www.amazon.fr/dp/B0CF5QSDYB`
