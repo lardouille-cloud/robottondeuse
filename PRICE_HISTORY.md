@@ -47,3 +47,7 @@ Mis à jour automatiquement chaque jour par GitHub Actions.
 - **EcoFlow Blade** : 2 199 € → 2 999 €
 - **Husqvarna Automower 430X** : 1 799 € → 3 495 €
 - **Mammotion LUBA 2 AWD 1000** : 1 499 € → 2 199 €
+
+## 2026-04-09 — Prix
+- **Ecovacs Goat O800 RTK** : 899 € → 699 € (-200 €)
+- **Ecovacs GOAT G1** : 1289 € → 1599 € (+310 €)
