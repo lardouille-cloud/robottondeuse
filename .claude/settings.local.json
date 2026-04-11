@@ -1,5 +1,6 @@
 {
   "permissions": {
+    "defaultMode": "bypassPermissions",
     "allow": [
       "Bash(git push:*)",
       "Bash(git add:*)",
@@ -29,7 +30,27 @@
       "Bash(find . -name \"*.html\" -type f ! -name \"acces-premium.html\" ! -name \"acces-gratuit.html\" ! -name \"google3949f67af5de0649.html\" ! -name \"fiche.html\" -exec basename {})",
       "Bash(sed -i 's|<title>Guide Expert — Les 7 erreurs à ne pas faire — RobotTondeuse.guide</title>|<title>Les 7 erreurs à éviter — Guide Expert Robot Tondeuse</title>|' guide-pdf.html)",
       "Bash(__NEW_LINE_72ee7a94d1f8522a__ sed:*)",
-      "Bash(__NEW_LINE_72ee7a94d1f8522a__ grep:*)"
+      "Bash(__NEW_LINE_72ee7a94d1f8522a__ grep:*)",
+      "WebFetch(domain:comparatif-robot-tondeuse.fr)",
+      "WebFetch(domain:mes-robots.fr)",
+      "WebFetch(domain:mowerbot.fr)",
+      "WebFetch(domain:www.clubic.com)",
+      "WebFetch(domain:jardinsplus.com)",
+      "WebFetch(domain:maniaques.fr)",
+      "WebFetch(domain:www.jardibot.fr)",
+      "WebFetch(domain:www.jardinage-media.com)",
+      "WebFetch(domain:trends.google.fr)",
+      "WebFetch(domain:www.quechoisir.org)",
+      "WebFetch(domain:www.leroymerlin.fr)",
+      "Bash(python -c ':*)",
+      "Bash(pip install:*)",
+      "Bash(py -3 -c \"import openpyxl; print\\('ok'\\)\")",
+      "Bash(curl -s https://tondeuserobotguide.fr/fiche.html)",
+      "Bash(xargs -I {} basename {})",
+      "Bash(bash /tmp/check_issues.sh)",
+      "Bash(bash /tmp/detailed_audit.sh)",
+      "Bash(npx skills:*)",
+      "Skill(update-config)"
     ]
   }
 }

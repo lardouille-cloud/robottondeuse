@@ -1503,7 +1503,7 @@ updatePremiumUI();
    PRODUCTS DATA (kept for hero cards only)
 ════════════════════════════ */
 const PRODUCTS=[
-  {id:'navimow',rank:1,rankCls:'rank-gold',tag:'Rapport qualité/prix',tagColor:'#86efac',name:'Segway Navimow i105E',desc:'Le bestseller 2026 : installation sans câble en 30 min, lignes parallèles parfaites grâce au GPS RTK.',price:'649 €',priceN:649,surface:'600 m²',nav:'GPS RTK',slope:'45%',noise:'65 dB',score:'4.3',stars:'★★★★☆',count:'1 200+',img:'images/robots/navimow.png',imgBg:'linear-gradient(135deg,#0a2a1e,#061a10)',
+  {id:'navimow',rank:1,rankCls:'rank-gold',tag:'Rapport qualité/prix',tagColor:'#86efac',name:'Segway Navimow i105E',desc:'Le bestseller 2026 : installation sans câble en 30 min, lignes parallèles parfaites grâce au GPS RTK.',price:'799 €',priceN:799,surface:'600 m²',nav:'GPS RTK',slope:'45%',noise:'65 dB',score:'4.3',stars:'★★★★☆',count:'1 200+',img:'images/robots/navimow.png',imgBg:'linear-gradient(135deg,#0a2a1e,#061a10)',
    why:'Plébiscité par les experts ET les utilisateurs pour son installation sans câble en moins de 30 min, ses lignes de tonte parallèles au centimètre. <strong>-35% en ce moment sur Amazon.</strong>',
    pros:['Installation 30 min','Précision RTK cm','65 dB'],cons:['Max 600 m²','Signal GPS requis'],
    tags:['small','medium','flat','low','mid'],prios:['install','precision','noWire','silent'],
@@ -1515,31 +1515,31 @@ const PRODUCTS=[
    tags:['small','medium','flat','low','mid'],prios:['silent','precision','noWire','app'],
    links:[{l:'Amazon',c:'bb-amazon',ico:'🛒',url:'https://www.amazon.fr/ECOVACS-O800-RTK-p%C3%A9riph%C3%A9rique-Cartographie/dp/B0DQ8KYLYR'}]},
 
-  {id:'dreame',rank:3,rankCls:'rank-bronze',tag:'Polyvalent triple-capteur 2026',tagColor:'#fcd34d',name:'Dreame A1 Pro',desc:'LiDAR 360° + RTK + Vision 3D. La meilleure couverture surface/prix du marché à seulement 879 €.',price:'879 €',priceN:879,surface:'2 000 m²',nav:'LiDAR+RTK+Vision',slope:'45%',noise:'~65 dB',score:'4.4',stars:'★★★★☆',count:'950+',img:'images/robots/dreame.jpg',imgBg:'linear-gradient(135deg,#12122b,#0a0a1f)',
+  {id:'dreame',rank:3,rankCls:'rank-bronze',tag:'Polyvalent triple-capteur 2026',tagColor:'#fcd34d',name:'Dreame A1 Pro',desc:'LiDAR 360° + RTK + Vision 3D. La meilleure couverture surface/prix du marché à seulement 579 €.',price:'579 €',priceN:579,surface:'2 000 m²',nav:'LiDAR+RTK+Vision',slope:'45%',noise:'~65 dB',score:'4.4',stars:'★★★★☆',count:'950+',img:'images/robots/dreame.jpg',imgBg:'linear-gradient(135deg,#12122b,#0a0a1f)',
    why:'Noté <strong>8.5/10 experts</strong> — 2 000 m² pour 899 €, le meilleur ratio surface/prix. Triple navigation (LiDAR 360° + RTK + Vision 3D) idéal jardins complexes.',
    pros:['2000 m² à 899 €','Triple navigation','8.5/10 experts'],cons:['Marque récente','SAV à confirmer'],
    tags:['large','medium','complex','slopes','mid','low'],prios:['precision','obstacles','noWire','install'],
    links:[{l:'Amazon',c:'bb-amazon',ico:'🛒',url:'https://www.amazon.fr/robotis%C3%A9e-Intelligente-p%C3%A9rim%C3%A9trique-OmniSense-Intelligent/dp/B0DR35G7P3'}]},
 
-  {id:'worx',rank:4,rankCls:'rank-other',tag:'Zero câble, tond dès l\'unboxing',tagColor:'#fde68a',name:'Worx Landroid Vision WR208E',desc:'Le plus simple à installer — caméra 4K + IA, aucun câble ni antenne, 8 378 avis positifs.',price:'949 €',priceN:949,surface:'800 m²',nav:'Caméra 4K + IA',slope:'30%',noise:'~66 dB',score:'4.1',stars:'★★★★☆',count:'8 378',img:'images/robots/worx.jpg',imgBg:'linear-gradient(135deg,#1f1800,#140f00)',
+  {id:'worx',rank:4,rankCls:'rank-other',tag:'Zero câble, tond dès l\'unboxing',tagColor:'#fde68a',name:'Worx Landroid Vision WR208E',desc:'Le plus simple à installer — caméra 4K + IA, aucun câble ni antenne, 8 378 avis positifs.',price:'1 127 €',priceN:1127,surface:'800 m²',nav:'Caméra 4K + IA',slope:'30%',noise:'~66 dB',score:'4.1',stars:'★★★★☆',count:'8 378',img:'images/robots/worx.jpg',imgBg:'linear-gradient(135deg,#1f1800,#140f00)',
    why:'<strong>8 378 avis</strong> — le plus populaire. Caméra 4K + IA détecte bordures et obstacles sans rien installer. Compatible <strong>Alexa & Google Home</strong>. Pose, appuie, c\'est parti.',
    pros:['Zero câble ni antenne','8 378 avis','Alexa & Google'],cons:['Pentes max 30%','Luminosité requise'],
    tags:['small','medium','flat','low','mid'],prios:['install','voice','noWire','obstacles'],
    links:[{l:'Amazon',c:'bb-amazon',ico:'🛒',url:'https://www.amazon.fr/WORX-p%C3%A9riph%C3%A9rique-Evitement-dobstacles-Contr%C3%B4lable/dp/B0CTTWLLZZ'}]},
 
-  {id:'yuka',rank:5,rankCls:'rank-other',tag:'4G intégré · Triple caméra IA · 8.7/10',tagColor:'#86efac',name:'Mammotion Yuka Mini Vision',desc:'Triple caméra IA, 4G intégré, batterie remplaçable. La meilleure note toutes catégories 2026.',price:'1 199 €',priceN:1199,surface:'700 m²',nav:'Triple caméra IA',slope:'45%',noise:'~64 dB',score:'4.5',stars:'★★★★☆',count:'2 392',img:'images/robots/yuka.jpg',imgBg:'linear-gradient(135deg,#081f10,#040e08)',
+  {id:'yuka',rank:5,rankCls:'rank-other',tag:'4G intégré · Triple caméra IA · 8.7/10',tagColor:'#86efac',name:'Mammotion Yuka Mini Vision',desc:'Triple caméra IA, 4G intégré, batterie remplaçable. La meilleure note toutes catégories 2026.',price:'1 199 €',priceN:789,surface:'700 m²',nav:'Triple caméra IA',slope:'45%',noise:'~64 dB',score:'4.5',stars:'★★★★☆',count:'2 392',img:'images/robots/yuka.jpg',imgBg:'linear-gradient(135deg,#081f10,#040e08)',
    why:'<strong>8.7/10 meilleure note 2026</strong> (Jardinage-Media). 4.5/5 Trustpilot sur 2 392 avis. Triple caméra IA sans RTK ni câble, 4G intégré, batterie remplaçable.',
    pros:['8.7/10 note n°1','4.5/5 Trustpilot','4G + batterie swap'],cons:['App parfois instable','1 199 € pour 700 m²'],
    tags:['small','medium','complex','mid','high'],prios:['precision','obstacles','app','noWire'],
    links:[{l:'Amazon',c:'bb-amazon',ico:'🛒',url:'https://www.amazon.fr/Mammotion-Intelligent-Cartographie-Automatique-P%C3%A9riph%C3%A9rique/dp/B0FKTBKDQ1'}]},
 
-  {id:'luba2',rank:6,rankCls:'rank-other',tag:'Champion pentes — jusqu\'à 80%',tagColor:'#fdba74',name:'Mammotion LUBA 2 AWD 3000X',desc:'4 roues motrices, pentes jusqu\'à 80%, 3 000 m². Le roi des grands terrains accidentés.',price:'2 599 €',priceN:2599,surface:'3 000 m²',nav:'RTK+IMU+Vision',slope:'80%',noise:'<60 dB',score:'4.4',stars:'★★★★☆',count:'2 392',img:'images/robots/luba2.jpg',imgBg:'linear-gradient(135deg,#1a0d00,#0d0600)',
+  {id:'luba2',rank:6,rankCls:'rank-other',tag:'Champion pentes — jusqu\'à 80%',tagColor:'#fdba74',name:'Mammotion LUBA 2 AWD 3000X',desc:'4 roues motrices, pentes jusqu\'à 80%, 3 000 m². Le roi des grands terrains accidentés.',price:'2 599 €',priceN:1399,surface:'3 000 m²',nav:'RTK+IMU+Vision',slope:'80%',noise:'<60 dB',score:'4.4',stars:'★★★★☆',count:'2 392',img:'images/robots/luba2.jpg',imgBg:'linear-gradient(135deg,#1a0d00,#0d0600)',
    why:'Pour les grands terrains accidentés : <strong>4WD, pentes 80%, 3 000 m²</strong>. Utilisateurs Mammotion rapportent 5h libérées par semaine. Le plus abouti pour terrain exigeant.',
    pros:['3 000 m² + pentes 80%','4WD all-terrain','4G + NetRTK'],cons:['Prix élevé','App en rodage'],
    tags:['xlarge','large','slopes','complex','high'],prios:['precision','noWire','obstacles'],
    links:[{l:'Amazon',c:'bb-amazon',ico:'🛒',url:'https://www.amazon.fr/MAMMOTION-LUBA-AWD-P%C3%A9riph%C3%A9rique-Recommand%C3%A9/dp/B0DT46VJPG'}]},
 
-  {id:'husqvarna',rank:7,rankCls:'rank-other',tag:'Fiabilité & SAV France',tagColor:'#93c5fd',name:'Husqvarna Automower 320 NERA',desc:'20 ans d\'expertise, réseau SAV national, 4.6/5. Le choix des utilisateurs qui investissent sur le long terme.',price:'2 463 €',priceN:2463,surface:'2 200 m²',nav:'EPOS satellites',slope:'50%',noise:'60 dB',score:'4.6',stars:'★★★★★',count:'SAV FR',img:'images/robots/husqvarna.webp',imgBg:'linear-gradient(135deg,#091429,#040a1a)',
+  {id:'husqvarna',rank:7,rankCls:'rank-other',tag:'Fiabilité & SAV France',tagColor:'#93c5fd',name:'Husqvarna Automower 320 NERA',desc:'20 ans d\'expertise, réseau SAV national, 4.6/5. Le choix des utilisateurs qui investissent sur le long terme.',price:'2 463 €',priceN:2574,surface:'2 200 m²',nav:'EPOS satellites',slope:'50%',noise:'60 dB',score:'4.6',stars:'★★★★★',count:'SAV FR',img:'images/robots/husqvarna.webp',imgBg:'linear-gradient(135deg,#091429,#040a1a)',
    why:'<strong>4.6/5 — meilleure note utilisateurs</strong>. 20 ans de perfectionnement, réseau SAV France réactif. Jusqu\'à <strong>-849 € de remboursement</strong> en cours jusqu\'au 30 juin 2026.',
    pros:['SAV réseau France','4.6/5 note max','Remboursement -849 €'],cons:['Prix élevé','Détection obstacles basique'],
    tags:['large','xlarge','slopes','complex','high'],prios:['sav','silent','precision'],
@@ -1575,13 +1575,13 @@ const PRODUCTS=[
    tags:['small','medium','flat','low','mid'],prios:['install','noWire','sav'],
    links:[{l:'Amazon',c:'bb-amazon',ico:'🛒',url:'https://www.amazon.fr/dp/B09FDMXHRL'}]},
 
-  {id:'gardenaminimo',rank:13,rankCls:'rank-other',tag:'Silencieux entrée de gamme — 57 dB',tagColor:'#86efac',name:'Gardena Sileno Minimo 250',desc:'57 dB — quasi inaudible. Le robot le plus silencieux de sa catégorie, parfait pour les petits jardins en zone résidentielle.',price:'427 €',priceN:427,surface:'250 m²',nav:'Fil périmètre',slope:'25%',noise:'57 dB',score:'4.0',stars:'★★★★☆',count:'4 100+',img:'images/robots/gardenaminimo.png',imgBg:'linear-gradient(135deg,#071a07,#030d03)',
+  {id:'gardenaminimo',rank:13,rankCls:'rank-other',tag:'Silencieux entrée de gamme — 57 dB',tagColor:'#86efac',name:'Gardena Sileno Minimo 250',desc:'57 dB — quasi inaudible. Le robot le plus silencieux de sa catégorie, parfait pour les petits jardins en zone résidentielle.',price:'518 €',priceN:518,surface:'250 m²',nav:'Fil périmètre',slope:'25%',noise:'57 dB',score:'4.0',stars:'★★★★☆',count:'4 100+',img:'images/robots/gardenaminimo.png',imgBg:'linear-gradient(135deg,#071a07,#030d03)',
    why:'À 57 dB, le Sileno Minimo est quasi inaudible — parfait pour les petits jardins en zone résidentielle. Marque Gardena reconnue, légèreté et compacité remarquables.',
    pros:['57 dB — record entrée de gamme','Compact et léger','Marque Gardena fiable','Installation simple'],cons:['250 m² seulement','Câble périmètre à poser','Pas de GPS'],
    tags:['small','flat','low'],prios:['silent','install'],
    links:[{l:'Amazon',c:'bb-amazon',ico:'🛒',url:'https://www.amazon.fr/dp/B07GBRZFV2'}]},
 
-  {id:'gardena750',rank:14,rankCls:'rank-other',tag:'Silencieux & fiable — 58 dB sur 750 m²',tagColor:'#86efac',name:'Gardena Sileno Life 750',desc:'58 dB et fiabilité Gardena pour les jardins jusqu\'à 750 m². La référence des robots à câble dans sa catégorie.',price:'870 €',priceN:870,surface:'750 m²',nav:'Fil périmètre',slope:'25%',noise:'58 dB',score:'4.0',stars:'★★★★☆',count:'5 800+',img:'images/robots/gardena750.png',imgBg:'linear-gradient(135deg,#071a07,#030d03)',
+  {id:'gardena750',rank:14,rankCls:'rank-other',tag:'Silencieux & fiable — 58 dB sur 750 m²',tagColor:'#86efac',name:'Gardena Sileno Life 750',desc:'58 dB et fiabilité Gardena pour les jardins jusqu\'à 750 m². La référence des robots à câble dans sa catégorie.',price:'1 303 €',priceN:1303,surface:'750 m²',nav:'Fil périmètre',slope:'25%',noise:'58 dB',score:'4.0',stars:'★★★★☆',count:'5 800+',img:'images/robots/gardena750.png',imgBg:'linear-gradient(135deg,#071a07,#030d03)',
    why:'Parmi les robots à câble, le Sileno Life 750 est une référence. 58 dB, marque Gardena solide, app claire. Le choix rassurant pour un jardin classique jusqu\'à 750 m².',
    pros:['58 dB très silencieux','SAV Gardena France','App Gardena bien notée','Bon rapport qualité/prix'],cons:['Câble périmètre à poser','Pentes 25% maximum','Pas de détection d\'obstacles'],
    tags:['small','medium','flat','low','mid'],prios:['silent','sav','install'],
@@ -1599,8 +1599,8 @@ const PRODUCTS=[
    tags:['small','medium','flat','low','mid'],prios:['precision','install','noWire','silent'],
    links:[{l:'Amazon',c:'bb-amazon',ico:'🛒',url:'https://www.amazon.fr/dp/B0D3KWNDBY'}]},
 
-  {id:'stiga1000',rank:17,rankCls:'rank-other',tag:'RTK sans câble — marque suédoise 749 €',tagColor:'#fcd34d',name:'Stiga A 1000',desc:'Le RTK sans câble à 749 € — une rareté. Marque suédoise Stiga reconnue, précision 1-2 cm, pentes 45%, SAV européen.',price:'749 €',priceN:749,surface:'1 000 m²',nav:'GPS RTK (sans câble)',slope:'45%',noise:'~62 dB',score:'4.2',stars:'★★★★☆',count:'1 100+',img:'images/robots/stiga1000.jpg',imgBg:'linear-gradient(135deg,#1a1200,#0d0900)',
-   why:'Le Stiga A 1000 offre le RTK sans câble à 749 €, soit moins cher que le Navimow i105E. Tonte en lignes propres, application correcte, marque établie en Europe depuis 1943.',
+  {id:'stiga1000',rank:17,rankCls:'rank-other',tag:'RTK sans câble — marque suédoise 1 421 €',tagColor:'#fcd34d',name:'Stiga A 1000',desc:'Le RTK sans câble à 1 421 € — une rareté. Marque suédoise Stiga reconnue, précision 1-2 cm, pentes 45%, SAV européen.',price:'1 421 €',priceN:1421,surface:'1 000 m²',nav:'GPS RTK (sans câble)',slope:'45%',noise:'~62 dB',score:'4.2',stars:'★★★★☆',count:'1 100+',img:'images/robots/stiga1000.jpg',imgBg:'linear-gradient(135deg,#1a1200,#0d0900)',
+   why:'Le Stiga A 1000 offre le RTK sans câble à 1 421 €, soit moins cher que le Navimow i105E. Tonte en lignes propres, application correcte, marque établie en Europe depuis 1943.',
    pros:['RTK sans câble à 749 €','Marque Stiga fiable depuis 1943','45% de pente','SAV réseau européen'],cons:['App moins intuitive','Station RTK à poser à l\'extérieur','Moins connu en France'],
    tags:['small','medium','flat','low','mid'],prios:['precision','noWire','install','sav'],
    links:[{l:'Amazon',c:'bb-amazon',ico:'🛒',url:'https://www.amazon.fr/dp/B0BT5W5NNS'}]},
@@ -1617,13 +1617,13 @@ const PRODUCTS=[
    tags:['medium','large','flat','mid'],prios:['silent','sav'],
    links:[{l:'Amazon',c:'bb-amazon',ico:'🛒',url:'https://www.amazon.fr/dp/B07G1CC2SM'}]},
 
-  {id:'stihl422',rank:20,rankCls:'rank-other',tag:'Qualité allemande Stihl — 2 200 m²',tagColor:'#fdba74',name:'Stihl iMow RMI 422 PC',desc:'La qualité allemande au service de la tonte : GPS intégré, 2 200 m², réseau de revendeurs Stihl partout en France.',price:'895 €',priceN:895,surface:'2 200 m²',nav:'Fil périmètre + GPS',slope:'35%',noise:'~64 dB',score:'4.1',stars:'★★★★☆',count:'3 200+',img:'images/robots/stihl422.jpg',imgBg:'linear-gradient(135deg,#1a0800,#0d0400)',
+  {id:'stihl422',rank:20,rankCls:'rank-other',tag:'Qualité allemande Stihl — 2 200 m²',tagColor:'#fdba74',name:'Stihl iMow RMI 422 PC',desc:'La qualité allemande au service de la tonte : GPS intégré, 2 200 m², réseau de revendeurs Stihl partout en France.',price:'928 €',priceN:928,surface:'2 200 m²',nav:'Fil périmètre + GPS',slope:'35%',noise:'~64 dB',score:'4.1',stars:'★★★★☆',count:'3 200+',img:'images/robots/stihl422.jpg',imgBg:'linear-gradient(135deg,#1a0800,#0d0400)',
    why:'Stihl est synonyme de qualité allemande et de réseau de revendeurs agréés dense en France. Le RMI 422 PC couvre 2 200 m² avec GPS. La tranquillité des grandes marques.',
    pros:['Qualité allemande Stihl','Réseau revendeurs Stihl France','2 200 m² à 999 €','GPS intégré'],cons:['Câble périmètre à installer','Pas de navigation RTK','App iMow basique'],
    tags:['medium','large','flat','mid'],prios:['sav','install','silent'],
    links:[{l:'Amazon',c:'bb-amazon',ico:'🛒',url:'https://www.amazon.fr/dp/B0B3VLJHQ4'}]},
 
-  {id:'ecovacsG1',rank:21,rankCls:'rank-other',tag:'Vision sans câble — silencieux 60 dB',tagColor:'#7dd3fc',name:'Ecovacs GOAT G1',desc:'Vision IA 2 caméras sans câble ni antenne à 799 €. Plus silencieux que le Worx Vision (60 dB), avec la qualité reconnue Ecovacs.',price:'1 599 €',priceN:1599,surface:'1 000 m²',nav:'Vision IA 2 caméras',slope:'45%',noise:'~60 dB',score:'4.0',stars:'★★★★☆',count:'1 500+',img:'images/robots/ecovacsG1.png',imgBg:'linear-gradient(135deg,#091c2b,#060f1a)',
+  {id:'ecovacsG1',rank:21,rankCls:'rank-other',tag:'Vision sans câble — silencieux 60 dB',tagColor:'#7dd3fc',name:'Ecovacs GOAT G1',desc:'Vision IA 2 caméras sans câble ni antenne à 799 €. Plus silencieux que le Worx Vision (60 dB), avec la qualité reconnue Ecovacs.',price:'1 246 €',priceN:1246,surface:'1 000 m²',nav:'Vision IA 2 caméras',slope:'45%',noise:'~60 dB',score:'4.0',stars:'★★★★☆',count:'1 500+',img:'images/robots/ecovacsG1.png',imgBg:'linear-gradient(135deg,#091c2b,#060f1a)',
    why:'Le GOAT G1 apporte la navigation par caméra IA sans câble ni RTK pour 799 €. Plus silencieux que le Worx (60 dB vs 66 dB), 1 000 m², avec la qualité Ecovacs.',
    pros:['Vision IA sans câble ni antenne','Plus silencieux que Worx Vision','Qualité Ecovacs','45% de pente'],cons:['Précision inférieure au RTK','App parfois lente','SAV par envoi postal'],
    tags:['small','medium','flat','mid'],prios:['noWire','install','obstacles','app'],
@@ -1647,7 +1647,7 @@ const PRODUCTS=[
    tags:['large','xlarge','flat','mid','high'],prios:['sav','install'],
    links:[{l:'Amazon',c:'bb-amazon',ico:'🛒',url:'https://www.amazon.fr/dp/B09BNYTCC9'}]},
 
-  {id:'ecoflowblade',rank:25,rankCls:'rank-other',tag:'Tondeuse + souffleur de feuilles intégré',tagColor:'#c4b5fd',name:'EcoFlow Blade',desc:'Le seul robot tondeuse avec souffleur de feuilles intégré. Navigation Vision + GPS sans câble, 3 200 m², batterie EcoFlow interchangeable.',price:'2 999 €',priceN:2999,surface:'3 200 m²',nav:'Vision + GPS (sans câble)',slope:'30%',noise:'~64 dB',score:'4.2',stars:'★★★★☆',count:'900+',img:'images/robots/ecoflowblade.png',imgBg:'linear-gradient(135deg,#1a0d2e,#0d0618)',
+  {id:'ecoflowblade',rank:25,rankCls:'rank-other',tag:'Tondeuse + souffleur de feuilles intégré',tagColor:'#c4b5fd',name:'EcoFlow Blade',desc:'Le seul robot tondeuse avec souffleur de feuilles intégré. Navigation Vision + GPS sans câble, 3 200 m², batterie EcoFlow interchangeable.',price:'1 499 €',priceN:1499,surface:'3 200 m²',nav:'Vision + GPS (sans câble)',slope:'30%',noise:'~64 dB',score:'4.2',stars:'★★★★☆',count:'900+',img:'images/robots/ecoflowblade.png',imgBg:'linear-gradient(135deg,#1a0d2e,#0d0618)',
    why:'L\'EcoFlow Blade est unique : robot tondeuse + souffleur de feuilles intégré, navigation sans câble, batterie EcoFlow compatible gamme. Pour les propriétaires qui veulent tout-en-un.',
    pros:['Souffleur de feuilles intégré unique','Navigation sans câble','Batterie EcoFlow compatible','3 200 m²'],cons:['Pentes max 30%','Prix élevé pour Vision sans RTK','SAV encore récent en France'],
    tags:['large','xlarge','flat','high'],prios:['noWire','obstacles','install'],
@@ -1665,7 +1665,7 @@ const PRODUCTS=[
    tags:['small','medium','large','flat','mid','high'],prios:['sav','install','silent'],
    links:[{l:'Amazon',c:'bb-amazon',ico:'🛒',url:'https://www.amazon.fr/dp/B07YZ1KQP6'}]},
 
-  {id:'luba2_1000',rank:28,rankCls:'rank-other',tag:'4WD compact — pentes 80% pour petits jardins',tagColor:'#fdba74',name:'Mammotion LUBA 2 AWD 1000',desc:'Toutes les capacités du champion de pentes en version compacte : 4WD, pentes 80%, RTK+Vision, pour jardins jusqu\'à 1 000 m².',price:'2 199 €',priceN:2199,surface:'1 000 m²',nav:'RTK+IMU+Vision 4WD',slope:'80%',noise:'~58 dB',score:'4.3',stars:'★★★★☆',count:'1 200+',img:'images/robots/luba2_1000.webp',imgBg:'linear-gradient(135deg,#1a0d00,#0d0600)',
+  {id:'luba2_1000',rank:28,rankCls:'rank-other',tag:'4WD compact — pentes 80% pour petits jardins',tagColor:'#fdba74',name:'Mammotion LUBA 2 AWD 1000',desc:'Toutes les capacités du champion de pentes en version compacte : 4WD, pentes 80%, RTK+Vision, pour jardins jusqu\'à 1 000 m².',price:'1 399 €',priceN:1399,surface:'1 000 m²',nav:'RTK+IMU+Vision 4WD',slope:'80%',noise:'~58 dB',score:'4.3',stars:'★★★★☆',count:'1 200+',img:'images/robots/luba2_1000.webp',imgBg:'linear-gradient(135deg,#1a0d00,#0d0600)',
    why:'Jardin accidenté <1 000 m² ? Le LUBA 2 AWD 1000 offre exactement les mêmes capacités (4WD, pentes 80%, RTK précision) que le 3000X pour 1 200 € de moins, en version compacte.',
    pros:['4WD + pentes 80% en compact','RTK+IMU+Vision précis','4G intégré + batterie remplaçable','SAV chat Mammotion réactif'],cons:['1 000 m² seulement','1 499 € pour une petite surface','App en rodage'],
    tags:['small','medium','slopes','complex','high'],prios:['precision','obstacles','noWire'],

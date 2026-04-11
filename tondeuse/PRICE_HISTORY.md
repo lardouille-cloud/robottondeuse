@@ -48,6 +48,18 @@ Mis à jour automatiquement chaque jour par GitHub Actions.
 - **Husqvarna Automower 430X** : 1 799 € → 3 495 €
 - **Mammotion LUBA 2 AWD 1000** : 1 499 € → 2 199 €
 
-## 2026-04-09 — Prix
+## 2026-04-04 — Prix
+- **Segway Navimow i105E** : 649 € → 799 € (+150 €)
 - **Ecovacs Goat O800 RTK** : 899 € → 699 € (-200 €)
-- **Ecovacs GOAT G1** : 1289 € → 1599 € (+310 €)
+- **Dreame A1 Pro** : 879 € → 579 € (-300 €)
+- **Worx Landroid Vision WR208E** : 949 € → 1127 € (+178 €)
+- **Mammotion Yuka Mini Vision** : 1199 € → 789 € (-410 €)
+- **Mammotion LUBA 2 AWD 3000X** : 2599 € → 1399 € (-1200 €)
+- **Husqvarna Automower 320 NERA** : 2463 € → 2574 € (+111 €)
+- **Gardena Sileno Minimo 250** : 427 € → 518 € (+91 €)
+- **Gardena Sileno Life 750** : 870 € → 1303 € (+433 €)
+- **Stiga A 1000** : 749 € → 1421 € (+672 €)
+- **Stihl iMow RMI 422 PC** : 895 € → 928 € (+33 €)
+- **Ecovacs GOAT G1** : 1289 € → 1246 € (-43 €)
+- **EcoFlow Blade** : 2999 € → 1499 € (-1500 €)
+- **Mammotion LUBA 2 AWD 1000** : 2199 € → 1399 € (-800 €)
