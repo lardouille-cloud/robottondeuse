@@ -24,14 +24,14 @@ jobs:
         run: pip install requests beautifulsoup4 lxml
 
       - name: Vérifier et mettre à jour les prix et liens
-        run: python scripts/update_prices.py
+        run: python tondeuse/scripts/update_prices.py
 
       - name: Committer les changements si nécessaire
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           if ! git diff --quiet; then
-            git add index.html fiche.html robots.html comparatif.html classement.html quiz.html choisir_robot_tondeuse_2026.html PRICE_HISTORY.md LINKS_HISTORY.md
+            git add tondeuse/index.html tondeuse/fiche.html tondeuse/robots.html tondeuse/comparatif.html tondeuse/classement.html tondeuse/quiz.html tondeuse/choisir_robot_tondeuse_2026.html tondeuse/PRICE_HISTORY.md tondeuse/LINKS_HISTORY.md
             git commit -m "chore: mise à jour prix et liens $(date +%Y-%m-%d)"
             git push
           else
