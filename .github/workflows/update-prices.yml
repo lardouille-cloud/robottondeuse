@@ -27,7 +27,7 @@ jobs:
         run: pip install requests beautifulsoup4 lxml
 
       - name: Vérifier et mettre à jour les prix et liens
-        run: python tondeuse/scripts/update_prices.py
+        run: cd tondeuse && python scripts/update_prices.py
 
       - name: Committer les changements si nécessaire
         run: |
