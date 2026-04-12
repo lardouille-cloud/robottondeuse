@@ -6,5 +6,4 @@
 
 ## Environnement local
 
-- `pip` n'est pas dans le PATH — toujours utiliser `python -m pip install` (jamais `pip install` seul).
-- Python 3.14.3 installé via Microsoft Store (`python`, `python3`, `py` pointent tous vers la même version).
+- Python 3.14.3 installé, `pip` disponible dans le PATH (`C:\Users\Lo\AppData\Local\Programs\Python\Python314\Scripts`).
