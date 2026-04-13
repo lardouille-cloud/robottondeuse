@@ -63,3 +63,6 @@ Mis à jour automatiquement chaque jour par GitHub Actions.
 - **Ecovacs GOAT G1** : 1289 € → 1246 € (-43 €)
 - **EcoFlow Blade** : 2999 € → 1499 € (-1500 €)
 - **Mammotion LUBA 2 AWD 1000** : 2199 € → 1399 € (-800 €)
+
+## 2026-04-13 — Prix
+- **Ecovacs GOAT G1** : 1246 € → 1599 € (+353 €)

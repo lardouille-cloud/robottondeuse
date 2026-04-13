@@ -77,3 +77,7 @@ Chaque entrée indique qu'un lien mort a été remplacé par un lien fonctionnel
 
 ## 2026-04-04 — Liens
 - **Mammotion LUBA 2 AWD 3000X** : `null` → `https://www.amazon.fr/MAMMOTION-LUBA-AWD-P%C3%A9riph%C3%A9ri`
+
+## 2026-04-13 — Liens
+- **Ambrogio L15 Elite** : `https://www.amazon.fr/dp/B07YZ1KQP6` → `null (désactivé)`
+- **Husqvarna Automower 435X AWD** : `https://www.amazon.fr/dp/B0CF5QSDYB` → `null (désactivé)`
