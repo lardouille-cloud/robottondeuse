@@ -66,3 +66,8 @@ Mis à jour automatiquement chaque jour par GitHub Actions.
 
 ## 2026-04-13 — Prix
 - **Ecovacs GOAT G1** : 1246 € → 1599 € (+353 €)
+
+## 2026-04-14 — Prix
+- **Bosch Indego XS 300** : 483 € → 411 € (-72 €)
+- **Bosch Indego M+ 700** : 449 € → 374 € (-75 €)
+- **Gardena Sileno Minimo 250** : 518 € → 374 € (-144 €)
