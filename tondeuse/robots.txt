@@ -4,5 +4,6 @@ Allow: /
 Disallow: /acces-premium.html
 Disallow: /acces-gratuit.html
 Disallow: /scripts/
+Disallow: /google3949f67af5de0649.html
 
 Sitemap: https://tondeuserobotguide.fr/sitemap.xml
