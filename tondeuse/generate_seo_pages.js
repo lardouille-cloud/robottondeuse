@@ -7,7 +7,7 @@ const BASE = 'https://tondeuserobotguide.fr';
 const TODAY = '2026-03-17';
 
 const NAV = `<nav id="nav">
-  <a href="index.html" class="nav-logo">
+  <a href="/" class="nav-logo">
     <svg class="logo-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
       <circle cx="12" cy="12" r="9.5" stroke="currentColor" stroke-width="1.2" opacity="0.35"/>
       <path d="M4 15 Q12 3.5 20 15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
@@ -17,7 +17,7 @@ const NAV = `<nav id="nav">
     <span class="logo-name">Robot<em>Tondeuse</em><s>.guide</s></span>
   </a>
   <div class="nav-links">
-    <a href="index.html">Accueil</a>
+    <a href="/">Accueil</a>
     <a href="robots.html">Robots 2026</a>
     <a href="comparatif.html">Vue d'ensemble</a>
     <a href="quiz.html">Mon robot idéal</a>
@@ -27,7 +27,7 @@ const NAV = `<nav id="nav">
 
 const FOOTER = `<footer>
   <div class="footer-brand">
-    <a href="index.html" class="footer-logo-link">
+    <a href="/" class="footer-logo-link">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" style="color:var(--green-l)">
         <circle cx="12" cy="12" r="9.5" stroke="currentColor" stroke-width="1.2" opacity="0.35"/>
         <path d="M4 15 Q12 3.5 20 15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
@@ -43,7 +43,7 @@ const FOOTER = `<footer>
     <a href="robots.html">Robots 2026</a>
     <a href="comparatif.html">Tableau comparatif</a>
     <a href="quiz.html">Configurateur</a>
-    <a href="index.html#conseils">Conseils d'achat</a>
+    <a href="/#conseils">Conseils d'achat</a>
   </div>
   <div class="footer-links-col">
     <div class="footer-col-title">Guides</div>
