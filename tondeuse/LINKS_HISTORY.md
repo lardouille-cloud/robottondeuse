@@ -135,3 +135,7 @@ Chaque entrée indique qu'un lien mort a été remplacé par un lien fonctionnel
 - **Viking iMow MI 632 PC** : `null` → `https://www.amazon.fr/dp/B09BNYTCC9`
 - **Ambrogio L15 Elite** : `null` → `https://www.amazon.fr/dp/B07YZ1KQP6`
 - **Husqvarna Automower 435X AWD** : `null` → `https://www.amazon.fr/dp/B0CF5QSDYB`
+
+## 2026-05-01 — Liens
+- **Ambrogio L15 Elite** : `https://www.amazon.fr/dp/B07YZ1KQP6` → `null (désactivé)`
+- **Husqvarna Automower 435X AWD** : `https://www.amazon.fr/dp/B0CF5QSDYB` → `null (désactivé)`

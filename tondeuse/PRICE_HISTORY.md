@@ -77,3 +77,7 @@ Mis à jour automatiquement chaque jour par GitHub Actions.
 
 ## 2026-04-28 — Prix
 - **Gardena Sileno Minimo 250** : 374 € → 676 € (+302 €)
+
+## 2026-05-01 — Prix
+- **Ecovacs Goat O800 RTK** : 699 € → 670 € (-29 €)
+- **Gardena Sileno Minimo 250** : 676 € → 516 € (-160 €)
