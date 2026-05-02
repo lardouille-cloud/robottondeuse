@@ -139,3 +139,7 @@ Chaque entrée indique qu'un lien mort a été remplacé par un lien fonctionnel
 ## 2026-05-01 — Liens
 - **Ambrogio L15 Elite** : `https://www.amazon.fr/dp/B07YZ1KQP6` → `null (désactivé)`
 - **Husqvarna Automower 435X AWD** : `https://www.amazon.fr/dp/B0CF5QSDYB` → `null (désactivé)`
+
+## 2026-05-02 — Liens
+- **Ambrogio L15 Elite** : `null` → `https://www.amazon.fr/dp/B07YZ1KQP6`
+- **Husqvarna Automower 435X AWD** : `null` → `https://www.amazon.fr/dp/B0CF5QSDYB`
