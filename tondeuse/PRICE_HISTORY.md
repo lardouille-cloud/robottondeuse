@@ -81,3 +81,8 @@ Mis à jour automatiquement chaque jour par GitHub Actions.
 ## 2026-05-01 — Prix
 - **Ecovacs Goat O800 RTK** : 699 € → 670 € (-29 €)
 - **Gardena Sileno Minimo 250** : 676 € → 516 € (-160 €)
+
+## 2026-05-04 — Prix
+- **Bosch Indego XS 300** : 383 € → 331 € (-52 €)
+- **Gardena Sileno Minimo 250** : 516 € → 374 € (-142 €)
+- **Mammotion LUBA 2 AWD 1000** : 1399 € → 432 € (-967 €)
