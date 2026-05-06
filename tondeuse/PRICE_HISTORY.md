@@ -86,3 +86,6 @@ Mis à jour automatiquement chaque jour par GitHub Actions.
 - **Bosch Indego XS 300** : 383 € → 331 € (-52 €)
 - **Gardena Sileno Minimo 250** : 516 € → 374 € (-142 €)
 - **Mammotion LUBA 2 AWD 1000** : 1399 € → 432 € (-967 €)
+
+## 2026-05-06 — Prix
+- **Stiga A 1000** : 1421 € → 1699 € (+278 €)
