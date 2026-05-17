@@ -89,3 +89,6 @@ Mis à jour automatiquement chaque jour par GitHub Actions.
 
 ## 2026-05-06 — Prix
 - **Stiga A 1000** : 1421 € → 1699 € (+278 €)
+
+## 2026-05-17 — Prix
+- **Gardena Sileno Life 750** : 1303 € → 458 € (-845 €)
