@@ -92,3 +92,6 @@ Mis à jour automatiquement chaque jour par GitHub Actions.
 
 ## 2026-05-17 — Prix
 - **Gardena Sileno Life 750** : 1303 € → 458 € (-845 €)
+
+## 2026-05-21 — Prix
+- **Ecovacs Goat O800 RTK** : 670 € → 650 € (-20 €)
