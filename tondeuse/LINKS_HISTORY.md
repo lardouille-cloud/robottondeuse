@@ -190,3 +190,6 @@ Chaque entrée indique qu'un lien mort a été remplacé par un lien fonctionnel
 
 ## 2026-05-23 — Liens
 - **Husqvarna Automower 435X AWD** : `https://www.amazon.fr/dp/B0CF5QSDYB` → `null (désactivé)`
+
+## 2026-05-24 — Liens
+- **Husqvarna Automower 435X AWD** : `null` → `https://www.amazon.fr/dp/B0CF5QSDYB`
