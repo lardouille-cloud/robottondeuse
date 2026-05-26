@@ -98,3 +98,6 @@ Mis à jour automatiquement chaque jour par GitHub Actions.
 
 ## 2026-05-25 — Prix
 - **Gardena Sileno Minimo 250** : 374 € → 458 € (+84 €)
+
+## 2026-05-26 — Prix
+- **Stiga A 1000** : 1699 € → 1599 € (-100 €)
