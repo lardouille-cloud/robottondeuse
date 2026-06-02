@@ -101,3 +101,7 @@ Mis à jour automatiquement chaque jour par GitHub Actions.
 
 ## 2026-05-26 — Prix
 - **Stiga A 1000** : 1699 € → 1599 € (-100 €)
+
+## 2026-06-02 — Prix
+- **Bosch Indego XS 300** : 331 € → 337 € (+6 €)
+- **Bosch Indego M+ 700** : 374 € → 337 € (-37 €)
