@@ -218,3 +218,8 @@ Chaque entrée indique qu'un lien mort a été remplacé par un lien fonctionnel
 ## 2026-06-03 — Liens
 - **Segway Navimow i108E** : `null` → `https://www.amazon.fr/dp/B0D3KWNDBY`
 - **Kress Mission 5 RTK** : `null` → `https://www.amazon.fr/dp/B0C1MKBJ5Y`
+
+## 2026-06-04 — Liens
+- **Viking iMow MI 632 PC** : `null` → `https://www.amazon.fr/dp/B09BNYTCC9`
+- **Ambrogio L15 Elite** : `null` → `https://www.amazon.fr/dp/B07YZ1KQP6`
+- **Husqvarna Automower 435X AWD** : `null` → `https://www.amazon.fr/dp/B0CF5QSDYB`
