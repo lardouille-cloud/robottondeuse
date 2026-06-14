@@ -110,3 +110,7 @@ Mis à jour automatiquement chaque jour par GitHub Actions.
 - **Bosch Indego XS 300** : 337 € → 403 € (+66 €)
 - **Bosch Indego M+ 700** : 337 € → 507 € (+170 €)
 - **Gardena Sileno Minimo 250** : 458 € → 351 € (-107 €)
+
+## 2026-06-14 — Prix
+- **Gardena Sileno Minimo 250** : 351 € → 415 € (+64 €)
+- **Mammotion LUBA 2 AWD 1000** : 432 € → 415 € (-17 €)
