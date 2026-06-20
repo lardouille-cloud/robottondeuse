@@ -114,3 +114,6 @@ Mis à jour automatiquement chaque jour par GitHub Actions.
 ## 2026-06-14 — Prix
 - **Gardena Sileno Minimo 250** : 351 € → 415 € (+64 €)
 - **Mammotion LUBA 2 AWD 1000** : 432 € → 415 € (-17 €)
+
+## 2026-06-20 — Prix
+- **Segway Navimow i105E** : 799 € → 415 € (-384 €)
