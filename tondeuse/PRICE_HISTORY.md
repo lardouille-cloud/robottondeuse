@@ -117,3 +117,10 @@ Mis à jour automatiquement chaque jour par GitHub Actions.
 
 ## 2026-06-20 — Prix
 - **Segway Navimow i105E** : 799 € → 415 € (-384 €)
+
+## 2026-06-24 — Prix
+- **Husqvarna Automower 320 NERA** : 2463 € → 549 € (-1914 €)
+- **MOVA LiDAX Ultra 1200** : 1099 € → 457 € (-642 €)
+- **Bosch Indego XS 300** : 403 € → 476 € (+73 €)
+- **Gardena Sileno Minimo 250** : 415 € → 395 € (-20 €)
+- **Husqvarna Automower 115H** : 949 € → 457 € (-492 €)
