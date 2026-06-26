@@ -262,3 +262,7 @@ Chaque entrée indique qu'un lien mort a été remplacé par un lien fonctionnel
 ## 2026-06-25 — Liens
 - **Segway Navimow i108E** : `null` → `https://www.amazon.fr/dp/B0D3KWNDBY`
 - **Kress Mission 5 RTK** : `null` → `https://www.amazon.fr/dp/B0C1MKBJ5Y`
+
+## 2026-06-26 — Liens
+- **Segway Navimow i108E** : `https://www.amazon.fr/dp/B0D3KWNDBY` → `null (désactivé)`
+- **Kress Mission 5 RTK** : `https://www.amazon.fr/dp/B0C1MKBJ5Y` → `null (désactivé)`

@@ -124,3 +124,10 @@ Mis à jour automatiquement chaque jour par GitHub Actions.
 - **Bosch Indego XS 300** : 403 € → 476 € (+73 €)
 - **Gardena Sileno Minimo 250** : 415 € → 395 € (-20 €)
 - **Husqvarna Automower 115H** : 949 € → 457 € (-492 €)
+
+## 2026-06-26 — Prix
+- **Husqvarna Automower 320 NERA** : 2463 € → 549 € (-1914 €)
+- **MOVA LiDAX Ultra 1200** : 1099 € → 457 € (-642 €)
+- **Bosch Indego M+ 700** : 507 € → 374 € (-133 €)
+- **Gardena Sileno Minimo 250** : 395 € → 383 € (-12 €)
+- **Stiga A 1000** : 1599 € → 1499 € (-100 €)
