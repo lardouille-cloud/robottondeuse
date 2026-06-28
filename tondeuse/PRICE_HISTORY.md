@@ -131,3 +131,6 @@ Mis à jour automatiquement chaque jour par GitHub Actions.
 - **Bosch Indego M+ 700** : 507 € → 374 € (-133 €)
 - **Gardena Sileno Minimo 250** : 395 € → 383 € (-12 €)
 - **Stiga A 1000** : 1599 € → 1499 € (-100 €)
+
+## 2026-06-28 — Prix
+- **Gardena Sileno Minimo 250** : 383 € → 374 € (-9 €)
