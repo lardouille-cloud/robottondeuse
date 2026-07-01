@@ -134,3 +134,8 @@ Mis à jour automatiquement chaque jour par GitHub Actions.
 
 ## 2026-06-28 — Prix
 - **Gardena Sileno Minimo 250** : 383 € → 374 € (-9 €)
+
+## 2026-07-01 — Prix
+- **Bosch Indego XS 300** : 476 € → 313 € (-163 €)
+- **Bosch Indego M+ 700** : 374 € → 508 € (+134 €)
+- **Gardena Sileno Minimo 250** : 374 € → 458 € (+84 €)
